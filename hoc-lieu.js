@@ -842,6 +842,187 @@
 
 
   /* ==================================================================
+     ĐỢT 2 — TOÁN 8 (đối chiếu SGK Toán 8 tập một, Kết nối tri thức)
+     Soạn ngày 26/11/2026. Câu hỏi tự biên soạn; căn cứ kiến thức là
+     các trang SGK đã đọc (bản PDF trong thư mục Drive "Tin 8").
+     ================================================================== */
+  const SGK_TOAN8_DOC = {
+    tenTaiLieu: 'Toán 8, tập một (bộ sách "Kết nối tri thức với cuộc sống")',
+    tacGia: 'Hà Huy Khoái (Tổng Chủ biên); Cung Thế Anh, Nguyễn Huy Đoan (đồng Chủ biên) và nhóm tác giả',
+    donViPhatHanh: 'Nhà xuất bản Giáo dục Việt Nam',
+    anBan: 'Bản PDF có dấu "BẢN MẪU" trên bìa; phần văn bản đọc được không có trang bản quyền/ISBN — nên đối chiếu lại số trang với sách in',
+    banDoc: 'Bản PDF trong thư mục Google Drive "Bo sach ket noi tri thuc 6 - 7 - 8 - 9" › "Tin 8"; đọc ngày 26/11/2026'
+  };
+  const sgk8 = (viTri, ghiChu) => Object.assign(tuSoan(null), SGK_TOAN8_DOC, { canCu: 'Đã đối chiếu: SGK Toán 8 tập một — ' + viTri, viTri, ghiChu: ghiChu || null });
+  const kt8 = () => Object.assign(kt(), { doiChieuNguon: 'da-doi-chieu', ngayDoiChieu: '26/11/2026' });
+  const S = (b, e) => b + '<sup>' + e + '</sup>';
+
+  const daThuc8 = {
+    id: 'toan8-da-thuc', lop: 8, mon: 'toan', phanMon: 'Số và Đại số', ten: 'Đa thức nhiều biến',
+    sgk: 'SGK Toán 8 tập một — Chương I, Bài 1–5, trang 5–24',
+    yccdGhiChu: 'Đã đối chiếu với phần "Kiến thức, kĩ năng" của Bài 1, 2, 4, 5 trong SGK Toán 8 tập một.',
+    kienThucTruoc: ['Đa thức một biến, cộng trừ đa thức một biến (lớp 7)', 'Luỹ thừa: a<sup>m</sup> · a<sup>n</sup> = a<sup>m+n</sup>', 'Quy tắc dấu ngoặc'],
+    yeuCauCanDat: ['Nhận biết đơn thức, đơn thức thu gọn, hệ số, phần biến, bậc của đơn thức; đơn thức đồng dạng.', 'Nhận biết đa thức, hạng tử, đa thức thu gọn và bậc của đa thức.', 'Thực hiện cộng, trừ, nhân đa thức; chia đa thức cho đơn thức trong trường hợp chia hết.'],
+    bai: {
+      mucTieu: ['thu gọn đơn thức và tìm bậc;', 'nhận ra đơn thức đồng dạng và cộng trừ chúng;', 'nhân đa thức với đa thức, bỏ ngoặc đúng dấu;', 'kiểm tra một đa thức có chia hết cho đơn thức không và thực hiện phép chia.'],
+      khoiDong: { hoi: 'Một hình hộp chữ nhật có ba kích thước x, y và 2x (đơn vị cm). Viết biểu thức tính thể tích. Biểu thức đó có mấy biến?', goiY: 'V = x · y · 2x = 2x²y (cm³). Đây là một đơn thức của hai biến x và y.' },
+      trongTam: [
+        '<b>Đơn thức</b> là một số, một biến hoặc tích của số với các biến. <b>Đơn thức thu gọn</b>: chỉ gồm một số, hoặc tích của một số với các biến, mỗi biến xuất hiện một lần dưới dạng luỹ thừa. Phần số là <b>hệ số</b>, phần còn lại là <b>phần biến</b>.',
+        '<b>Bậc</b> của đơn thức thu gọn (hệ số khác 0) là tổng số mũ của các biến. Ví dụ ' + S('5x', 2) + S('y', 3) + 'z có bậc 2 + 3 + 1 = 6. Mỗi số khác 0 là đơn thức bậc 0.',
+        '<b>Đơn thức đồng dạng</b>: hệ số khác 0 và có cùng phần biến. Cộng (trừ) đơn thức đồng dạng: cộng (trừ) các hệ số, giữ nguyên phần biến.',
+        '<b>Đa thức</b> là tổng của những đơn thức (mỗi đơn thức là một <b>hạng tử</b>). Đa thức thu gọn không có hai hạng tử đồng dạng. <b>Bậc của đa thức</b> là bậc của hạng tử có bậc cao nhất trong dạng thu gọn.',
+        '<b>Nhân</b>: nhân hệ số với hệ số, phần biến với phần biến; nhân đa thức với đa thức thì nhân mỗi hạng tử của đa thức này với từng hạng tử của đa thức kia rồi cộng lại.',
+        '<b>Chia</b>: đơn thức A chia hết cho đơn thức B (B ≠ 0) khi mỗi biến của B đều là biến của A với số mũ không lớn hơn số mũ của nó trong A. Đa thức chia hết cho đơn thức B khi mọi hạng tử chia hết cho B; khi đó chia từng hạng tử rồi cộng lại.'
+      ],
+      viDu: { de: 'Thu gọn và tìm bậc của đa thức P = 3' + S('x', 2) + 'y − 2xy + ' + S('x', 2) + 'y + 5xy − 4.', loiGiai: 'P = (3' + S('x', 2) + 'y + ' + S('x', 2) + 'y) + (−2xy + 5xy) − 4 = <b>4' + S('x', 2) + 'y + 3xy − 4</b>.<br>Bậc của các hạng tử: 3; 2; 0. Vậy P có <b>bậc 3</b>.' },
+      nguon: sgk8('Chương I "Đa thức", Bài 1–5, trang 5–24 (khung kiến thức trọng tâm của từng bài)'),
+      hoiDap: [
+        { tu: ['bac', 'don thuc'], tl: 'Bậc của đơn thức thu gọn = tổng số mũ các biến. Nhớ biến không ghi số mũ thì số mũ là 1.' },
+        { tu: ['dong dang'], tl: 'Hai đơn thức đồng dạng: hệ số khác 0 và phần biến giống hệt nhau (cùng biến, cùng số mũ từng biến).' },
+        { tu: ['nhan'], tl: 'Nhân đa thức với đa thức: nhân mỗi hạng tử của đa thức này với từng hạng tử của đa thức kia rồi cộng các tích.' },
+        { tu: ['chia', 'chia het'], tl: 'A chia hết cho đơn thức B khi mỗi biến của B có mặt trong A với số mũ không lớn hơn số mũ trong A.' }
+      ]
+    },
+    cauHoi: [
+      {
+        id: 'T8A-01', muc: 'co-ban', liDoMuc: 'Áp dụng trực tiếp định nghĩa bậc của đơn thức.', loai: 'so', de: 'Tìm bậc của đơn thức −3' + S('x', 2) + S('y', 3) + 'z.', dapAn: 6,
+        loi: [{ gt: -3, nhan: 'Nhầm hệ số', phanHoi: '−3 là hệ số. Bậc là tổng số mũ của các biến.' }, { gt: 5, nhan: 'Quên số mũ 1', phanHoi: 'Biến z không ghi số mũ nghĩa là số mũ bằng 1. Em cộng thêm số mũ của z.' }, { gt: 3, nhan: 'Nhầm định nghĩa', phanHoi: '3 chỉ là số mũ lớn nhất. Bậc của đơn thức là <b>tổng</b> các số mũ.' }],
+        buoc: { hoi: 'Số mũ của biến z là bao nhiêu?', dapAn: 1, dung: 'Đúng: z = z¹. Bây giờ cộng 2 + 3 + 1.', sai: 'Biến không ghi số mũ thì số mũ là 1.' },
+        goiY: ['Cộng số mũ của x, y và z.'], viSaoDung: '2 + 3 + 1 = 6.', loiGiai: 'Bậc = 2 + 3 + 1 = <b>6</b> (hệ số −3 không ảnh hưởng đến bậc).', giangLai: 'Hãy viết đầy đủ: x · x · y · y · y · z — đếm có 6 thừa số biến. Bậc chính là số thừa số biến đó.', tienBo: 'Em đã nhớ cộng cả số mũ 1 của biến không ghi số mũ.',
+        nguon: sgk8('Bài 1 "Đơn thức" (trang 5–10), mục 1 "Đơn thức và đơn thức thu gọn" — đơn thức thu gọn, bậc của đơn thức'), kiemTra: kt8(),
+        tuongTu: { id: 'T8A-01-TT', muc: 'co-ban', liDoMuc: 'Như câu gốc.', loai: 'so', de: 'Tìm bậc của đơn thức 5x' + S('y', 4) + S('z', 2) + '.', dapAn: 7, loi: [{ gt: 5, nhan: 'Nhầm hệ số', phanHoi: '5 là hệ số.' }, { gt: 6, nhan: 'Quên số mũ 1', phanHoi: 'x có số mũ 1.' }, { gt: 4, nhan: 'Nhầm định nghĩa', phanHoi: 'Bậc là tổng số mũ.' }], buoc: { hoi: 'Số mũ của x?', dapAn: 1, dung: 'Đúng.', sai: 'x = x¹.' }, goiY: ['1 + 4 + 2.'], viSaoDung: '1 + 4 + 2 = 7.', loiGiai: '<b>7</b>.', giangLai: 'Đếm số thừa số biến.', nguon: sgk8('Bài 1 (trang 5–10), mục 1'), kiemTra: kt8() }
+      },
+      {
+        id: 'T8A-02', muc: 'co-ban', liDoMuc: 'Nhận biết đơn thức đồng dạng.', loai: 'chon1', de: 'Đơn thức nào sau đây <b>đồng dạng</b> với 4' + S('x', 2) + 'y?',
+        phuongAn: [{ t: '−7' + S('x', 2) + 'y', dung: true }, { t: '4x' + S('y', 2), phanHoi: 'Cùng hệ số 4 nhưng số mũ của x và y bị đổi chỗ, nên phần biến khác.' }, { t: '4' + S('x', 2) + S('y', 2), phanHoi: 'Số mũ của y là 2, khác 1.' }, { t: '4' + S('x', 2) + 'yz', phanHoi: 'Có thêm biến z nên phần biến khác.' }],
+        goiY: ['Đồng dạng chỉ cần cùng phần biến (hệ số khác 0), hệ số có thể khác nhau.'], viSaoDung: '−7x²y có cùng phần biến x²y với 4x²y.', loiGiai: '<b>−7' + S('x', 2) + 'y</b>.', giangLai: 'Bỏ hệ số đi, so "phần chữ" còn lại: x²y với x²y giống hệt → đồng dạng. Hệ số giống nhau không quan trọng.', tienBo: 'Em đã so phần biến, không bị hệ số giống nhau đánh lừa.',
+        nguon: sgk8('Bài 1 "Đơn thức" (trang 5–10), mục 2 "Đơn thức đồng dạng"'), kiemTra: kt8(),
+        tuongTu: { id: 'T8A-02-TT', muc: 'co-ban', liDoMuc: 'Như câu gốc.', loai: 'chon1', de: 'Đơn thức nào <b>đồng dạng</b> với −2x' + S('y', 3) + '?', phuongAn: [{ t: '5x' + S('y', 3), dung: true }, { t: '−2' + S('x', 3) + 'y', phanHoi: 'Số mũ bị đổi chỗ.' }, { t: 'x' + S('y', 3) + 'z', phanHoi: 'Thêm biến z.' }, { t: '−2' + S('x', 2) + S('y', 2), phanHoi: 'Phần biến khác.' }], goiY: ['So phần biến.'], viSaoDung: 'Cùng phần biến xy³.', loiGiai: '<b>5x' + S('y', 3) + '</b>.', giangLai: 'Bỏ hệ số, so phần chữ.', nguon: sgk8('Bài 1 (trang 5–10), mục 2'), kiemTra: kt8() }
+      },
+      {
+        id: 'T8A-03', muc: 'van-dung', liDoMuc: 'Hai bước: thu gọn đơn thức (nhân hệ số, cộng số mũ) rồi tìm bậc.', loai: 'so', de: 'Thu gọn đơn thức 5' + S('x', 2) + 'y · (−2)x' + S('y', 3) + ' rồi cho biết <b>bậc</b> của nó.', dapAn: 7,
+        loi: [{ gt: -10, nhan: 'Nhầm hệ số', phanHoi: '−10 là hệ số sau khi thu gọn. Đề hỏi bậc.' }, { gt: 3, nhan: 'Nhầm định nghĩa', phanHoi: '3 là số mũ của x (hoặc lớn nhất). Bậc = tổng số mũ.' }, { gt: 6, nhan: 'Lỗi luỹ thừa', phanHoi: 'Có vẻ em nhân số mũ thay vì cộng, hoặc bỏ sót. x² · x = x³; y · y³ = y⁴.' }],
+        buoc: { hoi: 'Sau khi thu gọn được −10x<sup>a</sup>y<sup>b</sup>. Số mũ a của x bằng bao nhiêu?', dapAn: 3, dung: 'Đúng: x² · x = x³. Còn y · y³ = y⁴. Vậy bậc = ?', sai: 'x² · x¹ = x<sup>2+1</sup>.' },
+        goiY: ['Nhân hệ số: 5 · (−2). Nhân luỹ thừa cùng biến: cộng số mũ.'], viSaoDung: 'Thu gọn được −10x³y⁴, bậc 3 + 4 = 7.', loiGiai: '5' + S('x', 2) + 'y · (−2)x' + S('y', 3) + ' = (5 · (−2)) · (' + S('x', 2) + ' · x) · (y · ' + S('y', 3) + ') = −10' + S('x', 3) + S('y', 4) + '. Bậc: 3 + 4 = <b>7</b>.',
+        giangLai: 'Gom theo ba ngăn: ngăn số (5 và −2), ngăn x (x² và x), ngăn y (y và y³). Trong mỗi ngăn biến, cộng số mũ.', tienBo: 'Em đã thu gọn đúng trước khi tìm bậc.',
+        nguon: sgk8('Bài 1 (trang 5–10), mục 1 (thu gọn đơn thức); Bài 4 "Phép nhân đa thức", trang 19 (quy tắc nhân hai đơn thức)'), kiemTra: kt8(),
+        tuongTu: { id: 'T8A-03-TT', muc: 'van-dung', liDoMuc: 'Như câu gốc.', loai: 'so', de: 'Thu gọn đơn thức 4xy · (−2)' + S('x', 2) + S('y', 2) + ' rồi cho biết <b>bậc</b>.', dapAn: 6, loi: [{ gt: -8, nhan: 'Nhầm hệ số', phanHoi: 'Đó là hệ số.' }, { gt: 3, nhan: 'Nhầm định nghĩa', phanHoi: 'Bậc = tổng số mũ.' }], buoc: { hoi: 'Số mũ của x sau khi thu gọn?', dapAn: 3, dung: 'Đúng.', sai: 'x · x².' }, goiY: ['−8x³y³.'], viSaoDung: '3 + 3 = 6.', loiGiai: '−8' + S('x', 3) + S('y', 3) + ', bậc <b>6</b>.', giangLai: 'Gom ba ngăn.', nguon: sgk8('Bài 1 (trang 5–10); Bài 4, trang 19'), kiemTra: kt8() }
+      },
+      {
+        id: 'T8A-04', muc: 'van-dung', liDoMuc: 'Hai bước: cộng hai đa thức (thu gọn hạng tử đồng dạng) rồi tính giá trị.', loai: 'so',
+        de: 'Cho A = 3' + S('x', 2) + 'y − 2xy + 5 và B = −' + S('x', 2) + 'y + 4xy − 1. Tính giá trị của <b>A + B</b> tại x = 2, y = 1.', dapAn: 16,
+        loi: [{ gt: 10, nhan: 'Nhầm phép tính', phanHoi: '10 là giá trị của A − B. Đề hỏi A + B.' }, { gt: 13, nhan: 'Thiếu bước', phanHoi: '13 mới là giá trị của A. Còn cộng thêm B.' }, { gt: 8, nhan: 'Lỗi dấu', phanHoi: 'Kiểm tra lại dấu khi cộng các hạng tử đồng dạng: −2xy + 4xy = +2xy.' }],
+        buoc: { hoi: 'Thu gọn A + B được 2' + S('x', 2) + 'y + m·xy + 4. Hệ số m bằng bao nhiêu?', dapAn: 2, dung: 'Đúng: −2xy + 4xy = 2xy. Giờ thay x = 2, y = 1.', sai: '−2 + 4 = ?' },
+        goiY: ['Cộng các hạng tử đồng dạng: x²y với x²y, xy với xy, số với số.', 'A + B = 2x²y + 2xy + 4.'], viSaoDung: 'A + B = 2x²y + 2xy + 4 = 2·4·1 + 2·2·1 + 4 = 16.',
+        loiGiai: 'A + B = (3' + S('x', 2) + 'y − ' + S('x', 2) + 'y) + (−2xy + 4xy) + (5 − 1) = 2' + S('x', 2) + 'y + 2xy + 4.<br>Tại x = 2, y = 1: 2 · 4 · 1 + 2 · 2 · 1 + 4 = <b>16</b>.<br>(Kiểm tra: A = 13, B = 3, A + B = 16 ✓)', giangLai: 'Cách kiểm tra nhanh: tính riêng A và B tại x = 2, y = 1 rồi cộng. Hai cách phải ra cùng một số.', tienBo: 'Em đã thu gọn đúng và thay số chính xác.',
+        nguon: sgk8('Bài 3 "Phép cộng và phép trừ đa thức", trang 15–16; Bài 2 "Đa thức", trang 12 (thu gọn đa thức)'), kiemTra: kt8(),
+        tuongTu: { id: 'T8A-04-TT', muc: 'van-dung', liDoMuc: 'Như câu gốc.', loai: 'so', de: 'Cho A = ' + S('x', 2) + 'y + 3xy − 2 và B = 2' + S('x', 2) + 'y − xy + 6. Tính giá trị của <b>A + B</b> tại x = 1, y = 2.', dapAn: 14, loi: [{ gt: -2, nhan: 'Nhầm phép tính', phanHoi: 'Đó là A − B.' }, { gt: 6, nhan: 'Thiếu bước', phanHoi: 'Đó mới là A.' }], buoc: { hoi: 'Thu gọn A + B = 3x²y + m·xy + 4. m = ?', dapAn: 2, dung: 'Đúng.', sai: '3 − 1.' }, goiY: ['3x²y + 2xy + 4.'], viSaoDung: '6 + 4 + 4 = 14.', loiGiai: '<b>14</b>.', giangLai: 'Tính riêng A, B rồi cộng để kiểm tra.', nguon: sgk8('Bài 3, trang 15–16'), kiemTra: kt8() }
+      },
+      {
+        id: 'T8A-05', muc: 'nang-cao', liDoMuc: 'Nhiều bước: nhân đa thức, bỏ ngoặc có dấu trừ, thu gọn, phát hiện biểu thức không phụ thuộc x.', loai: 'so',
+        de: 'Rút gọn biểu thức P = (x + 2y)(x − y) − x(x + y), rồi tính giá trị của P tại x = 3, y = −1.', dapAn: -2,
+        loi: [{ gt: -8, nhan: 'Lỗi dấu khi bỏ ngoặc', phanHoi: 'Khi bỏ ngoặc −x(x + y) = −x² − xy, em cần đổi dấu <b>cả</b> hạng tử xy.' }, { gt: 2, nhan: 'Lỗi dấu', phanHoi: '(−1)² = 1 nhưng còn hệ số −2 phía trước: −2y² = −2.' }, { gt: 7, nhan: 'Lỗi nhân đa thức', phanHoi: 'Có vẻ em bỏ sót một tích khi nhân (x + 2y)(x − y). Phải đủ 4 tích: x·x, x·(−y), 2y·x, 2y·(−y).' }],
+        buoc: { hoi: 'Khai triển (x + 2y)(x − y) được ' + S('x', 2) + ' + a·xy − 2' + S('y', 2) + '. Hệ số a bằng bao nhiêu?', dapAn: 1, dung: 'Đúng: −xy + 2xy = xy. Giờ trừ đi x² + xy.', sai: 'Cộng −xy và 2xy.' },
+        goiY: ['Khai triển (x + 2y)(x − y) đủ 4 tích.', 'Trừ x(x + y) = x² + xy: đổi dấu cả hai hạng tử.'], viSaoDung: 'P = −2y²; tại y = −1, P = −2 (không phụ thuộc x).',
+        loiGiai: '(x + 2y)(x − y) = ' + S('x', 2) + ' − xy + 2xy − 2' + S('y', 2) + ' = ' + S('x', 2) + ' + xy − 2' + S('y', 2) + '.<br>P = ' + S('x', 2) + ' + xy − 2' + S('y', 2) + ' − ' + S('x', 2) + ' − xy = <b>−2' + S('y', 2) + '</b>.<br>Tại y = −1: P = −2 · 1 = <b>−2</b>. Giá trị của P không phụ thuộc vào x.',
+        giangLai: 'Kiểm tra bằng số: thay luôn x = 3, y = −1 vào biểu thức ban đầu: (3 − 2)(3 + 1) − 3(3 − 1) = 4 − 6 = −2. Nếu bài rút gọn của em cho kết quả khác, em đã sai ở bước khai triển.', tienBo: 'Em đã bỏ ngoặc có dấu trừ đúng và nhận ra P không phụ thuộc x.',
+        nguon: sgk8('Bài 4 "Phép nhân đa thức", trang 20 (quy tắc nhân đơn thức với đa thức, nhân đa thức với đa thức)'), kiemTra: kt8(),
+        tuongTu: { id: 'T8A-05-TT', muc: 'nang-cao', liDoMuc: 'Như câu gốc.', loai: 'so', de: 'Rút gọn Q = (2x − y)(x + y) − 2x(x + y), rồi tính giá trị tại x = 2, y = 1.', dapAn: -3, loi: [{ gt: 5, nhan: 'Lỗi dấu khi bỏ ngoặc', phanHoi: 'Đổi dấu cả hai hạng tử khi trừ 2x(x + y).' }, { gt: 3, nhan: 'Lỗi dấu', phanHoi: 'Q = −xy − y², tại x = 2, y = 1 ra số âm.' }], buoc: { hoi: '(2x − y)(x + y) = 2x² + a·xy − y². a = ?', dapAn: 1, dung: 'Đúng.', sai: '2xy − xy.' }, goiY: ['Q = −xy − y².'], viSaoDung: '−2 − 1 = −3.', loiGiai: 'Q = −xy − ' + S('y', 2) + ' = <b>−3</b>.', giangLai: 'Thay số vào biểu thức gốc để kiểm tra: (4 − 1)(3) − 4·3 = −3.', nguon: sgk8('Bài 4, trang 20'), kiemTra: kt8() }
+      },
+      {
+        id: 'T8A-06', muc: 'nang-cao', liDoMuc: 'Phân tích điều kiện chia hết cho từng đơn thức và kiểm tra kết quả phép chia.', loai: 'chonNhieu',
+        de: 'Cho A = 12' + S('x', 3) + S('y', 2) + ' − 6' + S('x', 2) + S('y', 3) + ' + 3' + S('x', 2) + S('y', 2) + '. <b>Chọn TẤT CẢ</b> các khẳng định đúng.',
+        phuongAn: [{ t: 'A chia hết cho đơn thức 3' + S('x', 2) + 'y.', dung: true }, { t: 'A chia hết cho đơn thức ' + S('x', 3) + 'y.', phanHoi: 'Hạng tử −6x²y³ chỉ có x², số mũ nhỏ hơn 3, nên không chia hết.' }, { t: 'A : 3' + S('x', 2) + S('y', 2) + ' = 4x − 2y + 1.', dung: true }, { t: 'A : 3' + S('x', 2) + 'y = 4xy − 2' + S('y', 2) + ' + y.', dung: true }],
+        goiY: ['Đa thức chia hết cho đơn thức B khi <b>mọi</b> hạng tử đều chia hết cho B.', 'Chia từng hạng tử rồi cộng lại để kiểm tra ý 3 và 4.'], viSaoDung: 'Ý 1, 3, 4 đúng; ý 2 sai vì hạng tử x²y³ không chia hết cho x³y.',
+        loiGiai: 'Ý 1, 3, 4 đúng.<br>A : 3' + S('x', 2) + S('y', 2) + ' = 4x − 2y + 1.<br>A : 3' + S('x', 2) + 'y = 4xy − 2' + S('y', 2) + ' + y.<br>A không chia hết cho ' + S('x', 3) + 'y vì hạng tử −6' + S('x', 2) + S('y', 3) + ' có số mũ của x là 2 &lt; 3.',
+        giangLai: 'Phép thử: với mỗi biến trong đơn thức chia, nhìn số mũ <b>nhỏ nhất</b> của biến đó trong các hạng tử của A. Ở đây x nhỏ nhất là 2, y nhỏ nhất là 2. Đơn thức chia chỉ được có x với số mũ ≤ 2 và y với số mũ ≤ 2.', tienBo: 'Em đã kiểm tra điều kiện chia hết cho từng hạng tử.',
+        nguon: sgk8('Bài 5 "Phép chia đa thức cho đơn thức", mục 1–2, trang 23–24 (điều kiện chia hết; quy tắc chia đa thức cho đơn thức)'), kiemTra: kt8(),
+        tuongTu: { id: 'T8A-06-TT', muc: 'nang-cao', liDoMuc: 'Như câu gốc.', loai: 'chonNhieu', de: 'Cho A = 10' + S('x', 2) + S('y', 3) + ' + 5x' + S('y', 2) + ' − 15' + S('x', 3) + S('y', 2) + '. <b>Chọn TẤT CẢ</b> các khẳng định đúng.', phuongAn: [{ t: 'A chia hết cho 5x' + S('y', 2) + '.', dung: true }, { t: 'A chia hết cho x' + S('y', 3) + '.', phanHoi: 'Hạng tử 5xy² chỉ có y².' }, { t: 'A : 5x' + S('y', 2) + ' = 2xy + 1 − 3' + S('x', 2) + '.', dung: true }, { t: 'A chia hết cho 5' + S('x', 2) + 'y.', phanHoi: 'Hạng tử 5xy² chỉ có x¹.' }], goiY: ['Số mũ nhỏ nhất của x là 1, của y là 2.'], viSaoDung: 'Ý 1, 3 đúng.', loiGiai: 'Ý 1, 3.', giangLai: 'Nhìn số mũ nhỏ nhất.', nguon: sgk8('Bài 5, trang 23–24'), kiemTra: kt8() }
+      }
+    ]
+  };
+
+  const hangDangThuc8 = {
+    id: 'toan8-hang-dang-thuc', lop: 8, mon: 'toan', phanMon: 'Số và Đại số', ten: 'Hằng đẳng thức đáng nhớ và ứng dụng',
+    sgk: 'SGK Toán 8 tập một — Chương II, Bài 6–9, từ trang 29',
+    yccdGhiChu: 'Đã đối chiếu với phần "Kiến thức, kĩ năng" của Bài 6, 7, 8, 9 trong SGK Toán 8 tập một.',
+    kienThucTruoc: ['Nhân đa thức với đa thức (Chương I)', 'Luỹ thừa bậc hai, bậc ba', 'Thu gọn đa thức'],
+    yeuCauCanDat: ['Mô tả các hằng đẳng thức: hiệu hai bình phương, bình phương của một tổng/hiệu, lập phương của một tổng/hiệu, tổng/hiệu hai lập phương.', 'Vận dụng hằng đẳng thức để tính nhanh, rút gọn và tính giá trị biểu thức.', 'Phân tích đa thức thành nhân tử bằng cách đặt nhân tử chung, nhóm hạng tử, sử dụng hằng đẳng thức.'],
+    bai: {
+      mucTieu: ['viết đúng bảy hằng đẳng thức đáng nhớ;', 'tính nhanh như 99 · 101 hay 103² mà không cần máy tính;', 'tính x² + y², a³ + b³ khi biết tổng (hiệu) và tích;', 'phân tích đa thức thành nhân tử để tìm x.'],
+      khoiDong: { hoi: 'Không dùng máy tính, em có tính được 99 · 101 trong 5 giây không? Gợi ý: 99 = 100 − 1 và 101 = 100 + 1.', goiY: '99 · 101 = (100 − 1)(100 + 1) = 100² − 1² = 9999. Đó là hằng đẳng thức hiệu hai bình phương.' },
+      trongTam: [
+        '<b>Hiệu hai bình phương:</b> ' + S('A', 2) + ' − ' + S('B', 2) + ' = (A − B)(A + B).',
+        '<b>Bình phương của một tổng/hiệu:</b> ' + S('(A + B)', 2) + ' = ' + S('A', 2) + ' + 2AB + ' + S('B', 2) + '; ' + S('(A − B)', 2) + ' = ' + S('A', 2) + ' − 2AB + ' + S('B', 2) + '.',
+        '<b>Lập phương của một tổng/hiệu:</b> ' + S('(A + B)', 3) + ' = ' + S('A', 3) + ' + 3' + S('A', 2) + 'B + 3A' + S('B', 2) + ' + ' + S('B', 3) + '; ' + S('(A − B)', 3) + ' = ' + S('A', 3) + ' − 3' + S('A', 2) + 'B + 3A' + S('B', 2) + ' − ' + S('B', 3) + '.',
+        '<b>Tổng/hiệu hai lập phương:</b> ' + S('A', 3) + ' + ' + S('B', 3) + ' = (A + B)(' + S('A', 2) + ' − AB + ' + S('B', 2) + '); ' + S('A', 3) + ' − ' + S('B', 3) + ' = (A − B)(' + S('A', 2) + ' + AB + ' + S('B', 2) + ').',
+        '<b>Phân tích đa thức thành nhân tử</b> là biến đổi đa thức thành tích của những đa thức. Ba cách: đặt nhân tử chung; sử dụng hằng đẳng thức; nhóm các hạng tử.'
+      ],
+      viDu: { de: 'Phân tích ' + S('x', 3) + ' − 9x thành nhân tử.', loiGiai: S('x', 3) + ' − 9x = x(' + S('x', 2) + ' − 9) (đặt nhân tử chung) = <b>x(x − 3)(x + 3)</b> (hiệu hai bình phương).' },
+      nguon: sgk8('Chương II "Hằng đẳng thức đáng nhớ và ứng dụng": Bài 6 (trang 29–33), Bài 7 (trang 34–36), Bài 8 (từ trang 37), Bài 9 (từ trang 42)'),
+      hoiDap: [
+        { tu: ['binh phuong', 'tong', 'hieu'], tl: '(A + B)² = A² + 2AB + B²; (A − B)² = A² − 2AB + B². Đừng quên hạng tử 2AB!' },
+        { tu: ['hieu hai binh phuong'], tl: 'A² − B² = (A − B)(A + B). Dùng để tính nhanh 99 · 101 = 100² − 1.' },
+        { tu: ['lap phuong'], tl: '(A + B)³ = A³ + 3A²B + 3AB² + B³; A³ + B³ = (A + B)(A² − AB + B²).' },
+        { tu: ['nhan tu', 'phan tich'], tl: 'Phân tích thành nhân tử: thử đặt nhân tử chung trước, rồi xem có dùng được hằng đẳng thức hay nhóm hạng tử không.' }
+      ]
+    },
+    cauHoi: [
+      {
+        id: 'T8B-01', muc: 'co-ban', liDoMuc: 'Áp dụng trực tiếp hiệu hai bình phương để tính nhanh.', loai: 'so', de: 'Tính nhanh: 99 · 101.', dapAn: 9999,
+        loi: [{ gt: 10000, nhan: 'Thiếu một bước', phanHoi: '10000 = 100². Theo hằng đẳng thức còn phải trừ 1² = 1.' }, { gt: 9801, nhan: 'Nhầm công thức', phanHoi: '9801 = 99². Hãy viết 99 · 101 = (100 − 1)(100 + 1).' }, { gt: 10001, nhan: 'Lỗi dấu', phanHoi: '(A − B)(A + B) = A² <b>−</b> B².' }],
+        buoc: { hoi: '99 · 101 = (100 − 1)(100 + 1) = 100² − ? (em nhập số cần trừ)', dapAn: 1, dung: 'Đúng: 100² − 1² = 10000 − 1.', sai: 'B = 1 nên B² = 1.' },
+        goiY: ['Viết 99 = 100 − 1, 101 = 100 + 1.'], viSaoDung: '(100 − 1)(100 + 1) = 100² − 1 = 9999.', loiGiai: '99 · 101 = (100 − 1)(100 + 1) = 100² − 1² = <b>9999</b>.', giangLai: 'Hai số cách đều 100 (một số kém 1, một số hơn 1). Tích của chúng luôn bằng 100² trừ đi bình phương khoảng cách: 10000 − 1.', tienBo: 'Em đã dùng hằng đẳng thức để tính nhanh.',
+        nguon: sgk8('Bài 6 (trang 29–33), mục "Hiệu hai bình phương"'), kiemTra: kt8(),
+        tuongTu: { id: 'T8B-01-TT', muc: 'co-ban', liDoMuc: 'Như câu gốc.', loai: 'so', de: 'Tính nhanh: 49 · 51.', dapAn: 2499, loi: [{ gt: 2500, nhan: 'Thiếu một bước', phanHoi: 'Còn trừ 1.' }, { gt: 2401, nhan: 'Nhầm công thức', phanHoi: 'Đó là 49².' }], buoc: { hoi: '49 · 51 = 50² − ?', dapAn: 1, dung: 'Đúng.', sai: '1² = 1.' }, goiY: ['(50 − 1)(50 + 1).'], viSaoDung: '2500 − 1.', loiGiai: '<b>2499</b>.', giangLai: 'Cách đều 50.', nguon: sgk8('Bài 6 (trang 29–33)'), kiemTra: kt8() }
+      },
+      {
+        id: 'T8B-02', muc: 'co-ban', liDoMuc: 'Nhận biết khai triển đúng của bình phương một hiệu.', loai: 'chon1', de: 'Khai triển ' + S('(x − 3)', 2) + ' được:',
+        phuongAn: [{ t: S('x', 2) + ' − 9', phanHoi: 'Đây là lỗi hay gặp: (A − B)² ≠ A² − B². Còn thiếu hạng tử −2AB.' }, { t: S('x', 2) + ' − 6x + 9', dung: true }, { t: S('x', 2) + ' + 6x + 9', phanHoi: 'Đây là (x + 3)². Với bình phương một hiệu, hạng tử giữa mang dấu −.' }, { t: S('x', 2) + ' − 3x + 9', phanHoi: 'Hạng tử giữa là 2 · x · 3 = 6x, không phải 3x.' }],
+        goiY: ['(A − B)² = A² − 2AB + B² với A = x, B = 3.'], viSaoDung: 'x² − 2·x·3 + 3² = x² − 6x + 9.', loiGiai: S('(x − 3)', 2) + ' = ' + S('x', 2) + ' − 2·x·3 + ' + S('3', 2) + ' = <b>' + S('x', 2) + ' − 6x + 9</b>.', giangLai: 'Thử với x = 5: (5 − 3)² = 4. Thay vào từng phương án: chỉ 25 − 30 + 9 = 4 đúng. Kiểm tra bằng số là cách bắt lỗi rất nhanh!', tienBo: 'Em đã nhớ hạng tử 2AB.',
+        nguon: sgk8('Bài 6 (trang 29–33), mục "Bình phương của một hiệu"'), kiemTra: kt8(),
+        tuongTu: { id: 'T8B-02-TT', muc: 'co-ban', liDoMuc: 'Như câu gốc.', loai: 'chon1', de: 'Khai triển ' + S('(2x + 1)', 2) + ' được:', phuongAn: [{ t: '4' + S('x', 2) + ' + 4x + 1', dung: true }, { t: '4' + S('x', 2) + ' + 1', phanHoi: 'Thiếu 2AB.' }, { t: '2' + S('x', 2) + ' + 4x + 1', phanHoi: '(2x)² = 4x².' }, { t: '4' + S('x', 2) + ' + 2x + 1', phanHoi: '2·2x·1 = 4x.' }], goiY: ['A = 2x, B = 1.'], viSaoDung: '4x² + 4x + 1.', loiGiai: '<b>4' + S('x', 2) + ' + 4x + 1</b>.', giangLai: 'Thử x = 1: 3² = 9.', nguon: sgk8('Bài 6 (trang 29–33), mục "Bình phương của một tổng"'), kiemTra: kt8() }
+      },
+      {
+        id: 'T8B-03', muc: 'van-dung', liDoMuc: 'Tự chọn cách tách số để dùng bình phương một tổng khi tính nhẩm.', loai: 'so', de: 'Tính nhanh: ' + S('103', 2) + '.', dapAn: 10609,
+        loi: [{ gt: 10009, nhan: 'Thiếu hạng tử 2AB', phanHoi: 'Em đã tính 100² + 3² mà quên 2 · 100 · 3.' }, { gt: 10309, nhan: 'Sai hạng tử 2AB', phanHoi: 'Hạng tử giữa là 2 · 100 · 3 = 600, không phải 300.' }, { gt: 10600, nhan: 'Thiếu B²', phanHoi: 'Còn cộng 3² = 9.' }],
+        buoc: { hoi: 'Viết 103² = (100 + 3)². Hạng tử 2AB = 2 · 100 · 3 bằng bao nhiêu?', dapAn: 600, dung: 'Đúng. Vậy 10000 + 600 + 9 = ?', sai: '2 · 100 · 3 = ?' },
+        goiY: ['103 = 100 + 3.'], viSaoDung: '10000 + 600 + 9 = 10609.', loiGiai: S('103', 2) + ' = ' + S('(100 + 3)', 2) + ' = 10000 + 600 + 9 = <b>10609</b>.', giangLai: 'Vẽ hình vuông cạnh 103 chia thành: một hình vuông 100 × 100, hai hình chữ nhật 100 × 3 và một hình vuông nhỏ 3 × 3. Cộng diện tích: 10000 + 300 + 300 + 9.', tienBo: 'Em đã nhớ đủ ba hạng tử của bình phương một tổng.',
+        nguon: sgk8('Bài 6 (trang 29–33), mục "Bình phương của một tổng"'), kiemTra: kt8(),
+        tuongTu: { id: 'T8B-03-TT', muc: 'van-dung', liDoMuc: 'Như câu gốc, bình phương một hiệu.', loai: 'so', de: 'Tính nhanh: ' + S('98', 2) + '.', dapAn: 9604, loi: [{ gt: 9996, nhan: 'Thiếu hạng tử 2AB', phanHoi: 'Quên −2·100·2.' }, { gt: 10404, nhan: 'Lỗi dấu', phanHoi: '(100 − 2)²: hạng tử giữa mang dấu −.' }], buoc: { hoi: '2·100·2 = ?', dapAn: 400, dung: 'Đúng.', sai: 'Nhân.' }, goiY: ['98 = 100 − 2.'], viSaoDung: '10000 − 400 + 4.', loiGiai: '<b>9604</b>.', giangLai: 'Hình vuông bị cắt bớt.', nguon: sgk8('Bài 6 (trang 29–33), mục "Bình phương của một hiệu"'), kiemTra: kt8() }
+      },
+      {
+        id: 'T8B-04', muc: 'van-dung', liDoMuc: 'Biến đổi hằng đẳng thức để tính một biểu thức từ hiệu và tích.', loai: 'so', de: 'Cho x − y = 3 và xy = 4. Tính ' + S('x', 2) + ' + ' + S('y', 2) + '.', dapAn: 17,
+        loi: [{ gt: 1, nhan: 'Lỗi dấu', phanHoi: 'Từ (x − y)² = x² + y² − 2xy suy ra x² + y² = (x − y)² <b>+</b> 2xy.' }, { gt: 9, nhan: 'Thiếu bước', phanHoi: '9 mới là (x − y)². Còn cộng 2xy.' }, { gt: 13, nhan: 'Thiếu hệ số 2', phanHoi: 'Phải cộng 2xy = 8, không phải xy = 4.' }],
+        buoc: { hoi: 'Ta có ' + S('(x − y)', 2) + ' = ' + S('x', 2) + ' + ' + S('y', 2) + ' − k·xy. Hệ số k bằng bao nhiêu?', dapAn: 2, dung: 'Đúng. Vậy x² + y² = (x − y)² + 2xy = 9 + 8.', sai: '(A − B)² = A² − 2AB + B².' },
+        goiY: ['Viết (x − y)² theo hằng đẳng thức.', 'x² + y² = (x − y)² + 2xy.'], viSaoDung: '9 + 2 · 4 = 17.', loiGiai: S('x', 2) + ' + ' + S('y', 2) + ' = ' + S('(x − y)', 2) + ' + 2xy = 9 + 8 = <b>17</b>.<br>(Kiểm tra: x = 4, y = 1 thoả mãn; 16 + 1 = 17 ✓)', giangLai: 'Không cần tìm x, y. Chỉ cần "nối" điều cần tìm với điều đã biết qua hằng đẳng thức (x − y)².', tienBo: 'Em đã dùng hằng đẳng thức để tính mà không cần tìm x, y.',
+        nguon: sgk8('Bài 6 (trang 29–33), mục "Bình phương của một hiệu"'), kiemTra: kt8(),
+        tuongTu: { id: 'T8B-04-TT', muc: 'van-dung', liDoMuc: 'Như câu gốc.', loai: 'so', de: 'Cho x + y = 5 và xy = 6. Tính ' + S('x', 2) + ' + ' + S('y', 2) + '.', dapAn: 13, loi: [{ gt: 37, nhan: 'Lỗi dấu', phanHoi: 'x² + y² = (x + y)² − 2xy.' }, { gt: 25, nhan: 'Thiếu bước', phanHoi: 'Còn trừ 2xy.' }, { gt: 19, nhan: 'Thiếu hệ số 2', phanHoi: 'Trừ 2xy = 12.' }], buoc: { hoi: '(x + y)² = x² + y² + k·xy. k = ?', dapAn: 2, dung: 'Đúng.', sai: '2AB.' }, goiY: ['25 − 12.'], viSaoDung: '13.', loiGiai: '<b>13</b> (x = 2, y = 3: 4 + 9 ✓).', giangLai: 'Nối điều cần tìm với điều đã biết.', nguon: sgk8('Bài 6 (trang 29–33), mục "Bình phương của một tổng"'), kiemTra: kt8() }
+      },
+      {
+        id: 'T8B-05', muc: 'nang-cao', liDoMuc: 'Nhiều bước với lập phương của một tổng; tính a³ + b³ từ tổng và tích.', loai: 'so', de: 'Cho a + b = 4 và ab = 3. Tính ' + S('a', 3) + ' + ' + S('b', 3) + '.', dapAn: 28,
+        loi: [{ gt: 64, nhan: 'Thiếu bước', phanHoi: '64 = (a + b)³. Theo hằng đẳng thức còn phải trừ 3ab(a + b).' }, { gt: 100, nhan: 'Lỗi dấu', phanHoi: 'a³ + b³ = (a + b)³ <b>−</b> 3ab(a + b).' }, { gt: 52, nhan: 'Thiếu nhân tử', phanHoi: 'Em đã trừ 3(a + b) = 12. Phải trừ 3ab(a + b) = 3 · 3 · 4 = 36.' }],
+        buoc: { hoi: 'Từ ' + S('(a + b)', 3) + ' = ' + S('a', 3) + ' + ' + S('b', 3) + ' + 3ab(a + b), hãy tính 3ab(a + b).', dapAn: 36, dung: 'Đúng: 3 · 3 · 4 = 36. Vậy a³ + b³ = 64 − 36.', sai: '3 · ab · (a + b) = 3 · 3 · 4.' },
+        goiY: ['(a + b)³ = a³ + 3a²b + 3ab² + b³ = a³ + b³ + 3ab(a + b).', 'Hoặc dùng a³ + b³ = (a + b)(a² − ab + b²).'], viSaoDung: '64 − 36 = 28.',
+        loiGiai: S('a', 3) + ' + ' + S('b', 3) + ' = ' + S('(a + b)', 3) + ' − 3ab(a + b) = 64 − 36 = <b>28</b>.<br>Cách khác: a² + b² = 16 − 6 = 10; ' + S('a', 3) + ' + ' + S('b', 3) + ' = (a + b)(a² − ab + b²) = 4 · (10 − 3) = 28.<br>Kiểm tra: a = 1, b = 3 thoả mãn; 1 + 27 = 28 ✓.',
+        giangLai: 'Tìm thử hai số có tổng 4, tích 3: đó là 1 và 3. Khi đó 1³ + 3³ = 28. Hằng đẳng thức giúp ta tính được kể cả khi không đoán ra a, b.', tienBo: 'Em đã tách được (a + b)³ để rút ra a³ + b³.',
+        nguon: sgk8('Bài 7 "Lập phương của một tổng hay một hiệu" (trang 34–36); Bài 8 "Tổng và hiệu hai lập phương" (từ trang 37)'), kiemTra: kt8(),
+        tuongTu: { id: 'T8B-05-TT', muc: 'nang-cao', liDoMuc: 'Như câu gốc.', loai: 'so', de: 'Cho a + b = 5 và ab = 4. Tính ' + S('a', 3) + ' + ' + S('b', 3) + '.', dapAn: 65, loi: [{ gt: 125, nhan: 'Thiếu bước', phanHoi: 'Còn trừ 3ab(a + b).' }, { gt: 185, nhan: 'Lỗi dấu', phanHoi: 'Phải trừ.' }], buoc: { hoi: '3ab(a + b) = ?', dapAn: 60, dung: 'Đúng.', sai: '3·4·5.' }, goiY: ['125 − 60.'], viSaoDung: '65.', loiGiai: '<b>65</b> (a = 1, b = 4: 1 + 64 ✓).', giangLai: 'Đoán a, b để kiểm tra.', nguon: sgk8('Bài 7–8, từ trang 34'), kiemTra: kt8() }
+      },
+      {
+        id: 'T8B-06', muc: 'nang-cao', liDoMuc: 'Phân tích thành nhân tử kết hợp hai cách, phát hiện sai lầm chia cả hai vế cho x.', loai: 'chonNhieu',
+        de: '<b>Chọn TẤT CẢ</b> các giá trị của x thoả mãn ' + S('x', 3) + ' − 4x = 0.',
+        phuongAn: [{ t: 'x = −2', dung: true }, { t: 'x = 0', dung: true }, { t: 'x = 2', dung: true }, { t: 'x = 4', phanHoi: 'Thử lại: 64 − 16 = 48 ≠ 0.' }, { t: 'x = −4', phanHoi: 'Thử lại: −64 + 16 = −48 ≠ 0.' }],
+        goiY: ['Đặt nhân tử chung x, rồi dùng hiệu hai bình phương.', 'Tích bằng 0 khi một trong các thừa số bằng 0. Đừng chia hai vế cho x vì sẽ mất nghiệm x = 0.'], viSaoDung: 'x³ − 4x = x(x − 2)(x + 2) = 0 ⇔ x ∈ {−2; 0; 2}.',
+        loiGiai: S('x', 3) + ' − 4x = x(' + S('x', 2) + ' − 4) = x(x − 2)(x + 2).<br>Tích bằng 0 khi x = 0 hoặc x − 2 = 0 hoặc x + 2 = 0, tức là <b>x ∈ {−2; 0; 2}</b>.<br>Sai lầm hay gặp: chia hai vế cho x được x² = 4 và bỏ mất nghiệm x = 0.',
+        giangLai: 'Hãy coi x³ − 4x như "x nhân với (x² − 4)". Một tích bằng 0 thì ít nhất một thừa số bằng 0 — nên phải xét cả trường hợp x = 0.', tienBo: 'Em đã phân tích thành nhân tử và không để mất nghiệm x = 0.',
+        nguon: sgk8('Bài 9 "Phân tích đa thức thành nhân tử", từ trang 42 (đặt nhân tử chung; sử dụng hằng đẳng thức)'), kiemTra: kt8(),
+        tuongTu: { id: 'T8B-06-TT', muc: 'nang-cao', liDoMuc: 'Như câu gốc.', loai: 'chonNhieu', de: '<b>Chọn TẤT CẢ</b> các giá trị của x thoả mãn ' + S('x', 3) + ' − 9x = 0.', phuongAn: [{ t: 'x = −3', dung: true }, { t: 'x = 0', dung: true }, { t: 'x = 3', dung: true }, { t: 'x = 9', phanHoi: '729 − 81 ≠ 0.' }], goiY: ['x(x − 3)(x + 3).'], viSaoDung: '{−3; 0; 3}.', loiGiai: '<b>x ∈ {−3; 0; 3}</b>.', giangLai: 'Không chia cho x.', nguon: sgk8('Bài 9, từ trang 42'), kiemTra: kt8() }
+      }
+    ]
+  };
+
+  /* ==================================================================
      ĐỐI CHIẾU SGK — KHOA HỌC TỰ NHIÊN 7 (đã mở và đọc ngày 26/11/2026)
      Giáo viên sửa vị trí ở đây nếu dùng ấn bản khác. Số trang theo số in trên sách.
      ================================================================== */
@@ -932,7 +1113,7 @@
     },
     8: {
       khtn: [['Vật lí', 'Khối lượng riêng và áp suất'], ['Vật lí', 'Tác dụng làm quay của lực'], ['Vật lí', 'Điện'], ['Vật lí', 'Nhiệt'], ['Hóa học', 'Phản ứng hóa học'], ['Hóa học', 'Mol và tính theo phương trình hóa học'], ['Hóa học', 'Acid – base – muối'], ['Sinh học', 'Cơ thể người'], ['Sinh học', 'Sinh vật và môi trường']],
-      toan: [['Số và Đại số', 'Đa thức nhiều biến'], ['Số và Đại số', 'Hằng đẳng thức đáng nhớ'], ['Số và Đại số', 'Phân thức đại số'], ['Số và Đại số', 'Phương trình bậc nhất một ẩn'], ['Số và Đại số', 'Hàm số bậc nhất']],
+      toan: [['Số và Đại số', 'Đa thức nhiều biến', 'toan8-da-thuc', 'Chương I · Bài 1–5 · tr. 5'], ['Số và Đại số', 'Hằng đẳng thức đáng nhớ và ứng dụng', 'toan8-hang-dang-thuc', 'Chương II · Bài 6–9 · tr. 29'], ['Số và Đại số', 'Phân thức đại số'], ['Số và Đại số', 'Phương trình bậc nhất một ẩn'], ['Số và Đại số', 'Hàm số bậc nhất']],
       anh: [['Ngữ pháp', 'Động từ chỉ sở thích + V-ing / to V'], ['Ngữ pháp', 'Câu đơn và câu ghép'], ['Ngữ pháp', 'Câu điều kiện loại 1'], ['Đọc hiểu', 'Đọc hiểu bài báo ngắn'], ['Viết', 'Viết đoạn văn nêu ý kiến']]
     },
     9: {
@@ -942,12 +1123,12 @@
     }
   };
 
-  const CHU_DE = [vatLi, hoaHoc, sinhHoc, toan, soThuc, tiLe, daThuc, tiengAnh];
+  const CHU_DE = [vatLi, hoaHoc, sinhHoc, toan, soThuc, tiLe, daThuc, tiengAnh, daThuc8, hangDangThuc8];
   apDungDoiChieu(CHU_DE);
 
   window.HOC_LIEU = {
     tenWeb: TEN_WEB,
-    phienBan: '1.2 — ' + NGAY_SOAN + ' (thêm 3 chủ đề Toán 7; đối chiếu SGK KHTN 7)',
+    phienBan: '1.3 — ' + NGAY_SOAN + ' (thêm 2 chủ đề Toán 8 đối chiếu SGK)',
     caiDat: {
       // Địa chỉ máy chủ trung gian AI (tùy chọn). Để trống = chỉ dùng AI qua Claude Artifact (nếu có) hoặc trợ giúp theo bài học.
       aiEndpoint: ''

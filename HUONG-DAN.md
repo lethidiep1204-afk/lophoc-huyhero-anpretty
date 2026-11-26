@@ -1,7 +1,7 @@
 # LophocHuyhero-Anpretty — Hướng dẫn sử dụng bản web độc lập
 
 Sổ tay tự học THCS lớp 6–9: Khoa học tự nhiên, Toán (Số và Đại số), Tiếng Anh.
-Phiên bản học liệu: 1.2 — 26/11/2026 (8 chủ đề lớp 7, 96 câu; 36 câu KHTN 7 đã đối chiếu SGK).
+Phiên bản học liệu: 1.3 — 26/11/2026 (10 chủ đề lớp 7 và lớp 8, 120 câu; 60 câu đã đối chiếu SGK).
 
 ## 1. Trong thư mục có gì
 
@@ -60,7 +60,7 @@ Sau khi lưu, tải lại trang và xem **Má Điệp yêu con → Kiểm tra d�
 
 ## 5. Cập nhật nguồn
 
-Hiện có **36/96 câu đã đối chiếu SGK** (ba chủ đề KHTN 7: Tốc độ chuyển động — Bài 8; Nguyên tử — Bài 2; Quang hợp ở thực vật — Bài 22, đối chiếu với SGK KHTN 7 Kết nối tri thức, bản quyền 2022, ISBN 978-604-0-30713-2), trong đó 2 câu là loại B (phỏng theo). 60 câu Toán 7 và Tiếng Anh 7 vẫn là loại C, "Chờ đối chiếu tài liệu" vì chưa có SGK Toán 7 và Tiếng Anh 7. Giáo viên chưa duyệt câu nào. Vị trí đối chiếu KHTN 7 nằm trong khối `DC_KHTN7` của `hoc-lieu.js`. Với câu khác, sau khi mở sách và đối chiếu:
+Hiện có **60/120 câu đã đối chiếu SGK**: 36 câu KHTN 7 (Bài 2, 8, 22 — SGK KHTN 7 Kết nối tri thức, ISBN 978-604-0-30713-2; vị trí ghi trong khối `DC_KHTN7`) và 24 câu Toán 8 (Chương I, II — SGK Toán 8 tập một Kết nối tri thức, bản PDF có dấu "Bản mẫu"; vị trí ghi trong từng câu, hàm `sgk8`). 2 câu là loại B (phỏng theo). 60 câu Toán 7 và Tiếng Anh 7 vẫn "Chờ đối chiếu tài liệu" vì thư mục Drive chưa có SGK Toán 7, Tiếng Anh 7. Giáo viên chưa duyệt câu nào. Với câu khác, sau khi mở sách và đối chiếu:
 
 1. Thay `nguon: tuSoan(…)` bằng đối tượng nguồn đầy đủ (mẫu A/B có trong trang, mục **Cập nhật nguồn**). Chỉ ghi trang, số bài khi đã thấy trong sách.
 2. Đổi `kiemTra.doiChieuNguon` thành `'da-doi-chieu'` và `giaoVienDuyet` thành `true`.
@@ -78,6 +78,6 @@ Không bật thì gia sư vẫn chạy miễn phí ở chế độ **Trợ giúp
 
 ## 7. Lưu ý trước khi giao cho học sinh
 
-- Đáp án đã được giải lại và kiểm thử tự động (450/450 phép kiểm tra đạt). 36 câu KHTN 7 đã đối chiếu SGK; 60 câu Toán 7, Tiếng Anh 7 chưa. **Giáo viên chưa duyệt** câu nào.
+- Đáp án đã được giải lại và kiểm thử tự động (572/572 phép kiểm tra đạt). 60 câu (KHTN 7, Toán 8) đã đối chiếu SGK; 60 câu Toán 7, Tiếng Anh 7 chưa. **Giáo viên chưa duyệt** câu nào.
 - Các chủ đề ghi "Đang biên soạn" chỉ là tên dự kiến theo mạch nội dung, chưa đối chiếu số bài, Unit hay trang.
 - Tài liệu cần để hoàn tất đối chiếu: xem mục **Má Điệp yêu con → Tài liệu cần bổ sung** trên trang.

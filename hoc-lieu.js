@@ -1096,15 +1096,1410 @@
     });
   }
 
+  /* ==================================================================
+     ĐỢT 3 — LỚP 6 (soạn ngày 26/11/2026)
+     Câu hỏi tự biên soạn (loại C). Căn cứ kiến thức: tên bài và số trang
+     đọc từ MỤC LỤC sách giáo viên lớp 6 bộ "Kết nối tri thức với cuộc sống"
+     (bản PDF trong thư mục Drive "Tin 6"). Số trang là trang SGV, chưa đối
+     chiếu số trang SGK học sinh.
+     ================================================================== */
+  const SGV_TOAN6 = {
+    ngan: 'SGV Toán 6',
+    tenTaiLieu: 'Toán 6 — Sách giáo viên (bộ "Kết nối tri thức với cuộc sống")',
+    tacGia: 'Hà Huy Khoái (Tổng Chủ biên), Nguyễn Huy Đoan (Chủ biên), Nguyễn Cao Cường, Trần Mạnh Cường, Doãn Minh Cường, Sĩ Đức Quang, Lưu Bá Thắng (theo bìa sách)',
+    donViPhatHanh: 'Nhà xuất bản Giáo dục Việt Nam',
+    anBan: 'Bản PDF 221 trang; chưa xem trang ghi năm in, ISBN',
+    banDoc: 'Bản PDF trong thư mục Google Drive "Tin 6"; đọc mục lục ngày 26/11/2026'
+  };
+  const SGV_KHTN6 = {
+    ngan: 'SGV Khoa học tự nhiên 6',
+    tenTaiLieu: 'Khoa học tự nhiên 6 — Sách giáo viên (bộ "Kết nối tri thức với cuộc sống")',
+    tacGia: 'Chờ đối chiếu (chưa đọc trang ghi tên tác giả)',
+    donViPhatHanh: 'Nhà xuất bản Giáo dục Việt Nam',
+    anBan: 'Bản PDF 235 trang; chưa xem trang ghi năm in, ISBN',
+    banDoc: 'Bản PDF trong thư mục Google Drive "Tin 6"; đọc mục lục ngày 26/11/2026'
+  };
+  const SGV_TA6 = {
+    ngan: 'SGV Tiếng Anh 6 Global Success',
+    tenTaiLieu: 'Tiếng Anh 6 Global Success — Sách giáo viên (bộ "Kết nối tri thức với cuộc sống")',
+    tacGia: 'Hoàng Văn Vân (Tổng Chủ biên), Nguyễn Thị Chi (Chủ biên), Lê Kim Dung, Phan Chí Nghĩa, Vũ Mai Trang, Lương Quỳnh Trang, Nguyễn Quốc Tuấn (theo bìa sách)',
+    donViPhatHanh: 'Nhà xuất bản Giáo dục Việt Nam (hợp tác Pearson)',
+    anBan: 'Bản PDF 193 trang; chưa xem trang ghi năm in, ISBN',
+    banDoc: 'Bản PDF trong thư mục Google Drive "Tin 6"; đọc phần Objectives của Unit 1, 3, 4 và Review 1 ngày 26/11/2026'
+  };
+  const sgv6 = (doc, viTri) => Object.assign(tuSoan(null), doc, {
+    canCu: 'Đã đối chiếu: ' + doc.ngan + ' — ' + viTri, viTri,
+    ghiChu: doc === SGV_TA6 ? 'Đối chiếu theo mục tiêu (Objectives) của Unit trong SGV; chưa ghi số trang SGK học sinh.' : 'Số trang là trang sách giáo viên (theo mục lục SGV); chưa đối chiếu số trang SGK học sinh.'
+  });
+  const N6T = v => sgv6(SGV_TOAN6, v), N6K = v => sgv6(SGV_KHTN6, v), N6A = v => sgv6(SGV_TA6, v);
+  const K6 = c => Object.assign(kt(c), { doiChieuNguon: 'da-doi-chieu', ngayDoiChieu: NGAY_SOAN });
+  const YCCD6 = 'Yêu cầu cần đạt do nhóm biên soạn tóm tắt theo tên bài trong mục lục SGV; chưa đối chiếu nguyên văn Chương trình GDPT 2018.';
+
+  /* ---------------- TOÁN 6 ---------------- */
+  const t6TapHop = {
+    id: 'toan6-so-tu-nhien', lop: 6, mon: 'toan', phanMon: 'Số và Đại số', ten: 'Tập hợp các số tự nhiên',
+    sgk: 'SGV Toán 6 — Chương I, Bài 1–7, SGV tr. 26–49', yccdGhiChu: YCCD6,
+    kienThucTruoc: ['Bốn phép tính với số tự nhiên (tiểu học)', 'Thứ tự trong biểu thức có ngoặc'],
+    yeuCauCanDat: ['Viết tập hợp bằng cách liệt kê và chỉ ra tính chất đặc trưng; dùng kí hiệu ∈, ∉.', 'Đọc, viết số La Mã đơn giản.', 'Thực hiện phép tính luỹ thừa với số mũ tự nhiên; nhân, chia hai luỹ thừa cùng cơ số.', 'Thực hiện đúng thứ tự các phép tính.'],
+    bai: {
+      mucTieu: ['đếm đúng số phần tử của một tập hợp;', 'đọc số La Mã;', 'nhân, chia hai luỹ thừa cùng cơ số;', 'tính biểu thức theo đúng thứ tự.'],
+      khoiDong: { hoi: 'Lớp em có các bạn tên An, Bình, Chi. Hãy viết tập hợp M các bạn đó. Bình có thuộc M không?', goiY: 'M = {An; Bình; Chi}. Bình ∈ M.' },
+      trongTam: [
+        '<b>Tập hợp</b>: viết các phần tử trong dấu { }, cách nhau bởi dấu ";". a thuộc A viết a ∈ A, không thuộc viết a ∉ A.',
+        'ℕ = {0; 1; 2; 3; …} là tập hợp số tự nhiên; ℕ* là tập hợp số tự nhiên <b>khác 0</b>.',
+        'Số La Mã: I = 1, V = 5, X = 10. Chữ nhỏ đứng <b>trước</b> chữ lớn thì trừ (IV = 4, IX = 9); đứng <b>sau</b> thì cộng (VI = 6, XI = 11).',
+        '<b>Luỹ thừa</b>: a<sup>n</sup> = a · a · … · a (n thừa số). ' + S('a', 'm') + ' · ' + S('a', 'n') + ' = ' + S('a', 'm+n') + '; ' + S('a', 'm') + ' : ' + S('a', 'n') + ' = ' + S('a', 'm−n') + ' (a ≠ 0, m ≥ n).',
+        '<b>Thứ tự thực hiện</b>: ngoặc tròn ( ) → ngoặc vuông [ ] → ngoặc nhọn { }; trong mỗi bước: luỹ thừa → nhân, chia → cộng, trừ.'
+      ],
+      viDu: { de: 'Tính 3 + 2 · ' + S('4', 2) + '.', loiGiai: 'Luỹ thừa trước: ' + S('4', 2) + ' = 16. Nhân: 2 · 16 = 32. Cộng: 3 + 32 = <b>35</b>.' },
+      nguon: N6T('Chương I "Tập hợp các số tự nhiên", Bài 1–7 (SGV tr. 26–49)'),
+      hoiDap: [
+        { tu: ['luy thua', 'so mu'], tl: 'Nhân hai luỹ thừa cùng cơ số: giữ cơ số, <b>cộng</b> số mũ. Chia: giữ cơ số, <b>trừ</b> số mũ.' },
+        { tu: ['thu tu', 'ngoac'], tl: 'Làm trong ngoặc trước. Trong mỗi bước: luỹ thừa → nhân chia → cộng trừ.' },
+        { tu: ['la ma'], tl: 'Chữ nhỏ đứng trước chữ lớn thì trừ (IX = 9), đứng sau thì cộng (XI = 11).' },
+        { tu: ['phan tu', 'tap hop'], tl: 'Liệt kê từng phần tử rồi đếm; chú ý dấu ≤ (có lấy) và < (không lấy).' }
+      ]
+    },
+    cauHoi: [
+      {
+        id: 'T6A-01', muc: 'co-ban', liDoMuc: 'Liệt kê phần tử theo tính chất đặc trưng rồi đếm.', loai: 'so',
+        de: 'Tập hợp A = {x ∈ ℕ | 3 ≤ x &lt; 9} có bao nhiêu phần tử?', dapAn: 6,
+        loi: [{ gt: 7, nhan: 'Nhầm dấu bất đẳng thức', phanHoi: 'Dấu "&lt; 9" nghĩa là <b>không</b> lấy số 9.' }, { gt: 5, nhan: 'Nhầm dấu bất đẳng thức', phanHoi: 'Dấu "3 ≤" nghĩa là <b>có</b> lấy số 3.' }],
+        buoc: { hoi: 'Phần tử nhỏ nhất của A là số nào?', dapAn: 3, dung: 'Đúng. Phần tử lớn nhất là 8. Đếm từ 3 đến 8.', sai: '"3 ≤ x" nghĩa là x có thể bằng 3.' },
+        goiY: ['Liệt kê: A = {3; 4; …}.'], viSaoDung: 'A = {3; 4; 5; 6; 7; 8} có 6 phần tử.', loiGiai: 'A = {3; 4; 5; 6; 7; 8} → <b>6</b> phần tử.',
+        giangLai: '"≤" có gạch dưới nghĩa là "nhỏ hơn <b>hoặc bằng</b>" → lấy cả số đó. "&lt;" không có gạch → không lấy.', tienBo: 'Em đã đọc đúng dấu ≤ và &lt;.',
+        nguon: N6T('Bài 1 "Tập hợp" (SGV tr. 27)'), kiemTra: K6(),
+        tuongTu: { id: 'T6A-01-TT', muc: 'co-ban', liDoMuc: 'Như câu gốc, thêm ℕ*.', loai: 'so', de: 'Tập hợp B = {x ∈ ℕ* | x ≤ 7} có bao nhiêu phần tử?', dapAn: 7, loi: [{ gt: 8, nhan: 'Nhầm ℕ*', phanHoi: 'ℕ* không có số 0.' }, { gt: 6, nhan: 'Nhầm dấu bất đẳng thức', phanHoi: '"≤ 7" có lấy số 7.' }], buoc: { hoi: 'Phần tử nhỏ nhất của B?', dapAn: 1, dung: 'Đúng: ℕ* bắt đầu từ 1.', sai: 'ℕ* không chứa 0.' }, goiY: ['ℕ* bắt đầu từ 1.'], viSaoDung: 'B = {1; …; 7}.', loiGiai: '<b>7</b> phần tử.', giangLai: 'Dấu * nghĩa là bỏ số 0.', nguon: N6T('Bài 1 "Tập hợp" (SGV tr. 27)'), kiemTra: K6() }
+      },
+      {
+        id: 'T6A-02', muc: 'co-ban', liDoMuc: 'Đọc số La Mã theo quy tắc cộng, trừ.', loai: 'chon1', de: 'Số La Mã <b>XIV</b> biểu thị số nào?',
+        phuongAn: [{ t: '14', dung: true }, { t: '16', phanHoi: 'Đó là XVI. Ở XIV, I đứng <b>trước</b> V nên IV = 5 − 1 = 4.' }, { t: '4', phanHoi: 'Em quên chữ X = 10 ở đầu.' }, { t: '114', phanHoi: 'Số La Mã không ghép chữ số như số thập phân.' }],
+        goiY: ['Tách: X | IV.'], viSaoDung: 'X = 10, IV = 4 → 14.', loiGiai: 'XIV = X + IV = 10 + 4 = <b>14</b>.', giangLai: 'Đọc từ trái sang phải theo từng cụm: X (10), rồi IV (I đứng trước V → 5 − 1).', tienBo: 'Em đã nhận ra cụm IV.',
+        nguon: N6T('Bài 2 "Cách ghi số tự nhiên" (SGV tr. 29)'), kiemTra: K6(),
+        tuongTu: { id: 'T6A-02-TT', muc: 'co-ban', liDoMuc: 'Như câu gốc.', loai: 'chon1', de: 'Số La Mã <b>XXIX</b> biểu thị số nào?', phuongAn: [{ t: '29', dung: true }, { t: '31', phanHoi: 'Đó là XXXI. IX = 9.' }, { t: '21', phanHoi: 'Em đọc thành XXI.' }, { t: '19', phanHoi: 'Có hai chữ X.' }], goiY: ['Tách: XX | IX.'], viSaoDung: '20 + 9.', loiGiai: '<b>29</b>.', giangLai: 'IX: I trước X → 10 − 1 = 9.', nguon: N6T('Bài 2 (SGV tr. 29)'), kiemTra: K6() }
+      },
+      {
+        id: 'T6A-03', muc: 'van-dung', liDoMuc: 'Kết hợp hai quy tắc nhân và chia luỹ thừa cùng cơ số.', loai: 'so',
+        de: 'Tính: ' + S('2', 3) + ' · ' + S('2', 4) + ' : ' + S('2', 5) + '.', dapAn: 4,
+        loi: [{ gt: 128, nhan: 'Lỗi luỹ thừa', phanHoi: 'Khi nhân hai luỹ thừa cùng cơ số, em <b>cộng</b> số mũ (3 + 4), không nhân số mũ.' }, { gt: 2, nhan: 'Chưa tính giá trị', phanHoi: '2 là số mũ của kết quả. Đề yêu cầu tính giá trị: ' + S('2', 2) + ' = ?' }],
+        buoc: { hoi: 'Kết quả viết dưới dạng 2<sup>n</sup>. n bằng bao nhiêu?', dapAn: 2, dung: 'Đúng: 3 + 4 − 5 = 2. Vậy giá trị là 2² = ?', sai: 'Cộng số mũ khi nhân, trừ khi chia: 3 + 4 − 5.' },
+        goiY: ['Nhân: cộng số mũ. Chia: trừ số mũ.'], viSaoDung: S('2', 3) + ' · ' + S('2', 4) + ' : ' + S('2', 5) + ' = ' + S('2', 2) + ' = 4.', loiGiai: S('2', '3+4−5') + ' = ' + S('2', 2) + ' = <b>4</b>.',
+        giangLai: 'Viết ra cho dễ thấy: ' + S('2', 3) + ' · ' + S('2', 4) + ' là 3 + 4 = 7 thừa số 2. Chia cho 5 thừa số 2 thì còn 2 thừa số: 2 · 2 = 4.', tienBo: 'Em đã cộng và trừ số mũ đúng quy tắc.',
+        nguon: N6T('Bài 6 "Luỹ thừa với số mũ tự nhiên" (SGV tr. 41)'), kiemTra: K6(),
+        tuongTu: { id: 'T6A-03-TT', muc: 'van-dung', liDoMuc: 'Như câu gốc.', loai: 'so', de: 'Tính: ' + S('3', 5) + ' · ' + S('3', 2) + ' : ' + S('3', 4) + '.', dapAn: 27, loi: [{ gt: 729, nhan: 'Lỗi luỹ thừa', phanHoi: 'Cộng số mũ khi nhân, không nhân số mũ.' }, { gt: 3, nhan: 'Chưa tính giá trị', phanHoi: 'Đó là số mũ. Tính 3³.' }], buoc: { hoi: 'Kết quả là 3<sup>n</sup>. n = ?', dapAn: 3, dung: 'Đúng: 5 + 2 − 4 = 3.', sai: '5 + 2 − 4.' }, goiY: ['5 + 2 − 4.'], viSaoDung: '3³ = 27.', loiGiai: S('3', 3) + ' = <b>27</b>.', giangLai: 'Đếm số thừa số 3 còn lại.', nguon: N6T('Bài 6 (SGV tr. 41)'), kiemTra: K6() }
+      },
+      {
+        id: 'T6A-04', muc: 'van-dung', liDoMuc: 'Biểu thức có ngoặc tròn, ngoặc vuông và luỹ thừa.', loai: 'so',
+        de: 'Tính: 2 · [48 − ' + S('(7 − 3)', 2) + '] + 5.', dapAn: 69,
+        loi: [{ gt: 85, nhan: 'Lỗi luỹ thừa', phanHoi: 'Có vẻ em tính 4² = 4 · 2 = 8. Thực ra 4² = 4 · 4.' }, { gt: 74, nhan: 'Lỗi thứ tự phép tính', phanHoi: 'Em đã cộng 5 vào trong ngoặc. Phép nhân 2 · [ ] phải làm trước phép cộng 5.' }],
+        buoc: { hoi: 'Giá trị của ' + S('(7 − 3)', 2) + ' là bao nhiêu?', dapAn: 16, dung: 'Đúng. Trong ngoặc vuông: 48 − 16 = 32.', sai: '7 − 3 = 4; 4² = 4 · 4.' },
+        goiY: ['Làm ngoặc tròn → luỹ thừa → ngoặc vuông → nhân → cộng.'], viSaoDung: '2 · (48 − 16) + 5 = 64 + 5 = 69.', loiGiai: '(7 − 3)² = 4² = 16; 48 − 16 = 32; 2 · 32 = 64; 64 + 5 = <b>69</b>.',
+        giangLai: 'Gạch chân từng bước và viết lại cả biểu thức sau mỗi bước — mỗi lần chỉ làm một phép.', tienBo: 'Em đã làm đúng thứ tự từ trong ra ngoài.',
+        nguon: N6T('Bài 7 "Thứ tự thực hiện các phép tính" (SGV tr. 45)'), kiemTra: K6(),
+        tuongTu: { id: 'T6A-04-TT', muc: 'van-dung', liDoMuc: 'Như câu gốc.', loai: 'so', de: 'Tính: 3 · [50 − ' + S('(9 − 4)', 2) + '] − 7.', dapAn: 68, loi: [{ gt: 113, nhan: 'Lỗi luỹ thừa', phanHoi: '5² = 5 · 5 = 25, không phải 10.' }, { gt: 54, nhan: 'Lỗi thứ tự phép tính', phanHoi: 'Nhân 3 · [ ] trước rồi mới trừ 7.' }], buoc: { hoi: '(9 − 4)² = ?', dapAn: 25, dung: 'Đúng.', sai: '5 · 5.' }, goiY: ['Ngoặc tròn → luỹ thừa → ngoặc vuông.'], viSaoDung: '3 · 25 − 7.', loiGiai: '<b>68</b>.', giangLai: 'Mỗi lần một phép.', nguon: N6T('Bài 7 (SGV tr. 45)'), kiemTra: K6() }
+      },
+      {
+        id: 'T6A-05', muc: 'nang-cao', liDoMuc: 'Tìm x: phải tính vế phải có luỹ thừa rồi giải ngược hai bước.', loai: 'so',
+        de: 'Tìm số tự nhiên x, biết: 2 · x + ' + S('3', 2) + ' = ' + S('5', 2) + ' − ' + S('2', 3) + ' + 12.', dapAn: 10,
+        loi: [{ gt: 20, nhan: 'Thiếu bước', phanHoi: '20 là giá trị của 2 · x. Còn phải chia cho 2.' }, { gt: 19, nhan: 'Lỗi tìm số hạng', phanHoi: 'Tìm số hạng chưa biết: lấy tổng <b>trừ</b> số hạng đã biết (29 − 9), không cộng.' }],
+        buoc: { hoi: 'Vế phải ' + S('5', 2) + ' − ' + S('2', 3) + ' + 12 bằng bao nhiêu?', dapAn: 29, dung: 'Đúng. Vậy 2x + 9 = 29.', sai: '25 − 8 + 12.' },
+        goiY: ['Tính vế phải trước.', '2x + 9 = 29 → 2x = 29 − 9.'], viSaoDung: '2x = 20 → x = 10.', loiGiai: 'Vế phải: 25 − 8 + 12 = 29. 2x + 9 = 29 ⇒ 2x = 20 ⇒ x = <b>10</b>.<br>Thử lại: 2 · 10 + 9 = 29 ✓',
+        giangLai: 'Coi "2x" là một ô trống: ô + 9 = 29 → ô = 20. Rồi 2 · x = 20 → x = 10. Luôn thử lại bằng cách thay x vào.', tienBo: 'Em đã giải ngược đúng hai bước và thử lại.',
+        nguon: N6T('Bài 5 "Phép nhân và phép chia số tự nhiên" (SGV tr. 37); Bài 6–7 (SGV tr. 41–45)'), kiemTra: K6(),
+        tuongTu: { id: 'T6A-05-TT', muc: 'nang-cao', liDoMuc: 'Như câu gốc.', loai: 'so', de: 'Tìm số tự nhiên x, biết: 3 · x − ' + S('2', 2) + ' = ' + S('4', 2) + ' + ' + S('2', 3) + ' − 1.', dapAn: 9, loi: [{ gt: 27, nhan: 'Thiếu bước', phanHoi: '27 là 3 · x. Chia tiếp cho 3.' }], buoc: { hoi: 'Vế phải bằng bao nhiêu?', dapAn: 23, dung: 'Đúng: 3x − 4 = 23.', sai: '16 + 8 − 1.' }, goiY: ['3x − 4 = 23 → 3x = 23 + 4.'], viSaoDung: '3x = 27 → x = 9.', loiGiai: 'x = <b>9</b>.', giangLai: 'Số bị trừ = hiệu + số trừ.', nguon: N6T('Bài 5–7 (SGV tr. 37–45)'), kiemTra: K6() }
+      },
+      {
+        id: 'T6A-06', muc: 'nang-cao', liDoMuc: 'Đánh giá nhiều khẳng định, cần phát hiện lỗi quy tắc luỹ thừa.', loai: 'chonNhieu',
+        de: '<b>Chọn TẤT CẢ</b> các khẳng định đúng.',
+        phuongAn: [{ t: S('2', 3) + ' · ' + S('2', 2) + ' = ' + S('2', 5), dung: true }, { t: S('3', 6) + ' : ' + S('3', 2) + ' = ' + S('3', 3), phanHoi: 'Chia thì trừ số mũ: 6 − 2 = 4, không chia 6 : 2.' }, { t: S('10', 3) + ' = 1000', dung: true }, { t: S('2', 4) + ' = ' + S('4', 2), dung: true }, { t: S('2', 3) + ' = 6', phanHoi: '2³ = 2 · 2 · 2 = 8, không phải 2 · 3.' }],
+        goiY: ['Tính thử từng vế.', 'Chia luỹ thừa cùng cơ số: trừ số mũ.'], viSaoDung: 'Ý 1, 3, 4 đúng (2⁴ = 16 = 4²).', loiGiai: 'Đúng: 2³·2² = 2⁵; 10³ = 1000; 2⁴ = 16 = 4². Sai: 3⁶ : 3² = 3⁴; 2³ = 8.',
+        giangLai: 'Khi nghi ngờ, hãy tính ra số cụ thể ở hai vế rồi so sánh.', tienBo: 'Em đã kiểm tra từng khẳng định bằng cách tính.',
+        nguon: N6T('Bài 6 "Luỹ thừa với số mũ tự nhiên" (SGV tr. 41)'), kiemTra: K6(),
+        tuongTu: { id: 'T6A-06-TT', muc: 'nang-cao', liDoMuc: 'Như câu gốc.', loai: 'chonNhieu', de: '<b>Chọn TẤT CẢ</b> các khẳng định đúng.', phuongAn: [{ t: S('5', 2) + ' · 5 = ' + S('5', 3), dung: true }, { t: S('7', 8) + ' : ' + S('7', 4) + ' = ' + S('7', 2), phanHoi: '8 − 4 = 4.' }, { t: S('2', 5) + ' = 32', dung: true }, { t: S('3', 2) + ' = ' + S('2', 3), phanHoi: '9 ≠ 8.' }], goiY: ['5 = 5¹.'], viSaoDung: 'Ý 1, 3.', loiGiai: 'Ý 1 và 3 đúng.', giangLai: 'Tính ra số cụ thể.', nguon: N6T('Bài 6 (SGV tr. 41)'), kiemTra: K6() }
+      }
+    ]
+  };
+
+  const t6ChiaHet = {
+    id: 'toan6-chia-het', lop: 6, mon: 'toan', phanMon: 'Số và Đại số', ten: 'Tính chia hết trong tập hợp số tự nhiên',
+    sgk: 'SGV Toán 6 — Chương II, Bài 8–12, SGV tr. 50–72', yccdGhiChu: YCCD6,
+    kienThucTruoc: ['Phép chia hết và phép chia có dư', 'Luỹ thừa (Chương I)'],
+    yeuCauCanDat: ['Vận dụng dấu hiệu chia hết cho 2, 5, 3, 9.', 'Nhận biết số nguyên tố, hợp số; phân tích một số ra thừa số nguyên tố.', 'Tìm ƯCLN, BCNN và vận dụng giải bài toán thực tế.'],
+    bai: {
+      mucTieu: ['nhận ra số chia hết cho 2, 5, 3, 9;', 'nhận biết số nguyên tố;', 'tìm ƯCLN và BCNN bằng phân tích ra thừa số nguyên tố;', 'chọn đúng ƯCLN hay BCNN cho bài toán thực tế.'],
+      khoiDong: { hoi: 'Có 12 cái kẹo chia đều cho các bạn, mỗi bạn được số kẹo như nhau và không thừa. Có thể chia cho mấy bạn?', goiY: '1, 2, 3, 4, 6 hoặc 12 bạn — đó là các <b>ước</b> của 12.' },
+      trongTam: [
+        'Dấu hiệu: chữ số tận cùng chẵn → chia hết cho <b>2</b>; tận cùng 0 hoặc 5 → chia hết cho <b>5</b>; tổng các chữ số chia hết cho 3 (cho 9) → số đó chia hết cho <b>3</b> (cho <b>9</b>).',
+        '<b>Số nguyên tố</b>: số tự nhiên lớn hơn 1, chỉ có hai ước là 1 và chính nó. Số 0 và 1 không là số nguyên tố, cũng không là hợp số.',
+        '<b>ƯCLN</b>: phân tích ra thừa số nguyên tố, lấy các thừa số <b>chung</b>, mỗi thừa số lấy số mũ <b>nhỏ nhất</b>.',
+        '<b>BCNN</b>: lấy các thừa số chung <b>và riêng</b>, mỗi thừa số lấy số mũ <b>lớn nhất</b>.',
+        'Bài toán "chia đều nhiều nhất" → ƯCLN. Bài toán "lại gặp nhau sớm nhất / ít nhất" → BCNN.'
+      ],
+      viDu: { de: 'Tìm ƯCLN(24, 36) và BCNN(24, 36).', loiGiai: '24 = ' + S('2', 3) + ' · 3; 36 = ' + S('2', 2) + ' · ' + S('3', 2) + '.<br>ƯCLN = ' + S('2', 2) + ' · 3 = <b>12</b>; BCNN = ' + S('2', 3) + ' · ' + S('3', 2) + ' = <b>72</b>.' },
+      nguon: N6T('Chương II "Tính chia hết trong tập hợp các số tự nhiên", Bài 8–12 (SGV tr. 50–72)'),
+      hoiDap: [
+        { tu: ['ucln', 'uoc chung'], tl: 'ƯCLN: thừa số chung, số mũ nhỏ nhất.' },
+        { tu: ['bcnn', 'boi chung'], tl: 'BCNN: thừa số chung và riêng, số mũ lớn nhất.' },
+        { tu: ['nguyen to'], tl: 'Số nguyên tố > 1 và chỉ có 2 ước: 1 và chính nó. Ví dụ 2, 3, 5, 7, 11, 13.' },
+        { tu: ['dau hieu', 'chia het cho 3', 'chia het cho 9'], tl: 'Cộng các chữ số: tổng chia hết cho 3 (9) thì số đó chia hết cho 3 (9).' }
+      ]
+    },
+    cauHoi: [
+      {
+        id: 'T6B-01', muc: 'co-ban', liDoMuc: 'Áp dụng trực tiếp dấu hiệu chia hết cho 2 và 5.', loai: 'chonNhieu', de: '<b>Chọn TẤT CẢ</b> các số chia hết cho <b>cả 2 và 5</b>.',
+        phuongAn: [{ t: '120', dung: true }, { t: '135', phanHoi: '135 tận cùng là 5 (lẻ) nên không chia hết cho 2.' }, { t: '250', dung: true }, { t: '402', phanHoi: '402 tận cùng là 2 nên không chia hết cho 5.' }],
+        goiY: ['Chia hết cho cả 2 và 5 ⇔ tận cùng là 0.'], viSaoDung: '120 và 250 tận cùng là 0.', loiGiai: '<b>120; 250</b>.', giangLai: 'Chia hết cho 2: tận cùng chẵn. Chia hết cho 5: tận cùng 0 hoặc 5. Cả hai cùng lúc: chỉ có tận cùng 0.', tienBo: 'Em đã kết hợp hai dấu hiệu.',
+        nguon: N6T('Bài 9 "Dấu hiệu chia hết" (SGV tr. 55)'), kiemTra: K6(),
+        tuongTu: { id: 'T6B-01-TT', muc: 'co-ban', liDoMuc: 'Như câu gốc, dấu hiệu 3 và 9.', loai: 'chonNhieu', de: '<b>Chọn TẤT CẢ</b> các số chia hết cho <b>cả 3 và 9</b>.', phuongAn: [{ t: '1 260', dung: true }, { t: '2 034', dung: true }, { t: '1 236', phanHoi: 'Tổng chữ số 12: chia hết cho 3, không chia hết cho 9.' }, { t: '4 501', phanHoi: 'Tổng chữ số 10.' }], goiY: ['Tính tổng các chữ số.'], viSaoDung: '1+2+6+0 = 9; 2+0+3+4 = 9.', loiGiai: '<b>1 260; 2 034</b>.', giangLai: 'Chia hết cho 9 thì chắc chắn chia hết cho 3.', nguon: N6T('Bài 9 (SGV tr. 55)'), kiemTra: K6() }
+      },
+      {
+        id: 'T6B-02', muc: 'co-ban', liDoMuc: 'Nhận biết số nguyên tố theo định nghĩa.', loai: 'chon1', de: 'Số nào sau đây là <b>số nguyên tố</b>?',
+        phuongAn: [{ t: '1', phanHoi: 'Số 1 chỉ có một ước nên không là số nguyên tố.' }, { t: '9', phanHoi: '9 = 3 · 3, có ước 3.' }, { t: '17', dung: true }, { t: '21', phanHoi: '21 = 3 · 7.' }],
+        goiY: ['Thử chia cho 2, 3, 5, 7.'], viSaoDung: '17 chỉ có hai ước 1 và 17.', loiGiai: '<b>17</b>.', giangLai: 'Số nguyên tố "không chia được cho ai" ngoài 1 và chính nó. Thử chia cho các số nguyên tố nhỏ 2, 3, 5, 7.', tienBo: 'Em đã kiểm tra ước của từng số.',
+        nguon: N6T('Bài 10 "Số nguyên tố" (SGV tr. 58)'), kiemTra: K6(),
+        tuongTu: { id: 'T6B-02-TT', muc: 'co-ban', liDoMuc: 'Như câu gốc.', loai: 'chon1', de: 'Số nào sau đây là <b>số nguyên tố</b>?', phuongAn: [{ t: '27', phanHoi: '27 = 3 · 9.' }, { t: '29', dung: true }, { t: '33', phanHoi: '33 = 3 · 11.' }, { t: '51', phanHoi: '51 = 3 · 17 (tổng chữ số 6 chia hết cho 3).' }], goiY: ['Dùng dấu hiệu chia hết cho 3.'], viSaoDung: '29 chỉ có ước 1 và 29.', loiGiai: '<b>29</b>.', giangLai: 'Thử chia cho 2, 3, 5.', nguon: N6T('Bài 10 (SGV tr. 58)'), kiemTra: K6() }
+      },
+      {
+        id: 'T6B-03', muc: 'van-dung', liDoMuc: 'Phân tích hai số ra thừa số nguyên tố rồi áp dụng quy tắc ƯCLN.', loai: 'so', de: 'Tìm ƯCLN(36, 48).', dapAn: 12,
+        loi: [{ gt: 144, nhan: 'Nhầm ƯCLN với BCNN', phanHoi: '144 là BCNN. ƯCLN lấy số mũ <b>nhỏ nhất</b>.' }, { gt: 6, nhan: 'Chưa phải lớn nhất', phanHoi: '6 là một ước chung nhưng chưa lớn nhất.' }, { gt: 4, nhan: 'Thiếu thừa số', phanHoi: 'Em quên thừa số chung 3.' }],
+        buoc: { hoi: '36 = 2² · 3², 48 = 2⁴ · 3. Thừa số 2 trong ƯCLN lấy với số mũ bao nhiêu?', dapAn: 2, dung: 'Đúng — số mũ nhỏ nhất. Thừa số 3 lấy số mũ 1.', sai: 'Lấy số mũ nhỏ nhất giữa 2 và 4.' },
+        goiY: ['Phân tích 36 và 48 ra thừa số nguyên tố.'], viSaoDung: 'ƯCLN = 2² · 3 = 12.', loiGiai: '36 = ' + S('2', 2) + ' · ' + S('3', 2) + '; 48 = ' + S('2', 4) + ' · 3. ƯCLN = ' + S('2', 2) + ' · 3 = <b>12</b>.',
+        giangLai: 'Kiểm tra: 36 : 12 = 3 và 48 : 12 = 4; 3 và 4 không còn ước chung nào khác 1 → 12 là lớn nhất.', tienBo: 'Em đã lấy đúng số mũ nhỏ nhất.',
+        nguon: N6T('Bài 11 "Ước chung. Ước chung lớn nhất" (SGV tr. 63)'), kiemTra: K6(),
+        tuongTu: { id: 'T6B-03-TT', muc: 'van-dung', liDoMuc: 'Như câu gốc.', loai: 'so', de: 'Tìm ƯCLN(60, 72).', dapAn: 12, loi: [{ gt: 360, nhan: 'Nhầm ƯCLN với BCNN', phanHoi: 'Đó là BCNN.' }, { gt: 6, nhan: 'Chưa phải lớn nhất', phanHoi: 'Còn ước chung lớn hơn.' }], buoc: { hoi: '60 = 2²·3·5; 72 = 2³·3². Số mũ của 2 trong ƯCLN?', dapAn: 2, dung: 'Đúng.', sai: 'Nhỏ nhất của 2 và 3.' }, goiY: ['Thừa số chung: 2 và 3.'], viSaoDung: '2²·3.', loiGiai: '<b>12</b>.', giangLai: '60:12 = 5, 72:12 = 6.', nguon: N6T('Bài 11 (SGV tr. 63)'), kiemTra: K6() }
+      },
+      {
+        id: 'T6B-04', muc: 'van-dung', liDoMuc: 'Tìm BCNN, dễ nhầm với tích hai số.', loai: 'so', de: 'Tìm BCNN(12, 18).', dapAn: 36,
+        loi: [{ gt: 216, nhan: 'Lấy tích', phanHoi: '216 = 12 · 18 là một bội chung nhưng chưa nhỏ nhất.' }, { gt: 6, nhan: 'Nhầm BCNN với ƯCLN', phanHoi: '6 là ƯCLN. BCNN lấy số mũ <b>lớn nhất</b>.' }, { gt: 72, nhan: 'Chưa phải nhỏ nhất', phanHoi: '72 là bội chung nhưng còn bội chung nhỏ hơn.' }],
+        buoc: { hoi: '12 = 2² · 3, 18 = 2 · 3². Thừa số 3 trong BCNN lấy số mũ bao nhiêu?', dapAn: 2, dung: 'Đúng. BCNN = 2² · 3².', sai: 'Lấy số mũ lớn nhất.' },
+        goiY: ['Thừa số chung và riêng, số mũ lớn nhất.'], viSaoDung: 'BCNN = 2² · 3² = 36.', loiGiai: 'BCNN = ' + S('2', 2) + ' · ' + S('3', 2) + ' = <b>36</b>.', giangLai: 'Liệt kê bội của 18: 18, 36, … — 36 chia hết cho 12 → BCNN = 36.', tienBo: 'Em đã không nhầm BCNN với tích.',
+        nguon: N6T('Bài 12 "Bội chung. Bội chung nhỏ nhất" (SGV tr. 67)'), kiemTra: K6(),
+        tuongTu: { id: 'T6B-04-TT', muc: 'van-dung', liDoMuc: 'Như câu gốc.', loai: 'so', de: 'Tìm BCNN(15, 20).', dapAn: 60, loi: [{ gt: 300, nhan: 'Lấy tích', phanHoi: 'Chưa nhỏ nhất.' }, { gt: 5, nhan: 'Nhầm BCNN với ƯCLN', phanHoi: 'Đó là ƯCLN.' }], buoc: { hoi: '15 = 3·5; 20 = 2²·5. Số mũ của 2 trong BCNN?', dapAn: 2, dung: 'Đúng.', sai: 'Lớn nhất.' }, goiY: ['2²·3·5.'], viSaoDung: '60.', loiGiai: '<b>60</b>.', giangLai: 'Bội của 20: 20, 40, 60 — 60 chia hết cho 15.', nguon: N6T('Bài 12 (SGV tr. 67)'), kiemTra: K6() }
+      },
+      {
+        id: 'T6B-05', muc: 'nang-cao', liDoMuc: 'Mô hình hoá tình huống thực tế, phải nhận ra cần BCNN.', loai: 'so',
+        de: 'An cứ 6 ngày trực thư viện một lần, Bình cứ 8 ngày một lần. Hôm nay hai bạn cùng trực. Sau <b>ít nhất</b> bao nhiêu ngày nữa hai bạn lại cùng trực?', dapAn: 24, soLieu: GIA_DINH,
+        loi: [{ gt: 48, nhan: 'Lấy tích', phanHoi: '48 ngày nữa cũng cùng trực, nhưng chưa phải sớm nhất.' }, { gt: 2, nhan: 'Nhầm BCNN với ƯCLN', phanHoi: '"Lại gặp nhau sớm nhất" → BCNN, không phải ƯCLN.' }, { gt: 14, nhan: 'Chọn sai phép tính', phanHoi: 'Không cộng 6 + 8. Số ngày cần là bội của cả 6 và 8.' }],
+        buoc: { hoi: '6 = 2 · 3; 8 = 2³. Thừa số 2 trong BCNN có số mũ bao nhiêu?', dapAn: 3, dung: 'Đúng. BCNN = 2³ · 3.', sai: 'Lấy số mũ lớn nhất.' },
+        goiY: ['Số ngày phải chia hết cho cả 6 và 8.', 'Ít nhất → nhỏ nhất → BCNN.'], viSaoDung: 'BCNN(6, 8) = 24.', loiGiai: 'Số ngày cần tìm là BCNN(6, 8) = ' + S('2', 3) + ' · 3 = <b>24</b> ngày.',
+        giangLai: 'Lập bảng: ngày An trực: 6, 12, 18, 24…; ngày Bình trực: 8, 16, 24… Số đầu tiên chung là 24.', tienBo: 'Em đã nhận ra bài toán cần BCNN.',
+        nguon: N6T('Bài 12 "Bội chung. Bội chung nhỏ nhất" (SGV tr. 67)'), kiemTra: K6(),
+        tuongTu: { id: 'T6B-05-TT', muc: 'nang-cao', liDoMuc: 'Như câu gốc.', loai: 'so', de: 'Xe buýt tuyến A cứ 10 phút có một chuyến, tuyến B cứ 15 phút. Lúc 7 giờ hai tuyến cùng xuất bến. Sau ít nhất bao nhiêu phút lại cùng xuất bến?', dapAn: 30, loi: [{ gt: 150, nhan: 'Lấy tích', phanHoi: 'Chưa sớm nhất.' }, { gt: 5, nhan: 'Nhầm BCNN với ƯCLN', phanHoi: 'Cần BCNN.' }, { gt: 25, nhan: 'Chọn sai phép tính', phanHoi: 'Không cộng.' }], buoc: { hoi: 'Số mũ của 5 trong BCNN(10, 15)?', dapAn: 1, dung: 'Đúng.', sai: '10 = 2·5; 15 = 3·5.' }, goiY: ['BCNN(10, 15).'], viSaoDung: '30.', loiGiai: '<b>30</b> phút.', giangLai: 'Lập bảng 10, 20, 30 / 15, 30.', nguon: N6T('Bài 12 (SGV tr. 67)'), kiemTra: K6() }
+      },
+      {
+        id: 'T6B-06', muc: 'nang-cao', liDoMuc: 'Bài toán thực tế hai bước: tìm ƯCLN rồi trả lời đúng câu hỏi.', loai: 'so',
+        de: 'Cô giáo có 48 quyển vở và 36 cái bút, muốn chia thành các phần quà như nhau (mỗi phần có số vở như nhau, số bút như nhau) với <b>nhiều phần quà nhất</b>. Mỗi phần quà có bao nhiêu <b>quyển vở</b>?', dapAn: 4,
+        loi: [{ gt: 12, nhan: 'Chưa trả lời đúng câu hỏi', phanHoi: '12 là số phần quà. Đề hỏi số quyển vở trong mỗi phần.' }, { gt: 3, nhan: 'Nhầm đối tượng', phanHoi: '3 là số bút mỗi phần. Đề hỏi số vở.' }],
+        buoc: { hoi: 'Có nhiều nhất bao nhiêu phần quà?', dapAn: 12, dung: 'Đúng: ƯCLN(48, 36) = 12. Mỗi phần có 48 : 12 vở.', sai: 'Số phần quà là ước chung lớn nhất của 48 và 36.' },
+        goiY: ['Số phần quà nhiều nhất = ƯCLN(48, 36).', 'Rồi chia 48 cho số phần.'], viSaoDung: 'ƯCLN = 12 phần; 48 : 12 = 4 vở.', loiGiai: 'ƯCLN(48, 36) = 12 phần quà. Mỗi phần: 48 : 12 = <b>4</b> quyển vở (và 36 : 12 = 3 bút).',
+        giangLai: 'Gạch chân câu hỏi cuối đề trước khi giải để biết mình cần tìm gì.', tienBo: 'Em đã đi đủ hai bước và trả lời đúng câu hỏi.',
+        nguon: N6T('Bài 11 "Ước chung. Ước chung lớn nhất" (SGV tr. 63)'), kiemTra: K6(),
+        tuongTu: { id: 'T6B-06-TT', muc: 'nang-cao', liDoMuc: 'Như câu gốc.', loai: 'so', de: 'Có 60 cái kẹo và 45 cái bánh, chia thành các túi như nhau với nhiều túi nhất. Mỗi túi có bao nhiêu <b>cái bánh</b>?', dapAn: 3, loi: [{ gt: 15, nhan: 'Chưa trả lời đúng câu hỏi', phanHoi: '15 là số túi.' }, { gt: 4, nhan: 'Nhầm đối tượng', phanHoi: '4 là số kẹo mỗi túi.' }], buoc: { hoi: 'Nhiều nhất bao nhiêu túi?', dapAn: 15, dung: 'Đúng.', sai: 'ƯCLN(60, 45).' }, goiY: ['ƯCLN(60, 45) = 15.'], viSaoDung: '45 : 15 = 3.', loiGiai: '<b>3</b> cái bánh.', giangLai: 'Gạch chân câu hỏi.', nguon: N6T('Bài 11 (SGV tr. 63)'), kiemTra: K6() }
+      }
+    ]
+  };
+
+  const t6SoNguyen = {
+    id: 'toan6-so-nguyen', lop: 6, mon: 'toan', phanMon: 'Số và Đại số', ten: 'Số nguyên',
+    sgk: 'SGV Toán 6 — Chương III, Bài 13–17, SGV tr. 73–93', yccdGhiChu: YCCD6,
+    kienThucTruoc: ['Bốn phép tính với số tự nhiên', 'Tia số'],
+    yeuCauCanDat: ['Nhận biết số nguyên âm, biểu diễn và so sánh số nguyên.', 'Cộng, trừ, nhân số nguyên; vận dụng quy tắc dấu ngoặc.', 'Giải bài toán thực tế có số âm (nhiệt độ, độ cao…).'],
+    bai: {
+      mucTieu: ['so sánh số nguyên âm;', 'cộng hai số nguyên khác dấu;', 'trừ một số nguyên âm;', 'bỏ dấu ngoặc đúng dấu và nhân số nguyên.'],
+      khoiDong: { hoi: 'Nhiệt độ ở Sa Pa sáng nay là −2 °C, buổi trưa tăng thêm 7 °C. Buổi trưa nhiệt độ là bao nhiêu?', goiY: '−2 + 7 = 5 (°C).' },
+      trongTam: [
+        'Trên trục số nằm ngang, số bên trái nhỏ hơn số bên phải. Với số âm: số nào có <b>giá trị tuyệt đối lớn hơn thì nhỏ hơn</b> (−10 &lt; −2).',
+        'Cộng hai số <b>cùng dấu</b>: cộng hai phần số, giữ dấu chung. Cộng hai số <b>khác dấu</b>: lấy phần số lớn trừ phần số nhỏ, đặt dấu của số có phần số lớn hơn.',
+        '<b>Trừ</b>: a − b = a + (−b). Trừ một số âm là cộng số đối của nó: 7 − (−5) = 7 + 5.',
+        '<b>Quy tắc dấu ngoặc</b>: bỏ ngoặc có dấu "−" đứng trước thì <b>đổi dấu tất cả</b> số hạng trong ngoặc.',
+        '<b>Nhân</b>: cùng dấu → kết quả dương; khác dấu → kết quả âm.'
+      ],
+      viDu: { de: 'Tính (−8) + 3 − (−6).', loiGiai: '(−8) + 3 = −5; −5 − (−6) = −5 + 6 = <b>1</b>.' },
+      nguon: N6T('Chương III "Số nguyên", Bài 13–17 (SGV tr. 73–93)'),
+      hoiDap: [
+        { tu: ['khac dau', 'cong'], tl: 'Khác dấu: lấy phần số lớn trừ phần số nhỏ, đặt dấu của số có phần số lớn hơn.' },
+        { tu: ['tru so am', 'tru'], tl: 'Trừ số âm = cộng số dương: a − (−b) = a + b.' },
+        { tu: ['dau ngoac', 'bo ngoac'], tl: 'Trước ngoặc có dấu trừ: đổi dấu <b>mọi</b> số hạng trong ngoặc khi bỏ ngoặc.' },
+        { tu: ['nhan', 'dau'], tl: '(−)·(−) = (+); (−)·(+) = (−).' }
+      ]
+    },
+    cauHoi: [
+      {
+        id: 'T6C-01', muc: 'co-ban', liDoMuc: 'Cộng hai số nguyên khác dấu.', loai: 'so', de: 'Tính: (−15) + 9.', dapAn: -6,
+        loi: [{ gt: 6, nhan: 'Lỗi dấu', phanHoi: 'Phần số của −15 lớn hơn nên kết quả mang dấu <b>âm</b>.' }, { gt: -24, nhan: 'Lỗi quy tắc cộng', phanHoi: 'Hai số khác dấu: lấy phần số lớn <b>trừ</b> phần số nhỏ, không cộng.' }, { gt: 24, nhan: 'Lỗi quy tắc cộng', phanHoi: 'Hai số khác dấu thì trừ phần số, không cộng.' }],
+        buoc: { hoi: 'Phần số lớn trừ phần số nhỏ: 15 − 9 = ?', dapAn: 6, dung: 'Đúng. Dấu lấy theo −15 (phần số lớn hơn).', sai: '15 − 9.' },
+        goiY: ['Hai số khác dấu.'], viSaoDung: '15 − 9 = 6, dấu âm.', loiGiai: '(−15) + 9 = −(15 − 9) = <b>−6</b>.', giangLai: 'Nghĩ như tiền: nợ 15 nghìn, trả được 9 nghìn → vẫn nợ 6 nghìn, tức −6.', tienBo: 'Em đã đặt dấu đúng.',
+        nguon: N6T('Bài 14 "Phép cộng và phép trừ số nguyên" (SGV tr. 78)'), kiemTra: K6(),
+        tuongTu: { id: 'T6C-01-TT', muc: 'co-ban', liDoMuc: 'Như câu gốc.', loai: 'so', de: 'Tính: 12 + (−20).', dapAn: -8, loi: [{ gt: 8, nhan: 'Lỗi dấu', phanHoi: 'Phần số của −20 lớn hơn → dấu âm.' }, { gt: -32, nhan: 'Lỗi quy tắc cộng', phanHoi: 'Khác dấu thì trừ phần số.' }], buoc: { hoi: '20 − 12 = ?', dapAn: 8, dung: 'Đúng.', sai: '20 − 12.' }, goiY: ['Khác dấu.'], viSaoDung: '−8.', loiGiai: '<b>−8</b>.', giangLai: 'Có 12, nợ 20 → còn nợ 8.', nguon: N6T('Bài 14 (SGV tr. 78)'), kiemTra: K6() }
+      },
+      {
+        id: 'T6C-02', muc: 'co-ban', liDoMuc: 'So sánh số nguyên âm.', loai: 'chon1', de: 'Số nào <b>lớn nhất</b> trong các số: −7; −2; −10; −5?',
+        phuongAn: [{ t: '−7', phanHoi: '−7 nằm bên trái −2 trên trục số.' }, { t: '−2', dung: true }, { t: '−10', phanHoi: '−10 là số nhỏ nhất. Với số âm, phần số càng lớn thì số càng nhỏ.' }, { t: '−5', phanHoi: '−5 &lt; −2.' }],
+        goiY: ['Số âm nào gần 0 nhất thì lớn nhất.'], viSaoDung: '−2 gần 0 nhất.', loiGiai: '<b>−2</b>.', giangLai: 'Nhiệt độ −2 °C ấm hơn −10 °C, nên −2 lớn hơn.', tienBo: 'Em đã so sánh số âm đúng.',
+        nguon: N6T('Bài 13 "Tập hợp các số nguyên" (SGV tr. 74)'), kiemTra: K6(),
+        tuongTu: { id: 'T6C-02-TT', muc: 'co-ban', liDoMuc: 'Như câu gốc.', loai: 'chon1', de: 'Số nào <b>nhỏ nhất</b>: −3; 0; −8; 2?', phuongAn: [{ t: '−3', phanHoi: '−3 &gt; −8.' }, { t: '0', phanHoi: '0 lớn hơn mọi số âm.' }, { t: '−8', dung: true }, { t: '2', phanHoi: 'Số dương lớn hơn số âm.' }], goiY: ['Xa 0 nhất về bên trái.'], viSaoDung: '−8.', loiGiai: '<b>−8</b>.', giangLai: '−8 °C lạnh hơn −3 °C.', nguon: N6T('Bài 13 (SGV tr. 74)'), kiemTra: K6() }
+      },
+      {
+        id: 'T6C-03', muc: 'van-dung', liDoMuc: 'Kết hợp trừ số âm và cộng số âm.', loai: 'so', de: 'Tính: 7 − (−5) + (−12).', dapAn: 0,
+        loi: [{ gt: -10, nhan: 'Lỗi trừ số âm', phanHoi: '7 − (−5) = 7 + 5 = 12, không phải 2.' }, { gt: 24, nhan: 'Lỗi dấu', phanHoi: 'Cộng (−12) là trừ 12.' }],
+        buoc: { hoi: '7 − (−5) = ?', dapAn: 12, dung: 'Đúng. Còn 12 + (−12).', sai: 'Trừ số âm là cộng số dương.' },
+        goiY: ['7 − (−5) = 7 + 5.'], viSaoDung: '12 + (−12) = 0.', loiGiai: '7 − (−5) + (−12) = 7 + 5 − 12 = <b>0</b>.', giangLai: 'Hai dấu trừ đứng liền nhau "− (−" biến thành dấu cộng.', tienBo: 'Em đã đổi đúng phép trừ số âm.',
+        nguon: N6T('Bài 14 "Phép cộng và phép trừ số nguyên" (SGV tr. 78)'), kiemTra: K6(),
+        tuongTu: { id: 'T6C-03-TT', muc: 'van-dung', liDoMuc: 'Như câu gốc.', loai: 'so', de: 'Tính: −6 − (−9) + (−4).', dapAn: -1, loi: [{ gt: -19, nhan: 'Lỗi trừ số âm', phanHoi: '−6 − (−9) = −6 + 9.' }, { gt: 7, nhan: 'Lỗi dấu', phanHoi: 'Cộng (−4) là trừ 4.' }], buoc: { hoi: '−6 − (−9) = ?', dapAn: 3, dung: 'Đúng.', sai: '−6 + 9.' }, goiY: ['− (− = +.'], viSaoDung: '3 − 4.', loiGiai: '<b>−1</b>.', giangLai: 'Hai dấu trừ liền nhau thành cộng.', nguon: N6T('Bài 14 (SGV tr. 78)'), kiemTra: K6() }
+      },
+      {
+        id: 'T6C-04', muc: 'van-dung', liDoMuc: 'Nhân số nguyên rồi cộng, cần quy tắc dấu ở hai tích.', loai: 'so', de: 'Tính: (−4) · (−5) + (−3) · 6.', dapAn: 2,
+        loi: [{ gt: -38, nhan: 'Lỗi dấu phép nhân', phanHoi: '(−4) · (−5) cùng dấu → kết quả <b>dương</b> 20.' }, { gt: 38, nhan: 'Lỗi dấu phép nhân', phanHoi: '(−3) · 6 khác dấu → kết quả âm −18.' }, { gt: -2, nhan: 'Lỗi dấu', phanHoi: '20 + (−18) = 2, mang dấu dương.' }],
+        buoc: { hoi: '(−4) · (−5) = ?', dapAn: 20, dung: 'Đúng. (−3) · 6 = −18.', sai: 'Cùng dấu → dương.' },
+        goiY: ['Cùng dấu → dương; khác dấu → âm.'], viSaoDung: '20 − 18 = 2.', loiGiai: '20 + (−18) = <b>2</b>.', giangLai: 'Đếm số dấu trừ trong một tích: chẵn → dương, lẻ → âm.', tienBo: 'Em đã nắm quy tắc dấu phép nhân.',
+        nguon: N6T('Bài 16 "Phép nhân số nguyên" (SGV tr. 86)'), kiemTra: K6(),
+        tuongTu: { id: 'T6C-04-TT', muc: 'van-dung', liDoMuc: 'Như câu gốc.', loai: 'so', de: 'Tính: (−6) · (−3) + (−2) · 7.', dapAn: 4, loi: [{ gt: -32, nhan: 'Lỗi dấu phép nhân', phanHoi: '(−6)·(−3) = +18.' }, { gt: 32, nhan: 'Lỗi dấu phép nhân', phanHoi: '(−2)·7 = −14.' }, { gt: -4, nhan: 'Lỗi dấu', phanHoi: '18 − 14 dương.' }], buoc: { hoi: '(−6)·(−3) = ?', dapAn: 18, dung: 'Đúng.', sai: 'Cùng dấu.' }, goiY: ['Dấu.'], viSaoDung: '18 − 14.', loiGiai: '<b>4</b>.', giangLai: 'Đếm dấu trừ.', nguon: N6T('Bài 16 (SGV tr. 86)'), kiemTra: K6() }
+      },
+      {
+        id: 'T6C-05', muc: 'nang-cao', liDoMuc: 'Bỏ ngoặc có dấu trừ và nhóm số hạng để tính nhanh.', loai: 'so', de: 'Tính nhanh: 125 − (125 − 47) + (−47 + 30).', dapAn: 30,
+        loi: [{ gt: -64, nhan: 'Lỗi dấu khi bỏ ngoặc', phanHoi: 'Khi bỏ ngoặc −(125 − 47), số −47 trong ngoặc đổi thành <b>+47</b>.' }],
+        buoc: { hoi: 'Bỏ ngoặc: 125 − (125 − 47) = 125 − 125 + ? (điền số)', dapAn: 47, dung: 'Đúng. Biểu thức thành 125 − 125 + 47 − 47 + 30.', sai: 'Dấu trừ trước ngoặc đổi dấu cả −47.' },
+        goiY: ['Bỏ ngoặc, rồi nhóm các số đối nhau.'], viSaoDung: '(125 − 125) + (47 − 47) + 30 = 30.', loiGiai: '= 125 − 125 + 47 − 47 + 30 = 0 + 0 + 30 = <b>30</b>.', giangLai: 'Tìm các cặp số đối (như 125 và −125) — tổng của chúng bằng 0, gạch đi cho gọn.', tienBo: 'Em đã bỏ ngoặc đúng dấu và tính nhanh.',
+        nguon: N6T('Bài 15 "Quy tắc dấu ngoặc" (SGV tr. 83)'), kiemTra: K6(),
+        tuongTu: { id: 'T6C-05-TT', muc: 'nang-cao', liDoMuc: 'Như câu gốc.', loai: 'so', de: 'Tính nhanh: 210 − (210 − 56) + (−56 + 18).', dapAn: 18, loi: [{ gt: -94, nhan: 'Lỗi dấu khi bỏ ngoặc', phanHoi: '−(210 − 56) = −210 + 56.' }], buoc: { hoi: '210 − (210 − 56) = 210 − 210 + ?', dapAn: 56, dung: 'Đúng.', sai: 'Đổi dấu −56 thành +56.' }, goiY: ['Nhóm số đối.'], viSaoDung: '18.', loiGiai: '<b>18</b>.', giangLai: 'Gạch cặp số đối.', nguon: N6T('Bài 15 (SGV tr. 83)'), kiemTra: K6() }
+      },
+      {
+        id: 'T6C-06', muc: 'nang-cao', liDoMuc: 'Mô hình hoá thay đổi nhiệt độ bằng phép cộng, trừ số nguyên nhiều bước.', loai: 'so',
+        de: 'Lúc 6 giờ sáng nhiệt độ ở một trạm đo là −8 °C. Đến trưa nhiệt độ tăng 11 °C, đến tối lại giảm 6 °C. Nhiệt độ buổi tối là bao nhiêu độ C?', dapAn: -3, soLieu: GIA_DINH,
+        loi: [{ gt: 9, nhan: 'Sai chiều thay đổi', phanHoi: '"Giảm 6 °C" là trừ 6, không cộng.' }, { gt: -25, nhan: 'Sai chiều thay đổi', phanHoi: '"Tăng 11 °C" là cộng 11.' }, { gt: 3, nhan: 'Thiếu bước', phanHoi: '3 °C là nhiệt độ buổi trưa. Còn giảm 6 °C nữa.' }],
+        buoc: { hoi: 'Nhiệt độ buổi trưa là bao nhiêu?', dapAn: 3, dung: 'Đúng: −8 + 11 = 3. Buổi tối: 3 − 6.', sai: '−8 + 11.' },
+        goiY: ['Tăng → cộng; giảm → trừ.'], viSaoDung: '−8 + 11 − 6 = −3.', loiGiai: '−8 + 11 − 6 = 3 − 6 = <b>−3</b> °C.', giangLai: 'Vẽ trục số: bắt đầu ở −8, đi sang phải 11 bước tới 3, rồi sang trái 6 bước tới −3.', tienBo: 'Em đã chuyển lời văn thành phép tính số nguyên.',
+        nguon: N6T('Bài 14 "Phép cộng và phép trừ số nguyên" (SGV tr. 78)'), kiemTra: K6(),
+        tuongTu: { id: 'T6C-06-TT', muc: 'nang-cao', liDoMuc: 'Như câu gốc.', loai: 'so', de: 'Một tàu ngầm đang ở độ cao −45 m (dưới mực nước biển). Tàu nổi lên 20 m rồi lặn xuống thêm 12 m. Tàu ở độ cao bao nhiêu mét?', dapAn: -37, soLieu: GIA_DINH, loi: [{ gt: -13, nhan: 'Sai chiều thay đổi', phanHoi: 'Lặn xuống là trừ.' }, { gt: -77, nhan: 'Sai chiều thay đổi', phanHoi: 'Nổi lên là cộng.' }, { gt: -25, nhan: 'Thiếu bước', phanHoi: 'Còn lặn thêm 12 m.' }], buoc: { hoi: 'Sau khi nổi lên, tàu ở độ cao nào?', dapAn: -25, dung: 'Đúng.', sai: '−45 + 20.' }, goiY: ['Nổi lên → cộng.'], viSaoDung: '−25 − 12.', loiGiai: '<b>−37</b> m.', giangLai: 'Vẽ trục số thẳng đứng.', nguon: N6T('Bài 14 (SGV tr. 78)'), kiemTra: K6() }
+      }
+    ]
+  };
+
+  const t6PhanSo = {
+    id: 'toan6-phan-so', lop: 6, mon: 'toan', phanMon: 'Số và Đại số', ten: 'Phân số',
+    sgk: 'SGV Toán 6 — Chương VI, Bài 23–27, SGV tr. 131–149', yccdGhiChu: YCCD6,
+    kienThucTruoc: ['ƯCLN, BCNN (Chương II)', 'Số nguyên (Chương III)'],
+    yeuCauCanDat: ['Nhận biết phân số bằng nhau, rút gọn về phân số tối giản.', 'Cộng, trừ, nhân, chia phân số.', 'Giải hai bài toán về phân số: tìm giá trị phân số của một số; tìm một số biết giá trị phân số của nó.'],
+    bai: {
+      mucTieu: ['rút gọn phân số về tối giản;', 'quy đồng mẫu để cộng, trừ;', 'chia phân số bằng cách nhân với nghịch đảo;', 'phân biệt hai bài toán về phân số.'],
+      khoiDong: { hoi: 'Một chiếc bánh chia 8 phần bằng nhau, em ăn 2 phần. Em đã ăn mấy phần của chiếc bánh? Viết bằng hai phân số khác nhau.', goiY: F(2, 8) + ' = ' + F(1, 4) + ' chiếc bánh.' },
+      trongTam: [
+        '<b>Rút gọn</b>: chia cả tử và mẫu cho một ước chung (≠ 1). Phân số <b>tối giản</b> khi tử và mẫu chỉ có ước chung là 1 và −1 (chia cho ƯCLN là ra ngay).',
+        '<b>Cộng, trừ</b>: quy đồng mẫu (thường dùng BCNN của các mẫu) rồi cộng, trừ tử, giữ mẫu chung. <b>Không</b> cộng mẫu với mẫu.',
+        '<b>Nhân</b>: tử nhân tử, mẫu nhân mẫu. <b>Chia</b>: nhân với <b>phân số nghịch đảo</b> của số chia: ' + F('a', 'b') + ' : ' + F('c', 'd') + ' = ' + F('a', 'b') + ' · ' + F('d', 'c') + '.',
+        'Tìm <b>' + F('m', 'n') + ' của số b</b>: tính b · ' + F('m', 'n') + '.',
+        'Tìm <b>một số biết ' + F('m', 'n') + ' của nó bằng a</b>: tính a : ' + F('m', 'n') + '.'
+      ],
+      viDu: { de: 'Tính ' + F(1, 2) + ' + ' + F(1, 3) + '.', loiGiai: 'Mẫu chung 6: ' + F(3, 6) + ' + ' + F(2, 6) + ' = <b>' + F(5, 6) + '</b>.' },
+      nguon: N6T('Chương VI "Phân số", Bài 23–27 (SGV tr. 131–149)'),
+      hoiDap: [
+        { tu: ['rut gon', 'toi gian'], tl: 'Chia cả tử và mẫu cho ƯCLN của chúng để được phân số tối giản.' },
+        { tu: ['cong', 'quy dong'], tl: 'Quy đồng mẫu rồi cộng tử; không cộng mẫu với mẫu.' },
+        { tu: ['chia', 'nghich dao'], tl: 'Chia cho một phân số = nhân với phân số nghịch đảo của nó.' },
+        { tu: ['tim mot so', 'bai toan'], tl: '"m/n của b" → nhân. "m/n của nó là a" → chia a cho m/n.' }
+      ]
+    },
+    cauHoi: [
+      {
+        id: 'T6D-01', muc: 'co-ban', liDoMuc: 'Rút gọn về phân số tối giản.', loai: 'chon1', de: 'Phân số tối giản bằng ' + F(18, 24) + ' là:',
+        phuongAn: [{ t: F(3, 4), dung: true }, { t: F(9, 12), phanHoi: 'Bằng nhau nhưng chưa tối giản: 9 và 12 còn ước chung 3.' }, { t: F(6, 8), phanHoi: 'Chưa tối giản: còn chia được cho 2.' }, { t: F(4, 3), phanHoi: 'Em đã đảo tử và mẫu.' }],
+        goiY: ['ƯCLN(18, 24) = 6.'], viSaoDung: '18 : 6 = 3; 24 : 6 = 4.', loiGiai: F(18, 24) + ' = ' + F('18 : 6', '24 : 6') + ' = <b>' + F(3, 4) + '</b>.', giangLai: 'Chia cho ƯCLN thì chỉ cần một lần là tối giản.', tienBo: 'Em đã rút gọn đến tối giản.',
+        nguon: N6T('Bài 23 "Mở rộng phân số. Phân số bằng nhau" (SGV tr. 132)'), kiemTra: K6(),
+        tuongTu: { id: 'T6D-01-TT', muc: 'co-ban', liDoMuc: 'Như câu gốc.', loai: 'chon1', de: 'Phân số tối giản bằng ' + F(20, 35) + ' là:', phuongAn: [{ t: F(4, 7), dung: true }, { t: F(8, 14), phanHoi: 'Chưa tối giản.' }, { t: F(7, 4), phanHoi: 'Đảo tử mẫu.' }, { t: F(10, 17), phanHoi: '35 : 2 không phải số tự nhiên — em chia chưa đúng.' }], goiY: ['ƯCLN(20, 35) = 5.'], viSaoDung: '4/7.', loiGiai: '<b>' + F(4, 7) + '</b>.', giangLai: 'Chia cho ƯCLN.', nguon: N6T('Bài 23 (SGV tr. 132)'), kiemTra: K6() }
+      },
+      {
+        id: 'T6D-02', muc: 'co-ban', liDoMuc: 'Cộng hai phân số khác mẫu.', loai: 'so', de: 'Tính ' + F(1, 4) + ' + ' + F(2, 3) + '. <span class="note">Viết kết quả dạng phân số, ví dụ 5/6.</span>', dapAn: '11/12', canPhanSo: true,
+        loi: [{ gt: '3/7', nhan: 'Lỗi quy tắc cộng', phanHoi: 'Em đã cộng tử với tử, mẫu với mẫu. Phải quy đồng mẫu trước.' }],
+        buoc: { hoi: 'Mẫu chung nhỏ nhất của 4 và 3 là bao nhiêu?', dapAn: 12, dung: 'Đúng: ' + F(3, 12) + ' + ' + F(8, 12) + '.', sai: 'BCNN(4, 3).' },
+        goiY: ['Quy đồng mẫu 12.'], viSaoDung: '3/12 + 8/12 = 11/12.', loiGiai: F(3, 12) + ' + ' + F(8, 12) + ' = <b>' + F(11, 12) + '</b>.', giangLai: 'Một phần tư cái bánh cộng hai phần ba cái bánh không thể ra 3/7 (nhỏ hơn cả nửa cái). Phải cắt cùng cỡ — chia cả hai thành phần mười hai.', tienBo: 'Em đã quy đồng trước khi cộng.',
+        nguon: N6T('Bài 25 "Phép cộng và phép trừ phân số" (SGV tr. 139)'), kiemTra: K6(),
+        tuongTu: { id: 'T6D-02-TT', muc: 'co-ban', liDoMuc: 'Như câu gốc.', loai: 'so', de: 'Tính ' + F(2, 5) + ' + ' + F(1, 3) + '. <span class="note">Viết dạng phân số.</span>', dapAn: '11/15', canPhanSo: true, loi: [{ gt: '3/8', nhan: 'Lỗi quy tắc cộng', phanHoi: 'Phải quy đồng mẫu.' }], buoc: { hoi: 'Mẫu chung nhỏ nhất?', dapAn: 15, dung: 'Đúng.', sai: 'BCNN(5, 3).' }, goiY: ['Mẫu 15.'], viSaoDung: '6/15 + 5/15.', loiGiai: '<b>' + F(11, 15) + '</b>.', giangLai: 'Cắt cùng cỡ.', nguon: N6T('Bài 25 (SGV tr. 139)'), kiemTra: K6() }
+      },
+      {
+        id: 'T6D-03', muc: 'van-dung', liDoMuc: 'Chia phân số: nghịch đảo đúng phân số rồi rút gọn.', loai: 'so', de: 'Tính ' + F(3, 4) + ' : ' + F(9, 8) + '. <span class="note">Viết dạng phân số tối giản hoặc phân số bằng nó.</span>', dapAn: '2/3', canPhanSo: true,
+        loi: [{ gt: '27/32', nhan: 'Lỗi phép chia', phanHoi: 'Em đã nhân thẳng hai phân số. Chia thì nhân với <b>nghịch đảo</b> của số chia.' }, { gt: '3/2', nhan: 'Đảo nhầm phân số', phanHoi: 'Chỉ đảo phân số <b>chia</b> (' + F(9, 8) + '), giữ nguyên ' + F(3, 4) + '.' }],
+        buoc: { hoi: 'Nghịch đảo của ' + F(9, 8) + ' là phân số nào? (viết dạng a/b)', dapAn: '8/9', dung: 'Đúng: ' + F(3, 4) + ' · ' + F(8, 9) + '.', sai: 'Đổi chỗ tử và mẫu.' },
+        goiY: ['a/b : c/d = a/b · d/c.'], viSaoDung: '3/4 · 8/9 = 24/36 = 2/3.', loiGiai: F(3, 4) + ' · ' + F(8, 9) + ' = ' + F(24, 36) + ' = <b>' + F(2, 3) + '</b>.', giangLai: 'Câu thần chú: "giữ – đổi – lật": giữ phân số đầu, đổi ":" thành "·", lật phân số sau.', tienBo: 'Em đã lật đúng phân số chia.',
+        nguon: N6T('Bài 26 "Phép nhân và phép chia phân số" (SGV tr. 142)'), kiemTra: K6(),
+        tuongTu: { id: 'T6D-03-TT', muc: 'van-dung', liDoMuc: 'Như câu gốc.', loai: 'so', de: 'Tính ' + F(5, 6) + ' : ' + F(10, 9) + '. <span class="note">Viết dạng phân số.</span>', dapAn: '3/4', canPhanSo: true, loi: [{ gt: '25/27', nhan: 'Lỗi phép chia', phanHoi: 'Nhân với nghịch đảo.' }, { gt: '4/3', nhan: 'Đảo nhầm phân số', phanHoi: 'Chỉ lật phân số chia.' }], buoc: { hoi: 'Nghịch đảo của 10/9?', dapAn: '9/10', dung: 'Đúng.', sai: 'Đổi tử mẫu.' }, goiY: ['Giữ – đổi – lật.'], viSaoDung: '45/60 = 3/4.', loiGiai: '<b>' + F(3, 4) + '</b>.', giangLai: 'Giữ – đổi – lật.', nguon: N6T('Bài 26 (SGV tr. 142)'), kiemTra: K6() }
+      },
+      {
+        id: 'T6D-04', muc: 'van-dung', liDoMuc: 'Bài toán tìm giá trị phân số của một số.', loai: 'so', de: 'Lớp 6A có 40 học sinh, trong đó ' + F(2, 5) + ' số học sinh thích bóng đá. Có bao nhiêu học sinh thích bóng đá?', dapAn: 16, soLieu: GIA_DINH,
+        loi: [{ gt: 100, nhan: 'Nhầm dạng bài', phanHoi: 'Em đã chia 40 cho ' + F(2, 5) + '. Tìm ' + F(2, 5) + ' <b>của</b> 40 thì nhân.' }, { gt: 8, nhan: 'Thiếu bước', phanHoi: '8 mới là ' + F(1, 5) + ' của 40. Cần ' + F(2, 5) + '.' }],
+        buoc: { hoi: F(1, 5) + ' của 40 là bao nhiêu?', dapAn: 8, dung: 'Đúng. Vậy ' + F(2, 5) + ' là 2 · 8.', sai: '40 : 5.' },
+        goiY: ['Giá trị ' + F(2, 5) + ' của 40 = 40 · ' + F(2, 5) + '.'], viSaoDung: '40 · 2/5 = 16.', loiGiai: '40 · ' + F(2, 5) + ' = <b>16</b> học sinh.', giangLai: 'Chia 40 bạn thành 5 nhóm đều nhau (mỗi nhóm 8 bạn), lấy 2 nhóm: 16 bạn.', tienBo: 'Em đã nhận ra dạng "phân số của một số".',
+        nguon: N6T('Bài 27 "Hai bài toán về phân số" (SGV tr. 144)'), kiemTra: K6(),
+        tuongTu: { id: 'T6D-04-TT', muc: 'van-dung', liDoMuc: 'Như câu gốc.', loai: 'so', de: 'Một quyển sách dày 48 trang. Nam đã đọc ' + F(3, 4) + ' quyển. Nam đã đọc bao nhiêu trang?', dapAn: 36, loi: [{ gt: 64, nhan: 'Nhầm dạng bài', phanHoi: 'Phải nhân, không chia.' }, { gt: 12, nhan: 'Thiếu bước', phanHoi: 'Đó là 1/4.' }], buoc: { hoi: '1/4 của 48?', dapAn: 12, dung: 'Đúng.', sai: '48 : 4.' }, goiY: ['48 · 3/4.'], viSaoDung: '36.', loiGiai: '<b>36</b> trang.', giangLai: 'Chia 4 nhóm, lấy 3.', nguon: N6T('Bài 27 (SGV tr. 144)'), kiemTra: K6() }
+      },
+      {
+        id: 'T6D-05', muc: 'nang-cao', liDoMuc: 'Bài toán ngược: tìm một số biết giá trị phân số của nó (dễ nhầm với bài toán xuôi).', loai: 'so', de: 'Bình đã tiết kiệm được 36 nghìn đồng, bằng ' + F(3, 5) + ' số tiền cần để mua một cuốn truyện. Cuốn truyện giá bao nhiêu nghìn đồng?', dapAn: 60, soLieu: GIA_DINH,
+        loi: [{ gt: '108/5', nhan: 'Nhầm dạng bài', phanHoi: 'Em đã tính ' + F(3, 5) + ' của 36. Ở đây 36 mới là ' + F(3, 5) + ' giá truyện, nên phải <b>chia</b> 36 cho ' + F(3, 5) + '.' }, { gt: 12, nhan: 'Thiếu bước', phanHoi: '12 là ' + F(1, 5) + ' giá cuốn truyện. Giá cả cuốn là 5 phần.' }],
+        buoc: { hoi: F(1, 5) + ' giá cuốn truyện là bao nhiêu nghìn đồng?', dapAn: 12, dung: 'Đúng: 36 : 3 = 12. Cả cuốn = 5 · 12.', sai: '3 phần là 36 nghìn → 1 phần?' },
+        goiY: ['36 nghìn ứng với ' + F(3, 5) + ' giá truyện.', 'Tìm một số biết ' + F(3, 5) + ' của nó: lấy 36 : ' + F(3, 5) + '.'], viSaoDung: '36 : 3/5 = 60.', loiGiai: '36 : ' + F(3, 5) + ' = 36 · ' + F(5, 3) + ' = <b>60</b> nghìn đồng.<br>Thử lại: ' + F(3, 5) + ' · 60 = 36 ✓',
+        giangLai: 'Vẽ đoạn thẳng chia 5 ô; 3 ô = 36 nghìn → 1 ô = 12 nghìn → 5 ô = 60 nghìn.', tienBo: 'Em đã phân biệt được bài toán ngược.',
+        nguon: N6T('Bài 27 "Hai bài toán về phân số" (SGV tr. 144)'), kiemTra: K6(),
+        tuongTu: { id: 'T6D-05-TT', muc: 'nang-cao', liDoMuc: 'Như câu gốc.', loai: 'so', de: 'Sau một tuần, đội trồng cây trồng được 18 cây, bằng ' + F(2, 7) + ' kế hoạch. Theo kế hoạch đội phải trồng bao nhiêu cây?', dapAn: 63, soLieu: GIA_DINH, loi: [{ gt: '36/7', nhan: 'Nhầm dạng bài', phanHoi: 'Phải chia 18 cho 2/7.' }, { gt: 9, nhan: 'Thiếu bước', phanHoi: 'Đó là 1/7 kế hoạch.' }], buoc: { hoi: '1/7 kế hoạch là bao nhiêu cây?', dapAn: 9, dung: 'Đúng.', sai: '18 : 2.' }, goiY: ['18 : 2/7.'], viSaoDung: '63.', loiGiai: '<b>63</b> cây.', giangLai: '7 ô, 2 ô = 18.', nguon: N6T('Bài 27 (SGV tr. 144)'), kiemTra: K6() }
+      },
+      {
+        id: 'T6D-06', muc: 'nang-cao', liDoMuc: 'Hai bước liên tiếp, phân số của phần còn lại (dễ nhầm lấy phân số của cả cuộn).', loai: 'so',
+        de: 'Một cuộn dây dài 60 m. Lần thứ nhất dùng ' + F(1, 4) + ' cuộn dây, lần thứ hai dùng ' + F(2, 3) + ' <b>phần còn lại</b>. Cuộn dây còn lại bao nhiêu mét?', dapAn: 15, soLieu: GIA_DINH,
+        loi: [{ gt: 5, nhan: 'Nhầm "phần còn lại"', phanHoi: 'Lần hai dùng ' + F(2, 3) + ' của <b>phần còn lại</b> (45 m), không phải của cả 60 m.' }, { gt: 30, nhan: 'Chưa trả lời đúng câu hỏi', phanHoi: '30 m là số mét dùng lần hai. Đề hỏi phần còn lại.' }, { gt: 45, nhan: 'Thiếu bước', phanHoi: '45 m là phần còn lại sau lần thứ nhất.' }],
+        buoc: { hoi: 'Sau lần thứ nhất, còn lại bao nhiêu mét?', dapAn: 45, dung: 'Đúng: 60 − 15 = 45. Lần hai dùng ' + F(2, 3) + ' · 45.', sai: '60 − 60 · 1/4.' },
+        goiY: ['Tính phần còn lại sau lần 1.', 'Lần 2 dùng 2/3 của phần đó.'], viSaoDung: 'Còn 45 m; dùng 30 m; còn 15 m.', loiGiai: 'Lần 1: 60 · ' + F(1, 4) + ' = 15 m, còn 45 m.<br>Lần 2: 45 · ' + F(2, 3) + ' = 30 m.<br>Còn lại: 45 − 30 = <b>15</b> m.',
+        giangLai: 'Mỗi lần "phần còn lại" thay đổi, em viết rõ: Còn lại = … m, rồi mới tính phân số của nó.', tienBo: 'Em đã tính phân số trên đúng "phần còn lại".',
+        nguon: N6T('Bài 27 "Hai bài toán về phân số" (SGV tr. 144)'), kiemTra: K6(),
+        tuongTu: { id: 'T6D-06-TT', muc: 'nang-cao', liDoMuc: 'Như câu gốc.', loai: 'so', de: 'Cửa hàng có 72 kg gạo. Ngày đầu bán ' + F(1, 3) + ' số gạo, ngày thứ hai bán ' + F(3, 4) + ' số gạo <b>còn lại</b>. Cửa hàng còn bao nhiêu ki-lô-gam gạo?', dapAn: 12, soLieu: GIA_DINH, loi: [{ gt: 36, nhan: 'Chưa trả lời đúng câu hỏi', phanHoi: 'Đó là số gạo bán ngày hai.' }, { gt: 48, nhan: 'Thiếu bước', phanHoi: 'Đó là số còn sau ngày đầu.' }], buoc: { hoi: 'Sau ngày đầu còn bao nhiêu kg?', dapAn: 48, dung: 'Đúng.', sai: '72 − 24.' }, goiY: ['3/4 của 48.'], viSaoDung: '48 − 36.', loiGiai: '<b>12</b> kg.', giangLai: 'Viết rõ phần còn lại.', nguon: N6T('Bài 27 (SGV tr. 144)'), kiemTra: K6() }
+      }
+    ]
+  };
+
+  const t6ThapPhan = {
+    id: 'toan6-so-thap-phan', lop: 6, mon: 'toan', phanMon: 'Số và Đại số', ten: 'Số thập phân',
+    sgk: 'SGV Toán 6 — Chương VII, Bài 28–31, SGV tr. 150–168', yccdGhiChu: YCCD6,
+    kienThucTruoc: ['Phân số thập phân', 'Số nguyên âm'],
+    yeuCauCanDat: ['So sánh số thập phân (cả số âm).', 'Tính toán với số thập phân.', 'Làm tròn số thập phân.', 'Tính tỉ số phần trăm và giải bài toán phần trăm thực tế.'],
+    bai: {
+      mucTieu: ['so sánh số thập phân âm;', 'làm tròn đến hàng cho trước;', 'tính biểu thức có số thập phân âm;', 'giải bài toán giảm giá phần trăm.'],
+      khoiDong: { hoi: 'Một chiếc áo giá 200 nghìn đồng được giảm 10%. Giá mới là bao nhiêu?', goiY: '10% của 200 nghìn là 20 nghìn; giá mới 180 nghìn đồng.' },
+      trongTam: [
+        'So sánh hai số thập phân dương: so phần nguyên, rồi lần lượt hàng phần mười, phần trăm… Với số <b>âm</b>: số có phần số lớn hơn thì nhỏ hơn (−2,5 &lt; −2,05).',
+        'Cộng, trừ, nhân, chia số thập phân âm làm như số nguyên: xác định dấu rồi tính phần số.',
+        '<b>Làm tròn</b> đến một hàng: nhìn chữ số <b>ngay bên phải</b> hàng đó: &lt; 5 thì giữ nguyên, ≥ 5 thì cộng thêm 1 vào hàng làm tròn; bỏ các chữ số phía sau.',
+        '<b>Tỉ số phần trăm</b> của a và b: ' + F('a · 100', 'b') + ' %.',
+        'Giảm x% rồi giảm tiếp y% <b>không</b> bằng giảm (x + y)%, vì lần sau tính trên giá mới.'
+      ],
+      viDu: { de: 'Làm tròn 12,367 đến hàng phần mười.', loiGiai: 'Hàng phần mười là 3; chữ số bên phải là 6 ≥ 5 → <b>12,4</b>.' },
+      nguon: N6T('Chương VII "Số thập phân", Bài 28–31 (SGV tr. 150–168)'),
+      hoiDap: [
+        { tu: ['lam tron'], tl: 'Nhìn chữ số ngay bên phải hàng cần làm tròn: ≥ 5 thì tăng 1, &lt; 5 thì giữ.' },
+        { tu: ['phan tram', '%'], tl: 'Tỉ số phần trăm = a : b · 100 %. x% của b = b · x : 100.' },
+        { tu: ['so sanh', 'am'], tl: 'Số âm nào có phần số lớn hơn thì nhỏ hơn.' },
+        { tu: ['giam gia'], tl: 'Giảm lần hai tính trên giá đã giảm lần một.' }
+      ]
+    },
+    cauHoi: [
+      {
+        id: 'T6E-01', muc: 'co-ban', liDoMuc: 'So sánh số thập phân âm.', loai: 'chon1', de: 'Số nào <b>lớn nhất</b>: −2,5; −2,45; −3,1; −2,05?',
+        phuongAn: [{ t: '−2,5', phanHoi: '2,5 &gt; 2,05 nên −2,5 &lt; −2,05.' }, { t: '−2,45', phanHoi: '−2,45 &lt; −2,05.' }, { t: '−3,1', phanHoi: '−3,1 là số nhỏ nhất.' }, { t: '−2,05', dung: true }],
+        goiY: ['Số âm gần 0 nhất là số lớn nhất.'], viSaoDung: '2,05 là phần số nhỏ nhất nên −2,05 lớn nhất.', loiGiai: '<b>−2,05</b>.', giangLai: 'So các phần số: 2,05 &lt; 2,45 &lt; 2,5 &lt; 3,1. Đổi chiều cho số âm.', tienBo: 'Em đã so sánh đúng số thập phân âm.',
+        nguon: N6T('Bài 28 "Số thập phân" (SGV tr. 151)'), kiemTra: K6(),
+        tuongTu: { id: 'T6E-01-TT', muc: 'co-ban', liDoMuc: 'Như câu gốc, số dương.', loai: 'chon1', de: 'Số nào <b>nhỏ nhất</b>: 0,7; 0,07; 0,77; 0,707?', phuongAn: [{ t: '0,7', phanHoi: 'Hàng phần mười là 7.' }, { t: '0,07', dung: true }, { t: '0,77', phanHoi: 'Lớn nhất.' }, { t: '0,707', phanHoi: 'Hàng phần mười là 7.' }], goiY: ['So hàng phần mười.'], viSaoDung: '0,07 có hàng phần mười là 0.', loiGiai: '<b>0,07</b>.', giangLai: 'Viết thêm chữ số 0 cho đủ ba chữ số sau dấu phẩy rồi so.', nguon: N6T('Bài 28 (SGV tr. 151)'), kiemTra: K6() }
+      },
+      {
+        id: 'T6E-02', muc: 'co-ban', liDoMuc: 'Làm tròn đến hàng cho trước.', loai: 'so', de: 'Làm tròn số 3,14159 đến hàng phần trăm.', dapAn: 3.14,
+        loi: [{ gt: 3.142, nhan: 'Nhầm hàng làm tròn', phanHoi: 'Đó là làm tròn đến hàng phần nghìn. Hàng phần trăm là chữ số thứ hai sau dấu phẩy.' }, { gt: 3.1, nhan: 'Nhầm hàng làm tròn', phanHoi: 'Đó là hàng phần mười.' }, { gt: 3.15, nhan: 'Lỗi quy tắc làm tròn', phanHoi: 'Chữ số bên phải hàng phần trăm là 1 (&lt; 5) nên giữ nguyên.' }],
+        buoc: { hoi: 'Chữ số ngay bên phải hàng phần trăm là chữ số nào?', dapAn: 1, dung: 'Đúng: 1 &lt; 5 → giữ nguyên hàng phần trăm.', sai: '3,14|159 — chữ số đầu tiên sau vạch.' },
+        goiY: ['Hàng phần trăm: chữ số thứ hai sau dấu phẩy.'], viSaoDung: '3,14|159 → 1 &lt; 5 → 3,14.', loiGiai: '<b>3,14</b>.', giangLai: 'Kẻ một vạch ngay sau hàng cần làm tròn, chỉ nhìn chữ số đầu tiên sau vạch.', tienBo: 'Em đã xác định đúng hàng làm tròn.',
+        nguon: N6T('Bài 30 "Làm tròn và ước lượng" (SGV tr. 159)'), kiemTra: K6(),
+        tuongTu: { id: 'T6E-02-TT', muc: 'co-ban', liDoMuc: 'Như câu gốc.', loai: 'so', de: 'Làm tròn số 8,4762 đến hàng phần mười.', dapAn: 8.5, loi: [{ gt: 8.4, nhan: 'Lỗi quy tắc làm tròn', phanHoi: 'Chữ số sau là 7 ≥ 5 → tăng 1.' }, { gt: 8.48, nhan: 'Nhầm hàng làm tròn', phanHoi: 'Đó là hàng phần trăm.' }], buoc: { hoi: 'Chữ số ngay bên phải hàng phần mười?', dapAn: 7, dung: 'Đúng.', sai: '8,4|762.' }, goiY: ['8,4|762.'], viSaoDung: '8,5.', loiGiai: '<b>8,5</b>.', giangLai: 'Kẻ vạch.', nguon: N6T('Bài 30 (SGV tr. 159)'), kiemTra: K6() }
+      },
+      {
+        id: 'T6E-03', muc: 'van-dung', liDoMuc: 'Thứ tự phép tính với số thập phân âm.', loai: 'so', de: 'Tính: (−2,5) · 4 + 1,8 : 0,6.', dapAn: -7,
+        loi: [{ gt: 13, nhan: 'Lỗi dấu', phanHoi: '(−2,5) · 4 khác dấu → kết quả âm (−10).' }, { gt: '-41/3', saiSo: 0.01, nhan: 'Lỗi thứ tự phép tính', phanHoi: 'Phép chia 1,8 : 0,6 phải làm trước phép cộng.' }],
+        buoc: { hoi: '1,8 : 0,6 = ?', dapAn: 3, dung: 'Đúng. Còn −10 + 3.', sai: '18 : 6.' },
+        goiY: ['Nhân, chia trước; cộng sau.'], viSaoDung: '−10 + 3 = −7.', loiGiai: '(−2,5) · 4 = −10; 1,8 : 0,6 = 3; −10 + 3 = <b>−7</b>.', giangLai: 'Chia 1,8 : 0,6: nhân cả hai số với 10 → 18 : 6 = 3.', tienBo: 'Em đã làm đúng thứ tự và dấu.',
+        nguon: N6T('Bài 29 "Tính toán với số thập phân" (SGV tr. 154)'), kiemTra: K6(),
+        tuongTu: { id: 'T6E-03-TT', muc: 'van-dung', liDoMuc: 'Như câu gốc.', loai: 'so', de: 'Tính: 3,6 : (−1,2) + 0,5 · 8.', dapAn: 1, loi: [{ gt: 7, nhan: 'Lỗi dấu', phanHoi: '3,6 : (−1,2) âm.' }, { gt: -20, nhan: 'Lỗi thứ tự phép tính', phanHoi: 'Nhân 0,5 · 8 trước.' }], buoc: { hoi: '3,6 : (−1,2) = ?', dapAn: -3, dung: 'Đúng.', sai: 'Khác dấu → âm.' }, goiY: ['−3 + 4.'], viSaoDung: '1.', loiGiai: '<b>1</b>.', giangLai: '36 : 12 = 3.', nguon: N6T('Bài 29 (SGV tr. 154)'), kiemTra: K6() }
+      },
+      {
+        id: 'T6E-04', muc: 'van-dung', liDoMuc: 'Tính tỉ số phần trăm trong tình huống thực tế.', loai: 'so', de: 'Lớp 6B có 40 học sinh, 14 bạn đạt danh hiệu học sinh giỏi. Số học sinh giỏi chiếm bao nhiêu phần trăm số học sinh của lớp? <span class="note">Chỉ ghi số, ví dụ 25.</span>', dapAn: 35, soLieu: GIA_DINH,
+        loi: [{ gt: 0.35, nhan: 'Chưa nhân 100', phanHoi: '0,35 là tỉ số. Đổi sang phần trăm: nhân 100.' }, { gt: '40/14', saiSo: 0.01, nhan: 'Đảo tỉ số', phanHoi: 'Tỉ số của số HS giỏi <b>so với</b> số HS cả lớp: 14 : 40.' }],
+        buoc: { hoi: '14 : 40 = ? (số thập phân)', dapAn: 0.35, dung: 'Đúng. 0,35 = 35%.', sai: '14 : 40.' },
+        goiY: ['14 : 40 · 100.'], viSaoDung: '14 · 100 : 40 = 35.', loiGiai: F('14 · 100', '40') + ' % = <b>35%</b>.', giangLai: 'Nếu lớp có 100 bạn thì có bao nhiêu bạn giỏi? 40 bạn có 14 → 100 bạn có 14 · 100 : 40 = 35.', tienBo: 'Em đã đổi tỉ số sang phần trăm.',
+        nguon: N6T('Bài 31 "Một số bài toán về tỉ số và tỉ số phần trăm" (SGV tr. 162)'), kiemTra: K6(),
+        tuongTu: { id: 'T6E-04-TT', muc: 'van-dung', liDoMuc: 'Như câu gốc.', loai: 'so', de: 'Một đội có 25 bạn, 9 bạn là nữ. Số bạn nữ chiếm bao nhiêu phần trăm? <span class="note">Chỉ ghi số.</span>', dapAn: 36, soLieu: GIA_DINH, loi: [{ gt: 0.36, nhan: 'Chưa nhân 100', phanHoi: 'Nhân 100.' }], buoc: { hoi: '9 : 25 = ?', dapAn: 0.36, dung: 'Đúng.', sai: '9 : 25.' }, goiY: ['9 · 100 : 25.'], viSaoDung: '36.', loiGiai: '<b>36%</b>.', giangLai: '25 bạn → 100 bạn: nhân 4.', nguon: N6T('Bài 31 (SGV tr. 162)'), kiemTra: K6() }
+      },
+      {
+        id: 'T6E-05', muc: 'nang-cao', liDoMuc: 'Hai lần giảm giá liên tiếp; phải nhận ra lần hai tính trên giá mới.', loai: 'so', de: 'Một đôi giày giá 250 000 đồng. Cửa hàng giảm 20%, sau đó giảm tiếp 10% trên giá đã giảm. Giá cuối cùng là bao nhiêu đồng?', dapAn: 180000, soLieu: GIA_DINH,
+        loi: [{ gt: 175000, nhan: 'Cộng phần trăm', phanHoi: 'Không giảm 20% + 10% = 30% của giá ban đầu. Lần hai tính trên giá <b>đã giảm</b>.' }, { gt: 200000, nhan: 'Thiếu bước', phanHoi: '200 000 đồng là giá sau lần giảm thứ nhất.' }, { gt: 20000, nhan: 'Chưa trả lời đúng câu hỏi', phanHoi: 'Đó là số tiền giảm ở lần hai.' }],
+        buoc: { hoi: 'Giá sau lần giảm thứ nhất là bao nhiêu đồng?', dapAn: 200000, dung: 'Đúng. Lần hai giảm 10% của 200 000.', sai: '250 000 − 20% · 250 000.' },
+        goiY: ['Giảm 20% → còn 80%.', 'Giảm tiếp 10% → còn 90% của giá mới.'], viSaoDung: '250 000 · 0,8 · 0,9 = 180 000.', loiGiai: 'Lần 1: 250 000 · 80% = 200 000 đ.<br>Lần 2: 200 000 · 90% = <b>180 000</b> đ.',
+        giangLai: 'Mẹo: "giảm x%" = "còn (100 − x)%". Nhân lần lượt từng phần còn lại.', tienBo: 'Em đã tính lần giảm thứ hai trên giá mới.',
+        nguon: N6T('Bài 31 "Một số bài toán về tỉ số và tỉ số phần trăm" (SGV tr. 162)'), kiemTra: K6(),
+        tuongTu: { id: 'T6E-05-TT', muc: 'nang-cao', liDoMuc: 'Như câu gốc.', loai: 'so', de: 'Một chiếc cặp giá 400 000 đồng, giảm 25% rồi giảm tiếp 10% trên giá đã giảm. Giá cuối là bao nhiêu đồng?', dapAn: 270000, soLieu: GIA_DINH, loi: [{ gt: 260000, nhan: 'Cộng phần trăm', phanHoi: 'Lần hai tính trên giá mới.' }, { gt: 300000, nhan: 'Thiếu bước', phanHoi: 'Đó là giá sau lần 1.' }], buoc: { hoi: 'Giá sau lần 1?', dapAn: 300000, dung: 'Đúng.', sai: '400 000 · 75%.' }, goiY: ['75% rồi 90%.'], viSaoDung: '270 000.', loiGiai: '<b>270 000</b> đ.', giangLai: 'Giảm x% = còn (100 − x)%.', nguon: N6T('Bài 31 (SGV tr. 162)'), kiemTra: K6() }
+      },
+      {
+        id: 'T6E-06', muc: 'nang-cao', liDoMuc: 'Tìm x: phải tính phần trăm của một số rồi tìm số bị trừ.', loai: 'so', de: 'Tìm x, biết: x − 2,5 = 30% của 12.', dapAn: 6.1,
+        loi: [{ gt: 1.1, nhan: 'Lỗi tìm số bị trừ', phanHoi: 'x là số bị trừ: x = hiệu + số trừ = 3,6 + 2,5.' }, { gt: 362.5, nhan: 'Lỗi phần trăm', phanHoi: '30% của 12 = 12 · 30 : 100, không phải 30 · 12.' }],
+        buoc: { hoi: '30% của 12 bằng bao nhiêu?', dapAn: 3.6, dung: 'Đúng. x − 2,5 = 3,6.', sai: '12 · 30 : 100.' },
+        goiY: ['Tính 30% của 12 trước.'], viSaoDung: 'x = 3,6 + 2,5 = 6,1.', loiGiai: '30% của 12 = 3,6. x − 2,5 = 3,6 ⇒ x = <b>6,1</b>.<br>Thử lại: 6,1 − 2,5 = 3,6 ✓', giangLai: 'Số bị trừ = hiệu + số trừ. Thử lại bằng cách thay x vào.', tienBo: 'Em đã kết hợp phần trăm và tìm x.',
+        nguon: N6T('Bài 29 (SGV tr. 154); Bài 31 (SGV tr. 162)'), kiemTra: K6(),
+        tuongTu: { id: 'T6E-06-TT', muc: 'nang-cao', liDoMuc: 'Như câu gốc.', loai: 'so', de: 'Tìm x, biết: x + 1,4 = 15% của 40.', dapAn: 4.6, loi: [{ gt: 7.4, nhan: 'Lỗi tìm số hạng', phanHoi: 'x = tổng − số hạng đã biết.' }], buoc: { hoi: '15% của 40?', dapAn: 6, dung: 'Đúng.', sai: '40 · 15 : 100.' }, goiY: ['x = 6 − 1,4.'], viSaoDung: '4,6.', loiGiai: '<b>4,6</b>.', giangLai: 'Thử lại.', nguon: N6T('Bài 29, 31 (SGV tr. 154–162)'), kiemTra: K6() }
+      }
+    ]
+  };
+
+  /* ---------------- KHTN 6 ---------------- */
+  const vl6Luc = {
+    id: 'vl6-luc', lop: 6, mon: 'khtn', phanMon: 'Vật lí', ten: 'Lực trong đời sống',
+    sgk: 'SGV KHTN 6 — Chương VIII, Bài 40–45, SGV tr. 178–196', yccdGhiChu: YCCD6,
+    kienThucTruoc: ['Đổi đơn vị khối lượng: 1 kg = 1000 g', 'Đo chiều dài (Chương I)'],
+    yeuCauCanDat: ['Nêu được lực là sự đẩy hoặc kéo; nhận biết lực tiếp xúc và lực không tiếp xúc.', 'Biểu diễn được lực bằng mũi tên; đọc được độ lớn, hướng của lực.', 'Nêu được độ giãn của lò xo treo vật tỉ lệ với khối lượng vật treo.', 'Nêu được trọng lượng là độ lớn lực hút của Trái Đất; vận dụng: vật 1 kg có trọng lượng khoảng 10 N.', 'Nêu được tác dụng có lợi, có hại của lực ma sát và lực cản của nước.'],
+    bai: {
+      mucTieu: ['phân biệt lực tiếp xúc và không tiếp xúc;', 'đọc độ lớn, hướng của lực từ mũi tên;', 'tính độ dài lò xo khi treo vật;', 'tính trọng lượng từ khối lượng.'],
+      khoiDong: { hoi: 'Khi em đá quả bóng đang nằm yên, quả bóng thay đổi thế nào? Ai tác dụng lực lên quả bóng?', goiY: 'Quả bóng chuyển từ đứng yên sang chuyển động (thay đổi tốc độ); chân em tác dụng lực đẩy lên quả bóng.' },
+      trongTam: [
+        '<b>Lực</b> là sự đẩy hoặc kéo của vật này lên vật khác. Lực có thể làm vật <b>thay đổi tốc độ</b>, <b>đổi hướng chuyển động</b> hoặc <b>biến dạng</b>.',
+        '<b>Lực tiếp xúc</b>: hai vật chạm vào nhau (tay đẩy cửa). <b>Lực không tiếp xúc</b>: không cần chạm (nam châm hút đinh sắt, Trái Đất hút quả táo).',
+        'Đơn vị lực là <b>niutơn (N)</b>. Lực được biểu diễn bằng <b>mũi tên</b>: gốc ở điểm đặt, chiều mũi tên là hướng của lực, độ dài tỉ lệ với độ lớn theo tỉ xích.',
+        'Trong giới hạn đàn hồi, <b>độ giãn</b> của lò xo treo vật tỉ lệ với khối lượng vật treo. Độ giãn = chiều dài khi treo vật − chiều dài tự nhiên.',
+        '<b>Trọng lượng</b> là độ lớn lực hút của Trái Đất lên vật; vật có khối lượng 1 kg có trọng lượng khoảng <b>10 N</b>.',
+        '<b>Lực ma sát</b> cản trở chuyển động; có lợi (phanh xe, đi không trượt) hoặc có hại (mòn lốp, xích). Nước cũng có <b>lực cản</b> lên vật chuyển động trong nó.'
+      ],
+      viDu: { de: 'Một túi gạo 5 kg có trọng lượng khoảng bao nhiêu niutơn?', loiGiai: '1 kg ↔ khoảng 10 N, nên 5 kg ↔ khoảng 5 · 10 = <b>50 N</b>.' },
+      nguon: N6K('Chương VIII "Lực trong đời sống", Bài 40–45 (SGV tr. 178–196)'),
+      hoiDap: [
+        { tu: ['tiep xuc'], tl: 'Lực tiếp xúc: hai vật chạm nhau. Lực không tiếp xúc: hút/đẩy từ xa (nam châm, trọng lực).' },
+        { tu: ['lo xo', 'do gian'], tl: 'Độ giãn = chiều dài lúc treo − chiều dài tự nhiên; độ giãn tỉ lệ với khối lượng vật treo.' },
+        { tu: ['trong luong', 'niuton', 'newton'], tl: 'Vật 1 kg có trọng lượng khoảng 10 N. Nhớ đổi gam sang kilôgam trước.' },
+        { tu: ['ma sat'], tl: 'Ma sát có lợi khi cần giữ, hãm, bám (phanh, đế giày); có hại khi làm mòn, nóng máy, cản chuyển động.' }
+      ]
+    },
+    cauHoi: [
+      {
+        id: 'VL6A-01', muc: 'co-ban', liDoMuc: 'Nhận biết lực không tiếp xúc.', loai: 'chon1', de: 'Lực nào sau đây là <b>lực không tiếp xúc</b>?',
+        phuongAn: [{ t: 'Lực của tay đẩy chiếc xe đạp.', phanHoi: 'Tay chạm vào xe → lực tiếp xúc.' }, { t: 'Lực hút của nam châm lên chiếc đinh sắt ở gần.', dung: true }, { t: 'Lực của chân đá vào quả bóng.', phanHoi: 'Chân chạm bóng → lực tiếp xúc.' }, { t: 'Lực của dây kéo gàu nước.', phanHoi: 'Dây buộc vào gàu → lực tiếp xúc.' }],
+        goiY: ['Hai vật có chạm vào nhau không?'], viSaoDung: 'Nam châm hút đinh khi chưa chạm vào.', loiGiai: '<b>Lực hút của nam châm</b>.', giangLai: 'Lực không tiếp xúc "tác dụng từ xa": nam châm, trọng lực của Trái Đất.', tienBo: 'Em đã phân biệt hai loại lực.',
+        nguon: N6K('Bài 40 "Lực là gì?" (SGV tr. 178)'), kiemTra: K6(),
+        tuongTu: { id: 'VL6A-01-TT', muc: 'co-ban', liDoMuc: 'Như câu gốc.', loai: 'chon1', de: 'Lực nào là <b>lực không tiếp xúc</b>?', phuongAn: [{ t: 'Lực Trái Đất hút quả táo đang rơi.', dung: true }, { t: 'Lực của búa đóng vào đinh.', phanHoi: 'Búa chạm đinh.' }, { t: 'Lực của gió đẩy cánh buồm.', phanHoi: 'Gió (không khí) chạm vào buồm.' }, { t: 'Lực của tay bóp quả bóng.', phanHoi: 'Tay chạm bóng.' }], goiY: ['Có chạm không?'], viSaoDung: 'Trọng lực tác dụng từ xa.', loiGiai: '<b>Lực Trái Đất hút quả táo</b>.', giangLai: 'Quả táo rơi khi không ai chạm vào.', nguon: N6K('Bài 40 (SGV tr. 178)'), kiemTra: K6() }
+      },
+      {
+        id: 'VL6A-02', muc: 'co-ban', liDoMuc: 'Áp dụng trực tiếp: vật 1 kg ↔ khoảng 10 N.', loai: 'so', de: 'Một quả dưa hấu có khối lượng 2,5 kg. Trọng lượng của nó khoảng bao nhiêu niutơn? <span class="note">Chỉ ghi số.</span>', dapAn: 25,
+        loi: [{ gt: 2.5, nhan: 'Nhầm khối lượng với trọng lượng', phanHoi: '2,5 là khối lượng (kg). Trọng lượng (N) ≈ 10 lần số kg.' }, { gt: 0.25, nhan: 'Lỗi dùng công thức', phanHoi: 'Em đã chia cho 10. Phải nhân với 10.' }],
+        buoc: { hoi: 'Vật 1 kg có trọng lượng khoảng bao nhiêu N?', dapAn: 10, dung: 'Đúng. 2,5 kg → 2,5 · 10.', sai: 'Nhớ: 1 kg ↔ khoảng 10 N.' },
+        goiY: ['1 kg ↔ khoảng 10 N.'], viSaoDung: '2,5 · 10 = 25 N.', loiGiai: '2,5 · 10 = <b>25 N</b>.', giangLai: 'Khối lượng (kg) cho biết lượng chất; trọng lượng (N) là độ lớn lực hút của Trái Đất. Số N gấp khoảng 10 lần số kg.', tienBo: 'Em đã phân biệt khối lượng và trọng lượng.',
+        nguon: N6K('Bài 43 "Trọng lượng, lực hấp dẫn" (SGV tr. 189)'), kiemTra: K6(),
+        tuongTu: { id: 'VL6A-02-TT', muc: 'co-ban', liDoMuc: 'Như câu gốc, cần đổi gam.', loai: 'so', de: 'Một hộp sữa có khối lượng 400 g. Trọng lượng của nó khoảng bao nhiêu niutơn? <span class="note">Chỉ ghi số.</span>', dapAn: 4, loi: [{ gt: 4000, nhan: 'Lỗi đổi đơn vị', phanHoi: 'Đổi 400 g = 0,4 kg trước.' }, { gt: 0.4, nhan: 'Nhầm khối lượng với trọng lượng', phanHoi: '0,4 là số kg.' }], buoc: { hoi: '400 g = ? kg', dapAn: 0.4, dung: 'Đúng.', sai: '400 : 1000.' }, goiY: ['Đổi g → kg.'], viSaoDung: '0,4 · 10 = 4.', loiGiai: '<b>4 N</b>.', giangLai: 'Luôn đổi sang kg trước.', nguon: N6K('Bài 43 (SGV tr. 189)'), kiemTra: K6() }
+      },
+      {
+        id: 'VL6A-03', muc: 'van-dung', liDoMuc: 'Hai bước: tìm độ giãn ứng với 100 g, suy ra độ giãn và chiều dài khi treo 300 g.', loai: 'so',
+        de: 'Một lò xo có chiều dài tự nhiên 20 cm. Treo vật 100 g thì lò xo dài 22 cm. Nếu treo vật 300 g (vẫn trong giới hạn đàn hồi) thì lò xo dài bao nhiêu xentimét?', dapAn: 26, soLieu: GIA_DINH,
+        loi: [{ gt: 66, nhan: 'Lỗi dùng công thức', phanHoi: 'Không nhân cả chiều dài 22 cm với 3. Chỉ <b>độ giãn</b> mới tỉ lệ với khối lượng.' }, { gt: 6, nhan: 'Chưa trả lời đúng câu hỏi', phanHoi: '6 cm là độ giãn. Đề hỏi chiều dài lò xo.' }, { gt: 24, nhan: 'Lỗi tỉ lệ', phanHoi: '300 g gấp 3 lần 100 g nên độ giãn gấp 3 lần 2 cm.' }],
+        buoc: { hoi: 'Khi treo 100 g, lò xo giãn thêm bao nhiêu cm?', dapAn: 2, dung: 'Đúng: 22 − 20 = 2 cm. Treo 300 g giãn 3 · 2 cm.', sai: 'Độ giãn = chiều dài lúc treo − chiều dài tự nhiên.' },
+        goiY: ['Độ giãn khi treo 100 g = 22 − 20.', 'Chiều dài mới = chiều dài tự nhiên + độ giãn mới.'], viSaoDung: 'Độ giãn 6 cm → dài 26 cm.', loiGiai: 'Độ giãn với 100 g: 2 cm. Với 300 g: 3 · 2 = 6 cm. Chiều dài: 20 + 6 = <b>26 cm</b>.',
+        giangLai: 'Tách chiều dài lò xo thành hai phần: "phần sẵn có" 20 cm (không đổi) và "phần giãn thêm" (tỉ lệ với khối lượng).', tienBo: 'Em đã phân biệt độ giãn và chiều dài.',
+        nguon: N6K('Bài 42 "Biến dạng của lò xo" (SGV tr. 186)'), kiemTra: K6(),
+        tuongTu: { id: 'VL6A-03-TT', muc: 'van-dung', liDoMuc: 'Như câu gốc.', loai: 'so', de: 'Lò xo dài tự nhiên 15 cm. Treo vật 50 g thì dài 16 cm. Treo vật 200 g (trong giới hạn đàn hồi) thì lò xo dài bao nhiêu cm?', dapAn: 19, soLieu: GIA_DINH, loi: [{ gt: 64, nhan: 'Lỗi dùng công thức', phanHoi: 'Chỉ độ giãn tỉ lệ.' }, { gt: 4, nhan: 'Chưa trả lời đúng câu hỏi', phanHoi: 'Đó là độ giãn.' }], buoc: { hoi: 'Độ giãn khi treo 50 g?', dapAn: 1, dung: 'Đúng.', sai: '16 − 15.' }, goiY: ['200 g gấp 4 lần 50 g.'], viSaoDung: '15 + 4.', loiGiai: '<b>19 cm</b>.', giangLai: 'Phần sẵn có + phần giãn.', nguon: N6K('Bài 42 (SGV tr. 186)'), kiemTra: K6() }
+      },
+      {
+        id: 'VL6A-04', muc: 'van-dung', liDoMuc: 'Đọc độ lớn và hướng từ hình biểu diễn lực theo tỉ xích.', loai: 'chon1',
+        de: 'Một lực được biểu diễn bằng mũi tên nằm ngang, hướng <b>từ trái sang phải</b>, dài <b>3 đoạn</b>; tỉ xích mỗi đoạn ứng với <b>5 N</b>. Lực này có:',
+        phuongAn: [{ t: 'Độ lớn 15 N, hướng từ trái sang phải.', dung: true }, { t: 'Độ lớn 3 N, hướng từ trái sang phải.', phanHoi: '3 là số đoạn. Mỗi đoạn ứng 5 N.' }, { t: 'Độ lớn 15 N, hướng từ phải sang trái.', phanHoi: 'Hướng của lực là chiều mũi tên chỉ tới.' }, { t: 'Độ lớn 8 N, hướng từ trái sang phải.', phanHoi: 'Không cộng 3 + 5; phải nhân số đoạn với giá trị mỗi đoạn.' }],
+        goiY: ['Độ lớn = số đoạn × giá trị mỗi đoạn.'], viSaoDung: '3 · 5 = 15 N, hướng theo mũi tên.', loiGiai: '<b>15 N, hướng từ trái sang phải</b>.', giangLai: 'Tỉ xích giống bản đồ: 1 đoạn trên giấy ứng với 5 N ngoài thực tế.', tienBo: 'Em đã đọc đúng mũi tên lực.',
+        nguon: N6K('Bài 41 "Biểu diễn lực" (SGV tr. 183)'), kiemTra: K6(),
+        tuongTu: { id: 'VL6A-04-TT', muc: 'van-dung', liDoMuc: 'Như câu gốc.', loai: 'chon1', de: 'Mũi tên lực thẳng đứng, hướng <b>từ dưới lên</b>, dài 4 đoạn; mỗi đoạn ứng với 10 N. Lực này có:', phuongAn: [{ t: 'Độ lớn 40 N, hướng từ dưới lên.', dung: true }, { t: 'Độ lớn 4 N, hướng từ dưới lên.', phanHoi: 'Nhân với 10 N.' }, { t: 'Độ lớn 40 N, hướng từ trên xuống.', phanHoi: 'Xem chiều mũi tên.' }, { t: 'Độ lớn 14 N, hướng từ dưới lên.', phanHoi: 'Không cộng.' }], goiY: ['4 · 10.'], viSaoDung: '40 N, lên.', loiGiai: '<b>40 N, hướng từ dưới lên</b>.', giangLai: 'Tỉ xích như bản đồ.', nguon: N6K('Bài 41 (SGV tr. 183)'), kiemTra: K6() }
+      },
+      {
+        id: 'VL6A-05', muc: 'nang-cao', liDoMuc: 'Phân loại nhiều tình huống thực tế theo tác dụng có lợi/có hại của ma sát.', loai: 'chonNhieu',
+        de: '<b>Chọn TẤT CẢ</b> các trường hợp lực ma sát <b>có lợi</b>.',
+        phuongAn: [{ t: 'Bóp phanh để xe đạp dừng lại.', dung: true }, { t: 'Đế giày bám mặt đường giúp ta đi không bị trượt.', dung: true }, { t: 'Xích xe đạp bị mòn sau thời gian dài sử dụng.', phanHoi: 'Ma sát làm mòn xích → có hại.' }, { t: 'Viết phấn lên bảng để lại nét chữ.', dung: true }, { t: 'Phải dùng rất nhiều sức mới đẩy được thùng hàng nặng trên sàn.', phanHoi: 'Ma sát cản trở việc đẩy → có hại.' }],
+        goiY: ['Nếu không có ma sát, việc đó dễ hơn hay khó hơn?'], viSaoDung: 'Phanh, đế giày, viết phấn đều cần ma sát.', loiGiai: 'Có lợi: phanh xe, đế giày bám đường, viết phấn. Có hại: mòn xích, khó đẩy thùng hàng.',
+        giangLai: 'Phép thử "mất ma sát": nếu ma sát biến mất mà việc trở nên khó/không làm được → ma sát có lợi. Nếu việc trở nên dễ hơn → ma sát có hại.', tienBo: 'Em đã phân tích từng tình huống.',
+        nguon: N6K('Bài 44 "Lực ma sát" (SGV tr. 192)'), kiemTra: K6(),
+        tuongTu: { id: 'VL6A-05-TT', muc: 'nang-cao', liDoMuc: 'Như câu gốc, chọn trường hợp có hại.', loai: 'chonNhieu', de: '<b>Chọn TẤT CẢ</b> các trường hợp lực ma sát <b>có hại</b>.', phuongAn: [{ t: 'Lốp ô tô bị mòn dần.', dung: true }, { t: 'Bản lề cửa kêu cót két, khó mở.', dung: true }, { t: 'Rãnh trên lốp xe giúp xe không trượt khi trời mưa.', phanHoi: 'Có lợi.' }, { t: 'Trục quay của máy bị nóng lên khi máy chạy lâu.', dung: true }, { t: 'Cầm chắc được cây bút khi viết.', phanHoi: 'Có lợi.' }], goiY: ['Phép thử "mất ma sát".'], viSaoDung: 'Mòn lốp, cửa kêu, trục nóng.', loiGiai: 'Ý 1, 2, 4.', giangLai: 'Mất ma sát thì dễ hơn → có hại.', nguon: N6K('Bài 44 (SGV tr. 192)'), kiemTra: K6() }
+      },
+      {
+        id: 'VL6A-06', muc: 'nang-cao', liDoMuc: 'Giải thích hiện tượng thực tiễn bằng lực cản của nước; câu mở, đánh giá theo tiêu chí.', loai: 'mo',
+        de: 'Vận động viên bơi lội thường mặc đồ bơi bó sát và đội mũ bơi trơn nhẵn. Hãy giải thích việc làm này bằng kiến thức về lực. Viết 2–4 câu.',
+        tieuChi: [
+          { t: 'Nêu được nước có lực cản lên người chuyển động trong nước.', tuDong: { tuKhoa: ['luc can', 'can tro'] } },
+          { t: 'Nêu được đồ bơi bó sát, mũ trơn nhẵn làm giảm lực cản.', tuDong: { tuKhoa: ['giam'] } },
+          { t: 'Kết luận: bơi nhanh hơn, đỡ tốn sức.', tuDong: { tuKhoa: ['nhanh', 'it ton', 'do ton', 'de dang'] } },
+          { t: 'Viết 2–4 câu.', tuDong: { soCau: [2, 4] } }
+        ],
+        baiThamKhao: 'Khi bơi, nước tác dụng lực cản lên cơ thể vận động viên. Đồ bơi bó sát và mũ bơi trơn nhẵn giúp giảm lực cản của nước. Nhờ vậy vận động viên bơi nhanh hơn và đỡ tốn sức hơn.',
+        giupViet: 'Dàn ý: (1) Nước có … lên người bơi. (2) Đồ bơi bó sát, mũ trơn giúp … (3) Vì vậy vận động viên …',
+        goiY: ['Khi em đi bộ dưới hồ bơi, em thấy khó đi hơn trên cạn — vì sao?'], viSaoDung: '', loiGiai: 'Xem bài tham khảo.', giangLai: 'Thử tưởng tượng mặc áo phao rộng thùng thình rồi bơi: nước "níu" vào áo nhiều hơn → bơi chậm. Đồ bó sát làm nước ít "níu" hơn.', tienBo: 'Em đã giải thích hiện tượng bằng lực cản của nước.',
+        nguon: N6K('Bài 45 "Lực cản của nước" (SGV tr. 195)'), kiemTra: K6('Câu mở: nhóm biên soạn kiểm tra tiêu chí và bài tham khảo; máy chỉ kiểm tra sơ bộ theo từ khoá, học sinh tự đối chiếu tiêu chí.'),
+        tuongTu: { id: 'VL6A-06-TT', muc: 'nang-cao', liDoMuc: 'Như câu gốc.', loai: 'mo', de: 'Vì sao thân tàu thuyền thường được làm thon, nhọn ở phía trước? Viết 2–4 câu.', tieuChi: [{ t: 'Nêu nước có lực cản lên tàu.', tuDong: { tuKhoa: ['luc can', 'can tro'] } }, { t: 'Nêu hình dạng thon nhọn làm giảm lực cản.', tuDong: { tuKhoa: ['giam'] } }, { t: 'Kết luận: tàu đi nhanh hơn / tiết kiệm nhiên liệu.', tuDong: { tuKhoa: ['nhanh', 'tiet kiem'] } }, { t: 'Viết 2–4 câu.', tuDong: { soCau: [2, 4] } }], baiThamKhao: 'Khi tàu chạy, nước tác dụng lực cản lên thân tàu. Thân tàu thon, nhọn phía trước giúp giảm lực cản của nước. Nhờ vậy tàu đi nhanh hơn và tiết kiệm nhiên liệu.', giupViet: 'Nước có … → Hình dạng thon giúp … → Vì vậy …', goiY: ['Giống cá có thân thon.'], viSaoDung: '', loiGiai: 'Xem bài tham khảo.', giangLai: 'Hình thon "rẽ nước" dễ hơn.', nguon: N6K('Bài 45 (SGV tr. 195)'), kiemTra: K6('Câu mở: kiểm tra sơ bộ theo từ khoá.') }
+      }
+    ]
+  };
+
+  const vl6NangLuong = {
+    id: 'vl6-nang-luong', lop: 6, mon: 'khtn', phanMon: 'Vật lí', ten: 'Năng lượng',
+    sgk: 'SGV KHTN 6 — Chương IX, Bài 46–51, SGV tr. 197–214', yccdGhiChu: YCCD6,
+    kienThucTruoc: ['Lực (Chương VIII)'],
+    yeuCauCanDat: ['Nhận biết một số dạng năng lượng: động năng, thế năng, năng lượng nhiệt, ánh sáng, âm thanh, điện, hoá học.', 'Nêu được sự chuyển hoá năng lượng trong một số ví dụ.', 'Nêu được năng lượng hao phí luôn xuất hiện khi chuyển hoá; tính năng lượng hao phí từ số liệu.', 'Phân biệt năng lượng tái tạo và không tái tạo; nêu biện pháp tiết kiệm năng lượng.'],
+    bai: {
+      mucTieu: ['gọi tên dạng năng lượng;', 'mô tả sự chuyển hoá năng lượng;', 'tính năng lượng hao phí;', 'chọn biện pháp tiết kiệm năng lượng.'],
+      khoiDong: { hoi: 'Khi em bật quạt điện, quạt nhận năng lượng gì và tạo ra những gì?', goiY: 'Quạt nhận năng lượng điện; tạo ra chuyển động của cánh quạt (động năng), một ít nhiệt và âm thanh.' },
+      trongTam: [
+        'Năng lượng có nhiều dạng: <b>động năng</b> (vật chuyển động), <b>thế năng</b> (hấp dẫn, đàn hồi), năng lượng <b>nhiệt</b>, <b>ánh sáng</b>, <b>âm thanh</b>, <b>điện</b>, <b>hoá học</b> (trong thức ăn, nhiên liệu, pin).',
+        'Năng lượng có thể <b>truyền</b> từ vật này sang vật khác và <b>chuyển hoá</b> từ dạng này sang dạng khác.',
+        'Khi chuyển hoá, luôn có một phần thành năng lượng <b>hao phí</b> (thường là nhiệt). Năng lượng có ích + năng lượng hao phí = năng lượng cung cấp.',
+        '<b>Năng lượng tái tạo</b>: Mặt Trời, gió, nước, sinh khối… — được bổ sung liên tục. <b>Không tái tạo</b>: than đá, dầu mỏ, khí tự nhiên — dùng dần sẽ cạn.',
+        '<b>Tiết kiệm năng lượng</b>: tắt thiết bị khi không dùng, dùng thiết bị hiệu suất cao (đèn LED), đi bộ/xe đạp quãng ngắn…'
+      ],
+      viDu: { de: 'Một bóng đèn nhận 60 J năng lượng điện, tạo ra 12 J năng lượng ánh sáng. Năng lượng hao phí là bao nhiêu?', loiGiai: 'Hao phí = 60 − 12 = <b>48 J</b> (chủ yếu thành nhiệt).' },
+      nguon: N6K('Chương IX "Năng lượng", Bài 46–51 (SGV tr. 197–214)'),
+      hoiDap: [
+        { tu: ['hao phi'], tl: 'Hao phí = năng lượng cung cấp − năng lượng có ích.' },
+        { tu: ['tai tao'], tl: 'Tái tạo: Mặt Trời, gió, nước, sinh khối. Không tái tạo: than, dầu, khí tự nhiên.' },
+        { tu: ['chuyen hoa'], tl: 'Viết theo mũi tên: dạng nhận vào → dạng tạo ra. Ví dụ bếp ga: hoá năng → nhiệt.' },
+        { tu: ['dong nang', 'the nang'], tl: 'Động năng: vật đang chuyển động. Thế năng hấp dẫn: vật ở trên cao; thế năng đàn hồi: vật bị nén, kéo giãn.' }
+      ]
+    },
+    cauHoi: [
+      {
+        id: 'VL6B-01', muc: 'co-ban', liDoMuc: 'Nhận biết dạng năng lượng.', loai: 'chon1', de: 'Quả bóng đang bay trên sân có dạng năng lượng nào dễ nhận thấy nhất?',
+        phuongAn: [{ t: 'Động năng', dung: true }, { t: 'Năng lượng điện', phanHoi: 'Quả bóng không có dòng điện.' }, { t: 'Năng lượng hoá học', phanHoi: 'Năng lượng hoá học có trong thức ăn, nhiên liệu, pin.' }, { t: 'Năng lượng âm thanh', phanHoi: 'Bóng đang bay không phát ra âm thanh đáng kể.' }],
+        goiY: ['Bóng đang chuyển động.'], viSaoDung: 'Vật chuyển động có động năng.', loiGiai: '<b>Động năng</b>.', giangLai: '"Động" = chuyển động. Mọi vật đang chuyển động đều có động năng.', tienBo: 'Em đã gọi đúng tên dạng năng lượng.',
+        nguon: N6K('Bài 47 "Một số dạng năng lượng" (SGV tr. 200)'), kiemTra: K6(),
+        tuongTu: { id: 'VL6B-01-TT', muc: 'co-ban', liDoMuc: 'Như câu gốc.', loai: 'chon1', de: 'Thức ăn chúng ta ăn hằng ngày dự trữ năng lượng ở dạng nào?', phuongAn: [{ t: 'Năng lượng hoá học', dung: true }, { t: 'Động năng', phanHoi: 'Thức ăn không chuyển động.' }, { t: 'Năng lượng ánh sáng', phanHoi: 'Không phát sáng.' }, { t: 'Năng lượng điện', phanHoi: 'Không phải.' }], goiY: ['Giống nhiên liệu, pin.'], viSaoDung: 'Năng lượng hoá học.', loiGiai: '<b>Năng lượng hoá học</b>.', giangLai: 'Thức ăn, xăng, pin: năng lượng hoá học.', nguon: N6K('Bài 47 (SGV tr. 200)'), kiemTra: K6() }
+      },
+      {
+        id: 'VL6B-02', muc: 'co-ban', liDoMuc: 'Phân loại nguồn năng lượng tái tạo.', loai: 'chonNhieu', de: '<b>Chọn TẤT CẢ</b> các nguồn năng lượng <b>tái tạo</b>.',
+        phuongAn: [{ t: 'Năng lượng Mặt Trời', dung: true }, { t: 'Năng lượng gió', dung: true }, { t: 'Than đá', phanHoi: 'Than đá hình thành qua hàng triệu năm, dùng dần sẽ cạn.' }, { t: 'Dầu mỏ', phanHoi: 'Không tái tạo.' }, { t: 'Năng lượng nước (thuỷ điện)', dung: true }],
+        goiY: ['Nguồn nào được thiên nhiên bổ sung liên tục?'], viSaoDung: 'Mặt Trời, gió, nước được bổ sung liên tục.', loiGiai: 'Tái tạo: <b>Mặt Trời, gió, nước</b>.', giangLai: 'Hỏi: "Ngày mai nguồn này còn không?" — nắng, gió, dòng sông vẫn còn; than đá đào lên đốt rồi thì hết.', tienBo: 'Em đã phân loại đúng.',
+        nguon: N6K('Bài 50 "Năng lượng tái tạo" (SGV tr. 209)'), kiemTra: K6(),
+        tuongTu: { id: 'VL6B-02-TT', muc: 'co-ban', liDoMuc: 'Như câu gốc, chọn không tái tạo.', loai: 'chonNhieu', de: '<b>Chọn TẤT CẢ</b> các nguồn năng lượng <b>không tái tạo</b>.', phuongAn: [{ t: 'Khí tự nhiên', dung: true }, { t: 'Than đá', dung: true }, { t: 'Gió', phanHoi: 'Tái tạo.' }, { t: 'Dầu mỏ', dung: true }, { t: 'Mặt Trời', phanHoi: 'Tái tạo.' }], goiY: ['Nguồn nào dùng dần sẽ cạn?'], viSaoDung: 'Than, dầu, khí.', loiGiai: 'Ý 1, 2, 4.', giangLai: 'Nhiên liệu hoá thạch sẽ cạn.', nguon: N6K('Bài 50 (SGV tr. 209)'), kiemTra: K6() }
+      },
+      {
+        id: 'VL6B-03', muc: 'van-dung', liDoMuc: 'Tính năng lượng hao phí từ số liệu.', loai: 'so', de: 'Một bóng đèn nhận 100 J năng lượng điện và tạo ra 20 J năng lượng ánh sáng. Năng lượng hao phí (chủ yếu là nhiệt) là bao nhiêu jun? <span class="note">Chỉ ghi số.</span>', dapAn: 80, soLieu: GIA_DINH,
+        loi: [{ gt: 120, nhan: 'Lỗi dùng công thức', phanHoi: 'Hao phí = cung cấp − có ích, không cộng.' }, { gt: 20, nhan: 'Nhầm có ích với hao phí', phanHoi: '20 J ánh sáng là phần có ích.' }],
+        buoc: { hoi: 'Năng lượng có ích + hao phí bằng bao nhiêu jun?', dapAn: 100, dung: 'Đúng — bằng năng lượng cung cấp. Hao phí = 100 − 20.', sai: 'Tổng năng lượng tạo ra bằng năng lượng nhận vào.' },
+        goiY: ['Hao phí = cung cấp − có ích.'], viSaoDung: '100 − 20 = 80 J.', loiGiai: '100 − 20 = <b>80 J</b>.', giangLai: 'Năng lượng không tự mất đi: 100 J vào thì phải có 100 J ra, gồm 20 J ánh sáng và phần còn lại là nhiệt.', tienBo: 'Em đã tính đúng năng lượng hao phí.',
+        nguon: N6K('Bài 49 "Năng lượng hao phí" (SGV tr. 206)'), kiemTra: K6(),
+        tuongTu: { id: 'VL6B-03-TT', muc: 'van-dung', liDoMuc: 'Như câu gốc.', loai: 'so', de: 'Một quạt điện nhận 200 J năng lượng điện, cánh quạt nhận được 170 J động năng. Năng lượng hao phí là bao nhiêu jun?', dapAn: 30, soLieu: GIA_DINH, loi: [{ gt: 370, nhan: 'Lỗi dùng công thức', phanHoi: 'Trừ, không cộng.' }, { gt: 170, nhan: 'Nhầm có ích với hao phí', phanHoi: 'Đó là phần có ích.' }], buoc: { hoi: 'Có ích + hao phí = ?', dapAn: 200, dung: 'Đúng.', sai: 'Bằng năng lượng cung cấp.' }, goiY: ['200 − 170.'], viSaoDung: '30 J.', loiGiai: '<b>30 J</b>.', giangLai: 'Vào bao nhiêu, ra bấy nhiêu.', nguon: N6K('Bài 49 (SGV tr. 206)'), kiemTra: K6() }
+      },
+      {
+        id: 'VL6B-04', muc: 'van-dung', liDoMuc: 'Mô tả đúng chiều chuyển hoá năng lượng trong thiết bị thực tế.', loai: 'chon1', de: 'Khi đun nước bằng bếp ga, năng lượng chủ yếu chuyển hoá thế nào?',
+        phuongAn: [{ t: 'Năng lượng hoá học của khí ga → năng lượng nhiệt', dung: true }, { t: 'Năng lượng điện → năng lượng nhiệt', phanHoi: 'Bếp ga không dùng điện để đun.' }, { t: 'Năng lượng nhiệt → năng lượng hoá học', phanHoi: 'Ngược chiều.' }, { t: 'Động năng → năng lượng nhiệt', phanHoi: 'Nguồn năng lượng là khí ga (nhiên liệu).' }],
+        goiY: ['Khí ga là nhiên liệu.'], viSaoDung: 'Nhiên liệu cháy: hoá năng → nhiệt.', loiGiai: '<b>Hoá học → nhiệt</b>.', giangLai: 'Hỏi hai câu: "Nhận vào gì?" (khí ga — hoá học), "Tạo ra gì có ích?" (nhiệt làm nóng nước).', tienBo: 'Em đã xác định đúng chiều chuyển hoá.',
+        nguon: N6K('Bài 48 "Sự chuyển hoá năng lượng" (SGV tr. 202)'), kiemTra: K6(),
+        tuongTu: { id: 'VL6B-04-TT', muc: 'van-dung', liDoMuc: 'Như câu gốc.', loai: 'chon1', de: 'Tấm pin mặt trời chuyển hoá năng lượng thế nào?', phuongAn: [{ t: 'Năng lượng ánh sáng → năng lượng điện', dung: true }, { t: 'Năng lượng điện → năng lượng ánh sáng', phanHoi: 'Ngược chiều (đó là bóng đèn).' }, { t: 'Năng lượng hoá học → năng lượng điện', phanHoi: 'Đó là pin hoá học (pin con thỏ).' }, { t: 'Động năng → năng lượng điện', phanHoi: 'Đó là máy phát điện gió.' }], goiY: ['Nhận vào ánh nắng.'], viSaoDung: 'Ánh sáng → điện.', loiGiai: '<b>Ánh sáng → điện</b>.', giangLai: 'Nhận vào gì, tạo ra gì.', nguon: N6K('Bài 48 (SGV tr. 202)'), kiemTra: K6() }
+      },
+      {
+        id: 'VL6B-05', muc: 'nang-cao', liDoMuc: 'So sánh hai thiết bị: tính hai lượng hao phí rồi lập tỉ số.', loai: 'so',
+        de: 'Đèn LED và đèn sợi đốt đều nhận 50 J năng lượng điện. Đèn LED tạo ra 40 J năng lượng ánh sáng, đèn sợi đốt chỉ tạo ra 5 J. Năng lượng hao phí của đèn sợi đốt <b>gấp bao nhiêu lần</b> của đèn LED?', dapAn: 4.5, soLieu: GIA_DINH,
+        loi: [{ gt: 8, nhan: 'So sánh nhầm đại lượng', phanHoi: '8 = 40 : 5 là tỉ số năng lượng <b>có ích</b>. Đề hỏi về năng lượng <b>hao phí</b>.' }, { gt: '2/9', saiSo: 0.001, nhan: 'Đảo tỉ số', phanHoi: 'Đề hỏi hao phí của đèn sợi đốt gấp mấy lần đèn LED: lấy hao phí sợi đốt chia hao phí LED.' }, { gt: 45, nhan: 'Thiếu bước', phanHoi: '45 J là hao phí của đèn sợi đốt. Còn so với đèn LED.' }],
+        buoc: { hoi: 'Năng lượng hao phí của đèn LED là bao nhiêu jun?', dapAn: 10, dung: 'Đúng: 50 − 40 = 10 J. Đèn sợi đốt: 50 − 5 = 45 J.', sai: '50 − 40.' },
+        goiY: ['Tính hao phí từng đèn.', 'Chia hao phí sợi đốt cho hao phí LED.'], viSaoDung: '45 : 10 = 4,5.', loiGiai: 'LED: 50 − 40 = 10 J. Sợi đốt: 50 − 5 = 45 J. 45 : 10 = <b>4,5</b> lần.<br>→ Dùng đèn LED tiết kiệm năng lượng hơn.',
+        giangLai: 'Lập bảng hai cột (LED | sợi đốt), ba hàng (cung cấp | có ích | hao phí). Điền rồi mới so sánh.', tienBo: 'Em đã so sánh hai thiết bị bằng số liệu.',
+        nguon: N6K('Bài 49 "Năng lượng hao phí" (SGV tr. 206); Bài 51 "Tiết kiệm năng lượng" (SGV tr. 212)'), kiemTra: K6(),
+        tuongTu: { id: 'VL6B-05-TT', muc: 'nang-cao', liDoMuc: 'Như câu gốc.', loai: 'so', de: 'Động cơ A và B đều nhận 100 J. A tạo ra 80 J có ích, B tạo ra 60 J có ích. Hao phí của B gấp bao nhiêu lần hao phí của A?', dapAn: 2, soLieu: GIA_DINH, loi: [{ gt: 0.75, nhan: 'So sánh nhầm đại lượng', phanHoi: 'Đó là tỉ số phần có ích.' }, { gt: 0.5, nhan: 'Đảo tỉ số', phanHoi: 'Lấy B chia A.' }], buoc: { hoi: 'Hao phí của A?', dapAn: 20, dung: 'Đúng.', sai: '100 − 80.' }, goiY: ['40 : 20.'], viSaoDung: '2.', loiGiai: '<b>2</b> lần.', giangLai: 'Lập bảng.', nguon: N6K('Bài 49 (SGV tr. 206)'), kiemTra: K6() }
+      },
+      {
+        id: 'VL6B-06', muc: 'nang-cao', liDoMuc: 'Đánh giá nhiều hành động, cần hiểu bản chất tiết kiệm năng lượng.', loai: 'chonNhieu', de: '<b>Chọn TẤT CẢ</b> các việc làm giúp <b>tiết kiệm năng lượng</b>.',
+        phuongAn: [{ t: 'Tắt đèn, quạt khi ra khỏi phòng.', dung: true }, { t: 'Thay bóng đèn sợi đốt bằng đèn LED.', dung: true }, { t: 'Mở cửa tủ lạnh thật lâu để chọn đồ ăn.', phanHoi: 'Hơi lạnh thoát ra, tủ lạnh phải chạy nhiều hơn → tốn điện.' }, { t: 'Đi xe đạp hoặc đi bộ khi đến nơi gần.', dung: true }, { t: 'Để điều hoà ở 18 °C suốt ngày.', phanHoi: 'Nhiệt độ quá thấp làm máy chạy liên tục, tốn điện.' }],
+        goiY: ['Việc nào làm thiết bị chạy ít hơn hoặc hiệu quả hơn?'], viSaoDung: 'Ý 1, 2, 4 giảm năng lượng tiêu thụ.', loiGiai: 'Ý 1, 2, 4 đúng.', giangLai: 'Ba cách tiết kiệm: (1) không dùng khi không cần; (2) dùng thiết bị ít hao phí; (3) thay bằng sức người khi có thể.', tienBo: 'Em đã chọn đúng các việc tiết kiệm năng lượng.',
+        nguon: N6K('Bài 51 "Tiết kiệm năng lượng" (SGV tr. 212)'), kiemTra: K6(),
+        tuongTu: { id: 'VL6B-06-TT', muc: 'nang-cao', liDoMuc: 'Như câu gốc.', loai: 'chonNhieu', de: '<b>Chọn TẤT CẢ</b> các việc làm <b>gây lãng phí</b> năng lượng.', phuongAn: [{ t: 'Để tivi bật khi không ai xem.', dung: true }, { t: 'Rút sạc điện thoại khi pin đã đầy.', phanHoi: 'Đó là tiết kiệm.' }, { t: 'Bật đèn vào ban ngày dù phòng đủ sáng.', dung: true }, { t: 'Phơi quần áo dưới nắng thay vì dùng máy sấy.', phanHoi: 'Tiết kiệm.' }], goiY: ['Thiết bị chạy mà không cần thiết?'], viSaoDung: 'Ý 1, 3.', loiGiai: 'Ý 1 và 3.', giangLai: 'Không dùng khi không cần.', nguon: N6K('Bài 51 (SGV tr. 212)'), kiemTra: K6() }
+      }
+    ]
+  };
+
+  const hh6TheChat = {
+    id: 'hh6-the-chat', lop: 6, mon: 'khtn', phanMon: 'Hóa học', ten: 'Các thể của chất và sự chuyển thể',
+    sgk: 'SGV KHTN 6 — Chương II, Bài 9–10, SGV tr. 44–60', yccdGhiChu: YCCD6,
+    kienThucTruoc: ['Đo nhiệt độ (Chương I)'],
+    yeuCauCanDat: ['Nêu được đặc điểm cơ bản ba thể rắn, lỏng, khí.', 'Phân biệt tính chất vật lí và tính chất hoá học.', 'Gọi tên và giải thích các quá trình nóng chảy, đông đặc, bay hơi, ngưng tụ, sôi.'],
+    bai: {
+      mucTieu: ['so sánh hình dạng, thể tích, khả năng nén của ba thể;', 'gọi đúng tên quá trình chuyển thể;', 'phân biệt tính chất vật lí, hoá học;', 'suy ra thể của chất từ nhiệt độ nóng chảy và nhiệt độ sôi.'],
+      khoiDong: { hoi: 'Viên nước đá để ngoài trời một lúc thì thế nào? Nếu đun tiếp nước đó thì sao?', goiY: 'Nước đá tan thành nước lỏng (nóng chảy); đun tiếp nước bay hơi, sôi thành hơi nước.' },
+      trongTam: [
+        '<b>Thể rắn</b>: có hình dạng và thể tích xác định, rất khó nén. <b>Thể lỏng</b>: có thể tích xác định nhưng hình dạng theo vật chứa, khó nén. <b>Thể khí</b>: không có hình dạng, thể tích xác định, dễ nén.',
+        '<b>Tính chất vật lí</b>: thể, màu, mùi, vị, tính tan, nhiệt độ nóng chảy, nhiệt độ sôi… (không tạo chất mới). <b>Tính chất hoá học</b>: khả năng bị biến đổi thành chất khác (cháy, gỉ, bị phân huỷ).',
+        '<b>Nóng chảy</b>: rắn → lỏng. <b>Đông đặc</b>: lỏng → rắn.',
+        '<b>Bay hơi</b>: lỏng → hơi (xảy ra ở bề mặt chất lỏng, ở mọi nhiệt độ). <b>Ngưng tụ</b>: hơi → lỏng. <b>Sôi</b>: bay hơi xảy ra cả trong lòng chất lỏng, ở nhiệt độ sôi.',
+        'Dưới nhiệt độ nóng chảy: thể rắn. Giữa nhiệt độ nóng chảy và nhiệt độ sôi: thể lỏng. Trên nhiệt độ sôi: thể khí (hơi).'
+      ],
+      viDu: { de: 'Vì sao giọt nước xuất hiện ở mặt dưới nắp nồi canh đang đun?', loiGiai: 'Hơi nước bốc lên gặp nắp nồi nguội hơn thì <b>ngưng tụ</b> thành giọt nước.' },
+      nguon: N6K('Chương II "Chất quanh ta", Bài 9 "Sự đa dạng của chất" (SGV tr. 44) và Bài 10 "Các thể của chất và sự chuyển thể" (SGV tr. 50)'),
+      hoiDap: [
+        { tu: ['nong chay', 'dong dac'], tl: 'Nóng chảy: rắn → lỏng. Đông đặc: lỏng → rắn (ngược nhau).' },
+        { tu: ['bay hoi', 'ngung tu', 'soi'], tl: 'Bay hơi: lỏng → hơi ở bề mặt. Ngưng tụ: hơi → lỏng. Sôi: bay hơi cả trong lòng chất lỏng.' },
+        { tu: ['tinh chat vat li', 'tinh chat hoa hoc', 'vat li', 'hoa hoc'], tl: 'Có tạo ra chất mới không? Có → tính chất hoá học; không → tính chất vật lí.' },
+        { tu: ['the ran', 'the long', 'the khi'], tl: 'Rắn: giữ hình dạng. Lỏng: chảy, theo hình vật chứa. Khí: lan ra mọi nơi, dễ nén.' }
+      ]
+    },
+    cauHoi: [
+      {
+        id: 'HH6A-01', muc: 'co-ban', liDoMuc: 'Nhận biết đặc điểm thể rắn.', loai: 'chon1', de: 'Thể nào của chất có <b>cả hình dạng và thể tích xác định</b>?',
+        phuongAn: [{ t: 'Thể rắn', dung: true }, { t: 'Thể lỏng', phanHoi: 'Chất lỏng có thể tích xác định nhưng hình dạng theo vật chứa.' }, { t: 'Thể khí', phanHoi: 'Chất khí không có hình dạng và thể tích xác định.' }, { t: 'Cả thể lỏng và thể khí', phanHoi: 'Cả hai đều không có hình dạng xác định.' }],
+        goiY: ['Rót sang cốc khác, chất nào vẫn giữ nguyên hình?'], viSaoDung: 'Chất rắn giữ hình dạng và thể tích.', loiGiai: '<b>Thể rắn</b>.', giangLai: 'Viên bi bỏ vào cốc nào cũng tròn; nước đổ vào cốc nào cũng mang hình cốc đó.', tienBo: 'Em đã nhớ đặc điểm thể rắn.',
+        nguon: N6K('Bài 10 "Các thể của chất và sự chuyển thể" (SGV tr. 50)'), kiemTra: K6(),
+        tuongTu: { id: 'HH6A-01-TT', muc: 'co-ban', liDoMuc: 'Như câu gốc.', loai: 'chon1', de: 'Thể nào của chất <b>dễ bị nén</b> nhất?', phuongAn: [{ t: 'Thể khí', dung: true }, { t: 'Thể lỏng', phanHoi: 'Khó nén.' }, { t: 'Thể rắn', phanHoi: 'Rất khó nén.' }, { t: 'Ba thể như nhau', phanHoi: 'Không đúng.' }], goiY: ['Bơm xe đạp nén gì?'], viSaoDung: 'Khí dễ nén.', loiGiai: '<b>Thể khí</b>.', giangLai: 'Bịt đầu bơm tiêm có không khí, ấn được pít-tông xuống.', nguon: N6K('Bài 10 (SGV tr. 50)'), kiemTra: K6() }
+      },
+      {
+        id: 'HH6A-02', muc: 'co-ban', liDoMuc: 'Gọi tên quá trình chuyển thể.', loai: 'chon1', de: 'Quá trình chất chuyển từ <b>thể lỏng sang thể rắn</b> gọi là gì?',
+        phuongAn: [{ t: 'Đông đặc', dung: true }, { t: 'Nóng chảy', phanHoi: 'Nóng chảy là rắn → lỏng (ngược lại).' }, { t: 'Bay hơi', phanHoi: 'Bay hơi là lỏng → hơi.' }, { t: 'Ngưng tụ', phanHoi: 'Ngưng tụ là hơi → lỏng.' }],
+        goiY: ['Nước trong khay đá tủ lạnh.'], viSaoDung: 'Lỏng → rắn là đông đặc.', loiGiai: '<b>Đông đặc</b>.', giangLai: '"Đông" như nước đông thành đá; "nóng chảy" như đá chảy ra thành nước.', tienBo: 'Em đã gọi đúng tên quá trình.',
+        nguon: N6K('Bài 10 (SGV tr. 50)'), kiemTra: K6(),
+        tuongTu: { id: 'HH6A-02-TT', muc: 'co-ban', liDoMuc: 'Như câu gốc.', loai: 'chon1', de: 'Hơi nước gặp lạnh tạo thành giọt nước. Đó là quá trình gì?', phuongAn: [{ t: 'Ngưng tụ', dung: true }, { t: 'Bay hơi', phanHoi: 'Ngược lại.' }, { t: 'Đông đặc', phanHoi: 'Lỏng → rắn.' }, { t: 'Nóng chảy', phanHoi: 'Rắn → lỏng.' }], goiY: ['Hơi → lỏng.'], viSaoDung: 'Ngưng tụ.', loiGiai: '<b>Ngưng tụ</b>.', giangLai: 'Giọt nước trên nắp nồi.', nguon: N6K('Bài 10 (SGV tr. 50)'), kiemTra: K6() }
+      },
+      {
+        id: 'HH6A-03', muc: 'van-dung', liDoMuc: 'Nhận ra quá trình chuyển thể trong hiện tượng đời sống, tự viết tên.', loai: 'chu', boDau: true,
+        de: 'Quần áo ướt phơi ngoài nắng một lúc thì khô. Nước trong quần áo đã trải qua quá trình chuyển thể nào? <span class="note">Gõ tên quá trình, có thể gõ không dấu.</span>',
+        chapNhan: ['bay hơi', 'sự bay hơi', 'quá trình bay hơi'],
+        loi: [{ mau: '\\bsoi\\b', danhDau: 'sôi', nhan: 'Nhầm với sự sôi', phanHoi: 'Nước không sôi ở nhiệt độ ngoài trời. Nước chỉ chuyển thành hơi ở <b>bề mặt</b> — đó là sự bay hơi.' }, { mau: 'ngung tu', danhDau: '*', nhan: 'Ngược chiều', phanHoi: 'Ngưng tụ là hơi → lỏng. Ở đây nước lỏng biến thành hơi.' }, { mau: 'nong chay|dong dac', danhDau: '*', nhan: 'Nhầm quá trình', phanHoi: 'Không có thể rắn nào ở đây. Nước lỏng → hơi nước.' }],
+        goiY: ['Nước đi đâu khi quần áo khô?'], viSaoDung: 'Nước lỏng chuyển thành hơi ở bề mặt vải.', loiGiai: '<b>Sự bay hơi</b>.', giangLai: 'Nước không biến mất — nó thành hơi nước bay vào không khí. Nắng và gió làm bay hơi nhanh hơn.', tienBo: 'Em đã gọi đúng tên quá trình trong đời sống.',
+        nguon: N6K('Bài 10 (SGV tr. 50)'), kiemTra: K6('Nhóm biên soạn kiểm tra các cách viết đúng (có dấu/không dấu); chạy kiểm thử tự động ngày ' + NGAY_SOAN + '.'),
+        tuongTu: { id: 'HH6A-03-TT', muc: 'van-dung', liDoMuc: 'Như câu gốc.', loai: 'chu', boDau: true, de: 'Khi đốt nến, phần sáp gần bấc chảy thành chất lỏng. Đó là quá trình chuyển thể gì? <span class="note">Có thể gõ không dấu.</span>', chapNhan: ['nóng chảy', 'sự nóng chảy', 'quá trình nóng chảy'], loi: [{ mau: 'dong dac', danhDau: '*', nhan: 'Ngược chiều', phanHoi: 'Đông đặc là lỏng → rắn.' }, { mau: 'bay hoi|\\bsoi\\b', danhDau: '*', nhan: 'Nhầm quá trình', phanHoi: 'Sáp rắn → sáp lỏng.' }], goiY: ['Rắn → lỏng.'], viSaoDung: 'Nóng chảy.', loiGiai: '<b>Sự nóng chảy</b>.', giangLai: 'Sáp rắn gặp nóng thì chảy.', nguon: N6K('Bài 10 (SGV tr. 50)'), kiemTra: K6() }
+      },
+      {
+        id: 'HH6A-04', muc: 'van-dung', liDoMuc: 'Phân biệt tính chất vật lí, hoá học qua nhiều phát biểu.', loai: 'chonNhieu', de: '<b>Chọn TẤT CẢ</b> các <b>tính chất vật lí</b> của nước.',
+        phuongAn: [{ t: 'Nước là chất lỏng không màu.', dung: true }, { t: 'Nước sôi ở 100 °C (ở áp suất thường).', dung: true }, { t: 'Nước hoà tan được đường, muối.', dung: true }, { t: 'Nước bị phân huỷ thành khí hydrogen và khí oxygen khi có dòng điện.', phanHoi: 'Tạo ra chất mới → tính chất hoá học.' }],
+        goiY: ['Có tạo ra chất mới không?'], viSaoDung: 'Màu, nhiệt độ sôi, tính tan là tính chất vật lí.', loiGiai: 'Ý 1, 2, 3 là tính chất vật lí; ý 4 là tính chất hoá học.', giangLai: 'Nước đường cô cạn vẫn lấy lại được đường và nước — không có chất mới. Còn phân huỷ nước thì tạo ra hai khí hoàn toàn khác.', tienBo: 'Em đã dùng tiêu chí "có chất mới không".',
+        nguon: N6K('Bài 9 "Sự đa dạng của chất" (SGV tr. 44)'), kiemTra: K6(),
+        tuongTu: { id: 'HH6A-04-TT', muc: 'van-dung', liDoMuc: 'Như câu gốc, chọn tính chất hoá học.', loai: 'chonNhieu', de: '<b>Chọn TẤT CẢ</b> các hiện tượng thể hiện <b>tính chất hoá học</b>.', phuongAn: [{ t: 'Đinh sắt để lâu ngoài trời bị gỉ.', dung: true }, { t: 'Nến cháy tạo ra khí carbon dioxide và hơi nước.', dung: true }, { t: 'Đun đường quá lửa, đường chuyển màu đen và có mùi khét.', dung: true }, { t: 'Nước đá tan thành nước lỏng.', phanHoi: 'Chỉ đổi thể → vật lí.' }], goiY: ['Có chất mới?'], viSaoDung: 'Gỉ, cháy, đường cháy đen tạo chất mới.', loiGiai: 'Ý 1, 2, 3.', giangLai: 'Chất mới → hoá học.', nguon: N6K('Bài 9 (SGV tr. 44)'), kiemTra: K6() }
+      },
+      {
+        id: 'HH6A-05', muc: 'nang-cao', liDoMuc: 'Suy luận thể của chất ở nhiều nhiệt độ từ nhiệt độ nóng chảy và sôi.', loai: 'chonNhieu',
+        de: 'Chất X có nhiệt độ nóng chảy là −10 °C và nhiệt độ sôi là 120 °C (số liệu giả định). <b>Chọn TẤT CẢ</b> các khẳng định đúng.',
+        phuongAn: [{ t: 'Ở −20 °C, X ở thể rắn.', dung: true }, { t: 'Ở 50 °C, X ở thể lỏng.', dung: true }, { t: 'Ở 150 °C, X ở thể khí (hơi).', dung: true }, { t: 'Ở 100 °C, X đang sôi.', phanHoi: 'X sôi ở 120 °C. Ở 100 °C, X vẫn ở thể lỏng (có thể bay hơi ở bề mặt).' }],
+        goiY: ['Vẽ trục nhiệt độ, đánh dấu −10 °C và 120 °C.'], viSaoDung: 'Dưới −10: rắn; từ −10 đến 120: lỏng; trên 120: khí.', loiGiai: 'Ý 1, 2, 3 đúng; ý 4 sai vì X sôi ở 120 °C.',
+        giangLai: 'Chia trục nhiệt độ thành 3 vùng bởi hai mốc: vùng lạnh (rắn) | vùng giữa (lỏng) | vùng nóng (khí). Đặt từng nhiệt độ vào đúng vùng.', tienBo: 'Em đã suy luận thể của chất từ hai mốc nhiệt độ.',
+        nguon: Object.assign(N6K('Bài 10 "Các thể của chất và sự chuyển thể" (SGV tr. 50)'), { soLieu: GIA_DINH }), kiemTra: K6(),
+        tuongTu: { id: 'HH6A-05-TT', muc: 'nang-cao', liDoMuc: 'Như câu gốc.', loai: 'chonNhieu', de: 'Chất Y nóng chảy ở 40 °C, sôi ở 250 °C (giả định). <b>Chọn TẤT CẢ</b> các khẳng định đúng.', phuongAn: [{ t: 'Ở 25 °C, Y ở thể rắn.', dung: true }, { t: 'Ở 100 °C, Y ở thể lỏng.', dung: true }, { t: 'Ở 300 °C, Y ở thể khí.', dung: true }, { t: 'Ở 30 °C, Y ở thể lỏng.', phanHoi: '30 °C &lt; 40 °C → vẫn rắn.' }], goiY: ['Ba vùng.'], viSaoDung: 'Ý 1, 2, 3.', loiGiai: 'Ý 1, 2, 3.', giangLai: 'Chia ba vùng.', nguon: Object.assign(N6K('Bài 10 (SGV tr. 50)'), { soLieu: GIA_DINH }), kiemTra: K6() }
+      },
+      {
+        id: 'HH6A-06', muc: 'nang-cao', liDoMuc: 'Giải thích hiện tượng gồm hai quá trình chuyển thể ngược nhau; câu mở.', loai: 'mo',
+        de: 'Sáng mùa đông, em hà hơi vào mặt kính cửa sổ lạnh thì thấy kính bị mờ; một lúc sau kính lại trong. Hãy giải thích bằng sự chuyển thể. Viết 2–4 câu.',
+        tieuChi: [
+          { t: 'Nêu hơi nước trong hơi thở gặp kính lạnh.', tuDong: { tuKhoa: ['lanh'] } },
+          { t: 'Gọi đúng quá trình làm kính mờ: ngưng tụ.', tuDong: { tuKhoa: ['ngung tu'] } },
+          { t: 'Gọi đúng quá trình làm kính trong lại: bay hơi.', tuDong: { tuKhoa: ['bay hoi'] } },
+          { t: 'Viết 2–4 câu.', tuDong: { soCau: [2, 4] } }
+        ],
+        baiThamKhao: 'Hơi thở của em có nhiều hơi nước. Khi gặp mặt kính lạnh, hơi nước ngưng tụ thành những giọt nước rất nhỏ làm kính bị mờ. Một lúc sau, các giọt nước nhỏ này bay hơi hết nên kính trong trở lại.',
+        giupViet: 'Dàn ý: (1) Hơi thở có … (2) Gặp kính lạnh, hơi nước … (ngưng tụ) → kính mờ. (3) Sau đó các giọt nước … (bay hơi) → kính trong.',
+        goiY: ['Có hai quá trình ngược nhau.'], viSaoDung: '', loiGiai: 'Xem bài tham khảo.', giangLai: 'Kính mờ = có nước lỏng li ti (hơi → lỏng). Kính trong lại = nước li ti biến mất (lỏng → hơi).', tienBo: 'Em đã giải thích được hai quá trình chuyển thể.',
+        nguon: N6K('Bài 10 (SGV tr. 50)'), kiemTra: K6('Câu mở: kiểm tra sơ bộ theo từ khoá, học sinh tự đối chiếu tiêu chí.'),
+        tuongTu: { id: 'HH6A-06-TT', muc: 'nang-cao', liDoMuc: 'Như câu gốc.', loai: 'mo', de: 'Lấy cốc nước đá từ tủ lạnh ra, một lúc sau mặt ngoài cốc có nhiều giọt nước. Những giọt nước đó từ đâu ra? Viết 2–4 câu.', tieuChi: [{ t: 'Nêu nước đến từ hơi nước trong không khí.', tuDong: { tuKhoa: ['khong khi'] } }, { t: 'Nêu hơi nước gặp thành cốc lạnh.', tuDong: { tuKhoa: ['lanh'] } }, { t: 'Gọi đúng quá trình ngưng tụ.', tuDong: { tuKhoa: ['ngung tu'] } }, { t: 'Viết 2–4 câu.', tuDong: { soCau: [2, 4] } }], baiThamKhao: 'Trong không khí luôn có hơi nước. Khi gặp thành cốc lạnh, hơi nước ngưng tụ thành giọt nước bám ở mặt ngoài cốc. Nước không phải thấm từ trong cốc ra.', giupViet: 'Không khí có … → gặp cốc lạnh … → ngưng tụ.', goiY: ['Nước có thấm qua thuỷ tinh không?'], viSaoDung: '', loiGiai: 'Xem bài tham khảo.', giangLai: 'Hơi nước vô hình trong không khí.', nguon: N6K('Bài 10 (SGV tr. 50)'), kiemTra: K6('Câu mở: kiểm tra sơ bộ theo từ khoá.') }
+      }
+    ]
+  };
+
+  const hh6Oxygen = {
+    id: 'hh6-oxygen-khong-khi', lop: 6, mon: 'khtn', phanMon: 'Hóa học', ten: 'Oxygen và không khí',
+    sgk: 'SGV KHTN 6 — Chương II, Bài 11, SGV tr. 61–70', yccdGhiChu: YCCD6,
+    kienThucTruoc: ['Các thể của chất (Bài 10)', 'Tỉ số phần trăm (Toán 6)'],
+    yeuCauCanDat: ['Nêu được một số tính chất của oxygen; vai trò của oxygen với sự sống và sự cháy.', 'Nêu được thành phần của không khí (theo thể tích).', 'Nêu được nguồn gây ô nhiễm không khí và biện pháp bảo vệ môi trường không khí.'],
+    bai: {
+      mucTieu: ['nêu tính chất vật lí của oxygen;', 'nêu vai trò của oxygen;', 'tính thể tích oxygen trong một lượng không khí;', 'đề xuất biện pháp bảo vệ không khí.'],
+      khoiDong: { hoi: 'Úp một cốc thuỷ tinh lên cây nến đang cháy. Điều gì xảy ra? Vì sao?', goiY: 'Nến cháy thêm một lúc rồi tắt, vì oxygen trong cốc bị dùng hết.' },
+      trongTam: [
+        'Ở điều kiện thường, <b>oxygen</b> là chất khí không màu, không mùi, không vị, ít tan trong nước.',
+        'Oxygen <b>duy trì sự sống</b> (hô hấp) và <b>duy trì sự cháy</b>.',
+        'Thành phần <b>không khí</b> theo thể tích: khoảng <b>78% nitrogen</b>, <b>21% oxygen</b>, khoảng 1% là các khí khác (carbon dioxide, hơi nước, khí hiếm…).',
+        'Ô nhiễm không khí do khí thải xe cộ, nhà máy, đốt rác, cháy rừng… Bảo vệ: trồng cây xanh, dùng phương tiện công cộng, năng lượng sạch, không đốt rác bừa bãi.'
+      ],
+      viDu: { de: 'Một phòng chứa 100 m³ không khí. Trong đó có khoảng bao nhiêu m³ oxygen?', loiGiai: '21% của 100 m³ = <b>21 m³</b>.' },
+      nguon: N6K('Chương II "Chất quanh ta", Bài 11 "Oxygen. Không khí" (SGV tr. 61)'),
+      hoiDap: [
+        { tu: ['thanh phan', 'phan tram', 'nitrogen'], tl: 'Không khí: khoảng 78% nitrogen, 21% oxygen, 1% khí khác (theo thể tích).' },
+        { tu: ['vai tro', 'chay', 'ho hap'], tl: 'Oxygen duy trì sự hô hấp và sự cháy.' },
+        { tu: ['o nhiem', 'bao ve'], tl: 'Giảm khí thải (xe, nhà máy, đốt rác) và trồng nhiều cây xanh.' }
+      ]
+    },
+    cauHoi: [
+      {
+        id: 'HH6B-01', muc: 'co-ban', liDoMuc: 'Nhớ thành phần không khí.', loai: 'chon1', de: 'Oxygen chiếm khoảng bao nhiêu phần trăm thể tích không khí?',
+        phuongAn: [{ t: '21%', dung: true }, { t: '78%', phanHoi: '78% là của nitrogen.' }, { t: '1%', phanHoi: '1% là các khí khác.' }, { t: '50%', phanHoi: 'Không đúng.' }],
+        goiY: ['Nitrogen chiếm nhiều nhất.'], viSaoDung: 'Oxygen khoảng 21%.', loiGiai: '<b>21%</b>.', giangLai: 'Nhớ bộ ba 78 – 21 – 1 (nitrogen – oxygen – khí khác).', tienBo: 'Em đã nhớ thành phần không khí.',
+        nguon: N6K('Bài 11 "Oxygen. Không khí" (SGV tr. 61)'), kiemTra: K6(),
+        tuongTu: { id: 'HH6B-01-TT', muc: 'co-ban', liDoMuc: 'Như câu gốc.', loai: 'chon1', de: 'Khí nào chiếm thể tích nhiều nhất trong không khí?', phuongAn: [{ t: 'Nitrogen', dung: true }, { t: 'Oxygen', phanHoi: 'Khoảng 21%.' }, { t: 'Carbon dioxide', phanHoi: 'Rất ít.' }, { t: 'Hơi nước', phanHoi: 'Rất ít.' }], goiY: ['78%.'], viSaoDung: 'Nitrogen 78%.', loiGiai: '<b>Nitrogen</b>.', giangLai: '78 – 21 – 1.', nguon: N6K('Bài 11 (SGV tr. 61)'), kiemTra: K6() }
+      },
+      {
+        id: 'HH6B-02', muc: 'co-ban', liDoMuc: 'Nhận biết vai trò của oxygen.', loai: 'chonNhieu', de: '<b>Chọn TẤT CẢ</b> các vai trò của oxygen.',
+        phuongAn: [{ t: 'Duy trì sự hô hấp của người và động vật.', dung: true }, { t: 'Duy trì sự cháy.', dung: true }, { t: 'Dùng để dập tắt đám cháy.', phanHoi: 'Ngược lại: oxygen làm lửa cháy mạnh hơn.' }, { t: 'Là chất khí cây xanh lấy vào để quang hợp.', phanHoi: 'Cây lấy carbon dioxide để quang hợp và thải ra oxygen.' }],
+        goiY: ['Không có oxygen thì con người và ngọn lửa thế nào?'], viSaoDung: 'Oxygen duy trì hô hấp và sự cháy.', loiGiai: 'Ý 1 và 2.', giangLai: 'Muốn dập lửa, người ta làm ngọn lửa "thiếu oxygen" (trùm chăn ướt, phủ cát).', tienBo: 'Em đã nêu đúng vai trò của oxygen.',
+        nguon: N6K('Bài 11 (SGV tr. 61)'), kiemTra: K6(),
+        tuongTu: { id: 'HH6B-02-TT', muc: 'co-ban', liDoMuc: 'Như câu gốc, tính chất vật lí.', loai: 'chonNhieu', de: '<b>Chọn TẤT CẢ</b> các tính chất vật lí của khí oxygen ở điều kiện thường.', phuongAn: [{ t: 'Không màu', dung: true }, { t: 'Không mùi', dung: true }, { t: 'Ít tan trong nước', dung: true }, { t: 'Có màu xanh nhạt', phanHoi: 'Khí oxygen không màu.' }, { t: 'Tan rất nhiều trong nước', phanHoi: 'Ít tan.' }], goiY: ['Không khí ta thở có màu không?'], viSaoDung: 'Ý 1, 2, 3.', loiGiai: 'Ý 1, 2, 3.', giangLai: 'Cá thở bằng lượng oxygen ít ỏi hoà tan trong nước.', nguon: N6K('Bài 11 (SGV tr. 61)'), kiemTra: K6() }
+      },
+      {
+        id: 'HH6B-03', muc: 'van-dung', liDoMuc: 'Vận dụng tỉ lệ phần trăm thành phần không khí để tính thể tích.', loai: 'so', de: 'Một phòng học chứa khoảng 200 m³ không khí. Thể tích oxygen trong phòng khoảng bao nhiêu m³? <span class="note">Chỉ ghi số.</span>', dapAn: 42, soLieu: GIA_DINH,
+        loi: [{ gt: 156, nhan: 'Nhầm khí', phanHoi: '156 m³ là thể tích nitrogen (78%).' }, { gt: 4200, nhan: 'Chưa chia 100', phanHoi: '21% = 21 : 100. Em quên chia 100.' }, { gt: 158, nhan: 'Nhầm phần cần tính', phanHoi: '158 m³ là các khí không phải oxygen.' }],
+        buoc: { hoi: '1% của 200 m³ là bao nhiêu m³?', dapAn: 2, dung: 'Đúng. 21% là 21 · 2.', sai: '200 : 100.' },
+        goiY: ['Oxygen ≈ 21%.'], viSaoDung: '200 · 21 : 100 = 42.', loiGiai: '200 · 21% = <b>42 m³</b>.', giangLai: 'Tìm 1% trước (chia 100) rồi nhân với 21.', tienBo: 'Em đã dùng đúng tỉ lệ oxygen.',
+        nguon: N6K('Bài 11 (SGV tr. 61)'), kiemTra: K6(),
+        tuongTu: { id: 'HH6B-03-TT', muc: 'van-dung', liDoMuc: 'Như câu gốc.', loai: 'so', de: 'Một căn phòng chứa 150 m³ không khí. Thể tích oxygen khoảng bao nhiêu m³?', dapAn: 31.5, soLieu: GIA_DINH, loi: [{ gt: 117, nhan: 'Nhầm khí', phanHoi: 'Đó là nitrogen.' }, { gt: 3150, nhan: 'Chưa chia 100', phanHoi: 'Chia 100.' }], buoc: { hoi: '1% của 150?', dapAn: 1.5, dung: 'Đúng.', sai: '150 : 100.' }, goiY: ['21 · 1,5.'], viSaoDung: '31,5.', loiGiai: '<b>31,5 m³</b>.', giangLai: 'Tìm 1% trước.', nguon: N6K('Bài 11 (SGV tr. 61)'), kiemTra: K6() }
+      },
+      {
+        id: 'HH6B-04', muc: 'van-dung', liDoMuc: 'Giải thích thí nghiệm bằng vai trò duy trì sự cháy.', loai: 'chon1', de: 'Úp một cốc thuỷ tinh lên cây nến đang cháy, sau một lúc nến tắt. Nguyên nhân chính là:',
+        phuongAn: [{ t: 'Oxygen trong cốc đã bị dùng hết.', dung: true }, { t: 'Cốc thuỷ tinh làm nến bị lạnh.', phanHoi: 'Cốc úp lên còn nóng lên vì lửa.' }, { t: 'Nitrogen trong cốc tự sinh ra thêm.', phanHoi: 'Nitrogen không tự sinh ra.' }, { t: 'Hơi nước trong cốc dập tắt nến.', phanHoi: 'Lượng hơi nước rất ít; nguyên nhân chính là thiếu oxygen.' }],
+        goiY: ['Sự cháy cần khí gì?'], viSaoDung: 'Hết oxygen, nến không cháy được.', loiGiai: '<b>Oxygen trong cốc đã hết</b>.', giangLai: 'Cốc to hơn thì nến cháy lâu hơn — vì có nhiều oxygen hơn.', tienBo: 'Em đã giải thích thí nghiệm.',
+        nguon: N6K('Bài 11 (SGV tr. 61)'), kiemTra: K6(),
+        tuongTu: { id: 'HH6B-04-TT', muc: 'van-dung', liDoMuc: 'Như câu gốc.', loai: 'chon1', de: 'Đưa que đóm còn tàn đỏ vào lọ chứa đầy khí oxygen, que đóm bùng cháy. Vì sao?', phuongAn: [{ t: 'Oxygen duy trì sự cháy.', dung: true }, { t: 'Oxygen là nhiên liệu cháy được.', phanHoi: 'Oxygen duy trì sự cháy, que đóm mới là vật cháy.' }, { t: 'Lọ thuỷ tinh nóng.', phanHoi: 'Không phải.' }, { t: 'Oxygen có màu.', phanHoi: 'Không màu.' }], goiY: ['Vai trò của oxygen.'], viSaoDung: 'Duy trì sự cháy.', loiGiai: '<b>Oxygen duy trì sự cháy</b>.', giangLai: 'Nhiều oxygen → cháy mạnh.', nguon: N6K('Bài 11 (SGV tr. 61)'), kiemTra: K6() }
+      },
+      {
+        id: 'HH6B-05', muc: 'nang-cao', liDoMuc: 'Đánh giá nhiều biện pháp thực tế bảo vệ không khí.', loai: 'chonNhieu', de: '<b>Chọn TẤT CẢ</b> các biện pháp góp phần <b>bảo vệ môi trường không khí</b>.',
+        phuongAn: [{ t: 'Trồng nhiều cây xanh.', dung: true }, { t: 'Đi xe buýt, xe đạp thay cho xe máy khi có thể.', dung: true }, { t: 'Đốt rơm rạ ngoài đồng sau mùa gặt.', phanHoi: 'Đốt rơm rạ tạo khói bụi, gây ô nhiễm.' }, { t: 'Dùng năng lượng mặt trời thay than đá.', dung: true }, { t: 'Xả khói nhà máy chưa qua xử lý.', phanHoi: 'Gây ô nhiễm.' }],
+        goiY: ['Việc nào làm giảm khói bụi, khí thải?'], viSaoDung: 'Ý 1, 2, 4 giảm khí thải hoặc làm sạch không khí.', loiGiai: 'Ý 1, 2, 4.', giangLai: 'Hỏi: việc này làm không khí có thêm khói/khí độc không? Có → gây ô nhiễm.', tienBo: 'Em đã đánh giá đúng các biện pháp.',
+        nguon: N6K('Bài 11 (SGV tr. 61)'), kiemTra: K6(),
+        tuongTu: { id: 'HH6B-05-TT', muc: 'nang-cao', liDoMuc: 'Như câu gốc, nguồn gây ô nhiễm.', loai: 'chonNhieu', de: '<b>Chọn TẤT CẢ</b> các nguồn <b>gây ô nhiễm</b> không khí.', phuongAn: [{ t: 'Khí thải xe máy, ô tô.', dung: true }, { t: 'Cháy rừng.', dung: true }, { t: 'Đốt rác thải sinh hoạt.', dung: true }, { t: 'Trồng cây xanh ven đường.', phanHoi: 'Làm sạch không khí.' }], goiY: ['Có tạo khói không?'], viSaoDung: 'Ý 1, 2, 3.', loiGiai: 'Ý 1, 2, 3.', giangLai: 'Khói, khí thải → ô nhiễm.', nguon: N6K('Bài 11 (SGV tr. 61)'), kiemTra: K6() }
+      },
+      {
+        id: 'HH6B-06', muc: 'nang-cao', liDoMuc: 'Nhiều bước: tính oxygen trong 1 giờ rồi trong nhiều giờ.', loai: 'so',
+        de: 'Giả sử mỗi giờ một bạn học sinh hít vào khoảng 500 lít không khí. Trong 4 giờ, bạn đó hít vào khoảng bao nhiêu lít <b>oxygen</b>? (Oxygen chiếm khoảng 21% thể tích không khí.)', dapAn: 420, soLieu: GIA_DINH,
+        loi: [{ gt: 2000, nhan: 'Chưa trả lời đúng câu hỏi', phanHoi: '2000 lít là lượng không khí. Đề hỏi lượng oxygen.' }, { gt: 105, nhan: 'Thiếu bước', phanHoi: '105 lít là oxygen trong <b>1 giờ</b>. Đề hỏi 4 giờ.' }, { gt: 1560, nhan: 'Nhầm khí', phanHoi: 'Em dùng 78% (nitrogen).' }],
+        buoc: { hoi: 'Trong 1 giờ, bạn đó hít vào bao nhiêu lít oxygen?', dapAn: 105, dung: 'Đúng: 21% · 500 = 105. Nhân với 4.', sai: '500 · 21 : 100.' },
+        goiY: ['Tính lượng không khí hoặc oxygen trong 1 giờ trước.'], viSaoDung: '500 · 4 · 21% = 420.', loiGiai: 'Không khí trong 4 giờ: 500 · 4 = 2000 L. Oxygen: 2000 · 21% = <b>420 L</b>.', giangLai: 'Có hai bước nhân: theo số giờ và theo phần trăm. Thứ tự nào cũng được, nhưng phải đủ cả hai.', tienBo: 'Em đã làm đủ các bước.',
+        nguon: N6K('Bài 11 (SGV tr. 61)'), kiemTra: K6(),
+        tuongTu: { id: 'HH6B-06-TT', muc: 'nang-cao', liDoMuc: 'Như câu gốc.', loai: 'so', de: 'Giả sử mỗi giờ một người hít vào khoảng 600 lít không khí. Trong 3 giờ người đó hít vào khoảng bao nhiêu lít oxygen (21%)?', dapAn: 378, soLieu: GIA_DINH, loi: [{ gt: 1800, nhan: 'Chưa trả lời đúng câu hỏi', phanHoi: 'Đó là không khí.' }, { gt: 126, nhan: 'Thiếu bước', phanHoi: 'Đó là 1 giờ.' }], buoc: { hoi: 'Oxygen trong 1 giờ?', dapAn: 126, dung: 'Đúng.', sai: '600 · 21%.' }, goiY: ['126 · 3.'], viSaoDung: '378.', loiGiai: '<b>378 L</b>.', giangLai: 'Đủ hai bước nhân.', nguon: N6K('Bài 11 (SGV tr. 61)'), kiemTra: K6() }
+      }
+    ]
+  };
+
+  const hh6HonHop = {
+    id: 'hh6-hon-hop', lop: 6, mon: 'khtn', phanMon: 'Hóa học', ten: 'Hỗn hợp và tách chất khỏi hỗn hợp',
+    sgk: 'SGV KHTN 6 — Chương IV, Bài 16–17, SGV tr. 91–105', yccdGhiChu: YCCD6,
+    kienThucTruoc: ['Các thể của chất, sự bay hơi (Bài 10)'],
+    yeuCauCanDat: ['Phân biệt chất tinh khiết và hỗn hợp; hỗn hợp đồng nhất và không đồng nhất.', 'Nhận biết dung dịch, huyền phù, nhũ tương; dung môi và chất tan.', 'Chọn được cách tách chất (lọc, cô cạn, chiết) dựa vào tính chất của chất.'],
+    bai: {
+      mucTieu: ['phân biệt chất tinh khiết, hỗn hợp;', 'gọi tên dung dịch, huyền phù, nhũ tương;', 'chọn cách tách phù hợp;', 'giải thích vì sao chọn cách tách đó.'],
+      khoiDong: { hoi: 'Làm thế nào lấy lại muối từ cốc nước muối?', goiY: 'Đun cho nước bay hơi hết (cô cạn), muối còn lại.' },
+      trongTam: [
+        '<b>Chất tinh khiết</b> chỉ gồm một chất (nước cất, khí oxygen). <b>Hỗn hợp</b> gồm hai hay nhiều chất trộn lẫn (nước muối, không khí, sữa).',
+        '<b>Hỗn hợp đồng nhất</b>: thành phần giống nhau ở mọi vị trí (nước muối). <b>Không đồng nhất</b>: nhìn thấy các thành phần khác nhau (nước cát).',
+        '<b>Dung dịch</b>: hỗn hợp đồng nhất của dung môi và chất tan (nước đường). <b>Huyền phù</b>: chất rắn lơ lửng trong chất lỏng (nước phù sa). <b>Nhũ tương</b>: chất lỏng phân tán trong chất lỏng khác (dầu ăn lắc với nước).',
+        'Cách tách: <b>lọc</b> — tách chất rắn không tan khỏi chất lỏng; <b>cô cạn</b> — tách chất rắn tan khỏi dung dịch (làm bay hơi dung môi); <b>chiết</b> — tách hai chất lỏng không hoà tan vào nhau.'
+      ],
+      viDu: { de: 'Nên dùng cách nào để tách cát ra khỏi nước?', loiGiai: 'Cát không tan trong nước → <b>lọc</b>: cát bị giữ lại trên giấy lọc.' },
+      nguon: N6K('Chương IV "Hỗn hợp. Tách chất ra khỏi hỗn hợp", Bài 16–17 (SGV tr. 91–105)'),
+      hoiDap: [
+        { tu: ['loc'], tl: 'Lọc: tách chất rắn KHÔNG tan khỏi chất lỏng.' },
+        { tu: ['co can'], tl: 'Cô cạn: làm bay hơi dung môi để lấy chất rắn ĐÃ TAN.' },
+        { tu: ['chiet'], tl: 'Chiết: tách hai chất lỏng không tan vào nhau (dầu và nước).' },
+        { tu: ['dung dich', 'huyen phu', 'nhu tuong'], tl: 'Dung dịch: đồng nhất. Huyền phù: rắn lơ lửng trong lỏng. Nhũ tương: lỏng phân tán trong lỏng.' }
+      ]
+    },
+    cauHoi: [
+      {
+        id: 'HH6C-01', muc: 'co-ban', liDoMuc: 'Phân biệt hỗn hợp và chất tinh khiết.', loai: 'chonNhieu', de: '<b>Chọn TẤT CẢ</b> các <b>hỗn hợp</b>.',
+        phuongAn: [{ t: 'Nước muối', dung: true }, { t: 'Không khí', dung: true }, { t: 'Nước cất', phanHoi: 'Nước cất chỉ gồm nước → chất tinh khiết.' }, { t: 'Sữa', dung: true }, { t: 'Khí oxygen', phanHoi: 'Chỉ gồm oxygen → chất tinh khiết.' }],
+        goiY: ['Có từ hai chất trở lên?'], viSaoDung: 'Nước muối, không khí, sữa có nhiều chất.', loiGiai: 'Ý 1, 2, 4.', giangLai: 'Không khí gồm nitrogen, oxygen… nên là hỗn hợp, dù ta không nhìn thấy.', tienBo: 'Em đã phân biệt đúng.',
+        nguon: N6K('Bài 16 "Hỗn hợp các chất" (SGV tr. 91)'), kiemTra: K6(),
+        tuongTu: { id: 'HH6C-01-TT', muc: 'co-ban', liDoMuc: 'Như câu gốc.', loai: 'chonNhieu', de: '<b>Chọn TẤT CẢ</b> các <b>chất tinh khiết</b>.', phuongAn: [{ t: 'Nước cất', dung: true }, { t: 'Khí oxygen', dung: true }, { t: 'Nước biển', phanHoi: 'Có muối và nhiều chất.' }, { t: 'Nước chanh', phanHoi: 'Hỗn hợp.' }, { t: 'Không khí', phanHoi: 'Hỗn hợp nhiều khí.' }], goiY: ['Chỉ một chất.'], viSaoDung: 'Ý 1, 2.', loiGiai: 'Ý 1, 2.', giangLai: 'Một chất duy nhất.', nguon: N6K('Bài 16 (SGV tr. 91)'), kiemTra: K6() }
+      },
+      {
+        id: 'HH6C-02', muc: 'co-ban', liDoMuc: 'Nhận biết nhũ tương.', loai: 'chon1', de: 'Cho dầu ăn vào nước rồi lắc mạnh, ta được:',
+        phuongAn: [{ t: 'Nhũ tương', dung: true }, { t: 'Dung dịch', phanHoi: 'Dầu không tan trong nước nên không tạo dung dịch.' }, { t: 'Huyền phù', phanHoi: 'Huyền phù là chất <b>rắn</b> lơ lửng; dầu ăn là chất lỏng.' }, { t: 'Chất tinh khiết', phanHoi: 'Có hai chất.' }],
+        goiY: ['Dầu ăn là chất lỏng hay rắn?'], viSaoDung: 'Chất lỏng phân tán trong chất lỏng khác → nhũ tương.', loiGiai: '<b>Nhũ tương</b>.', giangLai: 'Nhũ tương = "lỏng trong lỏng"; huyền phù = "rắn trong lỏng".', tienBo: 'Em đã phân biệt nhũ tương và huyền phù.',
+        nguon: N6K('Bài 16 (SGV tr. 91)'), kiemTra: K6(),
+        tuongTu: { id: 'HH6C-02-TT', muc: 'co-ban', liDoMuc: 'Như câu gốc.', loai: 'chon1', de: 'Khuấy bột phấn vào nước, các hạt phấn lơ lửng làm nước đục. Đó là:', phuongAn: [{ t: 'Huyền phù', dung: true }, { t: 'Nhũ tương', phanHoi: 'Phấn là chất rắn.' }, { t: 'Dung dịch', phanHoi: 'Phấn không tan.' }, { t: 'Chất tinh khiết', phanHoi: 'Có hai chất.' }], goiY: ['Rắn trong lỏng.'], viSaoDung: 'Huyền phù.', loiGiai: '<b>Huyền phù</b>.', giangLai: 'Rắn trong lỏng.', nguon: N6K('Bài 16 (SGV tr. 91)'), kiemTra: K6() }
+      },
+      {
+        id: 'HH6C-03', muc: 'van-dung', liDoMuc: 'Chọn cách tách dựa vào tính tan.', loai: 'chon1', de: 'Để lấy muối ăn từ nước muối, ta dùng cách nào?',
+        phuongAn: [{ t: 'Cô cạn (làm bay hơi nước)', dung: true }, { t: 'Lọc', phanHoi: 'Muối đã tan, đi qua được giấy lọc cùng nước.' }, { t: 'Chiết', phanHoi: 'Chiết dùng cho hai chất lỏng không tan vào nhau.' }, { t: 'Dùng nam châm', phanHoi: 'Muối không bị nam châm hút.' }],
+        goiY: ['Muối có tan trong nước không?'], viSaoDung: 'Muối tan → cô cạn.', loiGiai: '<b>Cô cạn</b>.', giangLai: 'Ruộng muối: nắng làm nước biển bay hơi, muối đọng lại — đó chính là cô cạn.', tienBo: 'Em đã chọn cách tách dựa vào tính tan.',
+        nguon: N6K('Bài 17 "Tách chất khỏi hỗn hợp" (SGV tr. 100)'), kiemTra: K6(),
+        tuongTu: { id: 'HH6C-03-TT', muc: 'van-dung', liDoMuc: 'Như câu gốc.', loai: 'chon1', de: 'Để tách cát ra khỏi nước, ta dùng cách nào?', phuongAn: [{ t: 'Lọc', dung: true }, { t: 'Cô cạn', phanHoi: 'Được cát nhưng mất nước, tốn năng lượng; lọc đơn giản hơn.' }, { t: 'Chiết', phanHoi: 'Cát là chất rắn.' }, { t: 'Hoà tan thêm', phanHoi: 'Cát không tan.' }], goiY: ['Cát không tan.'], viSaoDung: 'Lọc.', loiGiai: '<b>Lọc</b>.', giangLai: 'Giấy lọc giữ hạt rắn không tan.', nguon: N6K('Bài 17 (SGV tr. 100)'), kiemTra: K6() }
+      },
+      {
+        id: 'HH6C-04', muc: 'van-dung', liDoMuc: 'Áp dụng: khối lượng dung dịch = khối lượng chất tan + dung môi, tính ngược.', loai: 'so',
+        de: 'Cô cạn 250 g nước biển thì thu được 9 g muối (số liệu giả định). Khối lượng nước đã bay hơi là bao nhiêu gam?', dapAn: 241, soLieu: GIA_DINH,
+        loi: [{ gt: 259, nhan: 'Lỗi dùng công thức', phanHoi: 'Nước bay hơi = nước biển − muối còn lại (trừ, không cộng).' }, { gt: 9, nhan: 'Chưa trả lời đúng câu hỏi', phanHoi: '9 g là muối. Đề hỏi nước.' }],
+        goiY: ['Nước biển = nước + muối (và chất khác).'], viSaoDung: '250 − 9 = 241 g.', loiGiai: '250 − 9 = <b>241 g</b>.', giangLai: 'Khi cô cạn, chỉ có nước đi ra ngoài; phần còn lại là muối.', tienBo: 'Em đã tính đúng khối lượng nước bay hơi.',
+        nguon: N6K('Bài 17 "Tách chất khỏi hỗn hợp" (SGV tr. 100)'), kiemTra: K6(),
+        tuongTu: { id: 'HH6C-04-TT', muc: 'van-dung', liDoMuc: 'Như câu gốc.', loai: 'so', de: 'Cô cạn 180 g nước muối thu được 6 g muối (giả định). Khối lượng nước đã bay hơi là bao nhiêu gam?', dapAn: 174, soLieu: GIA_DINH, loi: [{ gt: 186, nhan: 'Lỗi dùng công thức', phanHoi: 'Trừ.' }, { gt: 6, nhan: 'Chưa trả lời đúng câu hỏi', phanHoi: 'Đó là muối.' }], goiY: ['180 − 6.'], viSaoDung: '174.', loiGiai: '<b>174 g</b>.', giangLai: 'Chỉ nước bay đi.', nguon: N6K('Bài 17 (SGV tr. 100)'), kiemTra: K6() }
+      },
+      {
+        id: 'HH6C-05', muc: 'nang-cao', liDoMuc: 'Lập quy trình nhiều bước để tách hỗn hợp hai chất rắn.', loai: 'chonNhieu',
+        de: 'Có hỗn hợp gồm muối ăn và cát. <b>Chọn TẤT CẢ</b> các bước cần làm để thu được muối ăn sạch.',
+        phuongAn: [{ t: 'Hoà tan hỗn hợp vào nước.', dung: true }, { t: 'Lọc để loại bỏ cát, lấy nước lọc.', dung: true }, { t: 'Cô cạn nước lọc để thu muối.', dung: true }, { t: 'Dùng nam châm hút cát.', phanHoi: 'Cát không bị nam châm hút.' }, { t: 'Chiết lấy lớp muối.', phanHoi: 'Chiết dùng cho hai chất lỏng không tan vào nhau.' }],
+        goiY: ['Chất nào tan trong nước, chất nào không?'], viSaoDung: 'Hoà tan → lọc → cô cạn.', loiGiai: 'Ba bước: <b>hoà tan → lọc → cô cạn</b>.', giangLai: 'Dùng sự khác nhau về tính tan: muối tan, cát không tan. Hoà tan để "tách đường đi" của hai chất, lọc giữ cát, cô cạn lấy lại muối.', tienBo: 'Em đã lập được quy trình nhiều bước.',
+        nguon: N6K('Bài 17 "Tách chất khỏi hỗn hợp" (SGV tr. 100)'), kiemTra: K6(),
+        tuongTu: { id: 'HH6C-05-TT', muc: 'nang-cao', liDoMuc: 'Như câu gốc.', loai: 'chonNhieu', de: 'Có hỗn hợp dầu ăn và nước. <b>Chọn TẤT CẢ</b> các bước phù hợp để tách riêng hai chất.', phuongAn: [{ t: 'Để yên cho hỗn hợp tách thành hai lớp.', dung: true }, { t: 'Dùng phễu chiết, mở khoá cho lớp nước bên dưới chảy ra trước.', dung: true }, { t: 'Lọc qua giấy lọc.', phanHoi: 'Cả hai đều là chất lỏng.' }, { t: 'Cô cạn hỗn hợp.', phanHoi: 'Mất nước.' }], goiY: ['Dầu nhẹ hơn, nổi lên trên.'], viSaoDung: 'Để lắng, chiết.', loiGiai: 'Ý 1, 2.', giangLai: 'Hai chất lỏng không tan → chiết.', nguon: N6K('Bài 17 (SGV tr. 100)'), kiemTra: K6() }
+      },
+      {
+        id: 'HH6C-06', muc: 'nang-cao', liDoMuc: 'Giải thích lựa chọn phương pháp bằng tính chất của chất; câu mở.', loai: 'mo',
+        de: 'Vì sao có thể dùng cách lọc để tách cát ra khỏi nước, nhưng <b>không</b> thể dùng cách lọc để lấy muối ra khỏi nước muối? Viết 2–4 câu.',
+        tieuChi: [
+          { t: 'Nêu cát không tan, bị giữ lại trên giấy lọc.', tuDong: { tuKhoa: ['khong tan', 'giu lai'] } },
+          { t: 'Nêu muối đã tan trong nước, đi qua giấy lọc.', tuDong: { tuKhoa: ['tan'] } },
+          { t: 'Nêu cách đúng để lấy muối: cô cạn / làm bay hơi nước.', tuDong: { tuKhoa: ['co can', 'bay hoi'] } },
+          { t: 'Viết 2–4 câu.', tuDong: { soCau: [2, 4] } }
+        ],
+        baiThamKhao: 'Cát không tan trong nước nên khi lọc, các hạt cát bị giữ lại trên giấy lọc. Muối đã tan trong nước, các hạt muối rất nhỏ đi qua giấy lọc cùng với nước. Vì vậy muốn lấy muối phải cô cạn để nước bay hơi.',
+        giupViet: 'Dàn ý: Cát … (không tan) → bị … Muối … (tan) → đi qua … Muốn lấy muối phải …',
+        goiY: ['So sánh tính tan của cát và muối.'], viSaoDung: '', loiGiai: 'Xem bài tham khảo.', giangLai: 'Giấy lọc giống cái lưới: giữ lại hạt to (cát), cho đi qua thứ đã tan hoàn toàn (muối).', tienBo: 'Em đã giải thích bằng tính tan.',
+        nguon: N6K('Bài 17 (SGV tr. 100)'), kiemTra: K6('Câu mở: kiểm tra sơ bộ theo từ khoá, học sinh tự đối chiếu tiêu chí.'),
+        tuongTu: { id: 'HH6C-06-TT', muc: 'nang-cao', liDoMuc: 'Như câu gốc.', loai: 'mo', de: 'Nước giếng có lẫn đất, cát. Người ta thường để lắng rồi lọc qua bể cát, sỏi. Giải thích vì sao làm như vậy. Viết 2–4 câu.', tieuChi: [{ t: 'Nêu đất cát không tan.', tuDong: { tuKhoa: ['khong tan'] } }, { t: 'Nêu để lắng: hạt nặng chìm xuống.', tuDong: { tuKhoa: ['lang', 'chim'] } }, { t: 'Nêu lọc giữ lại hạt nhỏ.', tuDong: { tuKhoa: ['loc', 'giu lai'] } }, { t: 'Viết 2–4 câu.', tuDong: { soCau: [2, 4] } }], baiThamKhao: 'Đất, cát không tan trong nước. Để lắng giúp các hạt nặng chìm xuống đáy. Lọc qua lớp cát, sỏi giữ lại các hạt nhỏ còn lơ lửng nên nước trong hơn.', giupViet: 'Không tan → lắng → lọc.', goiY: ['Hai bước.'], viSaoDung: '', loiGiai: 'Xem bài tham khảo.', giangLai: 'Lắng rồi lọc.', nguon: N6K('Bài 17 (SGV tr. 100)'), kiemTra: K6('Câu mở: kiểm tra sơ bộ theo từ khoá.') }
+      }
+    ]
+  };
+
+  const sh6TeBao = {
+    id: 'sh6-te-bao', lop: 6, mon: 'khtn', phanMon: 'Sinh học', ten: 'Tế bào – đơn vị cơ sở của sự sống',
+    sgk: 'SGV KHTN 6 — Chương V, Bài 18–21, SGV tr. 106–118', yccdGhiChu: YCCD6,
+    kienThucTruoc: ['Luỹ thừa của 2 (Toán 6)'],
+    yeuCauCanDat: ['Nêu được tế bào là đơn vị cấu trúc và chức năng của cơ thể sống.', 'Nêu được chức năng các thành phần chính: màng tế bào, tế bào chất, nhân.', 'Phân biệt tế bào nhân sơ, nhân thực; tế bào động vật, thực vật.', 'Nêu được sự lớn lên và sinh sản của tế bào; tính số tế bào sau các lần phân chia.'],
+    bai: {
+      mucTieu: ['nêu chức năng của màng, tế bào chất, nhân;', 'phân biệt tế bào thực vật và động vật;', 'tính số tế bào sau n lần phân chia;', 'vận dụng vào tình huống có thời gian.'],
+      khoiDong: { hoi: 'Một tế bào phân chia thành 2. Mỗi tế bào con lại phân chia tiếp. Sau 2 lần có bao nhiêu tế bào?', goiY: '1 → 2 → 4 tế bào.' },
+      trongTam: [
+        '<b>Tế bào</b> là đơn vị cấu trúc và chức năng của cơ thể sống.',
+        'Thành phần chính: <b>màng tế bào</b> (bao bọc, kiểm soát chất ra vào), <b>tế bào chất</b> (nơi diễn ra hầu hết hoạt động sống), <b>nhân</b> hoặc vùng nhân (điều khiển hoạt động sống).',
+        '<b>Tế bào nhân sơ</b> (vi khuẩn): chưa có màng nhân. <b>Tế bào nhân thực</b>: có nhân được bao bởi màng nhân.',
+        'Tế bào <b>thực vật</b> có thêm <b>thành tế bào</b> và <b>lục lạp</b> (quang hợp) mà tế bào động vật không có.',
+        'Tế bào lớn lên đến kích thước nhất định thì phân chia: 1 → 2 → 4 → 8… Sau <b>n</b> lần phân chia, từ 1 tế bào tạo ra <b>' + S('2', 'n') + '</b> tế bào.'
+      ],
+      viDu: { de: 'Từ 1 tế bào, sau 4 lần phân chia liên tiếp tạo ra bao nhiêu tế bào?', loiGiai: S('2', 4) + ' = <b>16</b> tế bào.' },
+      nguon: N6K('Chương V "Tế bào", Bài 18–21 (SGV tr. 106–118)'),
+      hoiDap: [
+        { tu: ['nhan', 'dieu khien'], tl: 'Nhân điều khiển mọi hoạt động sống của tế bào.' },
+        { tu: ['phan chia', 'sinh san'], tl: 'Sau n lần phân chia, 1 tế bào → 2ⁿ tế bào. Có a tế bào ban đầu → a · 2ⁿ.' },
+        { tu: ['luc lap', 'thanh te bao', 'thuc vat'], tl: 'Tế bào thực vật có thêm thành tế bào và lục lạp.' },
+        { tu: ['nhan so', 'nhan thuc'], tl: 'Nhân sơ: chưa có màng nhân (vi khuẩn). Nhân thực: có màng nhân.' }
+      ]
+    },
+    cauHoi: [
+      {
+        id: 'SH6A-01', muc: 'co-ban', liDoMuc: 'Nhớ chức năng của nhân tế bào.', loai: 'chon1', de: 'Thành phần nào của tế bào <b>điều khiển</b> mọi hoạt động sống của tế bào?',
+        phuongAn: [{ t: 'Nhân tế bào', dung: true }, { t: 'Màng tế bào', phanHoi: 'Màng bao bọc và kiểm soát chất ra vào.' }, { t: 'Tế bào chất', phanHoi: 'Tế bào chất là nơi diễn ra phần lớn hoạt động sống, nhưng không điều khiển.' }, { t: 'Thành tế bào', phanHoi: 'Thành tế bào (ở thực vật) giúp bảo vệ, tạo hình dạng.' }],
+        goiY: ['"Trung tâm chỉ huy" của tế bào.'], viSaoDung: 'Nhân điều khiển hoạt động sống.', loiGiai: '<b>Nhân tế bào</b>.', giangLai: 'So sánh với trường học: màng = cổng trường, tế bào chất = các lớp học, nhân = phòng hiệu trưởng.', tienBo: 'Em đã nhớ chức năng của nhân.',
+        nguon: N6K('Bài 19 "Cấu tạo và chức năng các thành phần của tế bào" (SGV tr. 108)'), kiemTra: K6(),
+        tuongTu: { id: 'SH6A-01-TT', muc: 'co-ban', liDoMuc: 'Như câu gốc.', loai: 'chon1', de: 'Thành phần nào <b>bao bọc</b> tế bào và kiểm soát các chất đi vào, đi ra?', phuongAn: [{ t: 'Màng tế bào', dung: true }, { t: 'Nhân', phanHoi: 'Điều khiển.' }, { t: 'Tế bào chất', phanHoi: 'Nơi diễn ra hoạt động sống.' }, { t: 'Lục lạp', phanHoi: 'Quang hợp.' }], goiY: ['"Cổng trường".'], viSaoDung: 'Màng tế bào.', loiGiai: '<b>Màng tế bào</b>.', giangLai: 'Màng = cổng.', nguon: N6K('Bài 19 (SGV tr. 108)'), kiemTra: K6() }
+      },
+      {
+        id: 'SH6A-02', muc: 'co-ban', liDoMuc: 'Nhận biết bào quan đặc trưng của tế bào thực vật.', loai: 'chon1', de: 'Thành phần nào có ở tế bào lá cây và giúp cây <b>quang hợp</b>?',
+        phuongAn: [{ t: 'Lục lạp', dung: true }, { t: 'Màng tế bào', phanHoi: 'Có ở mọi tế bào, không thực hiện quang hợp.' }, { t: 'Nhân', phanHoi: 'Điều khiển hoạt động sống.' }, { t: 'Tế bào chất', phanHoi: 'Chứa các bào quan; quang hợp diễn ra ở lục lạp.' }],
+        goiY: ['Chứa chất diệp lục màu xanh.'], viSaoDung: 'Lục lạp chứa diệp lục, thực hiện quang hợp.', loiGiai: '<b>Lục lạp</b>.', giangLai: '"Lục" nghĩa là màu xanh lục — lá xanh nhờ lục lạp.', tienBo: 'Em đã nhận ra lục lạp.',
+        nguon: N6K('Bài 19 (SGV tr. 108)'), kiemTra: K6(),
+        tuongTu: { id: 'SH6A-02-TT', muc: 'co-ban', liDoMuc: 'Như câu gốc.', loai: 'chon1', de: 'Tế bào vi khuẩn thuộc loại nào?', phuongAn: [{ t: 'Tế bào nhân sơ', dung: true }, { t: 'Tế bào nhân thực', phanHoi: 'Vi khuẩn chưa có màng nhân.' }, { t: 'Tế bào thực vật', phanHoi: 'Không phải.' }, { t: 'Tế bào động vật', phanHoi: 'Không phải.' }], goiY: ['Có màng nhân không?'], viSaoDung: 'Nhân sơ.', loiGiai: '<b>Tế bào nhân sơ</b>.', giangLai: 'Sơ = sơ khai, chưa có màng nhân.', nguon: N6K('Bài 19 (SGV tr. 108)'), kiemTra: K6() }
+      },
+      {
+        id: 'SH6A-03', muc: 'van-dung', liDoMuc: 'Áp dụng quy luật 1 → 2ⁿ.', loai: 'so', de: 'Từ 1 tế bào ban đầu, sau 3 lần phân chia liên tiếp tạo ra bao nhiêu tế bào?', dapAn: 8,
+        loi: [{ gt: 6, nhan: 'Lỗi quy luật', phanHoi: 'Không phải 2 · 3. Mỗi lần phân chia, số tế bào <b>gấp đôi</b>: 1 → 2 → 4 → 8.' }, { gt: 3, nhan: 'Nhầm số lần với số tế bào', phanHoi: '3 là số lần phân chia.' }, { gt: 9, nhan: 'Lỗi quy luật', phanHoi: 'Đó là 3². Số tế bào là 2³.' }],
+        buoc: { hoi: 'Sau lần phân chia thứ nhất có bao nhiêu tế bào?', dapAn: 2, dung: 'Đúng. Lần 2: 4. Lần 3: ?', sai: '1 tế bào chia đôi.' },
+        goiY: ['Mỗi lần: gấp đôi.'], viSaoDung: '2³ = 8.', loiGiai: '1 → 2 → 4 → <b>8</b> (= ' + S('2', 3) + ').', giangLai: 'Vẽ sơ đồ cây: mỗi tế bào tách thành hai nhánh. Đếm số "lá" ở tầng cuối.', tienBo: 'Em đã nắm quy luật gấp đôi.',
+        nguon: N6K('Bài 20 "Sự lớn lên và sinh sản của tế bào" (SGV tr. 112)'), kiemTra: K6(),
+        tuongTu: { id: 'SH6A-03-TT', muc: 'van-dung', liDoMuc: 'Như câu gốc.', loai: 'so', de: 'Từ 1 tế bào, sau 5 lần phân chia liên tiếp tạo ra bao nhiêu tế bào?', dapAn: 32, loi: [{ gt: 10, nhan: 'Lỗi quy luật', phanHoi: 'Gấp đôi mỗi lần.' }, { gt: 25, nhan: 'Lỗi quy luật', phanHoi: 'Đó là 5². Cần 2⁵.' }], buoc: { hoi: 'Sau 3 lần?', dapAn: 8, dung: 'Đúng.', sai: '2³.' }, goiY: ['2⁵.'], viSaoDung: '32.', loiGiai: '<b>32</b>.', giangLai: 'Sơ đồ cây.', nguon: N6K('Bài 20 (SGV tr. 112)'), kiemTra: K6() }
+      },
+      {
+        id: 'SH6A-04', muc: 'van-dung', liDoMuc: 'Mở rộng: nhiều tế bào ban đầu cùng phân chia.', loai: 'so', de: 'Có 4 tế bào cùng phân chia 3 lần liên tiếp. Tổng số tế bào tạo ra là bao nhiêu?', dapAn: 32,
+        loi: [{ gt: 8, nhan: 'Thiếu bước', phanHoi: '8 là số tế bào tạo ra từ <b>một</b> tế bào. Có 4 tế bào ban đầu.' }, { gt: 24, nhan: 'Lỗi quy luật', phanHoi: 'Không phải 4 · 2 · 3. Mỗi tế bào tạo ra 2³ = 8.' }, { gt: 12, nhan: 'Lỗi quy luật', phanHoi: 'Mỗi lần phân chia số tế bào gấp đôi, không cộng thêm.' }],
+        buoc: { hoi: 'Một tế bào sau 3 lần phân chia tạo ra bao nhiêu tế bào?', dapAn: 8, dung: 'Đúng. 4 tế bào → 4 · 8.', sai: '2³.' },
+        goiY: ['Mỗi tế bào tạo 2³ tế bào.'], viSaoDung: '4 · 8 = 32.', loiGiai: '4 · ' + S('2', 3) + ' = 4 · 8 = <b>32</b> tế bào.', giangLai: 'Tính cho một tế bào rồi nhân với số tế bào ban đầu.', tienBo: 'Em đã mở rộng quy luật cho nhiều tế bào.',
+        nguon: N6K('Bài 20 (SGV tr. 112)'), kiemTra: K6(),
+        tuongTu: { id: 'SH6A-04-TT', muc: 'van-dung', liDoMuc: 'Như câu gốc.', loai: 'so', de: 'Có 3 tế bào cùng phân chia 4 lần liên tiếp. Tổng số tế bào tạo ra là bao nhiêu?', dapAn: 48, loi: [{ gt: 16, nhan: 'Thiếu bước', phanHoi: 'Đó là từ một tế bào.' }, { gt: 24, nhan: 'Lỗi quy luật', phanHoi: 'Mỗi tế bào tạo 2⁴.' }], buoc: { hoi: 'Một tế bào sau 4 lần?', dapAn: 16, dung: 'Đúng.', sai: '2⁴.' }, goiY: ['3 · 16.'], viSaoDung: '48.', loiGiai: '<b>48</b>.', giangLai: 'Một tế bào rồi nhân.', nguon: N6K('Bài 20 (SGV tr. 112)'), kiemTra: K6() }
+      },
+      {
+        id: 'SH6A-05', muc: 'nang-cao', liDoMuc: 'So sánh hai loại tế bào, chọn đúng các điểm chung.', loai: 'chonNhieu', de: '<b>Chọn TẤT CẢ</b> các thành phần có ở <b>cả</b> tế bào động vật và tế bào thực vật.',
+        phuongAn: [{ t: 'Màng tế bào', dung: true }, { t: 'Tế bào chất', dung: true }, { t: 'Nhân', dung: true }, { t: 'Thành tế bào', phanHoi: 'Chỉ tế bào thực vật có thành tế bào.' }, { t: 'Lục lạp', phanHoi: 'Chỉ tế bào thực vật (ở phần xanh của cây) có lục lạp.' }],
+        goiY: ['Ba thành phần chính của mọi tế bào nhân thực.'], viSaoDung: 'Màng, tế bào chất, nhân là thành phần chung.', loiGiai: 'Ý 1, 2, 3.', giangLai: 'Lập bảng hai cột "động vật | thực vật". Thực vật = động vật + thành tế bào + lục lạp.', tienBo: 'Em đã so sánh hai loại tế bào.',
+        nguon: N6K('Bài 19 (SGV tr. 108); Bài 21 "Thực hành: Quan sát và phân biệt một số loại tế bào" (SGV tr. 116)'), kiemTra: K6(),
+        tuongTu: { id: 'SH6A-05-TT', muc: 'nang-cao', liDoMuc: 'Như câu gốc, điểm khác.', loai: 'chonNhieu', de: '<b>Chọn TẤT CẢ</b> các thành phần <b>chỉ có ở tế bào thực vật</b>, không có ở tế bào động vật.', phuongAn: [{ t: 'Thành tế bào', dung: true }, { t: 'Lục lạp', dung: true }, { t: 'Màng tế bào', phanHoi: 'Có ở cả hai.' }, { t: 'Nhân', phanHoi: 'Có ở cả hai.' }], goiY: ['Thực vật = động vật + …'], viSaoDung: 'Ý 1, 2.', loiGiai: 'Ý 1, 2.', giangLai: 'Thành tế bào, lục lạp.', nguon: N6K('Bài 19, 21 (SGV tr. 108–116)'), kiemTra: K6() }
+      },
+      {
+        id: 'SH6A-06', muc: 'nang-cao', liDoMuc: 'Nhiều bước: đổi thời gian ra số lần phân chia rồi tính 2ⁿ.', loai: 'so',
+        de: 'Giả sử một loại vi khuẩn cứ 20 phút phân chia một lần. Từ 1 vi khuẩn, sau 2 giờ sẽ có bao nhiêu vi khuẩn?', dapAn: 64, soLieu: GIA_DINH,
+        loi: [{ gt: 12, nhan: 'Lỗi quy luật', phanHoi: 'Không phải 2 · 6. Số vi khuẩn gấp đôi sau mỗi lần: 2⁶.' }, { gt: 6, nhan: 'Nhầm số lần với số tế bào', phanHoi: '6 là số lần phân chia.' }, { gt: 32, nhan: 'Lỗi đếm số lần', phanHoi: '2 giờ = 120 phút = 6 lần 20 phút, không phải 5.' }],
+        buoc: { hoi: 'Trong 2 giờ, vi khuẩn phân chia bao nhiêu lần?', dapAn: 6, dung: 'Đúng: 120 : 20 = 6. Số vi khuẩn: 2⁶.', sai: 'Đổi 2 giờ = 120 phút rồi chia 20.' },
+        goiY: ['Đổi 2 giờ ra phút.', 'Số lần = thời gian : 20 phút.'], viSaoDung: '6 lần → 2⁶ = 64.', loiGiai: '2 giờ = 120 phút → 120 : 20 = 6 lần. Số vi khuẩn: ' + S('2', 6) + ' = <b>64</b>.',
+        giangLai: 'Tách bài thành hai câu hỏi nhỏ: (1) Phân chia mấy lần? (2) Sau ngần ấy lần có bao nhiêu tế bào?', tienBo: 'Em đã đổi đơn vị thời gian và tính đúng.',
+        nguon: N6K('Bài 20 (SGV tr. 112)'), kiemTra: K6(),
+        tuongTu: { id: 'SH6A-06-TT', muc: 'nang-cao', liDoMuc: 'Như câu gốc.', loai: 'so', de: 'Giả sử một loại vi khuẩn cứ 30 phút phân chia một lần. Từ 1 vi khuẩn, sau 2 giờ 30 phút có bao nhiêu vi khuẩn?', dapAn: 32, soLieu: GIA_DINH, loi: [{ gt: 10, nhan: 'Lỗi quy luật', phanHoi: 'Gấp đôi mỗi lần.' }, { gt: 5, nhan: 'Nhầm số lần với số tế bào', phanHoi: 'Đó là số lần.' }, { gt: 16, nhan: 'Lỗi đếm số lần', phanHoi: '150 : 30 = 5 lần.' }], buoc: { hoi: 'Số lần phân chia?', dapAn: 5, dung: 'Đúng.', sai: '150 : 30.' }, goiY: ['2 giờ 30 phút = 150 phút.'], viSaoDung: '2⁵.', loiGiai: '<b>32</b>.', giangLai: 'Hai câu hỏi nhỏ.', nguon: N6K('Bài 20 (SGV tr. 112)'), kiemTra: K6() }
+      }
+    ]
+  };
+
+  const sh6DaDang = {
+    id: 'sh6-da-dang-song', lop: 6, mon: 'khtn', phanMon: 'Sinh học', ten: 'Đa dạng thế giới sống',
+    sgk: 'SGV KHTN 6 — Chương VII, Bài 25–39, SGV tr. 129–177', yccdGhiChu: YCCD6,
+    kienThucTruoc: ['Tế bào nhân sơ, nhân thực (Chương V)'],
+    yeuCauCanDat: ['Nêu được các bậc phân loại sinh vật từ thấp đến cao.', 'Sử dụng được khoá lưỡng phân đơn giản.', 'Nhận biết virus, vi khuẩn, nguyên sinh vật, nấm, thực vật, động vật; nêu vai trò và tác hại.', 'Phân biệt các nhóm thực vật và các nhóm động vật (không xương sống, có xương sống).'],
+    bai: {
+      mucTieu: ['sắp xếp bậc phân loại;', 'dùng khoá lưỡng phân;', 'phân biệt động vật có xương sống và không xương sống;', 'nêu lợi ích, tác hại của vi sinh vật.'],
+      khoiDong: { hoi: 'Con cá, con ếch, con rắn, con chim, con mèo có điểm gì chung?', goiY: 'Đều có xương sống.' },
+      trongTam: [
+        'Các <b>bậc phân loại</b> từ thấp đến cao: <b>Loài → Chi (giống) → Họ → Bộ → Lớp → Ngành → Giới</b>.',
+        '<b>Khoá lưỡng phân</b>: mỗi bước chia các sinh vật thành 2 nhóm theo một đặc điểm đối lập, đến khi tách được từng sinh vật.',
+        '<b>Virus</b> chưa có cấu tạo tế bào. <b>Vi khuẩn</b>: tế bào nhân sơ. <b>Nấm</b>, nguyên sinh vật, thực vật, động vật: tế bào nhân thực.',
+        '<b>Thực vật</b>: Rêu (chưa có mạch dẫn) → Dương xỉ (có mạch, sinh sản bằng bào tử) → Hạt trần (có hạt, không có quả) → Hạt kín (có hoa, hạt nằm trong quả).',
+        '<b>Động vật không xương sống</b>: ruột khoang, giun, thân mềm, chân khớp… <b>Có xương sống</b>: cá, lưỡng cư, bò sát, chim, thú.',
+        'Vi khuẩn, nấm có <b>lợi</b> (làm sữa chua, muối dưa, phân giải xác sinh vật, làm men bánh mì) và có <b>hại</b> (gây bệnh, làm hỏng thức ăn).'
+      ],
+      viDu: { de: 'Dùng khoá: 1a có lông vũ → Chim; 1b không có lông vũ → bước 2. 2a có lông mao → Thú; 2b không có lông mao → khác. Con mèo thuộc nhóm nào?', loiGiai: 'Mèo không có lông vũ (1b) → có lông mao (2a) → <b>Thú</b>.' },
+      nguon: N6K('Chương VII "Đa dạng thế giới sống", Bài 25–39 (SGV tr. 129–177)'),
+      hoiDap: [
+        { tu: ['bac phan loai'], tl: 'Loài → Chi → Họ → Bộ → Lớp → Ngành → Giới (từ thấp đến cao).' },
+        { tu: ['khoa luong phan'], tl: 'Đi từng bước, mỗi bước chọn một trong hai đặc điểm đối lập.' },
+        { tu: ['virus'], tl: 'Virus chưa có cấu tạo tế bào, chỉ sống ký sinh trong tế bào sinh vật khác.' },
+        { tu: ['xuong song'], tl: 'Có xương sống: cá, lưỡng cư, bò sát, chim, thú.' }
+      ]
+    },
+    cauHoi: [
+      {
+        id: 'SH6B-01', muc: 'co-ban', liDoMuc: 'Nhận biết virus chưa có cấu tạo tế bào.', loai: 'chon1', de: 'Sinh vật nào sau đây <b>chưa có cấu tạo tế bào</b>?',
+        phuongAn: [{ t: 'Virus', dung: true }, { t: 'Vi khuẩn', phanHoi: 'Vi khuẩn có cấu tạo tế bào nhân sơ.' }, { t: 'Nấm men', phanHoi: 'Nấm men là tế bào nhân thực.' }, { t: 'Trùng roi', phanHoi: 'Trùng roi là nguyên sinh vật, có tế bào.' }],
+        goiY: ['Nhóm nào phải sống nhờ trong tế bào khác?'], viSaoDung: 'Virus chưa có cấu tạo tế bào.', loiGiai: '<b>Virus</b>.', giangLai: 'Virus giống "một gói chỉ dẫn" — phải chui vào tế bào sinh vật khác mới nhân lên được.', tienBo: 'Em đã nhận biết virus.',
+        nguon: N6K('Bài 29 "Virus" (SGV tr. 142)'), kiemTra: K6(),
+        tuongTu: { id: 'SH6B-01-TT', muc: 'co-ban', liDoMuc: 'Như câu gốc.', loai: 'chon1', de: 'Vi khuẩn có tế bào thuộc loại nào?', phuongAn: [{ t: 'Nhân sơ', dung: true }, { t: 'Nhân thực', phanHoi: 'Chưa có màng nhân.' }, { t: 'Chưa có tế bào', phanHoi: 'Đó là virus.' }, { t: 'Tế bào thực vật', phanHoi: 'Không phải.' }], goiY: ['Màng nhân?'], viSaoDung: 'Nhân sơ.', loiGiai: '<b>Nhân sơ</b>.', giangLai: 'Sơ = sơ khai.', nguon: N6K('Bài 27 "Vi khuẩn" (SGV tr. 134)'), kiemTra: K6() }
+      },
+      {
+        id: 'SH6B-02', muc: 'co-ban', liDoMuc: 'Phân loại động vật có xương sống.', loai: 'chonNhieu', de: '<b>Chọn TẤT CẢ</b> các động vật <b>có xương sống</b>.',
+        phuongAn: [{ t: 'Cá chép', dung: true }, { t: 'Ếch đồng', dung: true }, { t: 'Chim bồ câu', dung: true }, { t: 'Giun đất', phanHoi: 'Giun không có xương sống.' }, { t: 'Tôm', phanHoi: 'Tôm có vỏ cứng bên ngoài (chân khớp), không có xương sống.' }],
+        goiY: ['Năm nhóm: cá, lưỡng cư, bò sát, chim, thú.'], viSaoDung: 'Cá chép (cá), ếch (lưỡng cư), bồ câu (chim).', loiGiai: 'Ý 1, 2, 3.', giangLai: 'Vỏ cứng bên ngoài (tôm, cua) không phải xương sống — xương sống nằm bên trong cơ thể.', tienBo: 'Em đã phân loại đúng.',
+        nguon: N6K('Bài 36 "Động vật" (SGV tr. 164)'), kiemTra: K6(),
+        tuongTu: { id: 'SH6B-02-TT', muc: 'co-ban', liDoMuc: 'Như câu gốc.', loai: 'chonNhieu', de: '<b>Chọn TẤT CẢ</b> các động vật <b>không xương sống</b>.', phuongAn: [{ t: 'Giun đất', dung: true }, { t: 'Ốc sên', dung: true }, { t: 'Châu chấu', dung: true }, { t: 'Rắn', phanHoi: 'Bò sát, có xương sống.' }, { t: 'Cá rô', phanHoi: 'Có xương sống.' }], goiY: ['Năm nhóm có xương sống.'], viSaoDung: 'Ý 1, 2, 3.', loiGiai: 'Ý 1, 2, 3.', giangLai: 'Vỏ ngoài không phải xương sống.', nguon: N6K('Bài 36 (SGV tr. 164)'), kiemTra: K6() }
+      },
+      {
+        id: 'SH6B-03', muc: 'van-dung', liDoMuc: 'Sắp xếp đúng toàn bộ thứ tự bậc phân loại.', loai: 'chon1', de: 'Thứ tự các bậc phân loại <b>từ thấp đến cao</b> là:',
+        phuongAn: [{ t: 'Loài → Chi → Họ → Bộ → Lớp → Ngành → Giới', dung: true }, { t: 'Giới → Ngành → Lớp → Bộ → Họ → Chi → Loài', phanHoi: 'Đó là từ cao đến thấp.' }, { t: 'Loài → Họ → Chi → Bộ → Lớp → Ngành → Giới', phanHoi: 'Chi phải đứng ngay sau Loài.' }, { t: 'Loài → Chi → Họ → Lớp → Bộ → Ngành → Giới', phanHoi: 'Bộ đứng trước Lớp.' }],
+        goiY: ['Bậc thấp nhất là Loài, cao nhất là Giới.'], viSaoDung: 'Loài – Chi – Họ – Bộ – Lớp – Ngành – Giới.', loiGiai: '<b>Loài → Chi → Họ → Bộ → Lớp → Ngành → Giới</b>.', giangLai: 'Câu nhớ tự đặt: "<b>L</b>àm <b>C</b>on <b>H</b>ọc <b>B</b>ài <b>L</b>ớp <b>N</b>ăm <b>G</b>iỏi" (Loài, Chi, Họ, Bộ, Lớp, Ngành, Giới).', tienBo: 'Em đã nhớ đúng thứ tự bậc phân loại.',
+        nguon: N6K('Bài 25 "Hệ thống phân loại sinh vật" (SGV tr. 129)'), kiemTra: K6(),
+        tuongTu: { id: 'SH6B-03-TT', muc: 'van-dung', liDoMuc: 'Như câu gốc.', loai: 'chon1', de: 'Bậc phân loại nào nằm <b>ngay trên</b> bậc Họ?', phuongAn: [{ t: 'Bộ', dung: true }, { t: 'Chi', phanHoi: 'Chi ở dưới Họ.' }, { t: 'Lớp', phanHoi: 'Lớp ở trên Bộ.' }, { t: 'Loài', phanHoi: 'Thấp nhất.' }], goiY: ['Loài → Chi → Họ → ?'], viSaoDung: 'Bộ.', loiGiai: '<b>Bộ</b>.', giangLai: 'Câu nhớ.', nguon: N6K('Bài 25 (SGV tr. 129)'), kiemTra: K6() }
+      },
+      {
+        id: 'SH6B-04', muc: 'van-dung', liDoMuc: 'Nhận biết nhóm thực vật từ nhiều đặc điểm.', loai: 'chon1', de: 'Nhóm thực vật nào <b>có hoa</b> và <b>hạt nằm trong quả</b>?',
+        phuongAn: [{ t: 'Hạt kín', dung: true }, { t: 'Hạt trần', phanHoi: 'Hạt trần có hạt nhưng hạt nằm lộ trên lá noãn, chưa có quả.' }, { t: 'Dương xỉ', phanHoi: 'Dương xỉ sinh sản bằng bào tử, không có hạt.' }, { t: 'Rêu', phanHoi: 'Rêu chưa có mạch dẫn, không có hạt.' }],
+        goiY: ['"Kín" nghĩa là hạt được bọc kín.'], viSaoDung: 'Hạt kín: có hoa, quả bọc hạt.', loiGiai: '<b>Hạt kín</b>.', giangLai: 'Quả cam, quả bưởi: hạt nằm kín bên trong → hạt kín. Cây thông: hạt lộ trên nón → hạt trần.', tienBo: 'Em đã phân biệt hạt kín và hạt trần.',
+        nguon: N6K('Bài 34 "Thực vật" (SGV tr. 157)'), kiemTra: K6(),
+        tuongTu: { id: 'SH6B-04-TT', muc: 'van-dung', liDoMuc: 'Như câu gốc.', loai: 'chon1', de: 'Nhóm thực vật nào <b>chưa có mạch dẫn</b>?', phuongAn: [{ t: 'Rêu', dung: true }, { t: 'Dương xỉ', phanHoi: 'Có mạch dẫn.' }, { t: 'Hạt trần', phanHoi: 'Có mạch dẫn.' }, { t: 'Hạt kín', phanHoi: 'Có mạch dẫn.' }], goiY: ['Nhóm đơn giản nhất.'], viSaoDung: 'Rêu.', loiGiai: '<b>Rêu</b>.', giangLai: 'Rêu nhỏ, sống nơi ẩm vì chưa có mạch dẫn nước.', nguon: N6K('Bài 34 (SGV tr. 157)'), kiemTra: K6() }
+      },
+      {
+        id: 'SH6B-05', muc: 'nang-cao', liDoMuc: 'Dùng khoá lưỡng phân nhiều bước để xác định nhóm.', loai: 'chon1',
+        de: 'Cho khoá lưỡng phân:<br>1a. Có lông vũ → <b>Chim</b>. 1b. Không có lông vũ → đến 2.<br>2a. Có lông mao, đẻ con → <b>Thú</b>. 2b. Không có lông mao → đến 3.<br>3a. Da trần, luôn ẩm ướt → <b>Lưỡng cư</b>. 3b. Da khô, có vảy sừng → <b>Bò sát</b>.<br>Một con vật không có lông vũ, không có lông mao, da khô phủ vảy sừng. Nó thuộc nhóm nào?',
+        phuongAn: [{ t: 'Bò sát', dung: true }, { t: 'Lưỡng cư', phanHoi: 'Lưỡng cư có da trần, ẩm ướt (bước 3a).' }, { t: 'Thú', phanHoi: 'Con vật không có lông mao (đi theo 2b).' }, { t: 'Chim', phanHoi: 'Con vật không có lông vũ (đi theo 1b).' }],
+        goiY: ['Đi lần lượt: 1 → 2 → 3.'], viSaoDung: '1b → 2b → 3b: Bò sát.', loiGiai: '1b → 2b → 3b → <b>Bò sát</b>.', giangLai: 'Lấy bút chỉ vào từng bước, đọc cả "a" và "b", chọn dòng đúng với con vật rồi đi tiếp theo mũi tên.', tienBo: 'Em đã dùng được khoá lưỡng phân.',
+        nguon: N6K('Bài 26 "Khoá lưỡng phân" (SGV tr. 132)'), kiemTra: K6(),
+        tuongTu: { id: 'SH6B-05-TT', muc: 'nang-cao', liDoMuc: 'Như câu gốc.', loai: 'chon1', de: 'Dùng khoá ở câu trước (1a Lông vũ → Chim; 2a Lông mao, đẻ con → Thú; 3a Da trần ẩm → Lưỡng cư; 3b Da khô, vảy sừng → Bò sát). Một con vật không có lông vũ, có lông mao và đẻ con. Nó thuộc nhóm nào?', phuongAn: [{ t: 'Thú', dung: true }, { t: 'Chim', phanHoi: 'Không có lông vũ.' }, { t: 'Bò sát', phanHoi: 'Có lông mao → dừng ở 2a.' }, { t: 'Lưỡng cư', phanHoi: 'Có lông mao.' }], goiY: ['1b → 2a.'], viSaoDung: 'Thú.', loiGiai: '<b>Thú</b>.', giangLai: 'Đi từng bước.', nguon: N6K('Bài 26 (SGV tr. 132)'), kiemTra: K6() }
+      },
+      {
+        id: 'SH6B-06', muc: 'nang-cao', liDoMuc: 'Tự nêu ví dụ lợi ích và tác hại của vi khuẩn; câu mở.', loai: 'mo',
+        de: 'Hãy nêu <b>hai</b> vai trò có lợi và <b>một</b> tác hại của vi khuẩn đối với đời sống con người. Viết 2–5 câu.',
+        tieuChi: [
+          { t: 'Nêu được ít nhất một ví dụ có lợi trong chế biến thực phẩm (sữa chua, muối dưa, làm tương…).', tuDong: { tuKhoa: ['sua chua', 'muoi dua', 'dua muoi', 'tuong', 'nuoc mam', 'che bien'] } },
+          { t: 'Nêu được thêm một vai trò có lợi khác (phân giải xác sinh vật, làm phân bón…).', tuDong: { tuKhoa: ['phan giai', 'phan bon', 'xac dong vat', 'xac thuc vat', 'xac sinh vat'] } },
+          { t: 'Nêu được một tác hại (gây bệnh, làm hỏng thức ăn).', tuDong: { tuKhoa: ['benh', 'lam hong', 'bi hong', 'hu hong', 'thiu'] } },
+          { t: 'Viết 2–5 câu.', tuDong: { soCau: [2, 5] } }
+        ],
+        baiThamKhao: 'Vi khuẩn được dùng để làm sữa chua và muối dưa cải. Vi khuẩn trong đất phân giải xác động vật, thực vật thành chất dinh dưỡng cho cây. Tuy nhiên, một số vi khuẩn gây bệnh cho người như bệnh tiêu chảy, và làm thức ăn bị hỏng, ôi thiu.',
+        giupViet: 'Dàn ý: (1) Trong chế biến thực phẩm, vi khuẩn giúp … (2) Trong tự nhiên, vi khuẩn … (3) Tác hại: một số vi khuẩn …',
+        goiY: ['Nghĩ đến món ăn lên men trong nhà em.', 'Vì sao thức ăn để lâu bị ôi thiu?'], viSaoDung: '', loiGiai: 'Xem bài tham khảo.', giangLai: 'Ghi hai cột "Có lợi | Có hại" rồi nghĩ ví dụ ở bếp nhà mình: sữa chua, dưa muối (lợi); cơm thiu (hại).', tienBo: 'Em đã nêu được cả lợi và hại của vi khuẩn.',
+        nguon: N6K('Bài 27 "Vi khuẩn" (SGV tr. 134); Bài 28 "Thực hành: Làm sữa chua và quan sát vi khuẩn" (SGV tr. 139)'), kiemTra: K6('Câu mở: kiểm tra sơ bộ theo từ khoá, học sinh tự đối chiếu tiêu chí.'),
+        tuongTu: { id: 'SH6B-06-TT', muc: 'nang-cao', liDoMuc: 'Như câu gốc, về nấm.', loai: 'mo', de: 'Hãy nêu <b>hai</b> vai trò có lợi và <b>một</b> tác hại của nấm. Viết 2–5 câu.', tieuChi: [{ t: 'Nêu nấm làm thức ăn (nấm rơm, nấm hương…).', tuDong: { tuKhoa: ['thuc an', 'nam rom', 'nam huong', 'nam kim cham', 'mon an'] } }, { t: 'Nêu vai trò khác (men làm bánh mì, phân giải…).', tuDong: { tuKhoa: ['banh mi', 'men', 'phan giai', 'thuoc'] } }, { t: 'Nêu tác hại (gây bệnh, nấm độc, làm mốc đồ ăn).', tuDong: { tuKhoa: ['benh', 'doc', 'moc', 'lam hong', 'bi hong', 'hu hong'] } }, { t: 'Viết 2–5 câu.', tuDong: { soCau: [2, 5] } }], baiThamKhao: 'Nhiều loại nấm như nấm rơm, nấm hương được dùng làm thức ăn. Nấm men được dùng để làm bánh mì. Tuy nhiên, có loại nấm độc gây ngộ độc nếu ăn phải, và nấm mốc làm hỏng thức ăn.', giupViet: 'Lợi: thức ăn, bánh mì. Hại: nấm độc, mốc.', goiY: ['Món nấm em từng ăn.'], viSaoDung: '', loiGiai: 'Xem bài tham khảo.', giangLai: 'Hai cột lợi | hại.', nguon: N6K('Bài 32 "Nấm" (SGV tr. 152)'), kiemTra: K6('Câu mở: kiểm tra sơ bộ theo từ khoá.') }
+      }
+    ]
+  };
+
+  /* ---------------- TIẾNG ANH 6 ---------------- */
+  const ta6Thi = {
+    id: 'ta6-hien-tai', lop: 6, mon: 'anh', phanMon: 'Ngữ pháp', ten: 'Thì hiện tại đơn và hiện tại tiếp diễn',
+    sgk: 'SGV Tiếng Anh 6 — Unit 1 (present simple, adverbs of frequency); Unit 3 (present continuous)', yccdGhiChu: 'Đã đối chiếu với phần Objectives của Unit 1 và Unit 3 trong SGV Tiếng Anh 6.',
+    kienThucTruoc: ['Động từ to be: am / is / are', 'Đại từ nhân xưng I, you, he, she, it, we, they'],
+    yeuCauCanDat: ['Dùng thì hiện tại đơn để nói thói quen, lịch học; dùng đúng trạng từ tần suất.', 'Dùng thì hiện tại tiếp diễn để nói việc đang xảy ra lúc nói.', 'Nhận ra dấu hiệu của từng thì và tự sửa lỗi chia động từ.', 'Viết đoạn văn ngắn kết hợp hai thì.'],
+    bai: {
+      mucTieu: ['chia động từ hiện tại đơn với he / she / it;', 'đặt trạng từ tần suất đúng vị trí;', 'chọn thì theo dấu hiệu (every day / now, Look!);', 'tìm và sửa lỗi dùng sai thì.'],
+      khoiDong: { hoi: 'What do you usually do after school? What are you doing now?', goiY: 'Ví dụ: "I usually play badminton after school. Now I am learning English."' },
+      trongTam: [
+        '<b>Hiện tại đơn</b> (thói quen, lịch cố định): I / You / We / They + <b>V</b>; He / She / It + <b>V-s/es</b>. Dấu hiệu: every day, on Mondays, after school, always, usually…',
+        '<b>Trạng từ tần suất</b> (always, usually, often, sometimes, rarely, never) đứng <b>trước động từ thường</b> nhưng <b>sau động từ to be</b>: She <u>often</u> walks… / He is <u>never</u> late.',
+        '<b>Hiện tại tiếp diễn</b> (đang xảy ra lúc nói): S + <b>am / is / are + V-ing</b>. Dấu hiệu: now, right now, at the moment, Look!, Listen!',
+        'Phủ định: don\'t / doesn\'t + V (đơn) — am not / isn\'t / aren\'t + V-ing (tiếp diễn).',
+        'Một số động từ chỉ trạng thái (have khi nói "sở hữu", like, know…) thường <b>không</b> dùng ở thì tiếp diễn: She <u>has</u> long hair (không viết "is having").'
+      ],
+      viDu: { de: 'Viết 2 câu về Nam: thói quen sáng nào cũng chạy bộ; lúc này đang ăn sáng.', loiGiai: 'Nam <b>runs</b> every morning. Right now he <b>is having</b> breakfast.' },
+      nguon: N6A('Unit 1 "My New School" — Objectives: use the present simple, use the adverbs of frequency; Unit 3 — Objectives: use the present continuous to talk about things happening now'),
+      hoiDap: [
+        { tu: ['hien tai don', 'present simple', 'them s'], tl: 'He/She/It + V-s/es (watches, goes, studies). Thói quen: every day, usually…' },
+        { tu: ['tiep dien', 'continuous', 'v-ing', 'ving'], tl: 'am/is/are + V-ing cho việc đang xảy ra: now, at the moment, Look!' },
+        { tu: ['trang tu', 'always', 'usually', 'never', 'vi tri'], tl: 'Trạng từ tần suất đứng trước động từ thường, sau to be.' }
+      ]
+    },
+    cauHoi: [
+      {
+        id: 'TA6A-01', muc: 'co-ban', liDoMuc: 'Chọn thì theo dấu hiệu "Look!".', loai: 'chon1', de: 'Choose the correct answer: <i>Look! The children ______ football in the schoolyard.</i>',
+        phuongAn: [{ t: 'are playing', dung: true }, { t: 'play', phanHoi: '"Look!" cho biết việc đang xảy ra → thì hiện tại tiếp diễn.' }, { t: 'plays', phanHoi: '"The children" là số nhiều, và cần thì tiếp diễn.' }, { t: 'is playing', phanHoi: '"The children" số nhiều → are, không dùng is.' }],
+        goiY: ['"Look!" → việc đang diễn ra.', '"The children" số ít hay số nhiều?'], viSaoDung: 'Look! → tiếp diễn; children số nhiều → are playing.', loiGiai: 'Look! The children <b>are playing</b> football.', giangLai: '"Look!", "Listen!" giống như em đang chỉ tay vào cảnh trước mắt → việc đang xảy ra → am/is/are + V-ing.', tienBo: 'Em đã nhận ra dấu hiệu thì tiếp diễn.',
+        nguon: N6A('Unit 3 — Objectives: use the present continuous'), kiemTra: K6(),
+        tuongTu: { id: 'TA6A-01-TT', muc: 'co-ban', liDoMuc: 'Như câu gốc.', loai: 'chon1', de: 'Choose the correct answer: <i>Listen! My sister ______ the piano.</i>', phuongAn: [{ t: 'is playing', dung: true }, { t: 'plays', phanHoi: 'Listen! → đang xảy ra.' }, { t: 'are playing', phanHoi: 'My sister = she → is.' }, { t: 'play', phanHoi: 'Cần thì tiếp diễn.' }], goiY: ['Listen!'], viSaoDung: 'is playing.', loiGiai: 'My sister <b>is playing</b> the piano.', giangLai: 'Listen! → đang xảy ra.', nguon: N6A('Unit 3 — Objectives'), kiemTra: K6() }
+      },
+      {
+        id: 'TA6A-02', muc: 'co-ban', liDoMuc: 'Chia động từ hiện tại đơn với ngôi thứ ba số ít, quy tắc -es.', loai: 'chu',
+        de: 'Write the correct form of the verb: <i>Nick ______ (go) to school by bike every day.</i> <span class="note">Chỉ gõ động từ đã chia.</span>',
+        chapNhan: ['goes'],
+        loi: [{ mau: '^gos$', danhDau: 'gos', nhan: 'Lỗi chính tả -es', phanHoi: '"go" kết thúc bằng <b>o</b> → thêm <b>-es</b>: goes.' }, { mau: '^go$', danhDau: 'go', nhan: 'Lỗi chia động từ', phanHoi: '"Nick" = he. Động từ cần thay đổi thế nào?' }, { mau: 'going', danhDau: '*', nhan: 'Sai thì', phanHoi: '"every day" là thói quen → hiện tại đơn.' }],
+        goiY: ['Nick = he.', '"go" kết thúc bằng "o".'], viSaoDung: 'he + goes.', loiGiai: 'Nick <b>goes</b> to school by bike every day.', giangLai: 'Đuôi o, s, sh, ch, x → thêm es: goes, does, watches, fixes.', tienBo: 'Em đã nhớ quy tắc -es.',
+        nguon: N6A('Unit 1 — Objectives: use the present simple'), kiemTra: K6(),
+        tuongTu: { id: 'TA6A-02-TT', muc: 'co-ban', liDoMuc: 'Như câu gốc.', loai: 'chu', de: 'Write the correct form of the verb: <i>My mum ______ (watch) the news every evening.</i> <span class="note">Chỉ gõ động từ đã chia.</span>', chapNhan: ['watches'], loi: [{ mau: '^watchs$', danhDau: 'watchs', nhan: 'Lỗi chính tả -es', phanHoi: 'ch → es.' }, { mau: '^watch$', danhDau: 'watch', nhan: 'Lỗi chia động từ', phanHoi: 'My mum = she.' }, { mau: 'watching', danhDau: '*', nhan: 'Sai thì', phanHoi: 'every evening → hiện tại đơn.' }], goiY: ['ch → es.'], viSaoDung: 'watches.', loiGiai: '<b>watches</b>.', giangLai: 'ch → es.', nguon: N6A('Unit 1 — Objectives'), kiemTra: K6() }
+      },
+      {
+        id: 'TA6A-03', muc: 'van-dung', liDoMuc: 'Tự tìm lỗi dùng sai thì và viết lại cả câu.', loai: 'chu',
+        de: 'Find and correct the mistake. Rewrite the sentence: <i>We are having English on Mondays and Wednesdays.</i>',
+        chapNhan: ['we have english on mondays and wednesdays', 'have'],
+        loi: [{ mau: '\\bare having\\b|\\bhaving\\b', danhDau: ['are', 'having'], nhan: 'Sai thì', phanHoi: '"on Mondays and Wednesdays" là lịch học lặp lại → thì <b>hiện tại đơn</b>.' }, { mau: '\\bwe has\\b|^has$', danhDau: 'has', nhan: 'Lỗi chia động từ', phanHoi: '"We" dùng "have", không dùng "has".' }],
+        goiY: ['Đây là thói quen hay việc đang xảy ra?'], viSaoDung: 'Lịch cố định → hiện tại đơn: We have…', loiGiai: 'We <b>have</b> English on Mondays and Wednesdays.', giangLai: 'Thời khoá biểu lặp lại mỗi tuần → hiện tại đơn. "Now" mới cần tiếp diễn.', tienBo: 'Em đã tìm ra lỗi dùng sai thì.',
+        nguon: N6A('Unit 1 — Objectives: use the present simple'), kiemTra: K6('Nhóm biên soạn kiểm tra các cách viết đúng (cả câu hoặc chỉ từ đã sửa); chạy kiểm thử tự động ngày ' + NGAY_SOAN + '.'),
+        tuongTu: { id: 'TA6A-03-TT', muc: 'van-dung', liDoMuc: 'Như câu gốc.', loai: 'chu', de: 'Find and correct the mistake. Rewrite the sentence: <i>She is usually walking to school.</i>', chapNhan: ['she usually walks to school', 'usually walks', 'walks'], loi: [{ mau: '\\bis\\b.*walking|walking', danhDau: ['is', 'walking'], nhan: 'Sai thì', phanHoi: '"usually" → thói quen → hiện tại đơn.' }, { mau: '\\busually walk\\b|^walk$', danhDau: 'walk', nhan: 'Lỗi chia động từ', phanHoi: 'She → walks.' }], goiY: ['usually → thói quen.'], viSaoDung: 'She usually walks…', loiGiai: 'She usually <b>walks</b> to school.', giangLai: 'usually = thói quen.', nguon: N6A('Unit 1 — Objectives'), kiemTra: K6() }
+      },
+      {
+        id: 'TA6A-04', muc: 'van-dung', liDoMuc: 'Đặt trạng từ tần suất đúng vị trí với động từ to be.', loai: 'chu',
+        de: 'Rewrite the sentence with the adverb in brackets: <i>Mai is late for school. (never)</i>',
+        chapNhan: ['mai is never late for school'],
+        loi: [{ mau: '^mai never is\\b', danhDau: 'never', nhan: 'Sai vị trí trạng từ', phanHoi: 'Với động từ <b>to be</b>, trạng từ tần suất đứng <b>sau</b> to be: is never.' }, { mau: '\\bnever\\b.*\\bnot\\b|\\bisn\'t never\\b|\\bis not never\\b', danhDau: 'not', nhan: 'Phủ định kép', phanHoi: '"never" đã mang nghĩa phủ định, không thêm "not".' }],
+        goiY: ['"is" là động từ to be.'], viSaoDung: 'to be + never.', loiGiai: 'Mai <b>is never</b> late for school.', giangLai: 'Nhớ: "BE đứng trước, thường đứng sau": trạng từ đứng sau to be nhưng đứng trước động từ thường.', tienBo: 'Em đã đặt trạng từ đúng vị trí.',
+        nguon: N6A('Unit 1 — Objectives: use the adverbs of frequency'), kiemTra: K6(),
+        tuongTu: { id: 'TA6A-04-TT', muc: 'van-dung', liDoMuc: 'Như câu gốc, động từ thường.', loai: 'chu', de: 'Rewrite the sentence with the adverb in brackets: <i>They play chess after school. (often)</i>', chapNhan: ['they often play chess after school'], loi: [{ mau: '^they play often\\b|\\bchess often\\b|school often$', danhDau: 'often', nhan: 'Sai vị trí trạng từ', phanHoi: 'Trạng từ đứng <b>trước</b> động từ thường: often play.' }, { mau: '\\boften plays\\b', danhDau: 'plays', nhan: 'Lỗi chia động từ', phanHoi: 'They → play.' }], goiY: ['play là động từ thường.'], viSaoDung: 'often play.', loiGiai: 'They <b>often play</b> chess after school.', giangLai: 'Trước động từ thường.', nguon: N6A('Unit 1 — Objectives'), kiemTra: K6() }
+      },
+      {
+        id: 'TA6A-05', muc: 'nang-cao', liDoMuc: 'Soát lỗi cả đoạn, phải phân biệt hai thì theo ngữ cảnh.', loai: 'chonNhieu',
+        de: 'Read the paragraph. <b>Chọn TẤT CẢ các câu có lỗi sai</b>.<br><i>(1) Phong lives near his school. (2) He walks to school every day. (3) Right now he play basketball with his friends. (4) Look! His mother waits for him at the gate. (5) She doesn\'t like being late.</i>',
+        phuongAn: [{ t: 'Câu (1)', phanHoi: 'Đúng: Phong → lives.' }, { t: 'Câu (2)', phanHoi: 'Đúng: every day → hiện tại đơn, he → walks.' }, { t: 'Câu (3)', dung: true }, { t: 'Câu (4)', dung: true }, { t: 'Câu (5)', phanHoi: 'Đúng: doesn\'t + like.' }],
+        goiY: ['Tìm dấu hiệu thời gian trong mỗi câu.'], viSaoDung: '(3) is playing; (4) is waiting.', loiGiai: 'Câu (3) và (4) sai.<br>(3) Right now he <b>is playing</b> basketball…<br>(4) Look! His mother <b>is waiting</b> for him…',
+        giangLai: 'Gạch chân dấu hiệu: every day → đơn; Right now, Look! → tiếp diễn. Rồi kiểm tra động từ có khớp không.', tienBo: 'Em đã soát lỗi theo dấu hiệu thời gian.',
+        nguon: N6A('Unit 1 và Unit 3 — Objectives (present simple, present continuous)'), kiemTra: K6(),
+        tuongTu: { id: 'TA6A-05-TT', muc: 'nang-cao', liDoMuc: 'Như câu gốc.', loai: 'chonNhieu', de: '<b>Chọn TẤT CẢ các câu có lỗi sai</b>.<br><i>(1) Lan is my best friend. (2) She is having long black hair. (3) At the moment she reads a book in the library. (4) She usually reads comics at weekends. (5) Today she is wearing a red T-shirt.</i>', phuongAn: [{ t: 'Câu (1)', phanHoi: 'Đúng.' }, { t: 'Câu (2)', dung: true }, { t: 'Câu (3)', dung: true }, { t: 'Câu (4)', phanHoi: 'Đúng: usually → reads.' }, { t: 'Câu (5)', phanHoi: 'Đúng: Today, việc đang diễn ra.' }], goiY: ['have (sở hữu) không dùng tiếp diễn.'], viSaoDung: '(2) has; (3) is reading.', loiGiai: 'Câu (2): She <b>has</b> long black hair. Câu (3): At the moment she <b>is reading</b>…', giangLai: 'have = có (sở hữu) → hiện tại đơn.', nguon: N6A('Unit 1, Unit 3 — Objectives'), kiemTra: K6() }
+      },
+      {
+        id: 'TA6A-06', muc: 'nang-cao', liDoMuc: 'Tự viết đoạn văn kết hợp hai thì; câu mở, đánh giá theo tiêu chí.', loai: 'mo',
+        de: 'Write a short paragraph (<b>40–60 words</b>) about your family. Say what your family members <b>usually do</b> at weekends and what they <b>are doing now</b>. Use at least <b>two</b> sentences in the present continuous.',
+        tieuChi: [
+          { t: 'Độ dài 40–60 từ.', tuDong: { soTu: [40, 60] } },
+          { t: 'Có trạng từ / cụm chỉ thói quen (usually, often, every…, at weekends).', tuDong: { mau: '\\b(always|usually|often|sometimes|never|every|at weekends|on weekends|at the weekend)\\b', toiThieu: 1 } },
+          { t: 'Có ít nhất 2 câu hiện tại tiếp diễn (am / is / are + V-ing).', tuDong: { mau: '\\b(am|is|are|\'m|\'s|\'re) \\w+ing\\b', toiThieu: 2 } },
+          { t: 'He / she + động từ thêm -s/-es ở thì hiện tại đơn.', tuDong: { canhBao: '\\b(he|she|my (mother|father|mum|dad|sister|brother)) (usually |often |always |sometimes )?(go|play|watch|read|cook|do|have|clean|visit|listen)\\b', thongBao: 'Có thể có lỗi: he/she + động từ chưa thêm -s.' } }
+        ],
+        baiThamKhao: 'There are four people in my family. At weekends, my dad usually goes fishing and my mum often cooks a big lunch. My brother and I sometimes visit our grandparents. But now it is Sunday evening. My parents are watching TV, my brother is doing his homework and I am writing this paragraph.',
+        giupViet: '<b>Khung:</b> At weekends, my dad usually … / My mum often … — Now, my dad is …-ing / I am …-ing.<br><b>Kiểm tra lại:</b> câu thói quen: he/she + V-s; câu "now": am/is/are + V-ing.',
+        goiY: ['Hai phần: "At weekends…" (hiện tại đơn) và "Now…" (tiếp diễn).'], viSaoDung: '', loiGiai: 'Xem bài tham khảo.', giangLai: 'Viết 2 câu thói quen trước (usually/often), rồi 2 câu "Now…" với am/is/are + V-ing.', tienBo: 'Em đã kết hợp được hai thì trong một đoạn văn.',
+        nguon: N6A('Unit 1 và Unit 3 — Objectives (present simple, present continuous)'), kiemTra: K6('Câu mở: nhóm biên soạn kiểm tra tiêu chí và bài tham khảo; máy chỉ kiểm tra sơ bộ, học sinh tự đối chiếu tiêu chí.'),
+        tuongTu: { id: 'TA6A-06-TT', muc: 'nang-cao', liDoMuc: 'Như câu gốc.', loai: 'mo', de: 'Write <b>30–50 words</b> about your best friend: what he/she usually does after school and what he/she is doing now.', tieuChi: [{ t: 'Độ dài 30–50 từ.', tuDong: { soTu: [30, 50] } }, { t: 'Có câu hiện tại đơn với trạng từ tần suất.', tuDong: { mau: '\\b(always|usually|often|sometimes|never|every)\\b', toiThieu: 1 } }, { t: 'Có câu hiện tại tiếp diễn.', tuDong: { mau: '\\b(is|are|\'s) \\w+ing\\b', toiThieu: 1 } }, { t: 'He/she + V-s.', tuDong: { canhBao: '\\b(he|she) (usually |often |always |sometimes )?(go|play|watch|read|do|have|help)\\b', thongBao: 'Có thể có lỗi: he/she + động từ chưa thêm -s.' } }], baiThamKhao: 'My best friend is Hoa. She usually plays badminton after school and sometimes helps her mother cook dinner. Right now she is sitting next to me in the library. She is reading a book about animals.', giupViet: 'Khung: My best friend … usually … Right now he/she is …-ing.', goiY: ['usually + V-s; now + is V-ing.'], viSaoDung: '', loiGiai: 'Xem bài tham khảo.', giangLai: 'Hai phần: thói quen / đang làm.', nguon: N6A('Unit 1, Unit 3 — Objectives'), kiemTra: K6('Câu mở: kiểm tra sơ bộ.') }
+      }
+    ]
+  };
+
+  const ta6GioiTu = {
+    id: 'ta6-gioi-tu', lop: 6, mon: 'anh', phanMon: 'Ngữ pháp', ten: 'Giới từ chỉ vị trí và sở hữu cách',
+    sgk: 'SGV Tiếng Anh 6 — Units 1–3 (Review 1: prepositions of place, possessive case)', yccdGhiChu: 'Đã đối chiếu với mục tiêu phần Grammar của Review 1 (ôn Units 1–3) trong SGV Tiếng Anh 6.',
+    kienThucTruoc: ['Từ vựng đồ vật trong nhà, lớp học', 'There is / There are'],
+    yeuCauCanDat: ['Dùng đúng giới từ chỉ vị trí: in, on, under, next to, behind, in front of, between.', 'Dùng sở hữu cách \'s để nói đồ vật của ai.', 'Đọc mô tả căn phòng và xác định vị trí đồ vật.', 'Viết đoạn ngắn tả căn phòng.'],
+    bai: {
+      mucTieu: ['chọn giới từ chỉ vị trí phù hợp;', 'viết đúng "in front of", "next to", "between … and …";', 'dùng sở hữu cách \'s;', 'tả căn phòng bằng There is / There are + giới từ.'],
+      khoiDong: { hoi: 'Where is your schoolbag now? Trả lời bằng một câu tiếng Anh.', goiY: 'Ví dụ: "It is under my desk." hoặc "It is next to my chair."' },
+      trongTam: [
+        '<b>in</b> (trong), <b>on</b> (trên, tiếp xúc bề mặt: on the table, on the wall), <b>under</b> (dưới), <b>behind</b> (phía sau), <b>next to</b> (bên cạnh), <b>in front of</b> (phía trước), <b>between A and B</b> (ở giữa A và B).',
+        'Chú ý viết đủ: next <b>to</b>, in front <b>of</b>. Tranh, đồng hồ treo tường: <b>on</b> the wall.',
+        '<b>There is</b> + danh từ số ít; <b>There are</b> + danh từ số nhiều: There is a lamp on the desk. There are two chairs in the room.',
+        '<b>Sở hữu cách</b>: người + <b>\'s</b> + vật: my brother\'s bike (xe của anh trai tôi). Danh từ số nhiều tận cùng -s chỉ thêm dấu \': my parents\' room. Danh từ số nhiều bất quy tắc thêm \'s: the children\'s toys.'
+      ],
+      viDu: { de: 'Tả: chiếc đèn ở trên bàn, bàn ở giữa giường và tủ.', loiGiai: 'The lamp is <b>on</b> the desk. The desk is <b>between</b> the bed <b>and</b> the wardrobe.' },
+      nguon: N6A('Review 1 (ôn Units 1–3) — Grammar: prepositions of place, possessive case'),
+      hoiDap: [
+        { tu: ['in front of', 'next to', 'between'], tl: 'next to = bên cạnh; in front of = phía trước; between A and B = ở giữa.' },
+        { tu: ['on the wall', 'on'], tl: 'Vật treo/dán trên tường dùng "on the wall".' },
+        { tu: ["'s", 'so huu'], tl: "Người + 's + vật: Mai's bag. Số nhiều có -s: the students' books." }
+      ]
+    },
+    cauHoi: [
+      {
+        id: 'TA6B-01', muc: 'co-ban', liDoMuc: 'Chọn giới từ theo nghĩa cho sẵn.', loai: 'chon1', de: 'Choose the correct answer (con mèo đang nằm <b>dưới gầm</b> bàn): <i>The cat is ______ the table.</i>',
+        phuongAn: [{ t: 'under', dung: true }, { t: 'on', phanHoi: '"on" = ở trên mặt bàn.' }, { t: 'in', phanHoi: '"in" = ở bên trong.' }, { t: 'behind', phanHoi: '"behind" = phía sau.' }],
+        goiY: ['Dưới = ?'], viSaoDung: 'under = dưới.', loiGiai: 'The cat is <b>under</b> the table.', giangLai: 'Vẽ nhanh cái bàn và đặt con mèo ở các vị trí: on / under / behind / next to.', tienBo: 'Em đã chọn đúng giới từ.',
+        nguon: N6A('Review 1 — Grammar: prepositions of place'), kiemTra: K6(),
+        tuongTu: { id: 'TA6B-01-TT', muc: 'co-ban', liDoMuc: 'Như câu gốc.', loai: 'chon1', de: 'Choose the correct answer (những quyển sách ở <b>trên</b> giá sách): <i>The books are ______ the shelf.</i>', phuongAn: [{ t: 'on', dung: true }, { t: 'under', phanHoi: 'Dưới.' }, { t: 'between', phanHoi: 'Ở giữa hai vật.' }, { t: 'behind', phanHoi: 'Phía sau.' }], goiY: ['Trên bề mặt.'], viSaoDung: 'on.', loiGiai: '<b>on</b>.', giangLai: 'on = trên bề mặt.', nguon: N6A('Review 1 — Grammar'), kiemTra: K6() }
+      },
+      {
+        id: 'TA6B-02', muc: 'co-ban', liDoMuc: 'Viết giới từ, cần nhớ cấu trúc between … and ….', loai: 'chu',
+        de: 'Complete the sentence (cái đèn ở <b>giữa</b> giường và tủ quần áo): <i>The lamp is ______ the bed and the wardrobe.</i> <span class="note">Chỉ gõ giới từ.</span>',
+        chapNhan: ['between'],
+        loi: [{ mau: '^among$', danhDau: 'among', nhan: 'Nhầm giới từ', phanHoi: 'Với <b>hai</b> vật (… and …) ta dùng <b>between</b>.' }, { mau: '^next( to)?$', danhDau: '*', nhan: 'Nhầm giới từ', phanHoi: '"next to" chỉ cạnh một vật. Ở đây đèn nằm giữa hai vật.' }, { mau: '^betwen$|^beetween$|^betweem$', danhDau: '*', nhan: 'Lỗi chính tả', phanHoi: 'Viết đúng: b-e-t-w-e-e-n.' }],
+        goiY: ['"… the bed and the wardrobe" — có hai vật.'], viSaoDung: 'between A and B.', loiGiai: 'The lamp is <b>between</b> the bed and the wardrobe.', giangLai: 'Thấy "A and B" ngay sau chỗ trống → nghĩ đến between.', tienBo: 'Em đã dùng đúng between … and ….',
+        nguon: N6A('Review 1 — Grammar: prepositions of place'), kiemTra: K6(),
+        tuongTu: { id: 'TA6B-02-TT', muc: 'co-ban', liDoMuc: 'Như câu gốc.', loai: 'chu', de: 'Complete (trường học ở <b>phía trước</b> bưu điện): <i>The school is ______ the post office.</i> <span class="note">Gõ cả cụm giới từ.</span>', chapNhan: ['in front of'], loi: [{ mau: '^front of$|^in front$', danhDau: '*', nhan: 'Thiếu từ', phanHoi: 'Đủ ba từ: in front of.' }, { mau: 'in the front of', danhDau: 'the', nhan: 'Thừa từ', phanHoi: 'Không có "the": in front of.' }, { mau: '^behind$', danhDau: 'behind', nhan: 'Nhầm giới từ', phanHoi: 'behind = phía sau.' }], goiY: ['Ba từ.'], viSaoDung: 'in front of.', loiGiai: '<b>in front of</b>.', giangLai: 'in front of.', nguon: N6A('Review 1 — Grammar'), kiemTra: K6() }
+      },
+      {
+        id: 'TA6B-03', muc: 'van-dung', liDoMuc: 'Đọc đoạn mô tả và suy ra vị trí.', loai: 'chon1',
+        de: 'Read: <i>"My bedroom is small. The bed is next to the window. The desk is in front of the bed. My computer is on the desk, and my schoolbag is under the desk."</i><br>Where is the computer?',
+        phuongAn: [{ t: 'It is on the desk.', dung: true }, { t: 'It is next to the window.', phanHoi: 'Cái giường mới ở cạnh cửa sổ.' }, { t: 'It is under the desk.', phanHoi: 'Cặp sách ở dưới bàn.' }, { t: 'It is in front of the bed.', phanHoi: 'Cái bàn ở trước giường; máy tính ở trên bàn.' }],
+        goiY: ['Tìm câu có "computer".'], viSaoDung: '"My computer is on the desk."', loiGiai: 'It is <b>on the desk</b>.', giangLai: 'Gạch chân từ khoá của câu hỏi (computer) trong đoạn văn, đọc phần ngay sau nó.', tienBo: 'Em đã tìm đúng thông tin trong bài đọc.',
+        nguon: N6A('Review 1 — Grammar: prepositions of place'), kiemTra: K6(),
+        tuongTu: { id: 'TA6B-03-TT', muc: 'van-dung', liDoMuc: 'Như câu gốc.', loai: 'chon1', de: 'Đọc lại đoạn văn ở câu trước: <i>"The bed is next to the window. The desk is in front of the bed. My computer is on the desk, and my schoolbag is under the desk."</i> Where is the schoolbag?', phuongAn: [{ t: 'It is under the desk.', dung: true }, { t: 'It is on the desk.', phanHoi: 'Máy tính.' }, { t: 'It is next to the window.', phanHoi: 'Giường.' }, { t: 'It is behind the bed.', phanHoi: 'Không có trong bài.' }], goiY: ['Tìm "schoolbag".'], viSaoDung: 'under the desk.', loiGiai: '<b>under the desk</b>.', giangLai: 'Gạch chân từ khoá.', nguon: N6A('Review 1 — Grammar'), kiemTra: K6() }
+      },
+      {
+        id: 'TA6B-04', muc: 'van-dung', liDoMuc: 'Viết lại câu dùng sở hữu cách.', loai: 'chu',
+        de: 'Rewrite the sentence using the possessive case (\'s): <i>This is the bike of my brother.</i>',
+        chapNhan: ["this is my brother's bike", "my brother's bike"],
+        loi: [{ mau: '\\bbrothers bike\\b', danhDau: 'brothers', nhan: 'Thiếu dấu \'', phanHoi: 'Cần dấu nháy: brother<b>\'s</b>.' }, { mau: '\\bbike of\\b', danhDau: 'of', nhan: 'Chưa đổi cấu trúc', phanHoi: 'Đề yêu cầu dùng \'s: người + \'s + vật.' }, { mau: "\\bbike's\\b|\\bbike brother", danhDau: "bike's", nhan: 'Sai thứ tự', phanHoi: 'Người sở hữu đứng trước: my brother\'s bike.' }],
+        goiY: ['Người + \'s + vật.'], viSaoDung: "my brother's bike.", loiGiai: "This is <b>my brother's bike</b>.", giangLai: '"\'s" giống chữ "của" nhưng đặt ngược: xe <i>của</i> anh trai → anh trai<b>\'s</b> xe.', tienBo: 'Em đã dùng sở hữu cách đúng.',
+        nguon: N6A('Review 1 — Grammar: possessive case'), kiemTra: K6(),
+        tuongTu: { id: 'TA6B-04-TT', muc: 'van-dung', liDoMuc: 'Như câu gốc, danh từ số nhiều bất quy tắc.', loai: 'chu', de: "Rewrite using the possessive case: <i>These are the toys of the children.</i>", chapNhan: ["these are the children's toys", "the children's toys"], loi: [{ mau: "childrens'|\\bchildrens\\b", danhDau: ["childrens'", 'childrens'], nhan: 'Lỗi sở hữu cách số nhiều', phanHoi: "children (không có -s) → children's." }, { mau: '\\btoys of\\b', danhDau: 'of', nhan: 'Chưa đổi cấu trúc', phanHoi: "Dùng 's." }], goiY: ["children + 's."], viSaoDung: "the children's toys.", loiGiai: "These are <b>the children's toys</b>.", giangLai: "Số nhiều không tận cùng -s → thêm 's.", nguon: N6A('Review 1 — Grammar'), kiemTra: K6() }
+      },
+      {
+        id: 'TA6B-05', muc: 'nang-cao', liDoMuc: 'Soát lỗi giới từ trong nhiều câu.', loai: 'chonNhieu',
+        de: '<b>Chọn TẤT CẢ các câu có lỗi sai</b>.<br><i>(1) There is a picture in the wall. (2) My shoes are under the bed. (3) The cat is between the sofa and the TV. (4) Mi\'s house is next the park. (5) The clock is on the wall.</i>',
+        phuongAn: [{ t: 'Câu (1)', dung: true }, { t: 'Câu (2)', phanHoi: 'Đúng.' }, { t: 'Câu (3)', phanHoi: 'Đúng: between … and ….' }, { t: 'Câu (4)', dung: true }, { t: 'Câu (5)', phanHoi: 'Đúng: on the wall.' }],
+        goiY: ['Tranh treo tường dùng giới từ gì?', '"next" có đủ chưa?'], viSaoDung: '(1) on the wall; (4) next to.', loiGiai: 'Câu (1): a picture <b>on</b> the wall. Câu (4): next <b>to</b> the park.', giangLai: 'Hai lỗi hay gặp: "in the wall" (đúng là on) và quên "to" sau next.', tienBo: 'Em đã phát hiện lỗi giới từ.',
+        nguon: N6A('Review 1 — Grammar: prepositions of place'), kiemTra: K6(),
+        tuongTu: { id: 'TA6B-05-TT', muc: 'nang-cao', liDoMuc: 'Như câu gốc.', loai: 'chonNhieu', de: '<b>Chọn TẤT CẢ các câu có lỗi sai</b>.<br><i>(1) The fridge is in the kitchen. (2) There is a lamp at the desk. (3) The dog is in front the door. (4) My bag is behind the chair.</i>', phuongAn: [{ t: 'Câu (1)', phanHoi: 'Đúng.' }, { t: 'Câu (2)', dung: true }, { t: 'Câu (3)', dung: true }, { t: 'Câu (4)', phanHoi: 'Đúng.' }], goiY: ['in front … ?'], viSaoDung: '(2) on the desk; (3) in front of.', loiGiai: 'Câu (2), (3).', giangLai: 'Đủ từ, đúng giới từ.', nguon: N6A('Review 1 — Grammar'), kiemTra: K6() }
+      },
+      {
+        id: 'TA6B-06', muc: 'nang-cao', liDoMuc: 'Tự viết đoạn tả phòng với nhiều giới từ; câu mở.', loai: 'mo',
+        de: 'Write a paragraph (<b>40–60 words</b>) to describe your bedroom. Use <b>There is / There are</b> and at least <b>three</b> different prepositions of place.',
+        tieuChi: [
+          { t: 'Độ dài 40–60 từ.', tuDong: { soTu: [40, 60] } },
+          { t: 'Có There is / There are.', tuDong: { mau: '\\bthere (is|are|\'s)\\b', toiThieu: 1 } },
+          { t: 'Có ít nhất 3 giới từ chỉ vị trí.', tuDong: { mau: '\\b(in front of|next to|between|behind|under|on|in|near|opposite)\\b', toiThieu: 3 } },
+          { t: 'Không thiếu "to"/"of": next to, in front of.', tuDong: { canhBao: '\\bnext (the|my|a)\\b|\\bin front (the|my|a)\\b', thongBao: 'Có thể thiếu từ: next to / in front of.' } }
+        ],
+        baiThamKhao: 'My bedroom is small but cosy. There is a bed next to the window. There is a desk in front of the bed, and my lamp is on the desk. There are two posters on the wall. My wardrobe is between the door and the bookshelf. I love reading books in my room.',
+        giupViet: '<b>Khung:</b> My bedroom is … There is a … next to … / There are … on … / My … is between … and …<br><b>Kiểm tra:</b> next <b>to</b>, in front <b>of</b>; số ít → There is, số nhiều → There are.',
+        goiY: ['Kể 4–5 đồ vật và vị trí của chúng.'], viSaoDung: '', loiGiai: 'Xem bài tham khảo.', giangLai: 'Đứng ở cửa phòng, nhìn lần lượt từ trái sang phải, mỗi đồ vật viết một câu.', tienBo: 'Em đã tự tả được căn phòng.',
+        nguon: N6A('Review 1 — Grammar: prepositions of place'), kiemTra: K6('Câu mở: kiểm tra sơ bộ, học sinh tự đối chiếu tiêu chí.'),
+        tuongTu: { id: 'TA6B-06-TT', muc: 'nang-cao', liDoMuc: 'Như câu gốc.', loai: 'mo', de: 'Write <b>30–50 words</b> to describe your classroom. Use at least <b>two</b> prepositions of place.', tieuChi: [{ t: 'Độ dài 30–50 từ.', tuDong: { soTu: [30, 50] } }, { t: 'Có ít nhất 2 giới từ.', tuDong: { mau: '\\b(in front of|next to|between|behind|under|on|in|near)\\b', toiThieu: 2 } }, { t: 'Không thiếu to/of.', tuDong: { canhBao: '\\bnext (the|my|a)\\b|\\bin front (the|my|a)\\b', thongBao: 'Có thể thiếu từ: next to / in front of.' } }], baiThamKhao: 'My classroom is on the second floor. There is a big board on the wall. The teacher\'s desk is in front of the board. There are forty desks in the room. My desk is next to the window.', giupViet: 'There is … on … / … is next to …', goiY: ['Bảng, bàn giáo viên, cửa sổ.'], viSaoDung: '', loiGiai: 'Xem bài tham khảo.', giangLai: 'Nhìn từ trái sang phải.', nguon: N6A('Review 1 — Grammar'), kiemTra: K6('Câu mở: kiểm tra sơ bộ.') }
+      }
+    ]
+  };
+
+  const ta6SoSanh = {
+    id: 'ta6-so-sanh-hon', lop: 6, mon: 'anh', phanMon: 'Ngữ pháp', ten: 'So sánh hơn của tính từ',
+    sgk: 'SGV Tiếng Anh 6 — Unit 4 "My Neighbourhood" (comparative adjectives)', yccdGhiChu: 'Đã đối chiếu với phần Objectives của Unit 4 trong SGV Tiếng Anh 6.',
+    kienThucTruoc: ['Tính từ miêu tả nơi chốn: big, small, noisy, quiet, modern…', 'Động từ to be'],
+    yeuCauCanDat: ['So sánh hai người / vật bằng tính từ so sánh hơn.', 'Viết đúng chính tả: -er, gấp đôi phụ âm, y → ier, more + tính từ dài.', 'Viết lại câu giữ nghĩa bằng tính từ trái nghĩa.', 'Viết đoạn văn so sánh hai nơi.'],
+    bai: {
+      mucTieu: ['thêm -er đúng chính tả;', 'dùng more với tính từ dài;', 'viết câu so sánh từ số liệu;', 'đổi câu so sánh bằng tính từ trái nghĩa.'],
+      khoiDong: { hoi: 'Is your town bigger or smaller than Hanoi?', goiY: 'Ví dụ: "My town is smaller than Hanoi."' },
+      trongTam: [
+        'Tính từ ngắn (1 âm tiết): <b>adj-er + than</b>: tall → tall<b>er</b> than; big → bi<b>gg</b>er (phụ âm – nguyên âm – phụ âm thì gấp đôi phụ âm cuối); large → large<b>r</b>.',
+        'Tính từ 2 âm tiết tận cùng <b>-y</b>: đổi y → <b>ier</b>: noisy → nois<b>ier</b>, busy → bus<b>ier</b>, friendly → friendl<b>ier</b>.',
+        'Tính từ dài (2 âm tiết trở lên, không tận cùng -y): <b>more + adj + than</b>: more modern, more beautiful, more peaceful.',
+        'Bất quy tắc: good → <b>better</b>, bad → <b>worse</b>.',
+        'Không dùng cả hai: ~~more bigger~~. Chỉ chọn một: bigger <b>hoặc</b> more modern.'
+      ],
+      viDu: { de: 'So sánh: Phố A ồn, phố B yên tĩnh.', loiGiai: 'Street A is <b>noisier than</b> Street B. / Street B is <b>quieter than</b> Street A.' },
+      nguon: N6A('Unit 4 "My Neighbourhood" — Objectives: compare two people or things using comparative adjectives'),
+      hoiDap: [
+        { tu: ['er', 'ngan'], tl: 'Tính từ một âm tiết: thêm -er (tall → taller). Phụ âm–nguyên âm–phụ âm: gấp đôi (big → bigger, hot → hotter).' },
+        { tu: ['more', 'dai'], tl: 'Tính từ dài: more + adj (more modern, more interesting).' },
+        { tu: ['y', 'ier'], tl: 'Tận cùng -y: y → ier (noisy → noisier, easy → easier).' },
+        { tu: ['good', 'better'], tl: 'good → better; bad → worse.' }
+      ]
+    },
+    cauHoi: [
+      {
+        id: 'TA6C-01', muc: 'co-ban', liDoMuc: 'Viết dạng so sánh hơn, quy tắc gấp đôi phụ âm.', loai: 'chu',
+        de: 'Write the correct form: <i>Hanoi is ______ (big) than Hue.</i> <span class="note">Chỉ gõ tính từ đã đổi.</span>',
+        chapNhan: ['bigger'],
+        loi: [{ mau: '^biger$', danhDau: 'biger', nhan: 'Lỗi chính tả', phanHoi: '"big": phụ âm – nguyên âm – phụ âm → gấp đôi g: bi<b>gg</b>er.' }, { mau: '^more big(ger)?$', danhDau: 'more', nhan: 'Dùng sai "more"', phanHoi: '"big" là tính từ ngắn → thêm -er, không dùng more.' }, { mau: '^biggest$', danhDau: 'biggest', nhan: 'Nhầm so sánh nhất', phanHoi: 'Có "than" → so sánh <b>hơn</b> (-er).' }],
+        goiY: ['big: b-i-g.'], viSaoDung: 'big → bigger.', loiGiai: 'Hanoi is <b>bigger</b> than Hue.', giangLai: 'Nhóm gấp đôi hay gặp: big → bigger, hot → hotter, thin → thinner, fat → fatter.', tienBo: 'Em đã nhớ quy tắc gấp đôi phụ âm.',
+        nguon: N6A('Unit 4 — Objectives: comparative adjectives'), kiemTra: K6(),
+        tuongTu: { id: 'TA6C-01-TT', muc: 'co-ban', liDoMuc: 'Như câu gốc, quy tắc -ier.', loai: 'chu', de: 'Write the correct form: <i>This street is ______ (noisy) than that one.</i> <span class="note">Chỉ gõ tính từ đã đổi.</span>', chapNhan: ['noisier'], loi: [{ mau: '^noisyer$', danhDau: 'noisyer', nhan: 'Lỗi chính tả', phanHoi: 'y → ier: noisier.' }, { mau: '^more noisy$', danhDau: 'more', nhan: 'Dùng sai "more"', phanHoi: 'Tận cùng -y → noisier.' }], goiY: ['y → ier.'], viSaoDung: 'noisier.', loiGiai: '<b>noisier</b>.', giangLai: 'y → ier.', nguon: N6A('Unit 4 — Objectives'), kiemTra: K6() }
+      },
+      {
+        id: 'TA6C-02', muc: 'co-ban', liDoMuc: 'Chọn dạng so sánh hơn của tính từ dài.', loai: 'chon1', de: 'Choose the correct answer: <i>My new school is ______ than my old school.</i>',
+        phuongAn: [{ t: 'more modern', dung: true }, { t: 'moderner', phanHoi: '"modern" có hai âm tiết, không tận cùng -y → more modern.' }, { t: 'most modern', phanHoi: 'Có "than" → so sánh hơn, không phải so sánh nhất.' }, { t: 'modern', phanHoi: 'Cần dạng so sánh hơn trước "than".' }],
+        goiY: ['mo-dern: mấy âm tiết?'], viSaoDung: 'Tính từ dài → more + adj.', loiGiai: '<b>more modern</b>.', giangLai: 'Đếm âm tiết: 1 → -er; 2 tận cùng y → -ier; còn lại → more.', tienBo: 'Em đã phân biệt tính từ ngắn và dài.',
+        nguon: N6A('Unit 4 — Objectives: comparative adjectives'), kiemTra: K6(),
+        tuongTu: { id: 'TA6C-02-TT', muc: 'co-ban', liDoMuc: 'Như câu gốc.', loai: 'chon1', de: 'Choose: <i>This book is ______ than that one.</i>', phuongAn: [{ t: 'more interesting', dung: true }, { t: 'interestinger', phanHoi: 'Tính từ dài.' }, { t: 'most interesting', phanHoi: 'Có than.' }, { t: 'interesting', phanHoi: 'Cần so sánh hơn.' }], goiY: ['in-te-res-ting.'], viSaoDung: 'more interesting.', loiGiai: '<b>more interesting</b>.', giangLai: 'Đếm âm tiết.', nguon: N6A('Unit 4 — Objectives'), kiemTra: K6() }
+      },
+      {
+        id: 'TA6C-03', muc: 'van-dung', liDoMuc: 'Tự viết câu so sánh từ số liệu, đúng nghĩa và đúng ngữ pháp.', loai: 'chu', nhieuCachDung: true,
+        de: 'Peter is 1.50 m tall. Tom is 1.45 m tall. Write <b>one</b> sentence comparing them. Use <b>tall</b> or <b>short</b>.',
+        chapNhan: ['peter is taller than tom', 'tom is shorter than peter'],
+        loi: [{ mau: '\\bmore tall\\b|\\bmore short\\b', danhDau: 'more', nhan: 'Dùng sai "more"', phanHoi: 'tall, short là tính từ ngắn → taller, shorter.' }, { mau: '\\btaller then\\b|\\bshorter then\\b', danhDau: 'then', nhan: 'Lỗi chính tả', phanHoi: 'Viết "<b>than</b>", không phải "then".' }, { mau: '^tom is taller than peter$|^peter is shorter than tom$', danhDau: ['taller', 'shorter'], nhan: 'Sai nghĩa', phanHoi: 'Peter cao 1,50 m, Tom 1,45 m. Ai cao hơn?' }],
+        goiY: ['Ai cao hơn?', 'S + is + taller than + …'], viSaoDung: 'Câu đúng nghĩa và đúng cấu trúc so sánh hơn.', loiGiai: 'Peter is <b>taller than</b> Tom. / Tom is <b>shorter than</b> Peter.', giangLai: 'Bước 1: so số liệu (1,50 &gt; 1,45 → Peter cao hơn). Bước 2: viết câu theo khung "A is …er than B".', tienBo: 'Em đã chuyển số liệu thành câu so sánh.',
+        nguon: N6A('Unit 4 — Objectives: comparative adjectives'), kiemTra: K6('Nhóm biên soạn liệt kê các cách viết đúng; chạy kiểm thử tự động ngày ' + NGAY_SOAN + '.'),
+        tuongTu: { id: 'TA6C-03-TT', muc: 'van-dung', liDoMuc: 'Như câu gốc.', loai: 'chu', nhieuCachDung: true, de: 'Bag A costs 200,000 dong. Bag B costs 150,000 dong. Write one sentence comparing them. Use <b>cheap</b> or <b>expensive</b>.', chapNhan: ['bag b is cheaper than bag a', 'bag a is more expensive than bag b'], loi: [{ mau: '\\bmore cheap\\b', danhDau: 'more', nhan: 'Dùng sai "more"', phanHoi: 'cheap → cheaper.' }, { mau: '\\bexpensiver\\b', danhDau: 'expensiver', nhan: 'Lỗi dạng so sánh', phanHoi: 'Tính từ dài → more expensive.' }, { mau: '^bag a is cheaper|^bag b is more expensive', danhDau: ['cheaper', 'expensive'], nhan: 'Sai nghĩa', phanHoi: 'Túi B rẻ hơn.' }], goiY: ['Túi nào rẻ hơn?'], viSaoDung: 'Đúng nghĩa.', loiGiai: 'Bag B is <b>cheaper than</b> Bag A. / Bag A is <b>more expensive than</b> Bag B.', giangLai: 'So số liệu trước.', nguon: N6A('Unit 4 — Objectives'), kiemTra: K6() }
+      },
+      {
+        id: 'TA6C-04', muc: 'van-dung', liDoMuc: 'Viết lại câu giữ nghĩa bằng tính từ trái nghĩa, có nhiều đáp án.', loai: 'chu', nhieuCachDung: true,
+        de: 'Rewrite the sentence so that it means the same. Begin with the given words.<br><i>My house is smaller than your house.</i><br>→ <b>Your house ______</b>',
+        chapNhan: ['your house is bigger than my house', 'your house is bigger than mine', 'your house is larger than my house', 'your house is larger than mine'],
+        loi: [{ mau: '\\bsmaller\\b', danhDau: 'smaller', nhan: 'Sai nghĩa', phanHoi: 'Đổi chủ ngữ thì phải đổi tính từ sang <b>trái nghĩa</b>: small ↔ big.' }, { mau: '\\bmore (big|large)\\b', danhDau: 'more', nhan: 'Dùng sai "more"', phanHoi: 'big → bigger; large → larger.' }, { mau: '\\bbiger\\b', danhDau: 'biger', nhan: 'Lỗi chính tả', phanHoi: 'bigger (gấp đôi g).' }],
+        goiY: ['Nhà tôi nhỏ hơn ⇔ nhà bạn … hơn?'], viSaoDung: 'small ↔ big; đổi vị trí hai ngôi nhà.', loiGiai: 'Your house <b>is bigger / larger than</b> my house (mine).', giangLai: '"A nhỏ hơn B" cũng có nghĩa là "B to hơn A". Đổi chỗ A, B thì đổi tính từ sang nghĩa ngược lại.', tienBo: 'Em đã dùng tính từ trái nghĩa để giữ nghĩa câu.',
+        giupViet: 'Khung: Your house is <b>…er than</b> my house / mine.',
+        nguon: N6A('Unit 4 — Objectives: comparative adjectives'), kiemTra: K6('Nhóm biên soạn liệt kê 4 cách viết đúng; giáo viên có thể bổ sung vào "chapNhan".'),
+        tuongTu: { id: 'TA6C-04-TT', muc: 'van-dung', liDoMuc: 'Như câu gốc.', loai: 'chu', nhieuCachDung: true, de: 'Rewrite so that it means the same.<br><i>The city is noisier than the countryside.</i><br>→ <b>The countryside ______</b>', chapNhan: ['the countryside is quieter than the city', 'the countryside is more peaceful than the city', 'the countryside is calmer than the city'], loi: [{ mau: '\\bnoisier\\b', danhDau: 'noisier', nhan: 'Sai nghĩa', phanHoi: 'Đổi tính từ trái nghĩa: noisy ↔ quiet.' }, { mau: '\\bpeacefuler\\b|\\bquieter then\\b', danhDau: ['peacefuler', 'then'], nhan: 'Lỗi dạng so sánh', phanHoi: 'more peaceful; than.' }], goiY: ['noisy ↔ quiet / peaceful.'], viSaoDung: 'quieter / more peaceful.', loiGiai: 'The countryside is <b>quieter / more peaceful than</b> the city.', giangLai: 'Đổi chỗ → đổi nghĩa tính từ.', nguon: N6A('Unit 4 — Objectives'), kiemTra: K6() }
+      },
+      {
+        id: 'TA6C-05', muc: 'nang-cao', liDoMuc: 'Đánh giá nhiều câu, cần nắm cả ba quy tắc chính tả và more.', loai: 'chonNhieu',
+        de: '<b>Chọn TẤT CẢ</b> các câu <b>đúng</b>.<br><i>(1) Ho Chi Minh City is busier than Hoi An. (2) My street is more narrow than yours. (3) The park is more beautiful than the market. (4) This road is wider than that road. (5) Today is hoter than yesterday.</i>',
+        phuongAn: [{ t: 'Câu (1)', dung: true }, { t: 'Câu (2)', phanHoi: 'narrow → narrower (narrow thường thêm -er).' }, { t: 'Câu (3)', dung: true }, { t: 'Câu (4)', dung: true }, { t: 'Câu (5)', phanHoi: 'hot → ho<b>tt</b>er (gấp đôi t).' }],
+        goiY: ['Kiểm tra chính tả từng tính từ.'], viSaoDung: '(1) busier, (3) more beautiful, (4) wider đều đúng.', loiGiai: 'Câu đúng: (1), (3), (4). Sửa: (2) narrower; (5) hotter.', giangLai: 'Ba "bẫy": gấp đôi phụ âm (hotter), y → ier (busier), và tính từ dài mới dùng more.', tienBo: 'Em đã kiểm tra được cả quy tắc chính tả.',
+        nguon: N6A('Unit 4 — Objectives: comparative adjectives'), kiemTra: K6(),
+        tuongTu: { id: 'TA6C-05-TT', muc: 'nang-cao', liDoMuc: 'Như câu gốc.', loai: 'chonNhieu', de: '<b>Chọn TẤT CẢ</b> các câu <b>đúng</b>.<br><i>(1) The countryside is more peaceful than the city. (2) My bike is faster than yours. (3) This test is easyer than the last one. (4) Our classroom is more large than theirs. (5) Mai is friendlier than her sister.</i>', phuongAn: [{ t: 'Câu (1)', dung: true }, { t: 'Câu (2)', dung: true }, { t: 'Câu (3)', phanHoi: 'easy → easier.' }, { t: 'Câu (4)', phanHoi: 'large → larger.' }, { t: 'Câu (5)', dung: true }], goiY: ['Ba bẫy.'], viSaoDung: '(1), (2), (5).', loiGiai: 'Câu đúng: (1), (2), (5).', giangLai: 'y → ier; tính từ ngắn → -er.', nguon: N6A('Unit 4 — Objectives'), kiemTra: K6() }
+      },
+      {
+        id: 'TA6C-06', muc: 'nang-cao', liDoMuc: 'Tự viết đoạn so sánh hai nơi với nhiều tính từ; câu mở.', loai: 'mo',
+        de: 'Write a paragraph (<b>40–60 words</b>) comparing your neighbourhood with another place you know (a city, a village…). Use at least <b>three</b> comparative adjectives.',
+        tieuChi: [
+          { t: 'Độ dài 40–60 từ.', tuDong: { soTu: [40, 60] } },
+          { t: 'Có ít nhất 3 cấu trúc so sánh hơn (…er than / more … than / better than).', tuDong: { mau: '\\b(\\w+er|more \\w+|better|worse) than\\b', toiThieu: 3 } },
+          { t: 'Không dùng sai: more + …er, hoặc chính tả sai thường gặp.', tuDong: { canhBao: '\\bmore \\w+er\\b|\\b(biger|hoter|noisyer|busyer|easyer|prettyer)\\b', thongBao: 'Có thể có lỗi so sánh hơn.' } }
+        ],
+        baiThamKhao: 'I live in a small town. My neighbourhood is quieter than Ho Chi Minh City, and the air is cleaner than in the city. The streets in the city are wider and busier than ours, and the buildings are more modern. However, I think my neighbourhood is more peaceful and the people here are friendlier.',
+        giupViet: '<b>Ý so sánh:</b> quiet/noisy, clean/dirty, big/small, busy, modern, peaceful, friendly.<br><b>Khung:</b> My neighbourhood is …er than … / … is more … than …<br><b>Kết:</b> I think … is better because …',
+        goiY: ['Chọn 3 tiêu chí: độ ồn, không khí, đường phố, con người.'], viSaoDung: '', loiGiai: 'Xem bài tham khảo.', giangLai: 'Lập bảng 2 cột (nơi em ở | nơi khác), điền tính từ, rồi mỗi hàng viết một câu so sánh.', tienBo: 'Em đã viết đoạn văn so sánh.',
+        nguon: N6A('Unit 4 — Objectives: comparative adjectives; write a paragraph to describe a neighbourhood'), kiemTra: K6('Câu mở: kiểm tra sơ bộ, học sinh tự đối chiếu tiêu chí.'),
+        tuongTu: { id: 'TA6C-06-TT', muc: 'nang-cao', liDoMuc: 'Như câu gốc.', loai: 'mo', de: 'Write <b>30–50 words</b> comparing two people in your family. Use at least <b>two</b> comparative adjectives.', tieuChi: [{ t: 'Độ dài 30–50 từ.', tuDong: { soTu: [30, 50] } }, { t: 'Có ít nhất 2 cấu trúc so sánh hơn.', tuDong: { mau: '\\b(\\w+er|more \\w+|better|worse) than\\b', toiThieu: 2 } }, { t: 'Không dùng more + …er.', tuDong: { canhBao: '\\bmore \\w+er\\b', thongBao: 'Có thể có lỗi so sánh hơn.' } }], baiThamKhao: 'I have an older brother, Minh. He is taller than me and he is stronger too. I am more talkative than him, but he is funnier. My mother says I am more careful than my brother when I do my homework.', giupViet: 'Khung: … is taller / older / more … than …', goiY: ['Chiều cao, tuổi, tính cách.'], viSaoDung: '', loiGiai: 'Xem bài tham khảo.', giangLai: 'Lập bảng hai cột.', nguon: N6A('Unit 4 — Objectives'), kiemTra: K6('Câu mở: kiểm tra sơ bộ.') }
+      }
+    ]
+  };
+
+  const ta6TuVung = {
+    id: 'ta6-tu-vung', lop: 6, mon: 'anh', phanMon: 'Từ vựng', ten: 'Từ vựng: trường học, nhà ở, bạn bè',
+    sgk: 'SGV Tiếng Anh 6 — Unit 1 (play / do / have / study + noun); Unit 3 (body parts, appearance, personality); Review 1 (rooms, types of house)', yccdGhiChu: 'Đã đối chiếu với phần Objectives của Unit 1, Unit 3 và mục tiêu phần Vocabulary của Review 1 trong SGV Tiếng Anh 6.',
+    kienThucTruoc: ['Môn học và hoạt động ở trường', 'Các phòng trong nhà'],
+    yeuCauCanDat: ['Dùng đúng các kết hợp play / do / have / study + danh từ.', 'Gọi tên các phòng, đồ vật trong nhà.', 'Dùng từ chỉ bộ phận cơ thể, ngoại hình và tính cách để tả bạn.'],
+    bai: {
+      mucTieu: ['chọn đúng động từ đi với môn học, hoạt động;', 'gọi tên phòng theo công dụng;', 'chọn tính từ tính cách phù hợp;', 'tả bạn thân về ngoại hình và tính cách.'],
+      khoiDong: { hoi: 'Name three things you do at school. Dùng play / do / have / study.', goiY: 'Ví dụ: I study English. I play football. I have lunch at school.' },
+      trongTam: [
+        '<b>play</b> + môn thể thao có bóng, trò chơi, nhạc cụ: play football, play badminton, play the guitar.',
+        '<b>do</b> + bài tập, môn võ, thể dục: do homework, do judo, do karate, do exercise.',
+        '<b>have</b> + bữa ăn, tiết học: have lunch, have breakfast, have English (lessons). <b>study</b> + môn học: study maths, study science.',
+        'Phòng: living room, bedroom, kitchen, bathroom, hall… Đồ vật: wardrobe, fridge, sofa, lamp, chest of drawers…',
+        'Ngoại hình: long / short / curly / straight hair, round face, big eyes. <b>has</b> + ngoại hình (She <u>has</u> long hair). Tính cách: kind, friendly, funny, clever, creative, confident, hard-working, shy… <b>is</b> + tính cách (He <u>is</u> funny).'
+      ],
+      viDu: { de: 'Tả một bạn có tóc ngắn, mặt tròn, hay giúp đỡ người khác.', loiGiai: 'She <b>has</b> short hair and a round face. She <b>is</b> very <b>kind</b>.' },
+      nguon: N6A('Unit 1 — Objectives: use the combinations to play, to do, to have, to study + Noun; Unit 3 — Objectives: body parts, appearance and personality; Review 1 — Vocabulary: rooms and types of house'),
+      hoiDap: [
+        { tu: ['play', 'do', 'have', 'study'], tl: 'play + thể thao có bóng/nhạc cụ; do + homework, judo, exercise; have + bữa ăn, tiết học; study + môn học.' },
+        { tu: ['has', 'is', 'ngoai hinh', 'tinh cach'], tl: 'has + ngoại hình (has long hair); is + tính cách (is kind).' }
+      ]
+    },
+    cauHoi: [
+      {
+        id: 'TA6D-01', muc: 'co-ban', liDoMuc: 'Chọn động từ kết hợp với môn võ.', loai: 'chon1', de: 'Choose the correct answer: <i>We ______ judo at the sports club on Saturdays.</i>',
+        phuongAn: [{ t: 'do', dung: true }, { t: 'play', phanHoi: '"play" đi với môn thể thao có bóng (football, badminton). Môn võ dùng "do".' }, { t: 'have', phanHoi: '"have" đi với bữa ăn, tiết học.' }, { t: 'study', phanHoi: '"study" đi với môn học.' }],
+        goiY: ['judo, karate là môn võ.'], viSaoDung: 'do judo.', loiGiai: 'We <b>do</b> judo…', giangLai: 'Mẹo: có quả bóng → play; võ, bài tập → do.', tienBo: 'Em đã chọn đúng kết hợp từ.',
+        nguon: N6A('Unit 1 — Objectives: play / do / have / study + Noun'), kiemTra: K6(),
+        tuongTu: { id: 'TA6D-01-TT', muc: 'co-ban', liDoMuc: 'Như câu gốc.', loai: 'chon1', de: 'Choose: <i>I ______ lunch at school every day.</i>', phuongAn: [{ t: 'have', dung: true }, { t: 'do', phanHoi: 'do + homework, judo.' }, { t: 'play', phanHoi: 'play + thể thao.' }, { t: 'study', phanHoi: 'study + môn học.' }], goiY: ['Bữa ăn.'], viSaoDung: 'have lunch.', loiGiai: '<b>have</b>.', giangLai: 'have + bữa ăn.', nguon: N6A('Unit 1 — Objectives'), kiemTra: K6() }
+      },
+      {
+        id: 'TA6D-02', muc: 'co-ban', liDoMuc: 'Gọi tên phòng theo công dụng.', loai: 'chon1', de: 'Choose the correct answer: <i>We cook meals in the ______.</i>',
+        phuongAn: [{ t: 'kitchen', dung: true }, { t: 'bedroom', phanHoi: 'Phòng ngủ.' }, { t: 'bathroom', phanHoi: 'Phòng tắm.' }, { t: 'living room', phanHoi: 'Phòng khách.' }],
+        goiY: ['Nấu ăn ở đâu?'], viSaoDung: 'kitchen = nhà bếp.', loiGiai: '<b>kitchen</b>.', giangLai: 'cook (nấu) – kitchen (bếp) có cùng âm "k" đầu.', tienBo: 'Em đã nhớ tên phòng.',
+        nguon: N6A('Review 1 — Vocabulary: rooms and types of house'), kiemTra: K6(),
+        tuongTu: { id: 'TA6D-02-TT', muc: 'co-ban', liDoMuc: 'Như câu gốc.', loai: 'chon1', de: 'Choose: <i>We sleep in the ______.</i>', phuongAn: [{ t: 'bedroom', dung: true }, { t: 'kitchen', phanHoi: 'Bếp.' }, { t: 'hall', phanHoi: 'Sảnh/hành lang.' }, { t: 'bathroom', phanHoi: 'Phòng tắm.' }], goiY: ['bed = giường.'], viSaoDung: 'bedroom.', loiGiai: '<b>bedroom</b>.', giangLai: 'bed + room.', nguon: N6A('Review 1 — Vocabulary'), kiemTra: K6() }
+      },
+      {
+        id: 'TA6D-03', muc: 'van-dung', liDoMuc: 'Suy ra tính từ tính cách từ hành động mô tả; nhiều đáp án.', loai: 'chu', nhieuCachDung: true,
+        de: 'Complete with <b>one</b> personality adjective: <i>She always helps other people. She is very ______.</i>',
+        chapNhan: ['kind', 'helpful', 'caring'],
+        loi: [{ mau: '^(clever|creative|sporty|confident)$', danhDau: '*', nhan: 'Chưa khớp nghĩa', phanHoi: 'Từ này đúng là tính cách, nhưng câu nói bạn ấy <b>luôn giúp đỡ người khác</b>. Tính từ nào nói về lòng tốt?' }, { mau: '^funny$', danhDau: 'funny', nhan: 'Chưa khớp nghĩa', phanHoi: '"funny" = hài hước, làm người khác cười.' }, { mau: '^kindly$|^help$', danhDau: '*', nhan: 'Sai từ loại', phanHoi: 'Sau "is very" cần <b>tính từ</b>: kind / helpful.' }],
+        goiY: ['Người hay giúp đỡ người khác thì…'], viSaoDung: 'kind / helpful / caring đều diễn tả lòng tốt.', loiGiai: 'She is very <b>kind</b> (hoặc <b>helpful</b>, <b>caring</b>).', giangLai: 'Đọc hành động → đoán tính cách: hay giúp đỡ → kind; làm mọi người cười → funny; học giỏi → clever.', tienBo: 'Em đã chọn tính từ khớp với hành động.',
+        nguon: N6A('Unit 3 — Objectives: words for personality'), kiemTra: K6('Nhóm biên soạn chấp nhận 3 tính từ đồng nghĩa; giáo viên có thể bổ sung.'),
+        tuongTu: { id: 'TA6D-03-TT', muc: 'van-dung', liDoMuc: 'Như câu gốc.', loai: 'chu', de: 'Complete with one personality adjective: <i>He tells jokes and makes us laugh a lot. He is ______.</i>', chapNhan: ['funny'], loi: [{ mau: '^(kind|clever|creative|shy)$', danhDau: '*', nhan: 'Chưa khớp nghĩa', phanHoi: 'Làm mọi người cười → ?' }, { mau: '^fun$', danhDau: 'fun', nhan: 'Gần đúng', phanHoi: 'Tả tính cách người hay pha trò, dùng "funny".' }], goiY: ['Làm cười.'], viSaoDung: 'funny.', loiGiai: '<b>funny</b>.', giangLai: 'Hành động → tính cách.', nguon: N6A('Unit 3 — Objectives'), kiemTra: K6() }
+      },
+      {
+        id: 'TA6D-04', muc: 'van-dung', liDoMuc: 'Tìm từ khác nhóm nghĩa.', loai: 'chon1', de: 'Find the odd one out (từ khác nhóm):',
+        phuongAn: [{ t: 'arm', phanHoi: 'Bộ phận cơ thể.' }, { t: 'leg', phanHoi: 'Bộ phận cơ thể.' }, { t: 'nose', phanHoi: 'Bộ phận cơ thể.' }, { t: 'kind', dung: true }],
+        goiY: ['Ba từ cùng chỉ bộ phận cơ thể.'], viSaoDung: '"kind" là tính từ tính cách.', loiGiai: '<b>kind</b>.', giangLai: 'Đặt tên nhóm cho từng từ; từ nào không cùng nhóm là đáp án.', tienBo: 'Em đã phân nhóm từ vựng.',
+        nguon: N6A('Unit 3 — Objectives: body parts, appearance and personality'), kiemTra: K6(),
+        tuongTu: { id: 'TA6D-04-TT', muc: 'van-dung', liDoMuc: 'Như câu gốc.', loai: 'chon1', de: 'Find the odd one out:', phuongAn: [{ t: 'kitchen', phanHoi: 'Phòng.' }, { t: 'bedroom', phanHoi: 'Phòng.' }, { t: 'bathroom', phanHoi: 'Phòng.' }, { t: 'compass', dung: true }], goiY: ['Ba từ là tên phòng.'], viSaoDung: 'compass = com-pa (đồ dùng học tập).', loiGiai: '<b>compass</b>.', giangLai: 'Đặt tên nhóm.', nguon: N6A('Unit 1 — Objectives; Review 1 — Vocabulary'), kiemTra: K6() }
+      },
+      {
+        id: 'TA6D-05', muc: 'nang-cao', liDoMuc: 'Đánh giá nhiều câu, kết hợp collocation và has/is.', loai: 'chonNhieu',
+        de: '<b>Chọn TẤT CẢ</b> các câu <b>đúng</b>.<br><i>(1) I do my homework every evening. (2) They play football after school. (3) We study science on Tuesdays. (4) She plays judo at weekends. (5) He does lunch at 12 o\'clock.</i>',
+        phuongAn: [{ t: 'Câu (1)', dung: true }, { t: 'Câu (2)', dung: true }, { t: 'Câu (3)', dung: true }, { t: 'Câu (4)', phanHoi: 'Môn võ → <b>does</b> judo.' }, { t: 'Câu (5)', phanHoi: 'Bữa ăn → <b>has</b> lunch.' }],
+        goiY: ['Kiểm tra động từ đi kèm từng danh từ.'], viSaoDung: '(1), (2), (3) dùng đúng kết hợp.', loiGiai: 'Đúng: (1), (2), (3). Sửa: (4) does judo; (5) has lunch.', giangLai: 'Lập bảng 4 cột play | do | have | study và xếp từ vào.', tienBo: 'Em đã kiểm tra được kết hợp từ.',
+        nguon: N6A('Unit 1 — Objectives: play / do / have / study + Noun'), kiemTra: K6(),
+        tuongTu: { id: 'TA6D-05-TT', muc: 'nang-cao', liDoMuc: 'Như câu gốc, ngoại hình/tính cách.', loai: 'chonNhieu', de: '<b>Chọn TẤT CẢ</b> các câu <b>đúng</b>.<br><i>(1) She has long black hair. (2) He has a round face. (3) My friend is very creative. (4) She has kind. (5) He is curly hair.</i>', phuongAn: [{ t: 'Câu (1)', dung: true }, { t: 'Câu (2)', dung: true }, { t: 'Câu (3)', dung: true }, { t: 'Câu (4)', phanHoi: 'Tính cách → is kind.' }, { t: 'Câu (5)', phanHoi: 'Ngoại hình → has curly hair.' }], goiY: ['has + ngoại hình; is + tính cách.'], viSaoDung: '(1), (2), (3).', loiGiai: 'Đúng: (1), (2), (3).', giangLai: 'has + hair/face; is + tính từ.', nguon: N6A('Unit 3 — Objectives'), kiemTra: K6() }
+      },
+      {
+        id: 'TA6D-06', muc: 'nang-cao', liDoMuc: 'Tự viết đoạn tả bạn, dùng đúng has/is và từ vựng; câu mở.', loai: 'mo',
+        de: 'Write a paragraph (<b>30–50 words</b>) about your best friend. Describe his/her <b>appearance</b> (hair, face, eyes…) and <b>personality</b>.',
+        tieuChi: [
+          { t: 'Độ dài 30–50 từ.', tuDong: { soTu: [30, 50] } },
+          { t: 'Có ít nhất 2 từ về ngoại hình.', tuDong: { mau: '\\b(hair|face|eyes|nose|tall|short|thin|slim)\\b', toiThieu: 2 } },
+          { t: 'Có ít nhất 1 tính từ tính cách.', tuDong: { mau: '\\b(kind|friendly|funny|clever|creative|confident|caring|hard-working|sporty|shy|curious|patient|talkative|helpful|active)\\b', toiThieu: 1 } },
+          { t: 'Dùng has với ngoại hình (không viết "he have / she have").', tuDong: { canhBao: '\\b(he|she) have\\b|\\b(is|are) (long|short|curly|straight) hair\\b', thongBao: 'Có thể có lỗi: he/she has + ngoại hình.' } }
+        ],
+        baiThamKhao: 'My best friend is Linh. She is tall and slim. She has long straight hair and big black eyes. Linh is very kind and hard-working. She often helps me with maths. She is also funny, so we laugh a lot together.',
+        giupViet: '<b>Khung:</b> My best friend is … He/She is tall/short… He/She has … hair and … eyes. He/She is very … (tính cách) because …',
+        goiY: ['Ngoại hình: has…; tính cách: is…'], viSaoDung: '', loiGiai: 'Xem bài tham khảo.', giangLai: 'Viết 2 câu ngoại hình (has …), 2 câu tính cách (is …), 1 câu ví dụ cho tính cách.', tienBo: 'Em đã tả bạn bằng từ vựng đúng.',
+        nguon: N6A('Unit 3 — Objectives: body parts, appearance and personality'), kiemTra: K6('Câu mở: kiểm tra sơ bộ, học sinh tự đối chiếu tiêu chí.'),
+        tuongTu: { id: 'TA6D-06-TT', muc: 'nang-cao', liDoMuc: 'Như câu gốc.', loai: 'mo', de: 'Write <b>30–50 words</b> about a family member: appearance and personality.', tieuChi: [{ t: 'Độ dài 30–50 từ.', tuDong: { soTu: [30, 50] } }, { t: 'Có từ ngoại hình.', tuDong: { mau: '\\b(hair|face|eyes|nose|tall|short|thin|slim)\\b', toiThieu: 2 } }, { t: 'Có tính từ tính cách.', tuDong: { mau: '\\b(kind|friendly|funny|clever|creative|confident|caring|hard-working|patient|helpful)\\b', toiThieu: 1 } }, { t: 'has với ngoại hình.', tuDong: { canhBao: '\\b(he|she) have\\b', thongBao: 'Có thể có lỗi: he/she has.' } }], baiThamKhao: 'My grandmother is short and a little thin. She has short grey hair and a round face. She is very patient and caring. She tells me interesting stories every evening.', giupViet: 'has … / is …', goiY: ['has / is.'], viSaoDung: '', loiGiai: 'Xem bài tham khảo.', giangLai: 'Ngoại hình rồi tính cách.', nguon: N6A('Unit 3 — Objectives'), kiemTra: K6('Câu mở: kiểm tra sơ bộ.') }
+      }
+    ]
+  };
+
+  const TEXT_MINH = '<i>"I live in a small town. My neighbourhood is quiet and green. There is a park near my house, and there are many trees along the streets. People here are friendly. However, there isn\'t a big supermarket, so we go to the city centre to buy things."</i> — Minh';
+  const ta6DocViet = {
+    id: 'ta6-doc-viet', lop: 6, mon: 'anh', phanMon: 'Đọc hiểu – Viết', ten: 'Đọc hiểu và viết đoạn văn miêu tả ngắn',
+    sgk: 'SGV Tiếng Anh 6 — Unit 1 (write a paragraph about one\'s school); Unit 4 (read about a neighbourhood; write a paragraph to describe a neighbourhood)', yccdGhiChu: 'Đã đối chiếu với phần Objectives của Unit 1 và Unit 4 trong SGV Tiếng Anh 6.',
+    kienThucTruoc: ['There is / There are', 'Tính từ miêu tả nơi chốn', 'Liên từ and, but, so'],
+    yeuCauCanDat: ['Đọc lấy thông tin chính và thông tin chi tiết trong đoạn văn ngắn.', 'Nối câu bằng and / but / so.', 'Nhận ra câu không liên quan đến chủ đề đoạn văn.', 'Viết đoạn văn miêu tả trường học / khu phố.'],
+    bai: {
+      mucTieu: ['tìm thông tin chi tiết trong bài đọc;', 'phân biệt True / False;', 'nối câu bằng but, so;', 'viết đoạn văn có câu chủ đề, chi tiết và câu kết.'],
+      khoiDong: { hoi: 'Describe your neighbourhood in one sentence.', goiY: 'Ví dụ: "My neighbourhood is busy and noisy."' },
+      trongTam: [
+        '<b>Đọc chi tiết</b>: gạch chân từ khoá của câu hỏi, tìm từ đó (hoặc từ cùng nghĩa) trong bài, đọc kĩ câu chứa nó.',
+        '<b>and</b>: thêm ý cùng chiều; <b>but</b>: ý trái ngược; <b>so</b>: kết quả (vì vậy).',
+        'Đoạn văn miêu tả gồm: <b>câu chủ đề</b> (giới thiệu nơi tả) → <b>3–4 câu chi tiết</b> (There is / There are, tính từ) → <b>câu kết</b> (cảm nghĩ: I love… / I think…).',
+        'Mọi câu trong đoạn phải <b>liên quan đến chủ đề</b>; câu lạc đề cần bỏ.'
+      ],
+      viDu: { de: 'Nối: "My school is old. It is very beautiful." (but)', loiGiai: 'My school is old, <b>but</b> it is very beautiful.' },
+      nguon: N6A('Unit 1 — Objectives: write a paragraph about one\'s school; Unit 4 — Objectives: read for specific information about a neighbourhood, write a paragraph to describe a neighbourhood'),
+      hoiDap: [
+        { tu: ['but', 'so', 'and'], tl: 'and: thêm ý; but: trái ngược; so: kết quả.' },
+        { tu: ['doc', 'reading', 'tu khoa'], tl: 'Gạch chân từ khoá câu hỏi rồi tìm trong bài.' },
+        { tu: ['doan van', 'paragraph', 'viet'], tl: 'Câu chủ đề → chi tiết → câu kết.' }
+      ]
+    },
+    cauHoi: [
+      {
+        id: 'TA6E-01', muc: 'co-ban', liDoMuc: 'Đọc lấy ý chính.', loai: 'chon1', de: 'Read the text:<br>' + TEXT_MINH + '<br><br>What is Minh\'s neighbourhood like?',
+        phuongAn: [{ t: 'It is quiet and green.', dung: true }, { t: 'It is noisy and busy.', phanHoi: 'Bài viết "quiet" (yên tĩnh).' }, { t: 'It has a big supermarket.', phanHoi: 'Bài nói "there isn\'t a big supermarket".' }, { t: 'It is in the city centre.', phanHoi: 'Minh sống ở thị trấn nhỏ, phải đi vào trung tâm thành phố để mua sắm.' }],
+        goiY: ['Tìm câu có "My neighbourhood is …".'], viSaoDung: '"My neighbourhood is quiet and green."', loiGiai: '<b>It is quiet and green.</b>', giangLai: '"What is … like?" hỏi về đặc điểm → tìm tính từ đi sau "is".', tienBo: 'Em đã tìm đúng thông tin.',
+        nguon: N6A('Unit 4 — Objectives: read for specific information about a neighbourhood'), kiemTra: K6(),
+        tuongTu: { id: 'TA6E-01-TT', muc: 'co-ban', liDoMuc: 'Như câu gốc.', loai: 'chon1', de: 'Đọc lại đoạn văn của Minh:<br>' + TEXT_MINH + '<br><br>Where do they go to buy things?', phuongAn: [{ t: 'To the city centre.', dung: true }, { t: 'To the park.', phanHoi: 'Công viên ở gần nhà.' }, { t: 'To a big supermarket in the town.', phanHoi: 'Thị trấn không có siêu thị lớn.' }, { t: 'To their neighbours\' houses.', phanHoi: 'Không có trong bài.' }], goiY: ['Tìm "buy things".'], viSaoDung: 'go to the city centre to buy things.', loiGiai: '<b>To the city centre.</b>', giangLai: 'Tìm từ khoá.', nguon: N6A('Unit 4 — Objectives'), kiemTra: K6() }
+      },
+      {
+        id: 'TA6E-02', muc: 'co-ban', liDoMuc: 'Xác định True / False dựa vào chi tiết.', loai: 'chon1', de: 'Read the text:<br>' + TEXT_MINH + '<br><br><b>True or False?</b> <i>There is a big supermarket in Minh\'s neighbourhood.</i>',
+        phuongAn: [{ t: 'True', phanHoi: 'Bài viết "there <b>isn\'t</b> a big supermarket".' }, { t: 'False', dung: true }],
+        goiY: ['Chú ý "isn\'t".'], viSaoDung: 'Bài nói không có siêu thị lớn.', loiGiai: '<b>False</b> — "there isn\'t a big supermarket".', giangLai: 'Câu True/False hay "bẫy" ở từ phủ định nhỏ như isn\'t, don\'t, never.', tienBo: 'Em đã để ý từ phủ định.',
+        nguon: N6A('Unit 4 — Objectives: read for specific information'), kiemTra: K6(),
+        tuongTu: { id: 'TA6E-02-TT', muc: 'co-ban', liDoMuc: 'Như câu gốc.', loai: 'chon1', de: 'Đọc lại đoạn văn của Minh:<br>' + TEXT_MINH + '<br><br><b>True or False?</b> <i>People in Minh\'s neighbourhood are friendly.</i>', phuongAn: [{ t: 'True', dung: true }, { t: 'False', phanHoi: '"People here are friendly."' }], goiY: ['Tìm "People".'], viSaoDung: 'True.', loiGiai: '<b>True</b>.', giangLai: 'Tìm câu chứa từ khoá.', nguon: N6A('Unit 4 — Objectives'), kiemTra: K6() }
+      },
+      {
+        id: 'TA6E-03', muc: 'van-dung', liDoMuc: 'Trả lời câu hỏi bằng câu/cụm từ tự viết.', loai: 'chu', nhieuCachDung: true,
+        de: 'Read the text:<br>' + TEXT_MINH + '<br><br>Answer the question: <b>What is there near Minh\'s house?</b>',
+        chapNhan: ['a park', 'park', 'there is a park', 'there is a park near his house', "there is a park near minh's house", "there's a park near his house", "there's a park"],
+        loi: [{ mau: 'supermarket', danhDau: 'supermarket', nhan: 'Sai thông tin', phanHoi: 'Không có siêu thị lớn. Đọc lại câu có "near my house".' }, { mau: '\\btrees?\\b', danhDau: ['trees', 'tree'], nhan: 'Sai thông tin', phanHoi: 'Cây ở dọc các con phố. Câu hỏi về thứ ở <b>gần nhà</b> Minh.' }, { mau: '\\bthere are a park\\b', danhDau: 'are', nhan: 'Lỗi ngữ pháp', phanHoi: '"a park" số ít → There <b>is</b>.' }],
+        goiY: ['Tìm "near my house".'], viSaoDung: '"There is a park near my house."', loiGiai: 'There is <b>a park</b> near his house.', giangLai: 'Câu hỏi "What is there…?" → trả lời "There is …". Nhớ đổi "my" (của Minh) thành "his".', tienBo: 'Em đã trả lời đúng thông tin chi tiết.',
+        nguon: N6A('Unit 4 — Objectives: read for specific information about a neighbourhood'), kiemTra: K6('Nhóm biên soạn liệt kê các cách trả lời đúng; giáo viên có thể bổ sung.'),
+        tuongTu: { id: 'TA6E-03-TT', muc: 'van-dung', liDoMuc: 'Như câu gốc.', loai: 'chu', nhieuCachDung: true, de: 'Đọc lại đoạn văn của Minh:<br>' + TEXT_MINH + '<br><br>Answer: <b>Why do they go to the city centre?</b>', chapNhan: ['to buy things', 'they go there to buy things', "because there isn't a big supermarket", "because there isn't a big supermarket in their neighbourhood", 'because there is not a big supermarket', 'to buy things because there isn\'t a big supermarket'], loi: [{ mau: '\\bpark\\b', danhDau: 'park', nhan: 'Sai thông tin', phanHoi: 'Đọc lại câu cuối.' }], goiY: ['Câu cuối có "so".'], viSaoDung: 'Để mua sắm vì không có siêu thị lớn.', loiGiai: '<b>To buy things</b> (because there isn\'t a big supermarket).', giangLai: '"so" nối nguyên nhân → kết quả.', nguon: N6A('Unit 4 — Objectives'), kiemTra: K6() }
+      },
+      {
+        id: 'TA6E-04', muc: 'van-dung', liDoMuc: 'Nối hai câu bằng liên từ đúng nghĩa.', loai: 'chu', nhieuCachDung: true,
+        de: 'Combine the two sentences using <b>but</b>: <i>My street is narrow. It is very clean.</i>',
+        chapNhan: ['my street is narrow but it is very clean', 'my street is narrow but very clean', "my street is narrow but it's very clean"],
+        loi: [{ mau: '\\bso\\b', danhDau: 'so', nhan: 'Sai liên từ', phanHoi: 'Đề yêu cầu "but" (ý trái ngược): hẹp nhưng sạch.' }, { mau: '\\band\\b', danhDau: 'and', nhan: 'Sai liên từ', phanHoi: 'Đề yêu cầu "but".' }, { mau: '^but\\b', danhDau: 'but', nhan: 'Sai vị trí liên từ', phanHoi: '"but" đứng giữa hai mệnh đề.' }],
+        goiY: ['Câu 1 + but + câu 2.'], viSaoDung: 'Hai ý trái ngược nối bằng but.', loiGiai: 'My street is narrow, <b>but</b> it is very clean.', giangLai: '"Hẹp" (chưa tốt) và "sạch" (tốt) → hai ý ngược chiều → but.', tienBo: 'Em đã nối câu đúng.',
+        nguon: N6A('Unit 4 — Objectives: write a paragraph to describe a neighbourhood'), kiemTra: K6('Chấp nhận cả cách viết có hoặc không có dấu phẩy, có hoặc không lặp "it is".'),
+        tuongTu: { id: 'TA6E-04-TT', muc: 'van-dung', liDoMuc: 'Như câu gốc, liên từ so.', loai: 'chu', nhieuCachDung: true, de: 'Combine using <b>so</b>: <i>There isn\'t a cinema in my town. We watch films at home.</i>', chapNhan: ["there isn't a cinema in my town so we watch films at home", 'there is not a cinema in my town so we watch films at home', 'there is no cinema in my town so we watch films at home'], loi: [{ mau: '\\bbut\\b', danhDau: 'but', nhan: 'Sai liên từ', phanHoi: 'Đề yêu cầu so (kết quả).' }, { mau: '^so\\b', danhDau: 'so', nhan: 'Sai vị trí liên từ', phanHoi: 'so đứng trước mệnh đề kết quả.' }], goiY: ['Nguyên nhân + so + kết quả.'], viSaoDung: 'so = vì vậy.', loiGiai: 'There isn\'t a cinema in my town, <b>so</b> we watch films at home.', giangLai: 'so = vì vậy.', nguon: N6A('Unit 4 — Objectives'), kiemTra: K6() }
+      },
+      {
+        id: 'TA6E-05', muc: 'nang-cao', liDoMuc: 'Đánh giá tính thống nhất của đoạn văn, tìm câu lạc đề.', loai: 'chonNhieu',
+        de: 'Paragraph topic: <b>My school</b>. <b>Chọn TẤT CẢ</b> các câu <b>không liên quan</b> đến chủ đề.<br><i>(1) My school is in the city centre. (2) It has three buildings and a big yard. (3) My favourite food is pizza. (4) There are thirty classrooms and a library. (5) My cousin lives in Da Nang.</i>',
+        phuongAn: [{ t: 'Câu (1)', phanHoi: 'Nói về vị trí trường → liên quan.' }, { t: 'Câu (2)', phanHoi: 'Nói về trường → liên quan.' }, { t: 'Câu (3)', dung: true }, { t: 'Câu (4)', phanHoi: 'Nói về trường → liên quan.' }, { t: 'Câu (5)', dung: true }],
+        goiY: ['Hỏi mỗi câu: câu này có nói về trường không?'], viSaoDung: '(3) đồ ăn yêu thích, (5) anh họ — không nói về trường.', loiGiai: 'Câu (3) và (5) lạc đề.', giangLai: 'Đặt chủ đề lên đầu, đọc từng câu và hỏi "câu này kể thêm điều gì về trường?" — không trả lời được thì bỏ.', tienBo: 'Em đã giữ đoạn văn đúng chủ đề.',
+        nguon: N6A('Unit 1 — Objectives: write a paragraph about one\'s school'), kiemTra: K6(),
+        tuongTu: { id: 'TA6E-05-TT', muc: 'nang-cao', liDoMuc: 'Như câu gốc.', loai: 'chonNhieu', de: 'Topic: <b>My neighbourhood</b>. <b>Chọn TẤT CẢ</b> các câu <b>không liên quan</b>.<br><i>(1) My neighbourhood is busy. (2) I like playing computer games. (3) There is a market and a temple. (4) My English teacher is very kind. (5) The streets are wide and clean.</i>', phuongAn: [{ t: 'Câu (1)', phanHoi: 'Liên quan.' }, { t: 'Câu (2)', dung: true }, { t: 'Câu (3)', phanHoi: 'Liên quan.' }, { t: 'Câu (4)', dung: true }, { t: 'Câu (5)', phanHoi: 'Liên quan.' }], goiY: ['Câu nào không nói về khu phố?'], viSaoDung: '(2), (4).', loiGiai: 'Câu (2) và (4).', giangLai: 'Hỏi từng câu.', nguon: N6A('Unit 4 — Objectives'), kiemTra: K6() }
+      },
+      {
+        id: 'TA6E-06', muc: 'nang-cao', liDoMuc: 'Tự viết đoạn văn miêu tả có bố cục; câu mở.', loai: 'mo',
+        de: 'Write a paragraph (<b>50–70 words</b>) to describe your neighbourhood. Include a topic sentence, at least <b>two</b> sentences with There is / There are, and your opinion at the end.',
+        tieuChi: [
+          { t: 'Độ dài 50–70 từ.', tuDong: { soTu: [50, 70] } },
+          { t: 'Có ít nhất 2 câu There is / There are.', tuDong: { mau: '\\bthere (is|are|isn\'t|aren\'t|\'s)\\b', toiThieu: 2 } },
+          { t: 'Có câu nêu cảm nghĩ (I like / I love / I think…).', tuDong: { mau: '\\b(i like|i love|i think|i enjoy|i want)\\b', toiThieu: 1 } },
+          { t: 'Dùng đúng There is + số ít / There are + số nhiều.', tuDong: { canhBao: '\\bthere is (many|some|two|three|four|five|lots)\\b|\\bthere are (a|an|one)\\b', thongBao: 'Có thể có lỗi There is / There are.' } }
+        ],
+        baiThamKhao: 'I live in a busy neighbourhood in Vung Tau. There is a big market near my house, and there are many small shops along the street. There is also a beautiful park where children play in the evening. The streets are a bit noisy, but people are very friendly. I love my neighbourhood because it is lively and convenient.',
+        giupViet: '<b>Bố cục:</b> (1) Câu chủ đề: I live in a … neighbourhood. (2) Chi tiết: There is … / There are … / The streets are … (3) Cảm nghĩ: I love/like my neighbourhood because …<br><b>Kiểm tra:</b> There is + số ít; There are + số nhiều.',
+        goiY: ['Bắt đầu: "I live in a … neighbourhood."'], viSaoDung: '', loiGiai: 'Xem bài tham khảo.', giangLai: 'Viết 5 câu: 1 câu chủ đề, 3 câu chi tiết, 1 câu cảm nghĩ.', tienBo: 'Em đã viết được đoạn văn miêu tả có bố cục.',
+        nguon: N6A('Unit 4 — Objectives: write a paragraph to describe a neighbourhood'), kiemTra: K6('Câu mở: kiểm tra sơ bộ, học sinh tự đối chiếu tiêu chí.'),
+        tuongTu: { id: 'TA6E-06-TT', muc: 'nang-cao', liDoMuc: 'Như câu gốc.', loai: 'mo', de: 'Write <b>40–60 words</b> to describe your school. Use There is / There are and end with your opinion.', tieuChi: [{ t: 'Độ dài 40–60 từ.', tuDong: { soTu: [40, 60] } }, { t: 'Có There is / There are.', tuDong: { mau: '\\bthere (is|are|\'s)\\b', toiThieu: 1 } }, { t: 'Có cảm nghĩ.', tuDong: { mau: '\\b(i like|i love|i think|i enjoy)\\b', toiThieu: 1 } }, { t: 'There is/are đúng.', tuDong: { canhBao: '\\bthere is (many|some|two|three|lots)\\b|\\bthere are (a|an|one)\\b', thongBao: 'Có thể có lỗi There is / There are.' } }], baiThamKhao: 'My school is a secondary school in my town. It has two buildings and a large yard with many trees. There are twenty-four classrooms, a library and a computer room. There is also a small garden. I love my school because my teachers and friends are very nice.', giupViet: 'Chủ đề → There is/are → cảm nghĩ.', goiY: ['5 câu.'], viSaoDung: '', loiGiai: 'Xem bài tham khảo.', giangLai: 'Bố cục 3 phần.', nguon: N6A('Unit 1 — Objectives'), kiemTra: K6('Câu mở: kiểm tra sơ bộ.') }
+      }
+    ]
+  };
+
   /* ------------------------------------------------------------------
      DANH MỤC CẢ 4 KHỐI — tên chủ đề dự kiến theo mạch nội dung,
      CHƯA đối chiếu số bài / Unit / trang. "id" chỉ có ở chủ đề đã soạn.
      ------------------------------------------------------------------ */
   const danhMuc = {
     6: {
-      khtn: [['Vật lí', 'Lực'], ['Vật lí', 'Năng lượng'], ['Hóa học', 'Các thể của chất'], ['Hóa học', 'Oxygen và không khí'], ['Hóa học', 'Hỗn hợp và tách chất'], ['Sinh học', 'Tế bào'], ['Sinh học', 'Đa dạng thế giới sống']],
-      toan: [['Số và Đại số', 'Tập hợp các số tự nhiên'], ['Số và Đại số', 'Tính chia hết trong tập hợp số tự nhiên'], ['Số và Đại số', 'Số nguyên'], ['Số và Đại số', 'Phân số'], ['Số và Đại số', 'Số thập phân']],
-      anh: [['Ngữ pháp', 'Thì hiện tại đơn và hiện tại tiếp diễn'], ['Ngữ pháp', 'Giới từ chỉ vị trí'], ['Ngữ pháp', 'So sánh hơn của tính từ'], ['Từ vựng', 'Trường học, nhà ở, bạn bè'], ['Đọc hiểu – Viết', 'Đoạn văn miêu tả ngắn']]
+      khtn: [['Mở đầu', 'Mở đầu về Khoa học tự nhiên (an toàn, kính lúp, kính hiển vi, đo lường)', null, 'Chương I · Bài 1–8 · SGV tr. 18'], ['Hóa học', 'Các thể của chất và sự chuyển thể', 'hh6-the-chat', 'Bài 9–10 · SGV tr. 44'], ['Hóa học', 'Oxygen và không khí', 'hh6-oxygen-khong-khi', 'Bài 11 · SGV tr. 61'], ['Hóa học', 'Vật liệu, nguyên liệu, nhiên liệu, lương thực – thực phẩm', null, 'Chương III · Bài 12–15 · SGV tr. 71'], ['Hóa học', 'Hỗn hợp và tách chất khỏi hỗn hợp', 'hh6-hon-hop', 'Bài 16–17 · SGV tr. 91'], ['Sinh học', 'Tế bào – đơn vị cơ sở của sự sống', 'sh6-te-bao', 'Bài 18–21 · SGV tr. 106'], ['Sinh học', 'Từ tế bào đến cơ thể', null, 'Chương VI · Bài 22–24 · SGV tr. 119'], ['Sinh học', 'Đa dạng thế giới sống', 'sh6-da-dang-song', 'Bài 25–39 · SGV tr. 129'], ['Vật lí', 'Lực trong đời sống', 'vl6-luc', 'Bài 40–45 · SGV tr. 178'], ['Vật lí', 'Năng lượng', 'vl6-nang-luong', 'Bài 46–51 · SGV tr. 197'], ['Vật lí', 'Trái Đất và bầu trời', null, 'Chương X · Bài 52–55 · SGV tr. 215']],
+      toan: [['Số và Đại số', 'Tập hợp các số tự nhiên', 'toan6-so-tu-nhien', 'Chương I · Bài 1–7 · SGV tr. 26'], ['Số và Đại số', 'Tính chia hết trong tập hợp số tự nhiên', 'toan6-chia-het', 'Chương II · Bài 8–12 · SGV tr. 50'], ['Số và Đại số', 'Số nguyên', 'toan6-so-nguyen', 'Chương III · Bài 13–17 · SGV tr. 73'], ['Số và Đại số', 'Phân số', 'toan6-phan-so', 'Chương VI · Bài 23–27 · SGV tr. 131'], ['Số và Đại số', 'Số thập phân', 'toan6-so-thap-phan', 'Chương VII · Bài 28–31 · SGV tr. 150']],
+      anh: [['Ngữ pháp', 'Thì hiện tại đơn và hiện tại tiếp diễn', 'ta6-hien-tai', 'Unit 1, Unit 3'], ['Ngữ pháp', 'Giới từ chỉ vị trí và sở hữu cách', 'ta6-gioi-tu', 'Units 1–3 (Review 1)'], ['Ngữ pháp', 'So sánh hơn của tính từ', 'ta6-so-sanh-hon', 'Unit 4'], ['Từ vựng', 'Trường học, nhà ở, bạn bè', 'ta6-tu-vung', 'Units 1–3'], ['Đọc hiểu – Viết', 'Đọc hiểu và viết đoạn văn miêu tả ngắn', 'ta6-doc-viet', 'Unit 1, Unit 4'], ['Ngữ pháp', 'Các Unit 5–12 (danh từ đếm được/không đếm được, so sánh nhất, quá khứ đơn, tương lai…)', null, 'Chờ đối chiếu SGV từng Unit']]
     },
     7: {
       khtn: [['Vật lí', 'Tốc độ chuyển động', 'vl7-toc-do', 'Bài 8 · tr. 45'], ['Vật lí', 'Đo tốc độ; Đồ thị quãng đường – thời gian', null, 'Bài 9–10 · tr. 49'], ['Vật lí', 'Âm thanh', null, 'Chương IV · Bài 12–14 · tr. 60'], ['Vật lí', 'Ánh sáng', null, 'Chương V · Bài 15–17 · tr. 72'], ['Vật lí', 'Từ', null, 'Chương VI · Bài 18–20 · tr. 86'], ['Hóa học', 'Nguyên tử', 'hh7-nguyen-tu', 'Bài 2 · tr. 14'], ['Hóa học', 'Nguyên tố hoá học', null, 'Bài 3 · tr. 19'], ['Hóa học', 'Sơ lược về bảng tuần hoàn các nguyên tố hoá học', null, 'Bài 4 · tr. 23'], ['Hóa học', 'Phân tử – Liên kết hoá học', null, 'Chương II · Bài 5–7 · tr. 32'], ['Sinh học', 'Quang hợp ở thực vật', 'sh7-quang-hop', 'Bài 22 · tr. 101'], ['Sinh học', 'Một số yếu tố ảnh hưởng đến quang hợp', null, 'Bài 23 · tr. 104'], ['Sinh học', 'Hô hấp tế bào', null, 'Bài 25 · tr. 111'], ['Sinh học', 'Trao đổi khí ở sinh vật', null, 'Bài 28 · tr. 118'], ['Sinh học', 'Trao đổi nước và chất dinh dưỡng ở thực vật', null, 'Bài 30 · tr. 127'], ['Sinh học', 'Cảm ứng, sinh trưởng và sinh sản']],
@@ -1123,12 +2518,12 @@
     }
   };
 
-  const CHU_DE = [vatLi, hoaHoc, sinhHoc, toan, soThuc, tiLe, daThuc, tiengAnh, daThuc8, hangDangThuc8];
+  const CHU_DE = [t6TapHop, t6ChiaHet, t6SoNguyen, t6PhanSo, t6ThapPhan, hh6TheChat, hh6Oxygen, hh6HonHop, sh6TeBao, sh6DaDang, vl6Luc, vl6NangLuong, ta6Thi, ta6GioiTu, ta6SoSanh, ta6TuVung, ta6DocViet, vatLi, hoaHoc, sinhHoc, toan, soThuc, tiLe, daThuc, tiengAnh, daThuc8, hangDangThuc8];
   apDungDoiChieu(CHU_DE);
 
   window.HOC_LIEU = {
     tenWeb: TEN_WEB,
-    phienBan: '1.4 — ' + NGAY_SOAN + ' (thêm chọn thành viên Huyhero, Anpretty và thống kê cho Má)',
+    phienBan: '1.5 — ' + NGAY_SOAN + ' (thêm 17 chủ đề lớp 6: Toán, KHTN, Tiếng Anh)',
     caiDat: {
       // Địa chỉ máy chủ trung gian AI (tùy chọn). Để trống = chỉ dùng AI qua Claude Artifact (nếu có) hoặc trợ giúp theo bài học.
       aiEndpoint: '',

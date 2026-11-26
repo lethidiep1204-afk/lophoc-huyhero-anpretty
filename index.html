@@ -235,6 +235,30 @@ pre{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding
 code{font-family:ui-monospace,Consolas,monospace;font-size:.9em;overflow-wrap:anywhere}
 .guide h3{margin-top:22px}
 .guide ol li,.guide ul li{margin:.3em 0}
+.who{background:var(--blue-soft);color:var(--blue)!important;gap:6px}
+.pick-hero{max-width:880px;margin:0 auto;text-align:center;padding-top:clamp(10px,4vw,40px)}
+.members{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin:28px 0 14px}
+.member{display:flex;flex-direction:column;align-items:center;gap:8px;padding:26px 18px;border-radius:22px;border:2px solid var(--line);background:var(--paper);box-shadow:var(--sh);min-height:200px;justify-content:center}
+.member:hover{border-color:var(--blue)}
+.member b{font-size:24px}
+.member .ava{width:84px;height:84px;border-radius:50%;display:grid;place-items:center;font-size:38px;font-weight:800;color:#fff}
+.member.m0 .ava{background:linear-gradient(135deg,var(--blue),var(--toan))}
+.member.m1 .ava{background:linear-gradient(135deg,var(--anh),var(--khtn))}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:12px 0}
+.kpi{padding:12px 14px;border-radius:14px;background:var(--paper);border:1px solid var(--line)}
+.kpi b{display:block;font-size:clamp(22px,3vw,30px);line-height:1.1}
+.kpi span{font-size:13px;color:var(--muted)}
+.mtabs{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 4px}
+.mtabs button{min-height:44px;padding:0 18px;border-radius:999px;border:2px solid var(--line);background:var(--paper);font-weight:700}
+.mtabs button[aria-pressed=true]{background:var(--blue);border-color:var(--blue);color:var(--on-blue)}
+.recs{list-style:none;padding:0;margin:8px 0;display:grid;gap:8px}
+.recs li{padding:10px 14px;border-radius:12px;background:var(--warn-soft);border-left:5px solid var(--warn)}
+.recs li.good{background:var(--ok-soft);border-color:var(--ok)}
+.bar{display:grid;grid-template-columns:minmax(0,13em) minmax(0,1fr) 3em;gap:10px;align-items:center;margin:6px 0;font-size:15px}
+.bar .tr{height:12px;border-radius:99px;background:var(--line);overflow:hidden}.bar .tr i{display:block;height:100%;background:var(--bad);border-radius:99px}
+.bar .n{text-align:right;font-variant-numeric:tabular-nums;font-weight:700}
+details.soan{margin-top:30px;padding:0 16px}details.soan>summary{font-size:18px}
+@media(max-width:600px){.bar{grid-template-columns:minmax(0,1fr) 2.5em}.bar .tr{grid-column:1/-1;grid-row:2}}
 .toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:12px;font-weight:600;z-index:60;font-size:15px;max-width:90vw}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 @media(max-width:1180px){.lay.tut{grid-template-columns:240px minmax(0,1fr)}.lay.tut .tutor{grid-column:2;position:static;max-height:none}.tutor .log{max-height:420px}}
@@ -269,6 +293,7 @@ code{font-family:ui-monospace,Consolas,monospace;font-size:.9em;overflow-wrap:an
     <span>LophocHuyhero-Anpretty</span>
   </a>
   <nav class="nav" aria-label="Điều hướng chính">
+    <a href="#chon-nguoi-hoc" data-nav="who" class="who">👤 <span id="whoName">Chọn người học</span></a>
     <a href="#trang-chu" data-nav="home">Trang chủ</a>
     <a href="#on-loi" data-nav="review">Ôn lỗi của em</a>
     <a href="#giao-vien" data-nav="teacher">Má Điệp yêu con</a>
@@ -276,7 +301,7 @@ code{font-family:ui-monospace,Consolas,monospace;font-size:.9em;overflow-wrap:an
 </header>
 <main id="app"><div class="wrap"><p>Đang mở sổ tay…</p></div></main>
 <div id="toast" class="toast" hidden role="status"></div>
-<script src="hoc-lieu.js?v=dc3a742d"></script>
+<script src="hoc-lieu.js?v=5975da3a"></script>
 <script>
 {
 const D = window.HOC_LIEU;
@@ -303,11 +328,27 @@ const monIcon = (m, cls = '') => ICONS[m] ? ICONS[m](cls) : '';
 
 /* ---------- lưu tiến độ trên thiết bị ---------- */
 const KEY = 'lophoc-huyhero-v1';
-let S = {};
-try { S = JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) { S = {}; }
-S.att ??= {}; S.draft ??= {}; S.pos ??= {}; S.tab ??= {}; S.loc ??= {}; S.lop ??= 7; S.mon ??= 'toan';
+const MEMBERS = (D.caiDat && D.caiDat.thanhVien) || ['Huyhero', 'Anpretty'];
+const blank = () => ({ att: {}, draft: {}, pos: {}, tab: {}, loc: {}, lop: 7, mon: 'toan' });
+let ROOT = {};
+try { ROOT = JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) { ROOT = {}; }
+if (!ROOT.members) { const legacy = ROOT.att && Object.keys(ROOT.att).length ? ROOT : null; ROOT = { members: {}, current: null, nhap: {} }; if (legacy) ROOT.members._cu = legacy; }
+ROOT.nhap ??= {};
+const fixS = x => { x.att ??= {}; x.draft ??= {}; x.pos ??= {}; x.tab ??= {}; x.loc ??= {}; x.lop ??= 7; x.mon ??= 'toan'; return x; };
+let S = ROOT.current && MEMBERS.includes(ROOT.current) ? fixS(ROOT.members[ROOT.current] ??= blank()) : blank();
 let canSave = true;
-const save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) { canSave = false; } };
+const save = () => { if (ROOT.current && MEMBERS.includes(ROOT.current)) ROOT.members[ROOT.current] = S; try { localStorage.setItem(KEY, JSON.stringify(ROOT)); } catch (e) { canSave = false; } };
+function useMember(n) { ROOT.current = n; S = fixS(ROOT.members[n] ??= blank()); V = {}; save(); }
+const hasMember = () => !!(ROOT.current && MEMBERS.includes(ROOT.current));
+function memberAtt(n) {
+  const loc = (ROOT.members[n] && ROOT.members[n].att) || {}, imp = (ROOT.nhap[n] && ROOT.nhap[n].att) || {};
+  const out = Object.assign({}, imp);
+  for (const [id, r] of Object.entries(loc)) { const o = out[id]; const lt = r.tries?.length ? r.tries[r.tries.length - 1].t || 0 : 0, ot = o?.tries?.length ? o.tries[o.tries.length - 1].t || 0 : 0; if (!o || lt >= ot) out[id] = r; }
+  return out;
+}
+const fmtTime = t => t ? new Date(t).toLocaleString('vi-VN', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' }) : '—';
+const b64e = s => { const b = new TextEncoder().encode(s); let x = ''; b.forEach(c => x += String.fromCharCode(c)); return btoa(x); };
+const b64d = s => new TextDecoder().decode(Uint8Array.from(atob(s), c => c.charCodeAt(0)));
 let saveT; const saveSoon = () => { clearTimeout(saveT); saveT = setTimeout(save, 300); };
 
 /* ---------- hình minh họa ---------- */
@@ -444,12 +485,81 @@ let V = {}; // trạng thái màn hình hiện tại (không lưu)
 function route() {
   const h = location.hash.slice(1);
   $$('.nav a').forEach(a => a.removeAttribute('aria-current'));
+  const wn = $('#whoName'); if (wn) wn.textContent = hasMember() ? ROOT.current : 'Chọn người học';
+  if (h === 'giao-vien') { $('[data-nav=teacher]').setAttribute('aria-current', 'page'); return viewTeacher(); }
+  if (h === 'chon-nguoi-hoc' || !hasMember()) { $('[data-nav=who]').setAttribute('aria-current', 'page'); return viewPicker(); }
   if (h.startsWith('bai-') && T[h.slice(4)]) return viewTopic(T[h.slice(4)]);
   if (h === 'on-loi') { $('[data-nav=review]').setAttribute('aria-current', 'page'); return viewReview(); }
   if (h === 'giao-vien') { $('[data-nav=teacher]').setAttribute('aria-current', 'page'); return viewTeacher(); }
   $('[data-nav=home]').setAttribute('aria-current', 'page'); viewHome();
 }
 addEventListener('hashchange', () => { route(); scrollTo(0, 0); });
+
+/* ---------- CHỌN NGƯỜI HỌC ---------- */
+function viewPicker() {
+  app.innerHTML = `<div class="wrap"><section class="pick-hero">
+    <h1>Ai đang học hôm nay?</h1>
+    <p class="lead" style="margin:0 auto">Chọn đúng tên của em để vào lớp học. Mỗi bạn có sổ tiến độ riêng trên máy này.</p>
+    <div class="members">${MEMBERS.map((n, i) => { const st = memberStats(memberAtt(n)); return `<button class="member m${i % 2}" data-member="${esc(n)}"><span class="ava" aria-hidden="true">${esc(n[0])}</span><b>${esc(n)}</b><span class="small muted">${st.lam ? `Đã làm ${st.lam} câu · học lần cuối ${fmtTime(st.last)}` : 'Chưa làm bài nào trên máy này'}</span></button>`; }).join('')}</div>
+    <p class="note">Má Điệp xem kết quả học của các con ở mục “Má Điệp yêu con”.</p>
+  </section></div>`;
+}
+function memberStats(att) {
+  const st = { lam: 0, dungDau: 0, daSua: 0, conSai: [], goiY: 0, tt: 0, last: 0, loi: {}, recent: [], muc: {}, chuDe: {} };
+  for (const [id, r] of Object.entries(att || {})) {
+    const x = ALLQ[id]; if (!x || !r.tries || !r.tries.length) continue;
+    st.lam++; if (x.tt) st.tt++;
+    const tid = x.t.id, c = (st.chuDe[tid] ??= { lam: 0, dungDau: 0, daSua: 0, conSai: 0, tt: 0 });
+    c.lam++; if (x.tt) c.tt++;
+    const m = (st.muc[x.q.muc] ??= { lam: 0, dungDau: 0 }); m.lam++;
+    if (r.first && r.first.ok) { st.dungDau++; c.dungDau++; m.dungDau++; }
+    else if (r.solved || r.done) { st.daSua++; c.daSua++; }
+    else { st.conSai.push({ id, x, r }); c.conSai++; }
+    st.goiY += r.goiY || 0;
+    r.tries.forEach(tr => { st.last = Math.max(st.last, tr.t || 0); if (!tr.ok) { const k = tr.nhan === 'Chưa đúng' ? 'Chọn sai phương án' : (tr.nhan || 'Sai (chưa rõ lỗi)'); (st.loi[k] ??= { n: 0, chuDe: new Set() }).n++; st.loi[k].chuDe.add(x.t.ten); } st.recent.push({ x, tr }); });
+  }
+  st.recent.sort((a, b) => (b.tr.t || 0) - (a.tr.t || 0));
+  return st;
+}
+const pct = (a, b) => b ? Math.round(a / b * 100) : 0;
+function recsFor(n, st) {
+  const out = [];
+  if (!st.lam) return [{ t: `${n} chưa làm bài nào (trên máy này hoặc trong dữ liệu đã nhập). Nếu con học trên máy khác, hãy nhờ con bấm “Gửi kết quả cho Má” rồi dán mã vào ô bên dưới.` }];
+  if (st.conSai.length) out.push({ t: `Còn <b>${st.conSai.length}</b> câu làm sai mà chưa sửa xong: ${st.conSai.slice(0, 6).map(c => esc(c.x.t.ten) + ' – ' + (c.x.tt ? 'câu luyện lại ' : 'câu ') + (c.x.i + 1)).join('; ')}${st.conSai.length > 6 ? '…' : ''}. Nên nhắc con mở mục “Ôn lỗi của em” để sửa.` });
+  Object.entries(st.chuDe).forEach(([tid, c]) => { const t = T[tid]; if (c.lam >= 2 && pct(c.dungDau, c.lam) < 60) out.push({ t: `Chủ đề <b>${esc(t.ten)}</b> (lớp ${t.lop}): chỉ đúng ngay ${c.dungDau}/${c.lam} câu ở lần đầu. Nên cho con đọc lại phần “Học kiến thức”, xem ví dụ có lời giải rồi làm lại các câu sai.` }); });
+  const loi = Object.entries(st.loi).sort((a, b) => b[1].n - a[1].n);
+  loi.slice(0, 3).forEach(([k, v]) => { if (v.n >= 2) out.push({ t: `Lỗi <b>“${esc(k)}”</b> lặp lại ${v.n} lần (${esc([...v.chuDe].join(', '))}). Nên luyện thêm đúng dạng này.` }); });
+  const nc = st.muc['nang-cao'], cb = st.muc['co-ban'];
+  if (nc && nc.lam >= 2 && pct(nc.dungDau, nc.lam) + 25 < pct(cb ? cb.dungDau : 0, cb ? cb.lam : 0)) out.push({ t: `Con làm tốt câu cơ bản nhưng câu <b>nâng cao</b> mới đúng ngay ${nc.dungDau}/${nc.lam}. Nên hướng dẫn con dùng nút “Xin gợi ý” từng bước trước khi xem lời giải.` });
+  if (st.lam >= 4 && st.goiY / st.lam > 1.2) out.push({ t: `Con dùng trung bình ${(st.goiY / st.lam).toFixed(1)} gợi ý mỗi câu. Có thể khuyến khích con tự thử trước một lần rồi mới xin gợi ý.` });
+  const daMo = new Set(Object.keys(st.chuDe)), lops = new Set(Object.keys(st.chuDe).map(tid => T[tid].lop));
+  const chuaLam = TOPICS.filter(t => lops.has(t.lop) && !daMo.has(t.id)).map(t => t.ten);
+  if (chuaLam.length) out.push({ t: `Chủ đề cùng lớp con chưa làm: ${esc(chuaLam.join(', '))}.` });
+  if (!out.length) out.push({ good: true, t: `${n} đang học tốt: đúng ngay ${pct(st.dungDau, st.lam)}% số câu ở lần đầu và đã sửa xong mọi câu sai. Có thể cho con thử các câu nâng cao và câu luyện lại.` });
+  return out;
+}
+function statsHTML(n) {
+  const att = memberAtt(n), st = memberStats(att), imp = ROOT.nhap[n];
+  const loi = Object.entries(st.loi).sort((a, b) => b[1].n - a[1].n), maxL = loi.length ? loi[0][1].n : 1;
+  const rows = TOPICS.map(t => ({ t, c: st.chuDe[t.id] })).filter(r => r.c);
+  return `<div class="kpis">
+    <div class="kpi"><b>${st.lam}</b><span>câu đã làm (gồm ${st.tt} câu luyện lại)</span></div>
+    <div class="kpi"><b>${pct(st.dungDau, st.lam)}%</b><span>đúng ngay lần đầu (${st.dungDau} câu)</span></div>
+    <div class="kpi"><b>${st.daSua}</b><span>câu sai rồi tự sửa đúng</span></div>
+    <div class="kpi"><b style="color:var(--bad)">${st.conSai.length}</b><span>câu còn sai, chưa sửa xong</span></div>
+    <div class="kpi"><b>${st.goiY}</b><span>lần xin gợi ý</span></div>
+    <div class="kpi"><b style="font-size:17px">${fmtTime(st.last)}</b><span>lần học gần nhất</span></div>
+  </div>
+  <p class="small muted">Dữ liệu: tiến độ của ${esc(n)} trên máy này${imp ? ` + kết quả nhập từ máy khác (xuất lúc ${fmtTime(imp.xuat)})` : ''}.</p>
+  <h3>Những vấn đề nên ôn luyện thêm cho con</h3>
+  <ul class="recs">${recsFor(n, st).map(r => `<li class="${r.good ? 'good' : ''}">${r.t}</li>`).join('')}</ul>
+  ${loi.length ? `<h3>Lỗi con hay mắc</h3>${loi.map(([k, v]) => `<div class="bar"><span>${esc(k)}</span><span class="tr"><i style="width:${Math.round(v.n / maxL * 100)}%"></i></span><span class="n">${v.n}</span></div>`).join('')}` : ''}
+  ${rows.length ? `<h3>Kết quả theo chủ đề</h3><div class="scroll card"><table class="inv stack"><thead><tr><th>Chủ đề</th><th class="n">Đã làm</th><th class="n">Đúng lần đầu</th><th class="n">Tự sửa đúng</th><th class="n">Còn sai</th><th class="n">Câu luyện lại</th></tr></thead><tbody>${rows.map(({ t, c }) => `<tr><td data-l="Chủ đề"><b>${esc(t.ten)}</b><br><span class="small muted">Lớp ${t.lop} · ${esc(D.mon[t.mon].ten)}</span></td><td class="n" data-l="Đã làm">${c.lam}/${qAll(t).length}</td><td class="n" data-l="Đúng lần đầu">${c.dungDau} (${pct(c.dungDau, c.lam)}%)</td><td class="n" data-l="Tự sửa đúng">${c.daSua}</td><td class="n" data-l="Còn sai">${c.conSai}</td><td class="n" data-l="Câu luyện lại">${c.tt}</td></tr>`).join('')}</tbody></table></div>` : ''}
+  ${st.conSai.length ? `<h3>Các câu con còn sai</h3><div class="rv">${st.conSai.map(c => { const last = c.r.tries[c.r.tries.length - 1]; return `<div class="card item m-${c.x.t.mon}" style="padding:12px 14px"><div class="row"><span class="badge">${esc(c.x.t.ten)}</span><span class="badge plain">${c.x.tt ? 'Câu luyện lại của câu ' : 'Câu '}${c.x.i + 1} · ${MUC[c.x.q.muc]}</span>${last.nhan ? `<span class="badge bad">${esc(last.nhan)}</span>` : ''}</div><p class="small" style="margin:6px 0">${esc(strip(c.x.q.de).slice(0, 160))}</p><p class="small muted" style="margin:0">Lần đầu: “${esc(ansText(c.x.q, c.r.first.a))}” · Lần gần nhất: “${esc(ansText(c.x.q, last.a))}” · ${c.r.tries.length} lần thử</p></div>`; }).join('')}</div>` : ''}
+  ${st.recent.length ? `<h3>Hoạt động gần đây</h3><div class="scroll"><table class="inv stack"><thead><tr><th>Thời gian</th><th>Chủ đề – câu</th><th>Kết quả</th></tr></thead><tbody>${st.recent.slice(0, 10).map(({ x, tr }) => `<tr><td data-l="Thời gian">${fmtTime(tr.t)}</td><td data-l="Câu">${esc(x.t.ten)} – ${x.tt ? 'luyện lại ' : 'câu '}${x.i + 1}</td><td data-l="Kết quả">${tr.ok ? '✓ Đúng' : '✗ ' + esc(tr.nhan || 'Chưa đúng')}</td></tr>`).join('')}</tbody></table></div>` : ''}`;
+}
+let maXem = MEMBERS[0];
+function exportCode() { return 'LHA1:' + b64e(JSON.stringify({ ten: ROOT.current, xuat: Date.now(), att: S.att })); }
 
 /* ---------- TRANG CHỦ ---------- */
 function viewHome() {
@@ -462,7 +572,7 @@ function viewHome() {
   app.innerHTML = `<div class="wrap">
   <section class="hero">
     <div>
-      <p class="crumb">Sổ tay tự học THCS · Lớp 6 – 9</p>
+      <p class="crumb">Chào ${esc(ROOT.current)}! · <a href="#chon-nguoi-hoc">Không phải em? Đổi người học</a></p>
       <h1>Hôm nay em muốn khám phá điều gì?</h1>
       <p class="lead">Đọc bài ngắn, làm bài từ cơ bản đến nâng cao, sai thì sửa — có gợi ý và gia sư đi cùng em.</p>
       ${lt ? `<a class="card resume m-${lt.mon}" href="#bai-${lt.id}" data-resume="1"><span class="badge">Học tiếp</span><span class="t"><b>${esc(lt.ten)}</b><br><span class="muted small">Lớp ${lt.lop} · ${esc(D.mon[lt.mon].ten)} · ${L.tt ? 'Câu luyện lại của câu ' + (L.i + 1) : 'Câu ' + (L.i + 1) + '/' + lt.cauHoi.length}</span></span><span aria-hidden="true">→</span></a>` : ''}
@@ -482,7 +592,11 @@ function viewHome() {
     }).join('')}</div>`).join('') || '<p class="muted">Chưa có chủ đề.</p>'}
     <p class="note">Chủ đề có ghi số bài, số trang đã được đối chiếu với mục lục SGK. Các chủ đề còn lại là tên dự kiến theo mạch nội dung, chưa đối chiếu.</p>
   </section>
-  <section class="row" style="margin-top:28px">
+  <details style="margin-top:24px"><summary>📤 Gửi kết quả cho Má (khi em học trên máy khác máy của Má)</summary><div>
+    <p class="small">Bấm “Sao chép mã”, rồi gửi mã này cho Má qua Zalo/Messenger. Má dán mã vào mục “Má Điệp yêu con” để xem kết quả của em.</p>
+    <textarea id="maGui" readonly rows="3" style="width:100%;font-size:13px;border-radius:10px;border:1px solid var(--line);background:var(--bg);padding:8px">${esc(exportCode())}</textarea>
+    <div class="row" style="margin-top:6px"><button class="btn sm" data-copy="maGui">Sao chép mã</button><button class="btn sm ghost" data-act3="taiMa">Tải tệp kết quả</button></div></div></details>
+  <section class="row" style="margin-top:18px">
     <a class="btn soft" href="#on-loi">Ôn lỗi của em${nErr ? ' (' + nErr + ')' : ''}</a>
     <a class="btn ghost" href="#giao-vien">Má Điệp yêu con</a>
   </section>
@@ -899,10 +1013,18 @@ function viewTeacher() {
   const inv = inventory(), sum = k => inv.reduce((s, r) => s + r[k], 0), issues = validate();
   const verified = Object.values(ALLQ).filter(x => x.q.kiemTra?.doiChieuNguon === 'da-doi-chieu' && x.q.kiemTra?.dapAn === 'da-kiem-tra');
   const cols = [['cb', 'Cơ bản'], ['vd', 'Vận dụng'], ['nc', 'Nâng cao'], ['tt', 'Câu luyện lại'], ['tong', 'Tổng số câu'], ['trich', 'Trích / phỏng theo'], ['tuSoan', 'Tự biên soạn'], ['daKT', 'Đáp án đã kiểm tra'], ['daDC', 'Đã đối chiếu nguồn'], ['cho', 'Chờ xác minh']];
-  app.innerHTML = `<div class="wrap guide"><h1>Má Điệp yêu con</h1><p class="crumb">Góc dành cho giáo viên</p>
+  app.innerHTML = `<div class="wrap guide"><h1>Má Điệp yêu con</h1>
+  <p class="lead">Theo dõi bài tập từng con đã làm và những vấn đề nên ôn luyện thêm.</p>
+  <div class="mtabs" role="group" aria-label="Chọn con">${MEMBERS.map(n => `<button data-maxem="${esc(n)}" aria-pressed="${n === maXem}">👤 ${esc(n)}</button>`).join('')}</div>
+  <section id="maStats">${statsHTML(maXem)}</section>
+  <details style="margin-top:18px"><summary>📥 Nhận kết quả của con từ máy khác</summary><div>
+    <p class="small">Khi con học trên điện thoại hoặc máy tính khác, con bấm “Gửi kết quả cho Má” ở trang chủ và gửi mã cho Má. Má dán mã (hoặc chọn tệp kết quả) vào đây.</p>
+    <textarea id="maNhan" rows="3" style="width:100%;font-size:13px;border-radius:10px;border:1px solid var(--line);background:var(--bg);padding:8px" placeholder="Dán mã bắt đầu bằng LHA1: …"></textarea>
+    <div class="row" style="margin-top:6px"><button class="btn sm pri" data-act3="nhanMa">Nhận kết quả</button><label class="btn sm ghost">Chọn tệp kết quả<input type="file" id="maTep" accept=".json,.txt" hidden></label><span id="maNhanFb" class="small"></span></div></div></details>
+  <details class="soan"><summary>🛠 Góc soạn học liệu: kiểm kê, nguồn, hướng dẫn</summary><div>
   <p class="lead">Kiểm kê học liệu, trạng thái nguồn và hướng dẫn thêm câu hỏi, sửa đáp án, triển khai miễn phí. Phiên bản học liệu: ${esc(D.phienBan || '')}.</p>
   <div class="row" style="margin:10px 0 18px"><span class="badge ok">Ngân hàng đã xác minh: ${verified.length} câu</span><span class="badge wait">Ngân hàng chờ xác minh: ${Object.keys(ALLQ).length - verified.length} câu</span></div>
-  <h2>Bảng kiểm kê 5 chủ đề mẫu</h2>
+  <h2>Bảng kiểm kê học liệu</h2>
   <p class="small muted">“Tổng số câu” gồm câu chính và câu luyện lại. Ba cột cuối tính trên tổng số câu.</p>
   <div class="scroll card"><table class="inv"><thead><tr><th>Chủ đề</th>${cols.map(c => `<th class="n">${c[1]}</th>`).join('')}</tr></thead><tbody>
   ${inv.map(r => `<tr><td><b>${esc(r.t.ten)}</b><br><span class="small muted">Lớp ${r.t.lop} · ${esc(r.t.phanMon)}</span></td>${cols.map(c => `<td class="n">${r[c[0]]}</td>`).join('')}</tr>`).join('')}
@@ -939,19 +1061,40 @@ function viewTeacher() {
   <ul><li>Khi mở trang trên Claude, “Hỏi AI tự do” dùng AI của Claude qua tài khoản người xem (sẽ hỏi quyền ở lần đầu).</li><li>Khi tự triển khai: tạo máy chủ trung gian giữ khóa API (ví dụ Cloudflare Worker gói miễn phí, mã bên dưới), rồi ghi địa chỉ vào <code>caiDat.aiEndpoint</code> trong <code>hoc-lieu.js</code>. Không bao giờ ghi khóa API vào <code>index.html</code> hay <code>hoc-lieu.js</code>.</li><li>Hết hạn mức hoặc mất kết nối: trang tự chuyển về “Trợ giúp theo bài học”, bài làm giữ nguyên.</li></ul>
   <div class="row"><button class="btn sm" data-copy="wk">Sao chép mã máy chủ AI</button></div><pre id="wk">${esc(WORKER)}</pre>
   <h3>7. Xóa tiến độ trên máy này</h3>
-  <div class="row"><button class="btn" data-act2="reset">Xóa tiến độ…</button><span id="rs"></span></div>
+  <div class="row"><button class="btn" data-act2="reset">Xóa tiến độ của mọi thành viên…</button><span id="rs"></span></div>
+  </div></details>
   </div>`;
 }
 app.addEventListener('click', async e => {
   const c = e.target.closest('[data-copy]');
   if (c) { try { await navigator.clipboard.writeText($('#' + c.dataset.copy).textContent); toast('Đã sao chép.'); } catch (x) { toast('Trình duyệt không cho sao chép — hãy bôi đen và sao chép thủ công.'); } return; }
   const r = e.target.closest('[data-act2]'); if (!r) return;
-  if (r.dataset.act2 === 'reset') $('#rs').innerHTML = '<span class="small">Chắc chắn xóa toàn bộ tiến độ trên máy này? </span><button class="btn sm" data-act2="resetYes">Xóa</button> <button class="btn sm ghost" data-act2="resetNo">Không</button>';
+  if (r.dataset.act2 === 'reset') $('#rs').innerHTML = '<span class="small">Chắc chắn xóa tiến độ của mọi thành viên trên máy này (kể cả kết quả đã nhập)? </span><button class="btn sm" data-act2="resetYes">Xóa</button> <button class="btn sm ghost" data-act2="resetNo">Không</button>';
   if (r.dataset.act2 === 'resetNo') $('#rs').innerHTML = '';
-  if (r.dataset.act2 === 'resetYes') { S = { att: {}, draft: {}, pos: {}, tab: {}, loc: {}, lop: 7, mon: 'toan' }; save(); $('#rs').textContent = 'Đã xóa tiến độ.'; }
+  if (r.dataset.act2 === 'resetYes') { ROOT = { members: {}, current: null, nhap: {} }; S = blank(); V = {}; try { localStorage.setItem(KEY, JSON.stringify(ROOT)); } catch (x) {} $('#rs').textContent = 'Đã xóa tiến độ.'; $('#maStats').innerHTML = statsHTML(maXem); }
 });
 
-window.__lophoc = { grade, parseNum, checkOpen, validate, inventory, ALLQ, state: () => S };
+app.addEventListener('click', e => {
+  const m = e.target.closest('[data-member]'); if (m) { useMember(m.dataset.member); if (location.hash === '#trang-chu') route(); else location.hash = '#trang-chu'; return; }
+  const mx = e.target.closest('[data-maxem]'); if (mx) { maXem = mx.dataset.maxem; $$('[data-maxem]').forEach(b => b.setAttribute('aria-pressed', String(b === mx))); $('#maStats').innerHTML = statsHTML(maXem); return; }
+  const a3 = e.target.closest('[data-act3]'); if (!a3) return;
+  if (a3.dataset.act3 === 'taiMa') { const blob = new Blob([exportCode()], { type: 'text/plain' }); const u = URL.createObjectURL(blob); const l = document.createElement('a'); l.href = u; l.download = 'ket-qua-' + ROOT.current + '-' + new Date().toISOString().slice(0, 10) + '.txt'; document.body.appendChild(l); l.click(); l.remove(); setTimeout(() => URL.revokeObjectURL(u), 2000); toast('Nếu trình duyệt không tải được tệp, em dùng nút “Sao chép mã”.'); }
+  if (a3.dataset.act3 === 'nhanMa') nhanMa($('#maNhan').value);
+});
+app.addEventListener('change', async e => { if (e.target.id === 'maTep' && e.target.files[0]) nhanMa(await e.target.files[0].text()); });
+function nhanMa(raw) {
+  const fb = $('#maNhanFb');
+  try {
+    const s = String(raw || '').trim(); if (!s.startsWith('LHA1:')) throw new Error('Mã phải bắt đầu bằng LHA1:');
+    const d = JSON.parse(b64d(s.slice(5))); if (!MEMBERS.includes(d.ten)) throw new Error('Mã không thuộc thành viên nào của lớp.');
+    if (!d.att || typeof d.att !== 'object') throw new Error('Mã không có dữ liệu bài làm.');
+    const cu = ROOT.nhap[d.ten]; if (cu && cu.xuat > d.xuat) throw new Error('Mã này cũ hơn kết quả đã nhận trước đó.');
+    ROOT.nhap[d.ten] = { att: d.att, xuat: d.xuat || Date.now() }; try { localStorage.setItem(KEY, JSON.stringify(ROOT)); } catch (x) {}
+    maXem = d.ten; viewTeacher(); toast('Đã nhận kết quả của ' + d.ten + '.');
+  } catch (err) { if (fb) fb.textContent = '✗ ' + err.message; }
+}
+
+window.__lophoc = { grade, parseNum, checkOpen, validate, inventory, ALLQ, state: () => S, root: () => ROOT, memberStats, memberAtt };
 route();
 }
 }

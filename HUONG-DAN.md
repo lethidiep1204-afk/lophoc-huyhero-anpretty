@@ -1,7 +1,7 @@
 # LophocHuyhero-Anpretty — Hướng dẫn sử dụng bản web độc lập
 
 Sổ tay tự học THCS lớp 6–9: Khoa học tự nhiên, Toán (Số và Đại số), Tiếng Anh.
-Phiên bản học liệu: 1.3 — 26/11/2026 (10 chủ đề lớp 7 và lớp 8, 120 câu; 60 câu đã đối chiếu SGK).
+Phiên bản học liệu: 1.4 — 26/11/2026 (10 chủ đề lớp 7 và lớp 8, 120 câu; 60 câu đã đối chiếu SGK; có chọn thành viên và thống kê cho Má).
 
 ## 1. Trong thư mục có gì
 
@@ -23,6 +23,15 @@ Ngoài thư mục còn có **`LophocHuyhero-Anpretty-1-tep.html`**: bản gộp 
 3. Tiến độ (bài đang học, câu đang làm, lần làm đầu, các lần sửa, câu cần ôn) được lưu **trong trình duyệt của máy đó**. Đổi máy hoặc xóa dữ liệu trình duyệt thì tiến độ bắt đầu lại.
 
 Khi không có mạng, trang dùng phông chữ hệ thống thay cho Be Vietnam Pro; mọi chức năng vẫn chạy.
+
+## 2b. Thành viên học và thống kê cho Má
+
+- Khi mở web, màn hình đầu tiên là **"Ai đang học hôm nay?"** với hai thành viên **Huyhero** và **Anpretty**. Con phải chọn đúng tên mình mới vào được phần chọn lớp và học bài. Nút 👤 ở góc trên dùng để đổi người học.
+- Mỗi con có sổ tiến độ riêng: bài đang học, câu đã làm, lần làm đầu, các lần sửa, câu cần ôn.
+- Mục **"Má Điệp yêu con"** cho xem từng con: số câu đã làm, tỉ lệ đúng ngay lần đầu, số câu tự sửa đúng, câu còn sai, số lần xin gợi ý, lần học gần nhất; **những vấn đề nên ôn luyện thêm**; lỗi con hay mắc; kết quả theo chủ đề; các câu còn sai; hoạt động gần đây.
+- Tiến độ được lưu **trong trình duyệt của từng máy**. Nếu con học trên máy khác máy của Má: ở trang chủ, con mở **"Gửi kết quả cho Má"**, bấm **"Sao chép mã"** (hoặc "Tải tệp kết quả") và gửi cho Má. Má mở "Má Điệp yêu con" › **"Nhận kết quả của con từ máy khác"**, dán mã (hoặc chọn tệp) rồi bấm **"Nhận kết quả"**.
+- Thêm hoặc đổi tên thành viên: sửa `thanhVien: ['Huyhero', 'Anpretty']` trong `caiDat` của `hoc-lieu.js`.
+- Không có mật khẩu: con nào cũng có thể bấm tên bạn kia. Nếu cần, nhắc các con chọn đúng tên.
 
 ## 3. Đưa lên web miễn phí
 

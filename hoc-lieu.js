@@ -1128,10 +1128,12 @@
 
   window.HOC_LIEU = {
     tenWeb: TEN_WEB,
-    phienBan: '1.3 — ' + NGAY_SOAN + ' (thêm 2 chủ đề Toán 8 đối chiếu SGK)',
+    phienBan: '1.4 — ' + NGAY_SOAN + ' (thêm chọn thành viên Huyhero, Anpretty và thống kê cho Má)',
     caiDat: {
       // Địa chỉ máy chủ trung gian AI (tùy chọn). Để trống = chỉ dùng AI qua Claude Artifact (nếu có) hoặc trợ giúp theo bài học.
-      aiEndpoint: ''
+      aiEndpoint: '',
+      // Thành viên học (tên hiển thị ở màn hình "Ai đang học hôm nay?"). Thêm/bớt tên tại đây.
+      thanhVien: ['Huyhero', 'Anpretty']
     },
     mon: {
       khtn: { ten: 'Khoa học tự nhiên', ngan: 'KHTN', moTa: 'Vật lí · Hóa học · Sinh học' },

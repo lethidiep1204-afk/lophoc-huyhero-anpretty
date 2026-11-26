@@ -36,7 +36,7 @@ Chọn một trong ba cách. Điều khoản gói miễn phí có thể thay đ�
 
 Sau khi có liên kết `https://…`: học sinh mở một lần khi có mạng, sau đó vẫn dùng được khi mất mạng. Trên điện thoại có thể chọn "Thêm vào màn hình chính".
 
-**Mỗi lần cập nhật học liệu trên web:** sửa `hoc-lieu.js`, mở `sw.js` và tăng số phiên bản (`lophoc-v1` → `lophoc-v2`), rồi tải lại cả hai tệp lên.
+**Mỗi lần cập nhật học liệu trên web:** sửa `hoc-lieu.js`; mở `sw.js` và tăng số phiên bản (ví dụ `lophoc-v2` → `lophoc-v3`); mở `index.html`, tìm `hoc-lieu.js?v=` và đổi chuỗi phía sau thành bất kì chữ mới nào (ví dụ `?v=2026-12-01`). Tải cả ba tệp lên. Nếu chỉ sửa `hoc-lieu.js`, trang vẫn cập nhật nhưng có thể chậm tới khoảng 10 phút.
 
 ## 4. Thêm, sửa câu hỏi
 

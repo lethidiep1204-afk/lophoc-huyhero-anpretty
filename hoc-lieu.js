@@ -226,7 +226,7 @@
         'Hạt nhân chứa <b>proton</b> (p, điện tích +1) và <b>neutron</b> (n, không mang điện). Vỏ có <b>electron</b> (e, điện tích −1).',
         'Nguyên tử trung hòa về điện: <b>số p = số e</b>.',
         'Khối lượng: proton ≈ neutron ≈ 1 amu; electron ≈ 0,00055 amu (rất nhỏ). Vì vậy <b>khối lượng nguyên tử ≈ số p + số n</b> (amu).',
-        'Electron xếp theo lớp từ trong ra ngoài: lớp 1 tối đa <b>2</b> e, lớp 2 tối đa <b>8</b> e; trong các bài ở đây (số proton đến 18), lớp 3 chứa tối đa 8 e.'
+        'Electron xếp thành từng lớp, từ trong ra ngoài: lớp thứ nhất (trong cùng) tối đa <b>2</b> electron, lớp thứ hai tối đa <b>8</b> electron. Electron ở lớp ngoài cùng quyết định tính chất hoá học của nguyên tố. (Trong các bài ở đây, số proton không quá 18 nên lớp thứ ba chứa không quá 8 electron.)'
       ],
       viDu: { de: 'Nguyên tử fluorine có 9 proton và 10 neutron. Tìm số electron, khối lượng nguyên tử và số electron ở từng lớp.', loiGiai: 'Số e = số p = <b>9</b>.<br>Khối lượng ≈ 9 + 10 = <b>19 amu</b>.<br>Xếp electron: lớp 1 có 2 e, lớp 2 có 9 − 2 = 7 e → <b>2, 7</b>. Lớp ngoài cùng có 7 electron.' },
       nguon: tuSoan(SGK_KHTN7 + ' — bài về Nguyên tử: mô hình nguyên tử, khối lượng nguyên tử (amu), sự sắp xếp electron.'),
@@ -255,7 +255,7 @@
       },
       {
         id: 'HH7-03', muc: 'van-dung', liDoMuc: 'Kết hợp hai ý: khối lượng tập trung ở hạt nhân + bỏ qua khối lượng electron.', loai: 'so',
-        de: 'Nguyên tử aluminium có <b>13 proton</b> và <b>14 neutron</b>. Khối lượng nguyên tử aluminium xấp xỉ bao nhiêu amu?', donVi: 'amu', dapAn: 27,
+        de: 'Nguyên tử nhôm (aluminium) có <b>13 proton</b> và <b>14 neutron</b>. Khối lượng nguyên tử aluminium xấp xỉ bao nhiêu amu?', donVi: 'amu', dapAn: 27,
         loi: [{ gt: 40, nhan: 'Nhầm khái niệm', phanHoi: 'Em đã cộng cả 13 electron. Electron rất nhẹ (≈ 0,00055 amu) nên khi tính gần đúng ta bỏ qua.' }, { gt: 13, nhan: 'Thiếu dữ kiện', phanHoi: 'Em mới tính proton. Neutron cũng nặng ≈ 1 amu.' }, { gt: 26, nhan: 'Nhầm khái niệm', phanHoi: 'Em đã lấy 2 × 13 (p + e?). Hãy dùng p + n.' }],
         buoc: { hoi: 'Mỗi proton và mỗi neutron nặng khoảng bao nhiêu amu?', dapAn: 1, saiSo: 0.01, dung: 'Đúng, ≈ 1 amu. Vậy 13 proton và 14 neutron nặng khoảng bao nhiêu?', sai: 'Mỗi hạt proton, neutron ≈ 1 amu.' },
         goiY: ['Hạt nào đóng góp gần như toàn bộ khối lượng?', 'Khối lượng ≈ số p + số n.'], viSaoDung: '13 + 14 = 27 amu; electron nhẹ nên bỏ qua.', loiGiai: 'Khối lượng ≈ 13 + 14 = <b>27 amu</b>.',
@@ -371,7 +371,7 @@
           id: 'SH7-05-TT', muc: 'nang-cao', liDoMuc: 'Như câu gốc.', loai: 'chonNhieu', de: 'Đặt một cành rong trong ống nghiệm nước, chiếu đèn ở các khoảng cách khác nhau và đếm số bọt khí thoát ra trong 5 phút. <b>Chọn TẤT CẢ các kết luận được dữ liệu ủng hộ</b>.',
           bang: { tieuDe: ['Khoảng cách đèn', 'Số bọt khí / 5 phút'], dong: [['10 cm', '30'], ['20 cm', '18'], ['40 cm', '7']], ghiChu: GIA_DINH },
           phuongAn: [{ t: 'Đèn càng gần (ánh sáng càng mạnh) thì số bọt khí càng nhiều.', dung: true }, { t: 'Có thể dùng số bọt khí để so sánh mức độ quang hợp ở các khoảng cách đèn.', dung: true }, { t: 'Nếu tắt đèn hoàn toàn, số bọt khí sẽ tăng lên.', phanHoi: 'Dữ liệu cho thấy ánh sáng yếu đi thì bọt khí giảm, nên tắt đèn không thể làm tăng.' }, { t: 'Nhiệt độ là yếu tố duy nhất làm thay đổi số bọt khí.', phanHoi: 'Thí nghiệm thay đổi khoảng cách đèn; không có dữ liệu cho thấy nhiệt độ là yếu tố duy nhất.' }],
-          goiY: ['Đọc xu hướng của bảng.'], viSaoDung: 'Gần đèn → nhiều bọt → quang hợp mạnh hơn.', loiGiai: 'Ý 1, 2 đúng.', giangLai: 'Nhìn bảng: khoảng cách tăng thì số bọt giảm.', nguon: tuSoan(SGK_KHTN7 + ' — ảnh hưởng của ánh sáng đến quang hợp.', { soLieu: GIA_DINH }), kiemTra: kt()
+          goiY: ['Đọc xu hướng của bảng.'], viSaoDung: 'Gần đèn → nhiều bọt → quang hợp mạnh hơn.', loiGiai: 'Ý 1, 2 đúng. Lưu ý: SGK cũng nêu ánh sáng quá mạnh có thể làm giảm hiệu quả quang hợp, nên kết luận chỉ đúng trong phạm vi số liệu của thí nghiệm.', giangLai: 'Nhìn bảng: khoảng cách tăng thì số bọt giảm.', nguon: tuSoan(SGK_KHTN7 + ' — ảnh hưởng của ánh sáng đến quang hợp.', { soLieu: GIA_DINH }), kiemTra: kt()
         }
       },
       {
@@ -840,6 +840,81 @@
     ]
   };
 
+
+  /* ==================================================================
+     ĐỐI CHIẾU SGK — KHOA HỌC TỰ NHIÊN 7 (đã mở và đọc ngày 26/11/2026)
+     Giáo viên sửa vị trí ở đây nếu dùng ấn bản khác. Số trang theo số in trên sách.
+     ================================================================== */
+  const SGK_KHTN7_DOC = {
+    tenTaiLieu: 'Khoa học tự nhiên 7 (bộ sách "Kết nối tri thức với cuộc sống")',
+    tacGia: 'Vũ Văn Hùng (Tổng Chủ biên); Mai Văn Hưng, Lê Kim Long, Bùi Gia Thịnh (đồng Chủ biên) và nhóm tác giả',
+    donViPhatHanh: 'Nhà xuất bản Giáo dục Việt Nam',
+    anBan: 'Bản quyền 2022 · ISBN 978-604-0-30713-2 · Mã số G1HH7K001H22',
+    banDoc: 'Bản PDF trong thư mục Google Drive "Bo sach ket noi tri thuc 6 - 7 - 8 - 9" › "Tin 7" (chia sẻ cho giáo viên); đọc ngày 26/11/2026'
+  };
+  // [id, vị trí, loại ('C' hoặc 'B'), phần đã thay đổi (với B), ghi chú]
+  const DC_KHTN7 = [
+    ['VL7-01', 'Bài 8 "Tốc độ chuyển động", mục I, trang 45 (công thức 8.1: v = s/t)'],
+    ['VL7-01-TT', 'Bài 8, mục I, trang 45 (công thức 8.1)'],
+    ['VL7-02', 'Bài 8, mục I, trang 45–46 (khái niệm tốc độ chuyển động)'],
+    ['VL7-02-TT', 'Bài 8, mục II, trang 46 (Bảng 8.1 — các đơn vị đo tốc độ thường dùng)'],
+    ['VL7-03', 'Bài 8, mục II, trang 46 (đơn vị m/s, km/h; 1 m/s = 3,6 km/h)'],
+    ['VL7-03-TT', 'Bài 8, mục II, trang 46 (đổi đơn vị tốc độ)'],
+    ['VL7-04', 'Bài 8, mục I, trang 45 (hai cách xác định sự nhanh, chậm; công thức 8.1)'],
+    ['VL7-04-TT', 'Bài 8, mục I, trang 45'],
+    ['VL7-05', 'Bài 8, trang 46 (khung kiến thức: "tốc độ trung bình của chuyển động")'],
+    ['VL7-05-TT', 'Bài 8, trang 46 (tốc độ trung bình)'],
+    ['VL7-06', 'Bài 8, trang 46 (tốc độ trung bình; s = v.t và t = s/v)'],
+    ['VL7-06-TT', 'Bài 8, trang 46 (tốc độ trung bình)'],
+    ['HH7-01', 'Bài 2 "Nguyên tử", mục II–III, trang 15–17 (hạt nhân mang điện dương: proton mang điện dương, neutron không mang điện; electron mang điện âm)'],
+    ['HH7-01-TT', 'Bài 2, trang 15–18 (neutron không mang điện)'],
+    ['HH7-02', 'Bài 2, trang 17 (nguyên tử trung hoà về điện: tổng số proton bằng tổng số electron)'],
+    ['HH7-02-TT', 'Bài 2, trang 17'],
+    ['HH7-03', 'Bài 2, mục IV "Khối lượng nguyên tử", trang 18 — dữ kiện lấy từ câu hỏi 2 của mục này (nguyên tử nhôm 13p, 14n)', 'B',
+      'Giữ dữ kiện nguyên tử nhôm (13p, 14n); đổi yêu cầu từ so sánh khối lượng nhôm với đồng sang tính khối lượng nguyên tử nhôm theo amu; thêm phản hồi cho các lỗi thường gặp.'],
+    ['HH7-03-TT', 'Bài 2, mục IV, trang 18 (đơn vị amu; proton ≈ neutron ≈ 1 amu; electron ≈ 0,00055 amu)'],
+    ['HH7-04', 'Bài 2, trang 15 và 17 (lớp electron thứ nhất tối đa 2 electron, lớp thứ hai tối đa 8 electron; Hình 2.5 nguyên tử nitrogen)'],
+    ['HH7-04-TT', 'Bài 2, trang 15, 17–18 (các lớp electron; Hình 2.6 sơ đồ ba lớp electron của chlorine)'],
+    ['HH7-05', 'Bài 2, trang 17–18 (số proton = số electron; khối lượng nguyên tử tập trung ở hạt nhân)'],
+    ['HH7-05-TT', 'Bài 2, trang 17–18'],
+    ['HH7-06', 'Bài 2, trang 16–18 (thành phần hạt nhân, vỏ nguyên tử; số proton = số electron)', 'C', null, 'Dạng bài "tổng số hạt" không có trong Bài 2 của SGK; đây là bài nâng cao tự biên soạn dựa trên kiến thức của bài.'],
+    ['HH7-06-TT', 'Bài 2, trang 16–18', 'C', null, 'Dạng bài nâng cao, không có trong SGK.'],
+    ['SH7-01', 'Bài 22 "Quang hợp ở thực vật", mục I, trang 101 (Bảng 22.1, Hình 22.1, phương trình tổng quát)'],
+    ['SH7-01-TT', 'Bài 22, mục I, trang 101'],
+    ['SH7-02', 'Bài 22, mục I, trang 101 (bào quan quang hợp là lục lạp); trang 103 (Bảng 22.2)'],
+    ['SH7-02-TT', 'Bài 22, trang 101 và 103 (lục lạp chứa diệp lục, hấp thụ năng lượng ánh sáng)'],
+    ['SH7-03', 'Bài 22, trang 101–102; Bài 24 "Thực hành: Chứng minh quang hợp ở cây xanh", trang 108 (bước đặt cây trong bóng tối 2 ngày)'],
+    ['SH7-03-TT', 'Bài 22, trang 103 (Bảng 22.2: vai trò của khí khổng trong quang hợp)'],
+    ['SH7-04', 'Bài 22, mục I.2 "Phương trình tổng quát", trang 101'],
+    ['SH7-04-TT', 'Bài 22, mục I.2, trang 101 (glucose liên kết tạo thành tinh bột)'],
+    ['SH7-05', 'Bài 24 "Thực hành: Chứng minh quang hợp ở cây xanh", mục II.1 "Thí nghiệm chứng minh tinh bột được tạo thành trong quang hợp", trang 108–109', 'B',
+      'Giữ cách tiến hành của thí nghiệm trong SGK; thêm bảng kết quả mô phỏng và đổi yêu cầu thành chọn các kết luận được dữ liệu ủng hộ.'],
+    ['SH7-05-TT', 'Bài 23 "Một số yếu tố ảnh hưởng đến quang hợp", mục I.1 "Ánh sáng", trang 104; Bài 24, trang 108 (mẫu vật rong đuôi chó)'],
+    ['SH7-06', 'Bài 22, trang 101–103 (nguyên liệu, sản phẩm; trao đổi chất và chuyển hoá năng lượng)'],
+    ['SH7-06-TT', 'Bài 23, mục I.1 "Ánh sáng", trang 104; Bài 22, trang 103 (mục "Em có thể")']
+  ];
+  const BAI_KHTN7 = {
+    'vl7-toc-do': { sgk: 'SGK KHTN 7 — Bài 8, trang 45–48', viTri: 'Bài 8 "Tốc độ chuyển động", trang 45–46 (đã đọc mục tiêu, mục I, mục II)', yccd: 'Đã đối chiếu với mục tiêu Bài 8 trong SGK KHTN 7 (trang 45).' },
+    'hh7-nguyen-tu': { sgk: 'SGK KHTN 7 — Bài 2, trang 14–18', viTri: 'Bài 2 "Nguyên tử", trang 15–18 (mục II, III, IV và "Em đã học")', yccd: 'Đã đối chiếu với nội dung Bài 2 trong SGK KHTN 7 (trang 14–18).' },
+    'sh7-quang-hop': { sgk: 'SGK KHTN 7 — Bài 22, trang 101–103', viTri: 'Bài 22 "Quang hợp ở thực vật", trang 101–103 (mục tiêu, mục I, Bảng 22.2, "Em đã học")', yccd: 'Đã đối chiếu với mục tiêu Bài 22 trong SGK KHTN 7 (trang 101).' }
+  };
+  function apDungDoiChieu(chuDe) {
+    const map = Object.fromEntries(DC_KHTN7.map(r => [r[0], r]));
+    chuDe.forEach(t => {
+      const b = BAI_KHTN7[t.id]; if (!b) return;
+      t.sgk = b.sgk; t.yccdGhiChu = b.yccd;
+      t.bai.nguon = Object.assign({}, t.bai.nguon, SGK_KHTN7_DOC, { canCu: 'Đã đối chiếu: SGK KHTN 7 — ' + b.viTri, viTri: b.viTri, canDoiChieu: null });
+      t.cauHoi.forEach(q => [q, q.tuongTu].forEach(x => {
+        const r = x && map[x.id]; if (!r) return;
+        const [, viTri, loai, thayDoi, ghiChu] = r;
+        const n = Object.assign({}, x.nguon, SGK_KHTN7_DOC, { viTri, canCu: 'Đã đối chiếu: SGK KHTN 7 — ' + viTri, canDoiChieu: null, ghiChu: ghiChu || null });
+        if (loai === 'B') Object.assign(n, { loai: 'B', loaiTen: 'Bài tập phỏng theo SGK Khoa học tự nhiên 7 (Kết nối tri thức)', thayDoi });
+        x.nguon = n;
+        x.kiemTra = Object.assign({}, x.kiemTra, { doiChieuNguon: 'da-doi-chieu', ngayDoiChieu: '26/11/2026' });
+      }));
+    });
+  }
+
   /* ------------------------------------------------------------------
      DANH MỤC CẢ 4 KHỐI — tên chủ đề dự kiến theo mạch nội dung,
      CHƯA đối chiếu số bài / Unit / trang. "id" chỉ có ở chủ đề đã soạn.
@@ -851,7 +926,7 @@
       anh: [['Ngữ pháp', 'Thì hiện tại đơn và hiện tại tiếp diễn'], ['Ngữ pháp', 'Giới từ chỉ vị trí'], ['Ngữ pháp', 'So sánh hơn của tính từ'], ['Từ vựng', 'Trường học, nhà ở, bạn bè'], ['Đọc hiểu – Viết', 'Đoạn văn miêu tả ngắn']]
     },
     7: {
-      khtn: [['Vật lí', 'Tốc độ chuyển động', 'vl7-toc-do'], ['Vật lí', 'Âm thanh'], ['Vật lí', 'Ánh sáng'], ['Vật lí', 'Từ'], ['Hóa học', 'Nguyên tử', 'hh7-nguyen-tu'], ['Hóa học', 'Nguyên tố hóa học'], ['Hóa học', 'Sơ lược bảng tuần hoàn'], ['Hóa học', 'Phân tử và liên kết hóa học'], ['Sinh học', 'Quang hợp ở thực vật', 'sh7-quang-hop'], ['Sinh học', 'Hô hấp tế bào'], ['Sinh học', 'Trao đổi nước và chất dinh dưỡng'], ['Sinh học', 'Cảm ứng, sinh trưởng và sinh sản']],
+      khtn: [['Vật lí', 'Tốc độ chuyển động', 'vl7-toc-do', 'Bài 8 · tr. 45'], ['Vật lí', 'Đo tốc độ; Đồ thị quãng đường – thời gian', null, 'Bài 9–10 · tr. 49'], ['Vật lí', 'Âm thanh', null, 'Chương IV · Bài 12–14 · tr. 60'], ['Vật lí', 'Ánh sáng', null, 'Chương V · Bài 15–17 · tr. 72'], ['Vật lí', 'Từ', null, 'Chương VI · Bài 18–20 · tr. 86'], ['Hóa học', 'Nguyên tử', 'hh7-nguyen-tu', 'Bài 2 · tr. 14'], ['Hóa học', 'Nguyên tố hoá học', null, 'Bài 3 · tr. 19'], ['Hóa học', 'Sơ lược về bảng tuần hoàn các nguyên tố hoá học', null, 'Bài 4 · tr. 23'], ['Hóa học', 'Phân tử – Liên kết hoá học', null, 'Chương II · Bài 5–7 · tr. 32'], ['Sinh học', 'Quang hợp ở thực vật', 'sh7-quang-hop', 'Bài 22 · tr. 101'], ['Sinh học', 'Một số yếu tố ảnh hưởng đến quang hợp', null, 'Bài 23 · tr. 104'], ['Sinh học', 'Hô hấp tế bào', null, 'Bài 25 · tr. 111'], ['Sinh học', 'Trao đổi khí ở sinh vật', null, 'Bài 28 · tr. 118'], ['Sinh học', 'Trao đổi nước và chất dinh dưỡng ở thực vật', null, 'Bài 30 · tr. 127'], ['Sinh học', 'Cảm ứng, sinh trưởng và sinh sản']],
       toan: [['Số và Đại số', 'Số hữu tỉ', 'toan7-so-huu-ti'], ['Số và Đại số', 'Số thực', 'toan7-so-thuc'], ['Số và Đại số', 'Tỉ lệ thức và đại lượng tỉ lệ', 'toan7-ti-le-thuc'], ['Số và Đại số', 'Biểu thức đại số và đa thức một biến', 'toan7-da-thuc']],
       anh: [['Ngữ pháp – Viết', 'Diễn đạt sở thích bằng thì hiện tại đơn', 'ta7-so-thich'], ['Ngữ pháp', 'Thì quá khứ đơn'], ['Ngữ pháp', 'So sánh: like, as … as, different from'], ['Đọc hiểu', 'Đọc đoạn văn thông tin ngắn'], ['Viết', 'Viết email ngắn']]
     },
@@ -867,9 +942,12 @@
     }
   };
 
+  const CHU_DE = [vatLi, hoaHoc, sinhHoc, toan, soThuc, tiLe, daThuc, tiengAnh];
+  apDungDoiChieu(CHU_DE);
+
   window.HOC_LIEU = {
     tenWeb: TEN_WEB,
-    phienBan: '1.1 — ' + NGAY_SOAN + ' (thêm 3 chủ đề Toán 7)',
+    phienBan: '1.2 — ' + NGAY_SOAN + ' (thêm 3 chủ đề Toán 7; đối chiếu SGK KHTN 7)',
     caiDat: {
       // Địa chỉ máy chủ trung gian AI (tùy chọn). Để trống = chỉ dùng AI qua Claude Artifact (nếu có) hoặc trợ giúp theo bài học.
       aiEndpoint: ''
@@ -881,12 +959,12 @@
     },
     taiLieuCanBoSung: [
       'SGK Toán 7, tập một và tập hai — bộ "Kết nối tri thức với cuộc sống" (NXB Giáo dục Việt Nam): các chương Số hữu tỉ, Số thực, Tỉ lệ thức và đại lượng tỉ lệ, Biểu thức đại số và đa thức một biến (tệp PDF hoặc ảnh các trang, kèm năm in/ấn bản).',
-      'SGK Khoa học tự nhiên 7 — bộ "Kết nối tri thức với cuộc sống": các bài Tốc độ chuyển động, Nguyên tử, Quang hợp ở thực vật (và bài về các yếu tố ảnh hưởng đến quang hợp nếu có).',
+      'Thư mục Drive giáo viên cung cấp chưa có SGK Toán 7, Tiếng Anh 7, KHTN 8, Tiếng Anh 8, Tiếng Anh 9 — cần bổ sung để đối chiếu các chủ đề tương ứng.',
       'SGK Tiếng Anh 7 Global Success (NXB Giáo dục Việt Nam): đơn vị bài học về sở thích (Hobbies) — phần Grammar và Writing; kèm Workbook nếu muốn trích bài tập.',
       'Sách bài tập tương ứng (nếu muốn có câu loại A "trích" hoặc loại B "phỏng theo"), kèm xác nhận quyền sử dụng lại nguyên văn.',
       'Văn bản Chương trình GDPT 2018 môn Toán, môn KHTN, môn Tiếng Anh (Thông tư 32/2018/TT-BGDĐT) từ cổng thông tin Bộ GD&ĐT — để đối chiếu "Yêu cầu cần đạt".'
     ],
-    chuDe: [vatLi, hoaHoc, sinhHoc, toan, soThuc, tiLe, daThuc, tiengAnh],
+    chuDe: CHU_DE,
     danhMuc: danhMuc
   };
 })();

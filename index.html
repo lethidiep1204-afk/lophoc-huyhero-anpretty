@@ -276,7 +276,7 @@ code{font-family:ui-monospace,Consolas,monospace;font-size:.9em;overflow-wrap:an
 </header>
 <main id="app"><div class="wrap"><p>Đang mở sổ tay…</p></div></main>
 <div id="toast" class="toast" hidden role="status"></div>
-<script src="hoc-lieu.js?v=318efb7d"></script>
+<script src="hoc-lieu.js?v=f5e98fed"></script>
 <script>
 {
 const D = window.HOC_LIEU;
@@ -434,6 +434,9 @@ function record(q, a, g) {
 }
 const status = id => { const r = S.att[id]; if (!r || !r.tries?.length) return r?.done ? 'ok' : ''; if (r.solved || r.done) return 'ok'; return 'bad'; };
 const topicDone = t => t.cauHoi.filter(q => status(q.id) === 'ok').length;
+const qAll = t => t.cauHoi.flatMap(q => q.tuongTu ? [q, q.tuongTu] : [q]);
+const srcState = t => { const a = qAll(t), n = a.filter(q => q.kiemTra?.doiChieuNguon === 'da-doi-chieu').length; return n === a.length ? 'ok' : n ? 'part' : 'none'; };
+const srcBadge = t => ({ ok: '<span class="badge ok">✓ Đã đối chiếu SGK</span>', part: '<span class="badge wait">Đối chiếu một phần</span>', none: '<span class="badge wait">Chờ đối chiếu nguồn</span>' })[srcState(t)];
 function setLast(tid, i, tt) { S.last = { tid, i, tt }; S.pos[tid] = { i, tt }; save(); }
 
 /* ---------- định tuyến ---------- */
@@ -455,7 +458,7 @@ function viewHome() {
   const nErr = Object.values(S.att).filter(r => r.first && !r.first.ok).length;
   const cat = D.danhMuc[S.lop] || {};
   const items = cat[S.mon] || [];
-  const groups = {}; items.forEach(([pm, ten, id]) => (groups[pm] ??= []).push({ ten, id }));
+  const groups = {}; items.forEach(([pm, ten, id, sgk]) => (groups[pm] ??= []).push({ ten, id, sgk }));
   app.innerHTML = `<div class="wrap">
   <section class="hero">
     <div>
@@ -474,16 +477,16 @@ function viewHome() {
   <section class="m-${S.mon}">
     <h2>Lớp ${S.lop} · ${esc(D.mon[S.mon].ten)}</h2>
     ${Object.entries(groups).map(([pm, arr]) => `<h3 class="group-h">${esc(pm)}</h3><div class="tlist">${arr.map(x => {
-      if (x.id && T[x.id]) { const t = T[x.id], d = topicDone(t); return `<a class="topic" href="#bai-${t.id}"><span class="row"><span class="badge">Chủ đề mẫu</span><span class="badge wait">Chờ đối chiếu nguồn</span></span><b>${esc(t.ten)}</b><span class="meter" aria-hidden="true"><i style="width:${d / t.cauHoi.length * 100}%"></i></span><span class="small muted">Đã làm đúng ${d}/${t.cauHoi.length} câu</span></a>`; }
-      return `<div class="topic draft"><span class="badge plain">Đang biên soạn</span><b>${esc(x.ten)}</b></div>`;
+      if (x.id && T[x.id]) { const t = T[x.id], d = topicDone(t); return `<a class="topic" href="#bai-${t.id}"><span class="row"><span class="badge">Chủ đề mẫu</span>${srcBadge(t)}</span><b>${esc(t.ten)}</b>${x.sgk ? `<span class="small muted">${esc(x.sgk)}</span>` : ''}<span class="meter" aria-hidden="true"><i style="width:${d / t.cauHoi.length * 100}%"></i></span><span class="small muted">Đã làm đúng ${d}/${t.cauHoi.length} câu</span></a>`; }
+      return `<div class="topic draft"><span class="badge plain">Đang biên soạn</span><b>${esc(x.ten)}</b>${x.sgk ? `<span class="small">${esc(x.sgk)}</span>` : ''}</div>`;
     }).join('')}</div>`).join('') || '<p class="muted">Chưa có chủ đề.</p>'}
-    <p class="note">Tên chủ đề là dự kiến theo mạch nội dung, chưa đối chiếu số bài, Unit hay trang sách.</p>
+    <p class="note">Chủ đề có ghi số bài, số trang đã được đối chiếu với mục lục SGK. Các chủ đề còn lại là tên dự kiến theo mạch nội dung, chưa đối chiếu.</p>
   </section>
   <section class="row" style="margin-top:28px">
     <a class="btn soft" href="#on-loi">Ôn lỗi của em${nErr ? ' (' + nErr + ')' : ''}</a>
     <a class="btn ghost" href="#giao-vien">Má Điệp yêu con</a>
   </section>
-  <p class="banner" style="margin-top:20px"><b>Lưu ý về học liệu:</b> tất cả câu hỏi hiện là <b>bài tập tự biên soạn</b>, đáp án đã được kiểm tra nhưng <b>nguồn chưa được đối chiếu với SGK</b>. Mỗi câu có nút “Xem nguồn” ghi rõ trạng thái.${canSave ? '' : ' Trình duyệt này không cho lưu tiến độ.'}</p>
+  <p class="banner" style="margin-top:20px"><b>Lưu ý về học liệu:</b> mọi đáp án đã được kiểm tra. ${(() => { const a = Object.values(ALLQ).map(x => x.q), d = a.filter(q => q.kiemTra?.doiChieuNguon === 'da-doi-chieu').length; return `<b>${d}/${a.length}</b> câu đã đối chiếu nguồn với SGK; các câu còn lại đang chờ đối chiếu.`; })()} Giáo viên chưa duyệt. Mỗi câu có nút “Xem nguồn” ghi rõ trạng thái.${canSave ? '' : ' Trình duyệt này không cho lưu tiến độ.'}</p>
   </div>`;
 }
 
@@ -498,7 +501,7 @@ function viewTopic(t) {
     <section class="main">
       <div class="row" style="margin-bottom:10px"><button class="btn sm pick" data-act="pick">☰ Chọn bài</button><a class="btn sm ghost" href="#trang-chu">← Trang chủ</a></div>
       <div class="paper">
-        <div class="thead"><div class="ic">${ICONS[t.mon]()}</div><div><div class="crumb">Lớp ${t.lop} · ${esc(D.mon[t.mon].ten)} · ${esc(t.phanMon)}</div><h1 style="font-size:clamp(26px,3.6vw,38px)">${esc(t.ten)}</h1><span class="badge wait">Chờ đối chiếu nguồn</span></div></div>
+        <div class="thead"><div class="ic">${ICONS[t.mon]()}</div><div><div class="crumb">Lớp ${t.lop} · ${esc(D.mon[t.mon].ten)} · ${esc(t.phanMon)}</div><h1 style="font-size:clamp(26px,3.6vw,38px)">${esc(t.ten)}</h1><span class="row" style="gap:6px">${srcBadge(t)}${t.sgk ? `<span class="badge plain">${esc(t.sgk)}</span>` : ''}</span></div></div>
         <div class="tabs" role="tablist"><button role="tab" data-tab="hoc" aria-selected="${tab === 'hoc'}">Học kiến thức</button><button role="tab" data-tab="luyen" aria-selected="${tab === 'luyen'}">Luyện tập (${topicDone(t)}/${t.cauHoi.length})</button></div>
         <div id="pane">${tab === 'hoc' ? learnHTML(t) : ''}</div>
       </div>
@@ -511,17 +514,17 @@ function sideHTML(t) {
   const cat = D.danhMuc[t.lop] || {};
   return `<div class="row" style="justify-content:space-between"><b>Danh mục bài</b><button class="btn sm x" data-act="pick" aria-label="Đóng danh mục">✕</button></div>
   <h3>Lớp</h3><div class="gsel">${[6, 7, 8, 9].map(g => `<button data-sidelop="${g}" aria-pressed="${g === (V.sideLop || t.lop)}">${g}</button>`).join('')}</div>
-  ${Object.entries(D.mon).map(([k, m]) => { const c = (D.danhMuc[V.sideLop || t.lop] || {})[k] || []; return `<h3 class="m-${k}" style="color:var(--m)">${esc(m.ten)}</h3><ul>${c.map(([pm, ten, id]) => id && T[id] ? `<li><a href="#bai-${id}" aria-current="${id === t.id}"><span>${esc(ten)}</span><span class="small">${topicDone(T[id])}/${T[id].cauHoi.length}</span></a></li>` : `<li><span>${esc(ten)} <em class="small">· Đang biên soạn</em></span></li>`).join('')}</ul>`; }).join('')}`;
+  ${Object.entries(D.mon).map(([k, m]) => { const c = (D.danhMuc[V.sideLop || t.lop] || {})[k] || []; return `<h3 class="m-${k}" style="color:var(--m)">${esc(m.ten)}</h3><ul>${c.map(([pm, ten, id, sgk]) => id && T[id] ? `<li><a href="#bai-${id}" aria-current="${id === t.id}"><span>${esc(ten)}</span><span class="small">${topicDone(T[id])}/${T[id].cauHoi.length}</span></a></li>` : `<li><span>${esc(ten)} <em class="small">· Đang biên soạn</em></span></li>`).join('')}</ul>`; }).join('')}`;
 }
 function learnHTML(t) {
   const b = t.bai;
-  return `<div class="info"><div><b>Kiến thức cần có trước</b><ul>${t.kienThucTruoc.map(x => `<li>${esc(x)}</li>`).join('')}</ul></div><div><b>Yêu cầu cần đạt</b><ul>${t.yeuCauCanDat.map(x => `<li>${esc(x)}</li>`).join('')}</ul><span class="note">Diễn đạt của nhóm biên soạn — chờ đối chiếu Chương trình GDPT 2018 và SGK.</span></div></div>
+  return `<div class="info"><div><b>Kiến thức cần có trước</b><ul>${t.kienThucTruoc.map(x => `<li>${esc(x)}</li>`).join('')}</ul></div><div><b>Yêu cầu cần đạt</b><ul>${t.yeuCauCanDat.map(x => `<li>${esc(x)}</li>`).join('')}</ul><span class="note">${esc(t.yccdGhiChu || 'Diễn đạt của nhóm biên soạn — chờ đối chiếu Chương trình GDPT 2018 và SGK.')}</span></div></div>
   <div class="sec"><h3>🎯 Học xong, em có thể…</h3><ul>${b.mucTieu.map(x => `<li>${x}</li>`).join('')}</ul></div>
   <div class="sec"><h3>💭 Khởi động</h3><p>${b.khoiDong.hoi}</p><details><summary>Xem gợi ý trả lời</summary><div>${b.khoiDong.goiY}</div></details></div>
   <div class="sec"><h3>📌 Kiến thức trọng tâm</h3><ul class="kn">${b.trongTam.map(x => `<li>${x}</li>`).join('')}</ul></div>
   <div class="sec"><h3>✏️ Ví dụ có lời giải</h3><div class="ex"><p><b>Đề:</b> ${b.viDu.de}</p><details><summary>Xem lời giải</summary><div>${b.viDu.loiGiai}</div></details></div></div>
   <div class="row"><button class="btn pri" data-tab="luyen">Sang phần luyện tập →</button><button class="btn ghost" data-act="srcLesson">Xem nguồn bài giảng</button></div>
-  <div id="srcLesson" hidden>${srcHTML({ nguon: b.nguon, kiemTra: { dapAn: 'khong-ap-dung', doiChieuNguon: 'cho-doi-chieu', giaoVienDuyet: false } }, true)}</div>`;
+  <div id="srcLesson" hidden>${srcHTML({ nguon: b.nguon, kiemTra: { dapAn: 'khong-ap-dung', doiChieuNguon: /^Đã đối chiếu/.test(b.nguon?.canCu || '') ? 'da-doi-chieu' : 'cho-doi-chieu', giaoVienDuyet: false } }, true)}</div>`;
 }
 
 /* ---------- hiển thị một câu ---------- */
@@ -587,8 +590,9 @@ function srcHTML(q, lesson) {
   return `<div class="src"><dl>
    <dt>Loại ${lesson ? 'nội dung' : 'bài'}</dt><dd><b>${esc(n.loai === 'C' ? n.loaiTen : LOAI_TEN[n.loai] || '—')}</b></dd>
    <dt>Nguồn ${lesson ? 'bài giảng' : 'bài tập'}</dt><dd>${esc(n.nguonBaiTap || '—')}</dd>
-   ${n.loai !== 'C' ? `<dt>Tên tài liệu</dt><dd>${esc(n.tenTaiLieu || '—')}</dd><dt>Đơn vị phát hành</dt><dd>${esc(n.donViPhatHanh || '—')}</dd><dt>Ấn bản / năm</dt><dd>${esc(n.anBan || '—')}</dd>${n.thayDoi ? `<dt>Phần đã thay đổi</dt><dd>${esc(n.thayDoi)}</dd>` : ''}` : ''}
-   <dt>Căn cứ kiến thức</dt><dd>${n.canCu === 'Chờ đối chiếu tài liệu' ? '<span class="badge wait">⏳ Chờ đối chiếu tài liệu</span>' : esc(n.canCu || '—')}</dd>
+   ${n.thayDoi ? `<dt>Phần đã thay đổi</dt><dd>${esc(n.thayDoi)}</dd>` : ''}
+   <dt>Căn cứ kiến thức</dt><dd>${n.canCu === 'Chờ đối chiếu tài liệu' ? '<span class="badge wait">⏳ Chờ đối chiếu tài liệu</span>' : /^Đã đối chiếu/.test(n.canCu || '') ? '<span class="badge ok">✓ Đã đối chiếu</span> ' + esc(n.canCu.replace(/^Đã đối chiếu:\s*/, '')) : esc(n.canCu || '—')}</dd>
+   ${n.tenTaiLieu ? `<dt>Tên tài liệu</dt><dd>${esc(n.tenTaiLieu)}</dd>` : ''}${n.tacGia ? `<dt>Tác giả</dt><dd>${esc(n.tacGia)}</dd>` : ''}${n.donViPhatHanh ? `<dt>Đơn vị phát hành</dt><dd>${esc(n.donViPhatHanh)}</dd>` : ''}${n.anBan ? `<dt>Ấn bản</dt><dd>${esc(n.anBan)}</dd>` : ''}${n.banDoc ? `<dt>Bản đã đọc</dt><dd class="small">${esc(n.banDoc)}</dd>` : ''}${n.ghiChu ? `<dt>Ghi chú</dt><dd class="small">${esc(n.ghiChu)}</dd>` : ''}
    ${n.canDoiChieu ? `<dt>Tài liệu cần đối chiếu</dt><dd>${esc(n.canDoiChieu)}</dd>` : ''}
    <dt>Vị trí để tra lại</dt><dd>${n.viTri ? esc(n.viTri) : none}</dd>
    <dt>Liên kết</dt><dd>${link}</dd>
@@ -903,14 +907,14 @@ function viewTeacher() {
   <div class="scroll card"><table class="inv"><thead><tr><th>Chủ đề</th>${cols.map(c => `<th class="n">${c[1]}</th>`).join('')}</tr></thead><tbody>
   ${inv.map(r => `<tr><td><b>${esc(r.t.ten)}</b><br><span class="small muted">Lớp ${r.t.lop} · ${esc(r.t.phanMon)}</span></td>${cols.map(c => `<td class="n">${r[c[0]]}</td>`).join('')}</tr>`).join('')}
   </tbody><tfoot><tr><td>Tổng</td>${cols.map(c => `<td class="n">${sum(c[0])}</td>`).join('')}</tr></tfoot></table></div>
-  <p class="banner" style="margin-top:14px"><b>Kết luận để quyết định giao bài:</b> 0 câu đã đối chiếu nguồn. Toàn bộ ${Object.keys(ALLQ).length} câu là <b>bài tự biên soạn</b>; đáp án đã được giải lại và chạy kiểm thử tự động, nhưng <b>giáo viên chưa duyệt</b> và chưa đối chiếu SGK. Có thể dùng để luyện tập thử; nên duyệt từng câu trước khi giao chính thức.</p>
+  <p class="banner" style="margin-top:14px"><b>Kết luận để quyết định giao bài:</b> ${sum('daDC')}/${sum('tong')} câu đã đối chiếu nguồn với SGK (${inv.filter(r => r.daDC === r.tong).map(r => esc(r.t.ten)).join(', ') || 'chưa có chủ đề nào'}). ${sum('trich')} câu phỏng theo SGK, ${sum('tuSoan')} câu tự biên soạn. Đáp án của tất cả các câu đã được giải lại và chạy kiểm thử tự động; <b>giáo viên chưa duyệt</b> câu nào. Các chủ đề đã đối chiếu đủ có thể dùng cho học sinh luyện tập; các chủ đề còn lại nên dùng thử và chờ đối chiếu.</p>
 
   <h2 style="margin-top:28px">Tài liệu cần bổ sung để hoàn tất đối chiếu</h2>
   <ol>${(D.taiLieuCanBoSung || []).map(x => `<li>${esc(x)}</li>`).join('')}</ol>
 
   <h2 style="margin-top:28px">Chi tiết từng câu</h2>
   ${TOPICS.map(t => `<details><summary>${esc(t.ten)} — ${t.cauHoi.length} câu + ${t.cauHoi.filter(q => q.tuongTu).length} câu luyện lại</summary><div class="scroll"><table class="inv stack"><thead><tr><th>Mã</th><th>Mức</th><th>Lí do xếp mức</th><th>Dạng</th><th>Đáp án</th><th>Nguồn</th><th>Trạng thái</th></tr></thead><tbody>
-  ${t.cauHoi.flatMap(q => q.tuongTu ? [q, q.tuongTu] : [q]).map(q => `<tr><td data-l="Mã"><b>${esc(q.id)}</b></td><td data-l="Mức">${MUC[q.muc]}</td><td data-l="Lí do xếp mức">${esc(q.liDoMuc)}</td><td data-l="Dạng">${{ so: 'Nhập số', chon1: 'Một đáp án', chonNhieu: 'Nhiều đáp án', chu: 'Nhập chữ', mo: 'Câu mở' }[q.loai]}</td><td data-l="Đáp án">${q.loai === 'so' ? esc(String(q.dapAn).replace('.', ',')) + ' ' + esc(q.donVi || '') : q.loai === 'chu' ? esc(q.chapNhan.slice(0, 3).join(' | ')) + (q.chapNhan.length > 3 ? ' …' : '') : q.loai === 'mo' ? 'Theo tiêu chí' : q.phuongAn.map((o, k) => o.dung ? 'ABCDE'[k] : '').join('')}</td><td data-l="Nguồn">Loại ${esc(q.nguon.loai)}</td><td data-l="Trạng thái">${q.kiemTra.dapAn === 'da-kiem-tra' ? '✓ đáp án' : '—'} · ${q.kiemTra.doiChieuNguon === 'da-doi-chieu' ? '✓ nguồn' : '⏳ nguồn'}</td></tr>`).join('')}
+  ${t.cauHoi.flatMap(q => q.tuongTu ? [q, q.tuongTu] : [q]).map(q => `<tr><td data-l="Mã"><b>${esc(q.id)}</b></td><td data-l="Mức">${MUC[q.muc]}</td><td data-l="Lí do xếp mức">${esc(q.liDoMuc)}</td><td data-l="Dạng">${{ so: 'Nhập số', chon1: 'Một đáp án', chonNhieu: 'Nhiều đáp án', chu: 'Nhập chữ', mo: 'Câu mở' }[q.loai]}</td><td data-l="Đáp án">${q.loai === 'so' ? esc(String(q.dapAn).replace('.', ',')) + ' ' + esc(q.donVi || '') : q.loai === 'chu' ? esc(q.chapNhan.slice(0, 3).join(' | ')) + (q.chapNhan.length > 3 ? ' …' : '') : q.loai === 'mo' ? 'Theo tiêu chí' : q.phuongAn.map((o, k) => o.dung ? 'ABCDE'[k] : '').join('')}</td><td data-l="Nguồn">Loại ${esc(q.nguon.loai)}${q.nguon.viTri ? '<br><span class="small muted">' + esc(q.nguon.viTri.split(' (')[0]) + '</span>' : ''}</td><td data-l="Trạng thái">${q.kiemTra.dapAn === 'da-kiem-tra' ? '✓ đáp án' : '—'} · ${q.kiemTra.doiChieuNguon === 'da-doi-chieu' ? '✓ nguồn' : '⏳ nguồn'}</td></tr>`).join('')}
   </tbody></table></div></details>`).join('')}
 
   <h2 style="margin-top:28px">Kiểm tra dữ liệu tự động</h2>

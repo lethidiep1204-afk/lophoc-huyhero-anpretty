@@ -271,7 +271,7 @@ code{font-family:ui-monospace,Consolas,monospace;font-size:.9em;overflow-wrap:an
   <nav class="nav" aria-label="Điều hướng chính">
     <a href="#trang-chu" data-nav="home">Trang chủ</a>
     <a href="#on-loi" data-nav="review">Ôn lỗi của em</a>
-    <a href="#giao-vien" data-nav="teacher">Dành cho giáo viên</a>
+    <a href="#giao-vien" data-nav="teacher">Má Điệp yêu con</a>
   </nav>
 </header>
 <main id="app"><div class="wrap"><p>Đang mở sổ tay…</p></div></main>
@@ -481,7 +481,7 @@ function viewHome() {
   </section>
   <section class="row" style="margin-top:28px">
     <a class="btn soft" href="#on-loi">Ôn lỗi của em${nErr ? ' (' + nErr + ')' : ''}</a>
-    <a class="btn ghost" href="#giao-vien">Dành cho giáo viên</a>
+    <a class="btn ghost" href="#giao-vien">Má Điệp yêu con</a>
   </section>
   <p class="banner" style="margin-top:20px"><b>Lưu ý về học liệu:</b> tất cả câu hỏi hiện là <b>bài tập tự biên soạn</b>, đáp án đã được kiểm tra nhưng <b>nguồn chưa được đối chiếu với SGK</b>. Mỗi câu có nút “Xem nguồn” ghi rõ trạng thái.${canSave ? '' : ' Trình duyệt này không cho lưu tiến độ.'}</p>
   </div>`;
@@ -595,7 +595,7 @@ function srcHTML(q, lesson) {
    ${n.soLieu ? `<dt>Số liệu</dt><dd><span class="tnote">⚑ ${esc(n.soLieu)}</span></dd>` : ''}
    <dt>Trạng thái</dt><dd class="row" style="gap:6px">${k.dapAn === 'da-kiem-tra' ? '<span class="badge ok">✓ Đáp án đã kiểm tra</span>' : k.dapAn === 'khong-ap-dung' ? '' : '<span class="badge wait">Đáp án chưa kiểm tra</span>'}${k.doiChieuNguon === 'da-doi-chieu' ? '<span class="badge ok">✓ Đã đối chiếu nguồn</span>' : '<span class="badge wait">⏳ Chưa đối chiếu nguồn</span>'}${k.giaoVienDuyet ? '<span class="badge ok">✓ Giáo viên đã duyệt</span>' : '<span class="badge plain">Giáo viên chưa duyệt</span>'}</dd>
    ${k.cachKiemTra ? `<dt>Cách kiểm tra đáp án</dt><dd class="small">${esc(k.cachKiemTra)}</dd>` : ''}
-   ${q.muc ? `<dt>Dành cho giáo viên</dt><dd class="small">Mã ${esc(q.id)} · Mức <b>${MUC[q.muc]}</b>: ${esc(q.liDoMuc || '')}</dd>` : ''}
+   ${q.muc ? `<dt>Ghi chú cho giáo viên</dt><dd class="small">Mã ${esc(q.id)} · Mức <b>${MUC[q.muc]}</b>: ${esc(q.liDoMuc || '')}</dd>` : ''}
   </dl></div>`;
 }
 
@@ -895,7 +895,7 @@ function viewTeacher() {
   const inv = inventory(), sum = k => inv.reduce((s, r) => s + r[k], 0), issues = validate();
   const verified = Object.values(ALLQ).filter(x => x.q.kiemTra?.doiChieuNguon === 'da-doi-chieu' && x.q.kiemTra?.dapAn === 'da-kiem-tra');
   const cols = [['cb', 'Cơ bản'], ['vd', 'Vận dụng'], ['nc', 'Nâng cao'], ['tt', 'Câu luyện lại'], ['tong', 'Tổng số câu'], ['trich', 'Trích / phỏng theo'], ['tuSoan', 'Tự biên soạn'], ['daKT', 'Đáp án đã kiểm tra'], ['daDC', 'Đã đối chiếu nguồn'], ['cho', 'Chờ xác minh']];
-  app.innerHTML = `<div class="wrap guide"><h1>Dành cho giáo viên</h1>
+  app.innerHTML = `<div class="wrap guide"><h1>Má Điệp yêu con</h1><p class="crumb">Góc dành cho giáo viên</p>
   <p class="lead">Kiểm kê học liệu, trạng thái nguồn và hướng dẫn thêm câu hỏi, sửa đáp án, triển khai miễn phí. Phiên bản học liệu: ${esc(D.phienBan || '')}.</p>
   <div class="row" style="margin:10px 0 18px"><span class="badge ok">Ngân hàng đã xác minh: ${verified.length} câu</span><span class="badge wait">Ngân hàng chờ xác minh: ${Object.keys(ALLQ).length - verified.length} câu</span></div>
   <h2>Bảng kiểm kê 5 chủ đề mẫu</h2>

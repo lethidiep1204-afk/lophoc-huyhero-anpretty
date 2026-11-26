@@ -1,7 +1,7 @@
 # LophocHuyhero-Anpretty — Hướng dẫn sử dụng bản web độc lập
 
 Sổ tay tự học THCS lớp 6–9: Khoa học tự nhiên, Toán (Số và Đại số), Tiếng Anh.
-Phiên bản học liệu: 1.0 — 26/11/2026.
+Phiên bản học liệu: 1.1 — 26/11/2026 (8 chủ đề lớp 7, 96 câu).
 
 ## 1. Trong thư mục có gì
 
@@ -43,14 +43,14 @@ Sau khi có liên kết `https://…`: học sinh mở một lần khi có mạn
 Mở `hoc-lieu.js` bằng Notepad, Notepad++ hoặc VS Code (lưu dạng UTF-8).
 
 - Mỗi chủ đề là một khối `const … = { id, lop, mon, phanMon, ten, kienThucTruoc, yeuCauCanDat, bai, cauHoi: [ … ] }`.
-- Mỗi câu hỏi nằm trong mảng `cauHoi`. Mẫu đầy đủ có trong trang web, mục **Dành cho giáo viên → Thêm câu hỏi** (có nút sao chép).
+- Mỗi câu hỏi nằm trong mảng `cauHoi`. Mẫu đầy đủ có trong trang web, mục **Má Điệp yêu con → Thêm câu hỏi** (có nút sao chép).
 - Dạng câu (`loai`): `so` (nhập số), `chon1` (một đáp án), `chonNhieu` (nhiều đáp án — ghi rõ "Chọn TẤT CẢ" trong đề), `chu` (nhập chữ), `mo` (câu mở, chấm theo tiêu chí).
 - Mức (`muc`): `co-ban`, `van-dung`, `nang-cao`, kèm `liDoMuc` nêu lí do xếp mức.
 - Phân số trong đề: `F(1, 2)`.
 - Muốn có câu luyện lại sau khi sửa đúng: thêm `tuongTu: { … }` cùng cấu trúc, `id` kết thúc bằng `-TT`.
 - Để một chủ đề mới xuất hiện: thêm khối vào `chuDe: [ … ]` và ghi `id` của nó vào cột thứ ba trong `danhMuc` (ví dụ `['Số và Đại số', 'Số thực', 'toan7-so-thuc']`).
 
-Sau khi lưu, tải lại trang và xem **Dành cho giáo viên → Kiểm tra dữ liệu tự động**. Trang báo thiếu trường, sai cấu trúc, câu một đáp án có hai đáp án đúng, chủ đề thiếu mức…
+Sau khi lưu, tải lại trang và xem **Má Điệp yêu con → Kiểm tra dữ liệu tự động**. Trang báo thiếu trường, sai cấu trúc, câu một đáp án có hai đáp án đúng, chủ đề thiếu mức…
 
 ### Sửa đáp án
 
@@ -60,7 +60,7 @@ Sau khi lưu, tải lại trang và xem **Dành cho giáo viên → Kiểm tra d
 
 ## 5. Cập nhật nguồn
 
-Hiện **toàn bộ 60 câu là loại C — bài tập tự biên soạn**, căn cứ kiến thức "Chờ đối chiếu tài liệu", giáo viên chưa duyệt. Sau khi mở sách và đối chiếu một câu:
+Hiện **toàn bộ 96 câu là loại C — bài tập tự biên soạn**, căn cứ kiến thức "Chờ đối chiếu tài liệu", giáo viên chưa duyệt. Sau khi mở sách và đối chiếu một câu:
 
 1. Thay `nguon: tuSoan(…)` bằng đối tượng nguồn đầy đủ (mẫu A/B có trong trang, mục **Cập nhật nguồn**). Chỉ ghi trang, số bài khi đã thấy trong sách.
 2. Đổi `kiemTra.doiChieuNguon` thành `'da-doi-chieu'` và `giaoVienDuyet` thành `true`.
@@ -78,6 +78,6 @@ Không bật thì gia sư vẫn chạy miễn phí ở chế độ **Trợ giúp
 
 ## 7. Lưu ý trước khi giao cho học sinh
 
-- Đáp án đã được giải lại và kiểm thử tự động (262/262 phép kiểm tra đạt), nhưng **chưa đối chiếu SGK** và **giáo viên chưa duyệt**.
+- Đáp án đã được giải lại và kiểm thử tự động (450/450 phép kiểm tra đạt), nhưng **chưa đối chiếu SGK** và **giáo viên chưa duyệt**.
 - Các chủ đề ghi "Đang biên soạn" chỉ là tên dự kiến theo mạch nội dung, chưa đối chiếu số bài, Unit hay trang.
-- Tài liệu cần để hoàn tất đối chiếu: xem mục **Dành cho giáo viên → Tài liệu cần bổ sung** trên trang.
+- Tài liệu cần để hoàn tất đối chiếu: xem mục **Má Điệp yêu con → Tài liệu cần bổ sung** trên trang.

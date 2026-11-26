@@ -601,6 +601,245 @@
     ]
   };
 
+  /* ==================================================================
+     ĐỢT 1 — TOÁN 7: SỐ THỰC; TỈ LỆ THỨC VÀ ĐẠI LƯỢNG TỈ LỆ;
+     BIỂU THỨC ĐẠI SỐ VÀ ĐA THỨC MỘT BIẾN  (soạn ngày 26/11/2026)
+     ================================================================== */
+  const SGK_TOAN7_T2 = 'SGK Toán 7, tập hai, bộ "Kết nối tri thức với cuộc sống" (NXB Giáo dục Việt Nam)';
+  const soThuc = {
+    id: 'toan7-so-thuc', lop: 7, mon: 'toan', phanMon: 'Số và Đại số', ten: 'Số thực',
+    kienThucTruoc: ['Số hữu tỉ và các phép tính', 'Số thập phân hữu hạn', 'Bình phương của một số'],
+    yeuCauCanDat: ['Nhận biết được số vô tỉ, số thực; số thập phân vô hạn tuần hoàn và không tuần hoàn.', 'Tính được căn bậc hai số học của số chính phương; dùng máy tính cầm tay tính căn bậc hai.', 'Nhận biết được số đối, giá trị tuyệt đối của số thực.', 'Làm tròn số theo yêu cầu.'],
+    bai: {
+      mucTieu: ['phân biệt số hữu tỉ và số vô tỉ;', 'tính căn bậc hai số học và không mắc lỗi "căn của tổng";', 'tính giá trị tuyệt đối của số thực;', 'làm tròn kết quả đúng hàng được yêu cầu.'],
+      khoiDong: { hoi: 'Một hình vuông có diện tích 2 m². Cạnh của nó dài bao nhiêu mét? Em có tìm được một phân số nào bình phương lên đúng bằng 2 không?', goiY: 'Cạnh dài √2 m ≈ 1,414… m. Không có phân số nào bình phương bằng 2: √2 là một số vô tỉ.' },
+      trongTam: [
+        'Số hữu tỉ viết được dưới dạng số thập phân hữu hạn hoặc <b>vô hạn tuần hoàn</b> (ví dụ ' + F(1, 3) + ' = 0,(3)). Số thập phân <b>vô hạn không tuần hoàn</b> là <b>số vô tỉ</b> (ví dụ √2 = 1,41421…, π).',
+        'Số hữu tỉ và số vô tỉ gọi chung là <b>số thực</b>. Tập hợp số thực kí hiệu là <b>ℝ</b>.',
+        '<b>Căn bậc hai số học</b> của a ≥ 0 là số không âm √a sao cho (√a)² = a. Ví dụ √49 = 7. Lưu ý: √(a + b) <b>khác</b> √a + √b.',
+        '<b>Giá trị tuyệt đối</b> |x| là khoảng cách từ x đến 0 trên trục số: |x| = x nếu x ≥ 0; |x| = −x nếu x &lt; 0. Luôn có |x| ≥ 0.',
+        '<b>Làm tròn</b> đến một hàng: nhìn chữ số ngay bên phải hàng đó; nếu ≥ 5 thì cộng 1 vào hàng đó, nếu &lt; 5 thì giữ nguyên, rồi bỏ các chữ số phía sau.'
+      ],
+      viDu: { de: 'Tính √64 + |−2,5| và làm tròn √10 đến hàng phần mười.', loiGiai: '√64 + |−2,5| = 8 + 2,5 = <b>10,5</b>.<br>√10 ≈ 3,162… Chữ số hàng phần trăm là 6 ≥ 5 nên làm tròn được <b>3,2</b>.' },
+      nguon: tuSoan(SGK_TOAN7 + ', tập một — chương về Số thực (số vô tỉ, căn bậc hai số học, số thực, giá trị tuyệt đối, làm tròn).'),
+      hoiDap: [
+        { tu: ['vo ti', 'so thuc', 'huu ti'], tl: 'Số vô tỉ là số thập phân vô hạn không tuần hoàn (như √2, π). Số hữu tỉ và số vô tỉ hợp thành số thực.' },
+        { tu: ['can', 'can bac hai'], tl: '√a (a ≥ 0) là số không âm mà bình phương bằng a: √49 = 7. Không được tách √(a + b) thành √a + √b.' },
+        { tu: ['tuyet doi'], tl: '|x| là khoảng cách từ x đến 0, nên luôn không âm: |−3,5| = 3,5; |2| = 2.' },
+        { tu: ['lam tron'], tl: 'Nhìn chữ số ngay sau hàng cần làm tròn: từ 5 trở lên thì cộng 1, dưới 5 thì giữ nguyên.' }
+      ]
+    },
+    cauHoi: [
+      {
+        id: 'T7B-01', muc: 'co-ban', liDoMuc: 'Nhận biết số vô tỉ.', loai: 'chon1', de: 'Số nào sau đây là <b>số vô tỉ</b>?',
+        phuongAn: [{ t: '0,(3)', phanHoi: '0,(3) là số thập phân vô hạn <b>tuần hoàn</b>, bằng 1/3 — số hữu tỉ.' }, { t: '√9', phanHoi: '√9 = 3, là số nguyên nên là số hữu tỉ.' }, { t: '√2', dung: true }, { t: F('−7', 4), phanHoi: 'Đây là phân số nên là số hữu tỉ.' }],
+        goiY: ['Thử tính hoặc đổi từng số: số nào không viết được thành phân số?'], viSaoDung: '√2 = 1,41421… là số thập phân vô hạn không tuần hoàn.', loiGiai: '<b>√2</b> là số vô tỉ. 0,(3) = 1/3; √9 = 3; −7/4 đều là số hữu tỉ.',
+        giangLai: 'Đừng nhìn dấu căn mà kết luận ngay: √9 có dấu căn nhưng bằng 3. Hãy tính thử: nếu ra số "đẹp" (nguyên, phân số) thì là hữu tỉ.', tienBo: 'Em đã biết tính thử trước khi kết luận số vô tỉ.',
+        nguon: tuSoan(SGK_TOAN7 + ', tập một — khái niệm số vô tỉ.'), kiemTra: kt(),
+        tuongTu: { id: 'T7B-01-TT', muc: 'co-ban', liDoMuc: 'Như câu gốc.', loai: 'chon1', de: 'Số nào sau đây là <b>số hữu tỉ</b>?', phuongAn: [{ t: '√3', phanHoi: '√3 = 1,732… vô hạn không tuần hoàn.' }, { t: 'π', phanHoi: 'π là số vô tỉ.' }, { t: '√25', dung: true }, { t: '0,1010010001… (số chữ số 0 tăng dần)', phanHoi: 'Không lặp lại theo chu kì nên là số vô tỉ.' }], goiY: ['Tính √25.'], viSaoDung: '√25 = 5.', loiGiai: '<b>√25</b> = 5.', giangLai: 'Tính thử từng số.', nguon: tuSoan(SGK_TOAN7 + ', tập một — số hữu tỉ, số vô tỉ.'), kiemTra: kt() }
+      },
+      {
+        id: 'T7B-02', muc: 'co-ban', liDoMuc: 'Tính trực tiếp căn bậc hai số học của số chính phương.', loai: 'so', de: 'Tính: √49 − √16.', dapAn: 3,
+        loi: [{ gt: 5.745, saiSo: 0.01, nhan: 'Lỗi quy tắc căn', phanHoi: 'Em đã tính √(49 − 16) = √33. Đề yêu cầu tính từng căn rồi mới trừ: √49 − √16.' }, { gt: 33, nhan: 'Chưa lấy căn', phanHoi: 'Em đã lấy 49 − 16. Cần tính √49 và √16 trước.' }, { gt: -3, nhan: 'Lỗi dấu', phanHoi: '√49 lớn hơn √16 nên hiệu dương.' }],
+        buoc: { hoi: '√49 bằng bao nhiêu?', dapAn: 7, dung: 'Đúng. Còn √16 = ?', sai: 'Số nào bình phương bằng 49?' },
+        goiY: ['Số nào bình phương bằng 49? Bằng 16?'], viSaoDung: '√49 = 7, √16 = 4, 7 − 4 = 3.', loiGiai: '√49 − √16 = 7 − 4 = <b>3</b>.', giangLai: '√49 hỏi: "số không âm nào nhân với chính nó được 49?" → 7 (vì 7 · 7 = 49).', tienBo: 'Em đã tính từng căn trước, không gộp dưới một dấu căn.',
+        nguon: tuSoan(SGK_TOAN7 + ', tập một — căn bậc hai số học.'), kiemTra: kt(),
+        tuongTu: { id: 'T7B-02-TT', muc: 'co-ban', liDoMuc: 'Như câu gốc.', loai: 'so', de: 'Tính: √100 − √64.', dapAn: 2, loi: [{ gt: 6, nhan: 'Lỗi quy tắc căn', phanHoi: 'Em đã tính √(100 − 64) = √36. Hãy tính từng căn.' }, { gt: 36, nhan: 'Chưa lấy căn', phanHoi: 'Cần lấy căn từng số.' }], buoc: { hoi: '√64 = ?', dapAn: 8, dung: 'Đúng.', sai: '8 · 8 = 64.' }, goiY: ['√100 = 10.'], viSaoDung: '10 − 8 = 2.', loiGiai: '<b>2</b>.', giangLai: 'Tìm số nhân chính nó.', nguon: tuSoan(SGK_TOAN7 + ', tập một — căn bậc hai số học.'), kiemTra: kt() }
+      },
+      {
+        id: 'T7B-03', muc: 'van-dung', liDoMuc: 'Kết hợp giá trị tuyệt đối với cộng trừ, chú ý dấu trừ trước |…|.', loai: 'so', de: 'Tính: |−3,5| + |2,5| − |−4|.', dapAn: 2,
+        loi: [{ gt: -5, nhan: 'Quên giá trị tuyệt đối', phanHoi: 'Em đã bỏ dấu |…| mà giữ nguyên số âm. |−3,5| = 3,5 và |−4| = 4.' }, { gt: 10, nhan: 'Lỗi dấu phép tính', phanHoi: '|−4| = 4, nhưng phía trước là dấu <b>trừ</b>: … − 4.' }, { gt: 3, nhan: 'Quên giá trị tuyệt đối', phanHoi: 'Em đã tính −3,5 + 2,5 − (−4). Phải lấy giá trị tuyệt đối trước: 3,5 + 2,5 − 4.' }],
+        buoc: { hoi: '|−3,5| bằng bao nhiêu?', dapAn: 3.5, saiSo: 0.001, dung: 'Đúng: 3,5. Tương tự |−4| = 4.', sai: 'Giá trị tuyệt đối là khoảng cách đến 0, luôn không âm.' },
+        goiY: ['Tính từng giá trị tuyệt đối trước.', '3,5 + 2,5 − 4.'], viSaoDung: '3,5 + 2,5 − 4 = 2.', loiGiai: '|−3,5| + |2,5| − |−4| = 3,5 + 2,5 − 4 = <b>2</b>.', giangLai: 'Coi |…| như "khoảng cách": −3,5 cách 0 là 3,5 bước; −4 cách 0 là 4 bước. Thay các khoảng cách vào rồi cộng trừ như thường.', tienBo: 'Em đã tính giá trị tuyệt đối trước và giữ đúng dấu phép tính.',
+        nguon: tuSoan(SGK_TOAN7 + ', tập một — giá trị tuyệt đối của một số thực.'), kiemTra: kt(),
+        tuongTu: { id: 'T7B-03-TT', muc: 'van-dung', liDoMuc: 'Như câu gốc.', loai: 'so', de: 'Tính: |−4,2| + |−1,8| − |3|.', dapAn: 3, loi: [{ gt: -9, nhan: 'Quên giá trị tuyệt đối', phanHoi: 'Phải lấy |−4,2| = 4,2 và |−1,8| = 1,8.' }, { gt: 9, nhan: 'Lỗi dấu phép tính', phanHoi: 'Trước |3| là dấu trừ.' }], buoc: { hoi: '|−4,2| + |−1,8| = ?', dapAn: 6, saiSo: 0.001, dung: 'Đúng: 6. Còn trừ 3.', sai: '4,2 + 1,8 = ?' }, goiY: ['4,2 + 1,8 − 3.'], viSaoDung: '6 − 3 = 3.', loiGiai: '<b>3</b>.', giangLai: 'Thay khoảng cách vào.', nguon: tuSoan(SGK_TOAN7 + ', tập một — giá trị tuyệt đối.'), kiemTra: kt() }
+      },
+      {
+        id: 'T7B-04', muc: 'van-dung', liDoMuc: 'Hai bước: nhận ra cạnh = √diện tích, rồi làm tròn đúng hàng.', loai: 'so',
+        de: 'Một mảnh vườn hình vuông có diện tích <b>50 m²</b>. Tính độ dài cạnh mảnh vườn, <b>làm tròn đến hàng phần mười</b>. <span class="note">Có thể dùng máy tính cầm tay.</span>', donVi: 'm', dapAn: 7.1, saiSo: 0.001,
+        loi: [{ gt: 25, nhan: 'Lỗi công thức', phanHoi: 'Em đã lấy 50 : 2. Diện tích hình vuông = cạnh × cạnh, nên cạnh = √50.' }, { gt: 12.5, nhan: 'Lỗi công thức', phanHoi: 'Em đã lấy 50 : 4 (nhầm với chu vi). Cạnh = √diện tích.' }, { gt: 7.07, saiSo: 0.001, nhan: 'Lỗi làm tròn', phanHoi: '7,07 là làm tròn đến hàng phần <b>trăm</b>. Đề yêu cầu hàng phần <b>mười</b>.' }, { gt: 7, nhan: 'Lỗi làm tròn', phanHoi: '7 là làm tròn đến hàng đơn vị. Đề yêu cầu hàng phần mười (một chữ số sau dấu phẩy).' }],
+        buoc: { hoi: 'Bấm máy tính: √50 ≈ ? (ghi 3 chữ số sau dấu phẩy)', dapAn: 7.071, saiSo: 0.0015, dung: 'Đúng: 7,071… Chữ số hàng phần trăm là 7 ≥ 5, nên hàng phần mười tăng thêm 1.', sai: 'Cạnh = √50. Dùng máy tính để bấm.' },
+        goiY: ['Diện tích hình vuông = cạnh · cạnh.', '√50 ≈ 7,071. Nhìn chữ số hàng phần trăm.'], viSaoDung: '√50 ≈ 7,07… → làm tròn đến hàng phần mười được 7,1 m.', loiGiai: 'Cạnh = √50 ≈ 7,071… (m). Chữ số hàng phần trăm là 7 ≥ 5 nên làm tròn được <b>7,1 m</b>.',
+        giangLai: 'Thử đoán: 7 · 7 = 49 (gần 50), 8 · 8 = 64. Vậy cạnh nằm giữa 7 và 8, gần 7. Máy tính cho 7,071… "Hàng phần mười" là chữ số đầu tiên sau dấu phẩy.', tienBo: 'Em đã dùng đúng căn bậc hai và làm tròn đúng hàng.',
+        nguon: tuSoan(SGK_TOAN7 + ', tập một — căn bậc hai số học; làm tròn số (cần đối chiếu cách SGK diễn đạt yêu cầu làm tròn).', { soLieu: GIA_DINH }), kiemTra: kt(),
+        tuongTu: { id: 'T7B-04-TT', muc: 'van-dung', liDoMuc: 'Như câu gốc.', loai: 'so', de: 'Một tấm thảm hình vuông có diện tích <b>20 m²</b>. Tính độ dài cạnh, <b>làm tròn đến hàng phần mười</b>.', donVi: 'm', dapAn: 4.5, saiSo: 0.001, loi: [{ gt: 10, nhan: 'Lỗi công thức', phanHoi: 'Cạnh = √20, không phải 20 : 2.' }, { gt: 5, nhan: 'Lỗi công thức', phanHoi: 'Cạnh = √20, không phải 20 : 4.' }, { gt: 4.47, saiSo: 0.001, nhan: 'Lỗi làm tròn', phanHoi: 'Đó là hàng phần trăm.' }, { gt: 4.4, saiSo: 0.001, nhan: 'Lỗi làm tròn', phanHoi: '√20 ≈ 4,472: chữ số hàng phần trăm là 7 ≥ 5 nên phải tăng lên 4,5.' }], buoc: { hoi: '√20 ≈ ? (3 chữ số sau dấu phẩy)', dapAn: 4.472, saiSo: 0.0015, dung: 'Đúng.', sai: 'Bấm √20.' }, goiY: ['√20 ≈ 4,472.'], viSaoDung: '4,47… → 4,5.', loiGiai: '<b>4,5 m</b>.', giangLai: 'Nhìn chữ số thứ hai sau dấu phẩy.', nguon: tuSoan(SGK_TOAN7 + ', tập một — làm tròn số.', { soLieu: GIA_DINH }), kiemTra: kt() }
+      },
+      {
+        id: 'T7B-05', muc: 'nang-cao', liDoMuc: 'Đánh giá nhiều khẳng định, cần phản ví dụ.', loai: 'chonNhieu', de: '<b>Chọn TẤT CẢ</b> các khẳng định đúng.',
+        phuongAn: [{ t: 'Mọi số nguyên đều là số thực.', dung: true }, { t: 'Tổng của hai số vô tỉ luôn là số vô tỉ.', phanHoi: 'Phản ví dụ: √2 + (−√2) = 0 là số hữu tỉ.' }, { t: 'Số đối của √3 là −√3.', dung: true }, { t: '|x| ≥ 0 với mọi số thực x.', dung: true }, { t: '0,1010010001… (số chữ số 0 tăng dần) là số hữu tỉ.', phanHoi: 'Dãy chữ số không lặp theo chu kì nên đây là số vô tỉ.' }],
+        goiY: ['Với câu có chữ "luôn", thử tìm một phản ví dụ.'], viSaoDung: 'Ý 1, 3, 4 đúng; ý 2 có phản ví dụ √2 + (−√2) = 0; ý 5 là số vô tỉ.', loiGiai: 'Đáp án: ý 1, 3, 4.', giangLai: 'Muốn bác bỏ "luôn luôn", chỉ cần một ví dụ sai. Với số vô tỉ, hãy thử ghép √2 với −√2.', tienBo: 'Em đã dùng phản ví dụ để kiểm tra khẳng định.',
+        nguon: tuSoan(SGK_TOAN7 + ', tập một — số thực, số đối, giá trị tuyệt đối.'), kiemTra: kt(),
+        tuongTu: { id: 'T7B-05-TT', muc: 'nang-cao', liDoMuc: 'Như câu gốc.', loai: 'chonNhieu', de: '<b>Chọn TẤT CẢ</b> các khẳng định đúng.', phuongAn: [{ t: 'Mọi số hữu tỉ đều là số thực.', dung: true }, { t: 'Tích của hai số vô tỉ luôn là số vô tỉ.', phanHoi: 'Phản ví dụ: √2 · √2 = 2.' }, { t: '|−√5| = √5.', dung: true }, { t: '√4 là số vô tỉ.', phanHoi: '√4 = 2.' }], goiY: ['Thử √2 · √2.'], viSaoDung: 'Ý 1, 3 đúng.', loiGiai: 'Ý 1, 3.', giangLai: 'Tìm phản ví dụ.', nguon: tuSoan(SGK_TOAN7 + ', tập một — số thực.'), kiemTra: kt() }
+      },
+      {
+        id: 'T7B-06', muc: 'nang-cao', liDoMuc: 'Phát hiện sai lầm phổ biến √(a + b) = √a + √b và tính lại.', loai: 'so',
+        de: 'Bạn An viết: √(16 + 9) = √16 + √9 = 4 + 3 = 7.<br>Lời giải có chỗ sai. Em hãy tính <b>đúng</b> √(16 + 9).', dapAn: 5,
+        loi: [{ gt: 7, nhan: 'Lặp lại lỗi của bạn', phanHoi: 'Không được tách căn của một tổng: √(16 + 9) ≠ √16 + √9. Hãy cộng trong ngoặc trước.' }, { gt: 25, nhan: 'Chưa lấy căn', phanHoi: '16 + 9 = 25, còn phải lấy căn.' }],
+        buoc: { hoi: 'Trong ngoặc, 16 + 9 = ?', dapAn: 25, dung: 'Đúng. Vậy √25 = ?', sai: 'Cộng trong ngoặc trước.' },
+        goiY: ['Làm trong ngoặc (dưới dấu căn) trước.'], viSaoDung: '√(16 + 9) = √25 = 5, khác 7.', loiGiai: '√(16 + 9) = √25 = <b>5</b>. An sai vì √(a + b) ≠ √a + √b (ví dụ này cho 5 ≠ 7).',
+        giangLai: 'Nghĩ hình học: tam giác vuông có hai cạnh 3 và 4 thì cạnh huyền 5, không phải 3 + 4 = 7. Căn của tổng không bằng tổng các căn.', tienBo: 'Em đã phát hiện được lỗi "tách căn" và tự tính lại đúng.',
+        nguon: tuSoan(SGK_TOAN7 + ', tập một — căn bậc hai số học.'), kiemTra: kt(),
+        tuongTu: { id: 'T7B-06-TT', muc: 'nang-cao', liDoMuc: 'Như câu gốc.', loai: 'so', de: 'Bạn Bình viết: √(36 + 64) = √36 + √64 = 14. Tính <b>đúng</b> √(36 + 64).', dapAn: 10, loi: [{ gt: 14, nhan: 'Lặp lại lỗi của bạn', phanHoi: 'Không tách căn của một tổng.' }, { gt: 100, nhan: 'Chưa lấy căn', phanHoi: 'Còn lấy căn.' }], buoc: { hoi: '36 + 64 = ?', dapAn: 100, dung: 'Đúng.', sai: 'Cộng trước.' }, goiY: ['Cộng trước, lấy căn sau.'], viSaoDung: '√100 = 10.', loiGiai: '<b>10</b>.', giangLai: 'Căn của tổng ≠ tổng các căn.', nguon: tuSoan(SGK_TOAN7 + ', tập một — căn bậc hai số học.'), kiemTra: kt() }
+      }
+    ]
+  };
+
+  const tiLe = {
+    id: 'toan7-ti-le-thuc', lop: 7, mon: 'toan', phanMon: 'Số và Đại số', ten: 'Tỉ lệ thức và đại lượng tỉ lệ',
+    kienThucTruoc: ['Phân số bằng nhau', 'Tỉ số của hai số', 'Phép nhân, chia số hữu tỉ'],
+    yeuCauCanDat: ['Nhận biết tỉ lệ thức và tính chất; tìm số chưa biết trong tỉ lệ thức.', 'Vận dụng tính chất dãy tỉ số bằng nhau.', 'Nhận biết đại lượng tỉ lệ thuận, tỉ lệ nghịch; giải bài toán thực tế.'],
+    bai: {
+      mucTieu: ['tìm số chưa biết trong tỉ lệ thức bằng tích chéo;', 'phân biệt tỉ lệ thuận với tỉ lệ nghịch;', 'giải bài toán mua bán, năng suất;', 'chia một số thành các phần tỉ lệ cho trước.'],
+      khoiDong: { hoi: 'Mua 2 kg cam hết 50 nghìn đồng. Mua 4 kg hết bao nhiêu? Còn nếu 2 người ăn hết hộp bánh trong 4 ngày thì 4 người ăn hết trong mấy ngày? Hai bài khác nhau ở đâu?', goiY: 'Bài cam: số kg gấp đôi → tiền gấp đôi (100 nghìn) — tỉ lệ thuận. Bài bánh: số người gấp đôi → số ngày giảm một nửa (2 ngày) — tỉ lệ nghịch.' },
+      trongTam: [
+        '<b>Tỉ lệ thức</b> là đẳng thức của hai tỉ số: ' + F('a', 'b') + ' = ' + F('c', 'd') + '. Tính chất: <b>a · d = b · c</b> (tích chéo).',
+        '<b>Dãy tỉ số bằng nhau:</b> ' + F('a', 'b') + ' = ' + F('c', 'd') + ' = ' + F('a + c', 'b + d') + ' (khi các mẫu khác 0).',
+        '<b>Tỉ lệ thuận:</b> y = k · x (k ≠ 0). x gấp bao nhiêu lần thì y gấp bấy nhiêu lần; tỉ số ' + F('y', 'x') + ' không đổi.',
+        '<b>Tỉ lệ nghịch:</b> y = ' + F('a', 'x') + ' hay x · y = a (a ≠ 0). x gấp bao nhiêu lần thì y giảm bấy nhiêu lần; tích x · y không đổi.',
+        '<b>Chia theo tỉ lệ</b> m : n : p: tính tổng số phần, tìm giá trị một phần, rồi nhân với số phần của mỗi đối tượng.'
+      ],
+      viDu: { de: 'Tìm x biết ' + F('x', 3) + ' = ' + F(10, 6) + '.', loiGiai: 'Tích chéo: x · 6 = 3 · 10 = 30, nên x = 30 : 6 = <b>5</b>.' },
+      nguon: tuSoan(SGK_TOAN7_T2 + ' — chương về Tỉ lệ thức và đại lượng tỉ lệ.'),
+      hoiDap: [
+        { tu: ['ti le thuc', 'tich cheo', 'tim x'], tl: 'Trong tỉ lệ thức a/b = c/d, ta có a · d = b · c. Dùng tích chéo để tìm số chưa biết.' },
+        { tu: ['ti le thuan'], tl: 'Tỉ lệ thuận: y = k · x; x tăng mấy lần thì y tăng bấy nhiêu lần; y : x không đổi.' },
+        { tu: ['ti le nghich'], tl: 'Tỉ lệ nghịch: x · y = a không đổi; x tăng mấy lần thì y giảm bấy nhiêu lần.' },
+        { tu: ['chia', 'phan'], tl: 'Chia theo tỉ lệ: cộng số phần → tìm một phần → nhân với số phần mỗi bên.' }
+      ]
+    },
+    cauHoi: [
+      {
+        id: 'T7C-01', muc: 'co-ban', liDoMuc: 'Áp dụng trực tiếp tính chất tích chéo.', loai: 'so', de: 'Tìm x biết ' + F('x', 4) + ' = ' + F(6, 8) + '.', dapAn: 3,
+        loi: [{ gt: 12, nhan: 'Đặt nhầm vị trí', phanHoi: 'Em đã tính 8 · 6 : 4. Tích chéo đúng là x · 8 = 4 · 6.' }, { gt: 5.333, saiSo: 0.01, nhan: 'Đặt nhầm vị trí', phanHoi: 'Em đã tính 4 · 8 : 6. Tích chéo đúng là x · 8 = 4 · 6.' }, { gt: 24, nhan: 'Thiếu bước', phanHoi: '24 là 4 · 6 = x · 8. Còn chia cho 8.' }],
+        buoc: { hoi: 'Tích chéo: x · 8 = 4 · 6 = ?', dapAn: 24, dung: 'Đúng: x · 8 = 24, vậy x = ?', sai: '4 · 6 = ?' },
+        goiY: ['Nhân chéo: x · 8 = 4 · 6.'], viSaoDung: 'x · 8 = 24 → x = 3. Kiểm tra: 3/4 = 6/8 ✓.', loiGiai: 'x · 8 = 4 · 6 = 24 ⇒ x = <b>3</b>.', giangLai: 'Cách khác: 6/8 rút gọn được 3/4. Vậy x/4 = 3/4 nên x = 3.', tienBo: 'Em đã nhân chéo đúng cặp số.',
+        nguon: tuSoan(SGK_TOAN7_T2 + ' — tỉ lệ thức và tính chất.'), kiemTra: kt(),
+        tuongTu: { id: 'T7C-01-TT', muc: 'co-ban', liDoMuc: 'Như câu gốc.', loai: 'so', de: 'Tìm x biết ' + F('x', 6) + ' = ' + F(10, 15) + '.', dapAn: 4, loi: [{ gt: 25, nhan: 'Đặt nhầm vị trí', phanHoi: 'x · 15 = 6 · 10.' }, { gt: 9, nhan: 'Đặt nhầm vị trí', phanHoi: 'x · 15 = 6 · 10.' }, { gt: 60, nhan: 'Thiếu bước', phanHoi: 'Còn chia cho 15.' }], buoc: { hoi: '6 · 10 = ?', dapAn: 60, dung: 'Đúng.', sai: 'Nhân.' }, goiY: ['10/15 = 2/3.'], viSaoDung: 'x = 60 : 15 = 4.', loiGiai: '<b>4</b>.', giangLai: 'Rút gọn 10/15 = 2/3 = 4/6.', nguon: tuSoan(SGK_TOAN7_T2 + ' — tỉ lệ thức.'), kiemTra: kt() }
+      },
+      {
+        id: 'T7C-02', muc: 'co-ban', liDoMuc: 'Nhận biết công thức tỉ lệ thuận.', loai: 'chon1', de: 'Cho y tỉ lệ thuận với x theo hệ số tỉ lệ 3. Khi x = 5 thì y bằng bao nhiêu?',
+        phuongAn: [{ t: '15', dung: true }, { t: F(5, 3), phanHoi: 'Đây là x : 3. Tỉ lệ thuận: y = k · x.' }, { t: '8', phanHoi: 'Em đã cộng 3 + 5. Tỉ lệ thuận là phép nhân.' }, { t: F(3, 5), phanHoi: 'Đây là 3 : x — công thức của tỉ lệ nghịch.' }],
+        goiY: ['Công thức: y = k · x.'], viSaoDung: 'y = 3 · 5 = 15.', loiGiai: 'y = k · x = 3 · 5 = <b>15</b>.', giangLai: 'Ví dụ: mỗi quyển vở 3 nghìn đồng (k = 3). Mua 5 quyển hết 3 · 5 = 15 nghìn.', tienBo: 'Em đã dùng đúng công thức tỉ lệ thuận.',
+        nguon: tuSoan(SGK_TOAN7_T2 + ' — đại lượng tỉ lệ thuận.'), kiemTra: kt(),
+        tuongTu: { id: 'T7C-02-TT', muc: 'co-ban', liDoMuc: 'Như câu gốc, tỉ lệ nghịch.', loai: 'chon1', de: 'Cho y tỉ lệ nghịch với x theo hệ số tỉ lệ 12. Khi x = 4 thì y bằng bao nhiêu?', phuongAn: [{ t: '3', dung: true }, { t: '48', phanHoi: '48 = 12 · 4 là công thức tỉ lệ thuận.' }, { t: '16', phanHoi: 'Em đã cộng.' }, { t: F(1, 3), phanHoi: 'Đây là 4 : 12. Tỉ lệ nghịch: y = a : x.' }], goiY: ['y = a : x.'], viSaoDung: '12 : 4 = 3.', loiGiai: '<b>3</b>.', giangLai: 'x · y = 12.', nguon: tuSoan(SGK_TOAN7_T2 + ' — đại lượng tỉ lệ nghịch.'), kiemTra: kt() }
+      },
+      {
+        id: 'T7C-03', muc: 'van-dung', liDoMuc: 'Nhận ra quan hệ tỉ lệ thuận trong tình huống mua bán, hai bước.', loai: 'so', de: 'Mua 4 quyển vở cùng loại hết 36 nghìn đồng. Hỏi mua 7 quyển như thế hết bao nhiêu nghìn đồng?', donVi: 'nghìn đồng', dapAn: 63,
+        loi: [{ gt: 9, nhan: 'Thiếu bước', phanHoi: '9 nghìn là giá một quyển. Còn nhân với 7.' }, { gt: 20.571, saiSo: 0.01, nhan: 'Nhầm tỉ lệ nghịch', phanHoi: 'Mua nhiều vở hơn thì tốn nhiều tiền hơn — đây là tỉ lệ <b>thuận</b>, không phải nghịch.' }, { gt: 39, nhan: 'Lỗi cách tính', phanHoi: 'Em đã cộng thêm 3 nghìn. Hãy tìm giá một quyển trước.' }],
+        buoc: { hoi: 'Giá một quyển vở là bao nhiêu nghìn đồng?', dapAn: 9, dung: 'Đúng: 36 : 4 = 9. Vậy 7 quyển = ?', sai: '36 : 4 = ?' },
+        goiY: ['Số vở và số tiền là hai đại lượng tỉ lệ thuận.', 'Tìm giá một quyển trước.'], viSaoDung: '36 : 4 = 9; 9 · 7 = 63.', loiGiai: 'Giá một quyển: 36 : 4 = 9 (nghìn đồng). 7 quyển: 9 · 7 = <b>63</b> nghìn đồng.<br>Cách khác: ' + F('x', 7) + ' = ' + F(36, 4) + ' ⇒ x = 63.',
+        giangLai: 'Hỏi: mua nhiều hơn thì tiền nhiều hơn hay ít hơn? Nhiều hơn → tỉ lệ thuận → tìm "một đơn vị" rồi nhân lên.', tienBo: 'Em đã nhận ra đúng quan hệ tỉ lệ thuận.',
+        nguon: tuSoan(SGK_TOAN7_T2 + ' — bài toán về đại lượng tỉ lệ thuận.', { soLieu: GIA_DINH }), kiemTra: kt(),
+        tuongTu: { id: 'T7C-03-TT', muc: 'van-dung', liDoMuc: 'Như câu gốc.', loai: 'so', de: 'Mua 5 kg gạo hết 90 nghìn đồng. Mua 8 kg gạo cùng loại hết bao nhiêu nghìn đồng?', donVi: 'nghìn đồng', dapAn: 144, loi: [{ gt: 18, nhan: 'Thiếu bước', phanHoi: 'Đó là giá 1 kg.' }, { gt: 56.25, saiSo: 0.01, nhan: 'Nhầm tỉ lệ nghịch', phanHoi: 'Đây là tỉ lệ thuận.' }], buoc: { hoi: 'Giá 1 kg?', dapAn: 18, dung: 'Đúng.', sai: '90 : 5.' }, goiY: ['90 : 5 = 18.'], viSaoDung: '18 · 8 = 144.', loiGiai: '<b>144</b> nghìn đồng.', giangLai: 'Tìm giá 1 kg.', nguon: tuSoan(SGK_TOAN7_T2 + ' — tỉ lệ thuận.', { soLieu: GIA_DINH }), kiemTra: kt() }
+      },
+      {
+        id: 'T7C-04', muc: 'van-dung', liDoMuc: 'Nhận ra quan hệ tỉ lệ nghịch (năng suất), dễ nhầm thành tỉ lệ thuận.', loai: 'so', de: '4 người làm xong một công việc trong 6 ngày. Hỏi 8 người (năng suất mỗi người như nhau) làm xong công việc đó trong bao nhiêu ngày?', donVi: 'ngày', dapAn: 3,
+        loi: [{ gt: 12, nhan: 'Nhầm tỉ lệ thuận', phanHoi: 'Nhiều người hơn thì làm <b>nhanh hơn</b>, số ngày phải giảm. Đây là tỉ lệ nghịch.' }, { gt: 24, nhan: 'Thiếu bước', phanHoi: '24 là tổng số "ngày công" (4 · 6). Còn chia cho 8 người.' }, { gt: 2, nhan: 'Lỗi tính', phanHoi: 'Kiểm tra lại: 4 · 6 = 24; 24 : 8 = ?' }],
+        buoc: { hoi: 'Nếu chỉ 1 người làm thì cần bao nhiêu ngày?', dapAn: 24, dung: 'Đúng: 24 ngày. 8 người thì chia đều: 24 : 8 = ?', sai: '4 người mất 6 ngày → 1 người mất 4 · 6 ngày.' },
+        goiY: ['Số người tăng thì số ngày tăng hay giảm?', 'Số người · số ngày = không đổi.'], viSaoDung: '4 · 6 = 8 · x ⇒ x = 3.', loiGiai: 'Số người và số ngày tỉ lệ nghịch: 4 · 6 = 8 · x ⇒ x = 24 : 8 = <b>3</b> ngày.',
+        giangLai: 'Nghĩ về "ngày công": việc này cần tổng cộng 4 · 6 = 24 ngày công. 8 người cùng làm thì mỗi ngày được 8 ngày công, cần 24 : 8 = 3 ngày.', tienBo: 'Em đã nhận ra đây là tỉ lệ nghịch.',
+        nguon: tuSoan(SGK_TOAN7_T2 + ' — bài toán về đại lượng tỉ lệ nghịch.', { soLieu: GIA_DINH }), kiemTra: kt(),
+        tuongTu: { id: 'T7C-04-TT', muc: 'van-dung', liDoMuc: 'Như câu gốc.', loai: 'so', de: '6 máy cày (như nhau) cày xong một cánh đồng trong 10 ngày. Hỏi 15 máy như thế cày xong trong bao nhiêu ngày?', donVi: 'ngày', dapAn: 4, loi: [{ gt: 25, nhan: 'Nhầm tỉ lệ thuận', phanHoi: 'Nhiều máy hơn thì xong nhanh hơn.' }, { gt: 60, nhan: 'Thiếu bước', phanHoi: '60 là tổng "ngày máy". Chia cho 15.' }], buoc: { hoi: '1 máy cần bao nhiêu ngày?', dapAn: 60, dung: 'Đúng.', sai: '6 · 10.' }, goiY: ['6 · 10 = 15 · x.'], viSaoDung: '60 : 15 = 4.', loiGiai: '<b>4</b> ngày.', giangLai: 'Ngày công.', nguon: tuSoan(SGK_TOAN7_T2 + ' — tỉ lệ nghịch.', { soLieu: GIA_DINH }), kiemTra: kt() }
+      },
+      {
+        id: 'T7C-05', muc: 'nang-cao', liDoMuc: 'Chia theo tỉ lệ nhiều bước (dãy tỉ số bằng nhau).', loai: 'so', de: 'Ba lớp 7A, 7B, 7C quyên góp được tất cả 120 quyển sách. Số sách của ba lớp tỉ lệ với 3; 4; 5. Hỏi lớp 7C quyên góp được bao nhiêu quyển?', donVi: 'quyển', dapAn: 50,
+        loi: [{ gt: 40, nhan: 'Nhầm đối tượng', phanHoi: '40 là số sách lớp 7B (4 phần). Lớp 7C ứng với 5 phần.' }, { gt: 30, nhan: 'Nhầm đối tượng', phanHoi: '30 là số sách lớp 7A.' }, { gt: 10, nhan: 'Thiếu bước', phanHoi: '10 là giá trị <b>một phần</b>. Lớp 7C có 5 phần.' }, { gt: 24, nhan: 'Lỗi cách chia', phanHoi: 'Em đã lấy 120 : 5. Phải chia cho <b>tổng số phần</b> 3 + 4 + 5 = 12.' }],
+        buoc: { hoi: 'Tổng số phần là 3 + 4 + 5 = 12. Mỗi phần ứng với bao nhiêu quyển?', dapAn: 10, dung: 'Đúng: 120 : 12 = 10. Lớp 7C có 5 phần → ?', sai: '120 : 12 = ?' },
+        goiY: ['Gọi số sách là a, b, c: a/3 = b/4 = c/5.', 'Dùng dãy tỉ số bằng nhau: (a + b + c)/(3 + 4 + 5) = 120/12.'], viSaoDung: 'Một phần = 120 : 12 = 10; 7C = 5 · 10 = 50.',
+        loiGiai: 'Gọi số sách của 7A, 7B, 7C là a, b, c. Ta có ' + F('a', 3) + ' = ' + F('b', 4) + ' = ' + F('c', 5) + ' = ' + F('a + b + c', '3 + 4 + 5') + ' = ' + F(120, 12) + ' = 10.<br>Vậy c = 5 · 10 = <b>50</b> quyển (a = 30, b = 40; kiểm tra 30 + 40 + 50 = 120 ✓).',
+        giangLai: 'Vẽ sơ đồ: 7A ■■■, 7B ■■■■, 7C ■■■■■ — tổng 12 ô bằng nhau chứa 120 quyển. Mỗi ô 10 quyển. 7C có 5 ô.', tienBo: 'Em đã chia theo tổng số phần và chọn đúng đối tượng.',
+        nguon: tuSoan(SGK_TOAN7_T2 + ' — tính chất dãy tỉ số bằng nhau; bài toán chia tỉ lệ.', { soLieu: GIA_DINH }), kiemTra: kt(),
+        tuongTu: { id: 'T7C-05-TT', muc: 'nang-cao', liDoMuc: 'Như câu gốc.', loai: 'so', de: 'Chia 150 cây giống cho ba đội theo tỉ lệ 2; 3; 5. Đội thứ ba nhận bao nhiêu cây?', donVi: 'cây', dapAn: 75, loi: [{ gt: 45, nhan: 'Nhầm đối tượng', phanHoi: 'Đó là đội thứ hai.' }, { gt: 30, nhan: 'Nhầm đối tượng', phanHoi: 'Đó là đội thứ nhất.' }, { gt: 15, nhan: 'Thiếu bước', phanHoi: 'Đó là một phần.' }], buoc: { hoi: 'Mỗi phần bao nhiêu cây?', dapAn: 15, dung: 'Đúng: 150 : 10.', sai: '150 : (2 + 3 + 5).' }, goiY: ['Tổng 10 phần.'], viSaoDung: '5 · 15 = 75.', loiGiai: '<b>75</b> cây.', giangLai: 'Vẽ ô.', nguon: tuSoan(SGK_TOAN7_T2 + ' — dãy tỉ số bằng nhau.', { soLieu: GIA_DINH }), kiemTra: kt() }
+      },
+      {
+        id: 'T7C-06', muc: 'nang-cao', liDoMuc: 'Phân tích bảng giá trị để nhận ra loại tỉ lệ và hệ số, rồi dự đoán.', loai: 'chonNhieu',
+        de: 'Cho bảng giá trị của hai đại lượng x và y. <b>Chọn TẤT CẢ</b> các nhận xét đúng.', bang: { tieuDe: ['x', '2', '4', '5', '10'], dong: [['y', '10', '5', '4', '2']], ghiChu: GIA_DINH },
+        phuongAn: [{ t: 'y tỉ lệ nghịch với x.', dung: true }, { t: 'y tỉ lệ thuận với x.', phanHoi: 'x tăng thì y giảm; tỉ số y : x không bằng nhau (5; 1,25; …).' }, { t: 'Hệ số tỉ lệ là 20.', dung: true }, { t: 'Khi x = 8 thì y = 2,5.', dung: true }],
+        goiY: ['Tính tích x · y ở từng cột.', 'Nếu tích luôn bằng nhau thì là tỉ lệ nghịch.'], viSaoDung: 'x · y = 20 ở mọi cột → tỉ lệ nghịch, hệ số 20; x = 8 ⇒ y = 20 : 8 = 2,5.', loiGiai: 'Ý 1, 3, 4 đúng. 2 · 10 = 4 · 5 = 5 · 4 = 10 · 2 = 20.',
+        giangLai: 'Phép thử nhanh: tỉ số y/x không đổi → tỉ lệ thuận; tích x · y không đổi → tỉ lệ nghịch.', tienBo: 'Em đã kiểm tra bằng số liệu trước khi kết luận loại tỉ lệ.',
+        nguon: tuSoan(SGK_TOAN7_T2 + ' — nhận biết đại lượng tỉ lệ thuận, tỉ lệ nghịch qua bảng giá trị.', { soLieu: GIA_DINH }), kiemTra: kt(),
+        tuongTu: { id: 'T7C-06-TT', muc: 'nang-cao', liDoMuc: 'Như câu gốc.', loai: 'chonNhieu', de: 'Cho bảng giá trị. <b>Chọn TẤT CẢ</b> các nhận xét đúng.', bang: { tieuDe: ['x', '1', '2', '3', '4'], dong: [['y', '3', '6', '9', '12']], ghiChu: GIA_DINH }, phuongAn: [{ t: 'y tỉ lệ thuận với x.', dung: true }, { t: 'Hệ số tỉ lệ (y theo x) là 3.', dung: true }, { t: 'y tỉ lệ nghịch với x.', phanHoi: 'Tích x · y thay đổi (3; 12; …).' }, { t: 'Khi x = 10 thì y = 13.', phanHoi: 'y = 3 · 10 = 30.' }], goiY: ['Tính y : x.'], viSaoDung: 'y : x = 3.', loiGiai: 'Ý 1, 2.', giangLai: 'Tỉ số không đổi → tỉ lệ thuận.', nguon: tuSoan(SGK_TOAN7_T2 + ' — tỉ lệ thuận.', { soLieu: GIA_DINH }), kiemTra: kt() }
+      }
+    ]
+  };
+
+  const daThuc = {
+    id: 'toan7-da-thuc', lop: 7, mon: 'toan', phanMon: 'Số và Đại số', ten: 'Biểu thức đại số và đa thức một biến',
+    kienThucTruoc: ['Lũy thừa với số mũ tự nhiên', 'Quy tắc dấu khi nhân số âm', 'Thứ tự thực hiện phép tính'],
+    yeuCauCanDat: ['Tính được giá trị của biểu thức đại số.', 'Nhận biết đa thức một biến, bậc, hệ số, hệ số tự do; thu gọn và sắp xếp đa thức.', 'Thực hiện cộng, trừ đa thức một biến.', 'Nhận biết nghiệm của đa thức một biến.'],
+    bai: {
+      mucTieu: ['thay số vào biểu thức mà không sai dấu;', 'thu gọn đa thức và tìm bậc, hệ số;', 'cộng, trừ hai đa thức;', 'tìm nghiệm của đa thức bậc nhất và dùng nghiệm để tìm hệ số chưa biết.'],
+      khoiDong: { hoi: 'Một chiếc taxi tính 12 nghìn đồng cho km đầu và 15 nghìn đồng cho mỗi km tiếp theo. Viết biểu thức tính tiền cho quãng đường x km (x ≥ 1). Đi 5 km hết bao nhiêu? (số liệu giả định)', goiY: 'Tiền = 12 + 15(x − 1) (nghìn đồng). Với x = 5: 12 + 15 · 4 = 72 nghìn đồng.' },
+      trongTam: [
+        '<b>Giá trị của biểu thức</b>: thay số vào biến (số âm đặt trong ngoặc), rồi tính theo thứ tự. Nhớ: (−1)² = 1, (−2)³ = −8.',
+        '<b>Đa thức một biến</b> là tổng các đơn thức của cùng một biến, ví dụ P(x) = 5x³ − 2x⁴ + x − 7.',
+        '<b>Thu gọn</b>: cộng các hạng tử cùng bậc. <b>Bậc</b> của đa thức (đã thu gọn, khác 0) là số mũ lớn nhất của biến. <b>Hệ số tự do</b> là hạng tử không chứa biến. Số khác 0 là đa thức bậc 0.',
+        '<b>Cộng, trừ</b> đa thức: bỏ ngoặc (trước ngoặc có dấu − thì đổi dấu mọi hạng tử trong ngoặc), rồi thu gọn.',
+        '<b>Nghiệm</b> của đa thức P(x) là giá trị x = a làm P(a) = 0.'
+      ],
+      viDu: { de: 'Thu gọn và tìm bậc của P(x) = 2x² + 3x − x² + 5 − 4x.', loiGiai: 'P(x) = (2x² − x²) + (3x − 4x) + 5 = <b>x² − x + 5</b>. Bậc của P(x) là <b>2</b>, hệ số tự do là 5.' },
+      nguon: tuSoan(SGK_TOAN7_T2 + ' — chương về Biểu thức đại số và đa thức một biến.'),
+      hoiDap: [
+        { tu: ['gia tri', 'thay'], tl: 'Thay số vào biến, đặt số âm trong ngoặc: x = −1 thì 2x² = 2 · (−1)² = 2.' },
+        { tu: ['bac'], tl: 'Bậc của đa thức một biến (đã thu gọn) là số mũ lớn nhất của biến.' },
+        { tu: ['thu gon', 'cung bac'], tl: 'Thu gọn: cộng các hạng tử cùng lũy thừa của x, ví dụ 3x² + 2x² = 5x².' },
+        { tu: ['nghiem'], tl: 'a là nghiệm của P(x) nếu P(a) = 0. Với đa thức bậc nhất ax + b, nghiệm là x = −b/a.' }
+      ]
+    },
+    cauHoi: [
+      {
+        id: 'T7D-01', muc: 'co-ban', liDoMuc: 'Thay số trực tiếp vào biểu thức.', loai: 'so', de: 'Tính giá trị của biểu thức 2x² − 3x + 1 tại x = −1.', dapAn: 6,
+        loi: [{ gt: 0, nhan: 'Lỗi dấu', phanHoi: 'Em đã tính −3x thành −3. Với x = −1: −3 · (−1) = +3.' }, { gt: 2, nhan: 'Lỗi lũy thừa số âm', phanHoi: 'Em đã tính (−1)² = −1. Thật ra (−1)² = (−1) · (−1) = 1.' }, { gt: -4, nhan: 'Lỗi dấu', phanHoi: 'Kiểm tra lại cả (−1)² và −3 · (−1).' }],
+        buoc: { hoi: '(−1)² bằng bao nhiêu?', dapAn: 1, dung: 'Đúng. Còn −3 · (−1) = ?', sai: '(−1) · (−1) = ?' },
+        goiY: ['Thay x = −1, nhớ đặt trong ngoặc: 2 · (−1)² − 3 · (−1) + 1.'], viSaoDung: '2 · 1 + 3 + 1 = 6.', loiGiai: '2 · (−1)² − 3 · (−1) + 1 = 2 + 3 + 1 = <b>6</b>.', giangLai: 'Luôn viết số âm trong ngoặc khi thay vào. Hai dấu trừ nhân nhau thành dấu cộng.', tienBo: 'Em đã giữ đúng dấu khi thay số âm vào biểu thức.',
+        nguon: tuSoan(SGK_TOAN7_T2 + ' — giá trị của biểu thức đại số.'), kiemTra: kt(),
+        tuongTu: { id: 'T7D-01-TT', muc: 'co-ban', liDoMuc: 'Như câu gốc.', loai: 'so', de: 'Tính giá trị của biểu thức 3x² + 2x − 5 tại x = −2.', dapAn: 3, loi: [{ gt: 11, nhan: 'Lỗi dấu', phanHoi: '2 · (−2) = −4.' }, { gt: -21, nhan: 'Lỗi lũy thừa số âm', phanHoi: '(−2)² = 4, không phải −4.' }], buoc: { hoi: '(−2)² = ?', dapAn: 4, dung: 'Đúng.', sai: '(−2)·(−2).' }, goiY: ['3 · 4 + 2 · (−2) − 5.'], viSaoDung: '12 − 4 − 5 = 3.', loiGiai: '<b>3</b>.', giangLai: 'Đặt số âm trong ngoặc.', nguon: tuSoan(SGK_TOAN7_T2 + ' — giá trị của biểu thức.'), kiemTra: kt() }
+      },
+      {
+        id: 'T7D-02', muc: 'co-ban', liDoMuc: 'Nhận biết bậc của đa thức chưa sắp xếp.', loai: 'chon1', de: 'Bậc của đa thức P(x) = 5x³ − 2x⁴ + x − 7 là:',
+        phuongAn: [{ t: '3', phanHoi: '5x³ đứng đầu nhưng chưa phải hạng tử có số mũ lớn nhất.' }, { t: '4', dung: true }, { t: '5', phanHoi: '5 là hệ số, không phải số mũ.' }, { t: '−7', phanHoi: '−7 là hệ số tự do.' }],
+        goiY: ['Tìm số mũ lớn nhất của x.'], viSaoDung: 'Hạng tử −2x⁴ có số mũ lớn nhất là 4.', loiGiai: 'Bậc là <b>4</b> (hạng tử −2x⁴).', giangLai: 'Sắp xếp lại theo lũy thừa giảm: −2x⁴ + 5x³ + x − 7. Hạng tử đầu cho biết bậc.', tienBo: 'Em đã tìm bậc theo số mũ, không theo vị trí hay hệ số.',
+        nguon: tuSoan(SGK_TOAN7_T2 + ' — bậc của đa thức một biến.'), kiemTra: kt(),
+        tuongTu: { id: 'T7D-02-TT', muc: 'co-ban', liDoMuc: 'Như câu gốc.', loai: 'chon1', de: 'Bậc của đa thức Q(x) = 7 − 3x² + 2x⁵ − x là:', phuongAn: [{ t: '2', phanHoi: 'Còn x⁵.' }, { t: '5', dung: true }, { t: '7', phanHoi: '7 là hệ số tự do.' }, { t: '3', phanHoi: '3 là hệ số.' }], goiY: ['Số mũ lớn nhất.'], viSaoDung: '2x⁵ → bậc 5.', loiGiai: '<b>5</b>.', giangLai: 'Sắp xếp lại.', nguon: tuSoan(SGK_TOAN7_T2 + ' — bậc của đa thức.'), kiemTra: kt() }
+      },
+      {
+        id: 'T7D-03', muc: 'van-dung', liDoMuc: 'Phải thu gọn trước khi đọc hệ số.', loai: 'so', de: 'Thu gọn đa thức P(x) = 3x² − 5x + 2x² + x − 4, rồi cho biết <b>hệ số của x</b>.', dapAn: -4,
+        loi: [{ gt: -5, nhan: 'Chưa thu gọn', phanHoi: 'Còn hạng tử +x cùng bậc với −5x. Hãy cộng: −5x + x.' }, { gt: 4, nhan: 'Lỗi dấu', phanHoi: '−5 + 1 = −4, kết quả âm.' }, { gt: 5, nhan: 'Nhầm hạng tử', phanHoi: '5 là hệ số của x². Đề hỏi hệ số của x.' }, { gt: -6, nhan: 'Lỗi dấu', phanHoi: '+x có hệ số +1: −5 + 1, không phải −5 − 1.' }],
+        buoc: { hoi: 'Hai hạng tử chứa x là −5x và x. Tổng hệ số −5 + 1 = ?', dapAn: -4, dung: 'Đúng.', sai: '−5 + 1 = ?' },
+        goiY: ['Gom các hạng tử chứa x: −5x + x.'], viSaoDung: 'P(x) = 5x² − 4x − 4, hệ số của x là −4.', loiGiai: 'P(x) = (3x² + 2x²) + (−5x + x) − 4 = 5x² − 4x − 4. Hệ số của x là <b>−4</b>.', giangLai: 'Tô màu: các hạng tử x² một màu, các hạng tử x một màu, rồi cộng từng nhóm.', tienBo: 'Em đã thu gọn trước khi đọc hệ số.',
+        nguon: tuSoan(SGK_TOAN7_T2 + ' — thu gọn đa thức một biến.'), kiemTra: kt(),
+        tuongTu: { id: 'T7D-03-TT', muc: 'van-dung', liDoMuc: 'Như câu gốc.', loai: 'so', de: 'Thu gọn Q(x) = 4x³ − 2x + 2x³ + 7x − 1, rồi cho biết <b>hệ số của x</b>.', dapAn: 5, loi: [{ gt: -2, nhan: 'Chưa thu gọn', phanHoi: 'Cộng −2x + 7x.' }, { gt: 6, nhan: 'Nhầm hạng tử', phanHoi: '6 là hệ số của x³.' }, { gt: 9, nhan: 'Lỗi dấu', phanHoi: '−2 + 7.' }], buoc: { hoi: '−2 + 7 = ?', dapAn: 5, dung: 'Đúng.', sai: 'Tính lại.' }, goiY: ['−2x + 7x.'], viSaoDung: 'Q(x) = 6x³ + 5x − 1.', loiGiai: '<b>5</b>.', giangLai: 'Gom nhóm.', nguon: tuSoan(SGK_TOAN7_T2 + ' — thu gọn đa thức.'), kiemTra: kt() }
+      },
+      {
+        id: 'T7D-04', muc: 'van-dung', liDoMuc: 'Hai bước: thu gọn rồi tìm nghiệm.', loai: 'so', choPhanSo: true, de: 'Tìm nghiệm của đa thức B(x) = 3x − 12 + x.', dapAn: 3,
+        loi: [{ gt: 4, nhan: 'Chưa thu gọn', phanHoi: 'Em đã giải 3x − 12 = 0 mà quên hạng tử +x. Thu gọn: 4x − 12.' }, { gt: -3, nhan: 'Lỗi chuyển vế', phanHoi: '4x − 12 = 0 ⇒ 4x = 12 (chuyển vế đổi dấu) ⇒ x = 3.' }, { gt: 12, nhan: 'Thiếu bước', phanHoi: '4x = 12, còn chia cho 4.' }],
+        buoc: { hoi: 'Thu gọn B(x) được a·x − 12. Hệ số a bằng bao nhiêu?', dapAn: 4, dung: 'Đúng: B(x) = 4x − 12. Giải 4x − 12 = 0.', sai: '3x + x = ?x' },
+        goiY: ['Thu gọn: 3x + x = 4x.', 'Giải 4x − 12 = 0.'], viSaoDung: 'B(x) = 4x − 12 = 0 ⇒ x = 3. Kiểm tra: B(3) = 9 − 12 + 3 = 0 ✓.', loiGiai: 'B(x) = 4x − 12. B(x) = 0 ⇔ 4x = 12 ⇔ x = <b>3</b>.', giangLai: 'Nghiệm là số làm đa thức bằng 0. Thử x = 3: 3 · 3 − 12 + 3 = 0. Đúng!', tienBo: 'Em đã thu gọn trước khi tìm nghiệm.',
+        nguon: tuSoan(SGK_TOAN7_T2 + ' — nghiệm của đa thức một biến.'), kiemTra: kt(),
+        tuongTu: { id: 'T7D-04-TT', muc: 'van-dung', liDoMuc: 'Như câu gốc.', loai: 'so', choPhanSo: true, de: 'Tìm nghiệm của đa thức C(x) = 5x + 10 − 3x.', dapAn: -5, loi: [{ gt: 5, nhan: 'Lỗi chuyển vế', phanHoi: '2x = −10.' }, { gt: -2, nhan: 'Chưa thu gọn', phanHoi: 'Quên −3x.' }, { gt: 2, nhan: 'Chưa thu gọn', phanHoi: 'Thu gọn: 2x + 10.' }], buoc: { hoi: 'Thu gọn được a·x + 10, a = ?', dapAn: 2, dung: 'Đúng.', sai: '5 − 3.' }, goiY: ['2x + 10 = 0.'], viSaoDung: 'x = −5.', loiGiai: '<b>−5</b>.', giangLai: 'Thử lại: C(−5) = 0.', nguon: tuSoan(SGK_TOAN7_T2 + ' — nghiệm của đa thức.'), kiemTra: kt() }
+      },
+      {
+        id: 'T7D-05', muc: 'nang-cao', liDoMuc: 'Dùng định nghĩa nghiệm để lập và giải điều kiện tìm hệ số.', loai: 'so', choPhanSo: true, de: 'Cho đa thức P(x) = x² + ax − 6. Biết x = 2 là một nghiệm của P(x). Tìm a.', dapAn: 1,
+        loi: [{ gt: -1, nhan: 'Lỗi chuyển vế', phanHoi: '2a − 2 = 0 ⇒ 2a = 2 ⇒ a = 1.' }, { gt: -5, nhan: 'Lỗi dấu', phanHoi: 'Có vẻ em đã viết +6 thay vì −6. P(2) = 4 + 2a − 6.' }, { gt: 2, nhan: 'Thiếu bước', phanHoi: '2a = 2, còn chia cho 2.' }],
+        buoc: { hoi: 'Thay x = 2: P(2) = 2² + 2a − 6 = 2a + b. Số b bằng bao nhiêu?', dapAn: -2, dung: 'Đúng: P(2) = 2a − 2. Vì 2 là nghiệm nên 2a − 2 = 0.', sai: '4 − 6 = ?' },
+        goiY: ['x = 2 là nghiệm nghĩa là P(2) = 0.', 'Thay x = 2: 4 + 2a − 6 = 0.'], viSaoDung: '4 + 2a − 6 = 0 ⇒ a = 1. Kiểm tra: P(x) = x² + x − 6, P(2) = 4 + 2 − 6 = 0 ✓.', loiGiai: 'P(2) = 0 ⇔ 4 + 2a − 6 = 0 ⇔ 2a = 2 ⇔ a = <b>1</b>.',
+        giangLai: 'Câu "x = 2 là nghiệm" là một manh mối: nó cho ta phương trình P(2) = 0. Chỉ còn một ẩn là a, giải như bài tìm x quen thuộc.', tienBo: 'Em đã biến điều kiện "là nghiệm" thành phương trình để tìm hệ số.',
+        nguon: tuSoan(SGK_TOAN7_T2 + ' — nghiệm của đa thức một biến (dạng tìm hệ số: kiểm tra có trong SGK/SBT lớp 7 không).'), kiemTra: kt(),
+        tuongTu: { id: 'T7D-05-TT', muc: 'nang-cao', liDoMuc: 'Như câu gốc.', loai: 'so', choPhanSo: true, de: 'Cho P(x) = x² + ax + 3. Biết x = −1 là một nghiệm của P(x). Tìm a.', dapAn: 4, loi: [{ gt: -4, nhan: 'Lỗi dấu', phanHoi: 'a · (−1) = −a: 1 − a + 3 = 0.' }, { gt: 2, nhan: 'Lỗi tính', phanHoi: '1 + 3 = 4.' }], buoc: { hoi: 'P(−1) = 1 − a + 3 = b − a. b = ?', dapAn: 4, dung: 'Đúng: 4 − a = 0.', sai: '(−1)² + 3 = ?' }, goiY: ['P(−1) = 0.'], viSaoDung: 'a = 4; P(x) = x² + 4x + 3, P(−1) = 0 ✓.', loiGiai: '<b>4</b>.', giangLai: 'Thay rồi giải.', nguon: tuSoan(SGK_TOAN7_T2 + ' — nghiệm của đa thức.'), kiemTra: kt() }
+      },
+      {
+        id: 'T7D-06', muc: 'nang-cao', liDoMuc: 'Cộng, trừ đa thức và kiểm tra nhiều khẳng định về kết quả.', loai: 'chonNhieu',
+        de: 'Cho A(x) = 2x³ − x + 5 và B(x) = −2x³ + 3x² − 4. <b>Chọn TẤT CẢ</b> các khẳng định đúng.',
+        phuongAn: [{ t: 'A(x) + B(x) = 3x² − x + 1.', dung: true }, { t: 'A(x) + B(x) có bậc 3.', phanHoi: '2x³ + (−2x³) = 0, nên tổng chỉ còn bậc 2.' }, { t: 'A(x) − B(x) = 4x³ − 3x² − x + 9.', dung: true }, { t: 'Hệ số tự do của A(x) − B(x) là 1.', phanHoi: '5 − (−4) = 9. Trừ một số âm là cộng.' }],
+        goiY: ['Cộng/trừ từng nhóm cùng bậc: x³, x², x, hệ số tự do.', 'Khi trừ B(x), đổi dấu mọi hạng tử của B.'], viSaoDung: 'A + B = 0x³ + 3x² − x + 1; A − B = 4x³ − 3x² − x + 9.',
+        loiGiai: 'Ý 1 và 3 đúng.<br>A + B = (2x³ − 2x³) + 3x² − x + (5 − 4) = 3x² − x + 1 (bậc 2).<br>A − B = 2x³ − x + 5 + 2x³ − 3x² + 4 = 4x³ − 3x² − x + 9.',
+        giangLai: 'Viết hai đa thức thẳng cột theo bậc (x³ | x² | x | số), rồi cộng hoặc trừ từng cột — giống phép tính cột dọc.', tienBo: 'Em đã đổi dấu đúng khi trừ đa thức và nhận ra bậc có thể giảm.',
+        nguon: tuSoan(SGK_TOAN7_T2 + ' — phép cộng và phép trừ đa thức một biến.'), kiemTra: kt(),
+        tuongTu: { id: 'T7D-06-TT', muc: 'nang-cao', liDoMuc: 'Như câu gốc.', loai: 'chonNhieu', de: 'Cho A(x) = x² − 3x + 2 và B(x) = −x² + 3x + 5. <b>Chọn TẤT CẢ</b> các khẳng định đúng.', phuongAn: [{ t: 'A(x) + B(x) = 7.', dung: true }, { t: 'A(x) + B(x) là đa thức bậc 0.', dung: true }, { t: 'A(x) − B(x) = 2x² − 6x − 3.', dung: true }, { t: 'A(x) + B(x) = 2x² + 7.', phanHoi: 'x² + (−x²) = 0.' }], goiY: ['Cộng từng cột.'], viSaoDung: 'Các hạng tử chứa x triệt tiêu, còn 7.', loiGiai: 'Ý 1, 2, 3.', giangLai: 'Cột dọc.', nguon: tuSoan(SGK_TOAN7_T2 + ' — cộng, trừ đa thức.'), kiemTra: kt() }
+      }
+    ]
+  };
+
   /* ------------------------------------------------------------------
      DANH MỤC CẢ 4 KHỐI — tên chủ đề dự kiến theo mạch nội dung,
      CHƯA đối chiếu số bài / Unit / trang. "id" chỉ có ở chủ đề đã soạn.
@@ -613,7 +852,7 @@
     },
     7: {
       khtn: [['Vật lí', 'Tốc độ chuyển động', 'vl7-toc-do'], ['Vật lí', 'Âm thanh'], ['Vật lí', 'Ánh sáng'], ['Vật lí', 'Từ'], ['Hóa học', 'Nguyên tử', 'hh7-nguyen-tu'], ['Hóa học', 'Nguyên tố hóa học'], ['Hóa học', 'Sơ lược bảng tuần hoàn'], ['Hóa học', 'Phân tử và liên kết hóa học'], ['Sinh học', 'Quang hợp ở thực vật', 'sh7-quang-hop'], ['Sinh học', 'Hô hấp tế bào'], ['Sinh học', 'Trao đổi nước và chất dinh dưỡng'], ['Sinh học', 'Cảm ứng, sinh trưởng và sinh sản']],
-      toan: [['Số và Đại số', 'Số hữu tỉ', 'toan7-so-huu-ti'], ['Số và Đại số', 'Số thực'], ['Số và Đại số', 'Tỉ lệ thức và đại lượng tỉ lệ'], ['Số và Đại số', 'Biểu thức đại số và đa thức một biến']],
+      toan: [['Số và Đại số', 'Số hữu tỉ', 'toan7-so-huu-ti'], ['Số và Đại số', 'Số thực', 'toan7-so-thuc'], ['Số và Đại số', 'Tỉ lệ thức và đại lượng tỉ lệ', 'toan7-ti-le-thuc'], ['Số và Đại số', 'Biểu thức đại số và đa thức một biến', 'toan7-da-thuc']],
       anh: [['Ngữ pháp – Viết', 'Diễn đạt sở thích bằng thì hiện tại đơn', 'ta7-so-thich'], ['Ngữ pháp', 'Thì quá khứ đơn'], ['Ngữ pháp', 'So sánh: like, as … as, different from'], ['Đọc hiểu', 'Đọc đoạn văn thông tin ngắn'], ['Viết', 'Viết email ngắn']]
     },
     8: {
@@ -630,7 +869,7 @@
 
   window.HOC_LIEU = {
     tenWeb: TEN_WEB,
-    phienBan: '1.0 — ' + NGAY_SOAN,
+    phienBan: '1.1 — ' + NGAY_SOAN + ' (thêm 3 chủ đề Toán 7)',
     caiDat: {
       // Địa chỉ máy chủ trung gian AI (tùy chọn). Để trống = chỉ dùng AI qua Claude Artifact (nếu có) hoặc trợ giúp theo bài học.
       aiEndpoint: ''
@@ -641,13 +880,13 @@
       anh: { ten: 'Tiếng Anh', ngan: 'Tiếng Anh', moTa: 'Từ vựng · Ngữ pháp · Đọc · Viết' }
     },
     taiLieuCanBoSung: [
-      'SGK Toán 7, tập một — bộ "Kết nối tri thức với cuộc sống" (NXB Giáo dục Việt Nam): chương Số hữu tỉ (tệp PDF hoặc ảnh các trang, kèm năm in/ấn bản).',
+      'SGK Toán 7, tập một và tập hai — bộ "Kết nối tri thức với cuộc sống" (NXB Giáo dục Việt Nam): các chương Số hữu tỉ, Số thực, Tỉ lệ thức và đại lượng tỉ lệ, Biểu thức đại số và đa thức một biến (tệp PDF hoặc ảnh các trang, kèm năm in/ấn bản).',
       'SGK Khoa học tự nhiên 7 — bộ "Kết nối tri thức với cuộc sống": các bài Tốc độ chuyển động, Nguyên tử, Quang hợp ở thực vật (và bài về các yếu tố ảnh hưởng đến quang hợp nếu có).',
       'SGK Tiếng Anh 7 Global Success (NXB Giáo dục Việt Nam): đơn vị bài học về sở thích (Hobbies) — phần Grammar và Writing; kèm Workbook nếu muốn trích bài tập.',
       'Sách bài tập tương ứng (nếu muốn có câu loại A "trích" hoặc loại B "phỏng theo"), kèm xác nhận quyền sử dụng lại nguyên văn.',
       'Văn bản Chương trình GDPT 2018 môn Toán, môn KHTN, môn Tiếng Anh (Thông tư 32/2018/TT-BGDĐT) từ cổng thông tin Bộ GD&ĐT — để đối chiếu "Yêu cầu cần đạt".'
     ],
-    chuDe: [vatLi, hoaHoc, sinhHoc, toan, tiengAnh],
+    chuDe: [vatLi, hoaHoc, sinhHoc, toan, soThuc, tiLe, daThuc, tiengAnh],
     danhMuc: danhMuc
   };
 })();

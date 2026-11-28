@@ -67,6 +67,7 @@ button{cursor:pointer}
 .btn[disabled]{opacity:.5;cursor:not-allowed}
 .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
 .badge{display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:999px;font-size:13px;font-weight:600;background:var(--ms);color:var(--m);white-space:nowrap}
+.badge.plain{white-space:normal;max-width:100%;line-height:1.35}
 .badge.wait{background:var(--warn-soft);color:var(--warn)}
 .badge.ok{background:var(--ok-soft);color:var(--ok)}
 .badge.bad{background:var(--bad-soft);color:var(--bad)}
@@ -301,7 +302,7 @@ details.soan{margin-top:30px;padding:0 16px}details.soan>summary{font-size:18px}
 </header>
 <main id="app"><div class="wrap"><p>Đang mở sổ tay…</p></div></main>
 <div id="toast" class="toast" hidden role="status"></div>
-<script src="hoc-lieu.js?v=4705a22d"></script>
+<script src="hoc-lieu.js?v=b9e43691"></script>
 <script>
 {
 const D = window.HOC_LIEU;

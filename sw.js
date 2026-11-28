@@ -1,7 +1,7 @@
 /* Bộ nhớ đệm ngoại tuyến cho LophocHuyhero-Anpretty.
    Khi cập nhật hoc-lieu.js hoặc index.html, hãy tăng số phiên bản bên dưới
    để máy học sinh tải bản mới. */
-const PHIEN_BAN = 'lophoc-v7';
+const PHIEN_BAN = 'lophoc-v8';
 const TEP = ['./', './index.html', './hoc-lieu.js', './manifest.webmanifest', './icon.svg', './icon-192.png', './icon-512.png'];
 
 self.addEventListener('install', e => {

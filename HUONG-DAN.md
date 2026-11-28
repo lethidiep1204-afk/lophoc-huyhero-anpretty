@@ -1,7 +1,7 @@
 # LophocHuyhero-Anpretty — Hướng dẫn sử dụng bản web độc lập
 
 Sổ tay tự học THCS lớp 6–9: Khoa học tự nhiên, Toán (Số và Đại số), Tiếng Anh.
-Phiên bản học liệu: 1.6 — 28/11/2026 (39 chủ đề lớp 6, 7, 8; lớp 6 đã đủ chương trình).
+Phiên bản học liệu: 1.7 — 28/11/2026 (59 chủ đề lớp 6, 7, 8; lớp 6 đủ chương trình; lớp 7 đủ KHTN, Toán Số và Đại số, Tiếng Anh Unit 1–12 — phần Tiếng Anh 7 chờ đối chiếu SGK).
 
 **Lớp 6 (mới):** 17 chủ đề — Toán 5 (Chương I, II, III, VI, VII), KHTN 7 (Chương II, IV, V, VII, VIII, IX), Tiếng Anh 5 (Unit 1–4). Câu hỏi do nhóm biên soạn tự soạn (loại C). Căn cứ kiến thức đối chiếu theo **mục lục sách giáo viên** lớp 6 (Toán, KHTN) và phần **Objectives** của Unit trong SGV Tiếng Anh 6 — số trang ghi là trang SGV, chưa đối chiếu số trang SGK học sinh. Đợt 28/11/2026 đã thêm KHTN Chương I, III, VI, X và Tiếng Anh Unit 5–12 (đối chiếu Objectives từng Unit trong SGV) → lớp 6 đủ 29 chủ đề.
 

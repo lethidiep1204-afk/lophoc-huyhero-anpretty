@@ -1,7 +1,7 @@
 /* Bộ nhớ đệm ngoại tuyến cho LophocHuyhero-Anpretty.
    Khi cập nhật hoc-lieu.js hoặc index.html, hãy tăng số phiên bản bên dưới
    để máy học sinh tải bản mới. */
-const PHIEN_BAN = 'lophoc-v8';
+const PHIEN_BAN = 'lophoc-v9';
 const TEP = ['./', './index.html', './hoc-lieu.js', './manifest.webmanifest', './icon.svg', './icon-192.png', './icon-512.png'];
 
 self.addEventListener('install', e => {
@@ -20,8 +20,8 @@ self.addEventListener('fetch', e => {
       .catch(() => caches.match(req, { ignoreSearch: true }).then(r => r || caches.match('./index.html'))));
     return;
   }
-  // Phông chữ Google: dùng bản đã lưu nếu có, đồng thời làm mới.
-  if (/fonts\.(googleapis|gstatic)\.com$/.test(url.hostname)) {
+  // Phông chữ Google và thư viện đăng nhập Firebase: dùng bản đã lưu nếu có, đồng thời làm mới.
+  if (/fonts\.(googleapis|gstatic)\.com$/.test(url.hostname) || (url.hostname === 'www.gstatic.com' && url.pathname.startsWith('/firebasejs/'))) {
     e.respondWith(caches.open(PHIEN_BAN).then(c => c.match(req).then(hit => {
       const net = fetch(req).then(r => { if (r.ok || r.type === 'opaque') c.put(req, r.clone()); return r; }).catch(() => hit);
       return hit || net;

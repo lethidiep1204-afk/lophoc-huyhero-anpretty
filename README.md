@@ -1,7 +1,7 @@
 # LophocHuyhero-Anpretty — Hướng dẫn sử dụng bản web độc lập
 
 Sổ tay tự học THCS lớp 6–9: Khoa học tự nhiên, Toán (Số và Đại số), Tiếng Anh.
-Phiên bản học liệu: 1.7 — 28/11/2026 (59 chủ đề lớp 6, 7, 8; lớp 6 đủ chương trình; lớp 7 đủ KHTN, Toán Số và Đại số, Tiếng Anh Unit 1–12 — phần Tiếng Anh 7 chờ đối chiếu SGK).
+Phiên bản học liệu: 1.7 — 28/11/2026 (có tài khoản đăng nhập; 59 chủ đề lớp 6, 7, 8; lớp 6 đủ chương trình; lớp 7 đủ KHTN, Toán Số và Đại số, Tiếng Anh Unit 1–12 — phần Tiếng Anh 7 chờ đối chiếu SGK).
 
 **Lớp 6 (mới):** 17 chủ đề — Toán 5 (Chương I, II, III, VI, VII), KHTN 7 (Chương II, IV, V, VII, VIII, IX), Tiếng Anh 5 (Unit 1–4). Câu hỏi do nhóm biên soạn tự soạn (loại C). Căn cứ kiến thức đối chiếu theo **mục lục sách giáo viên** lớp 6 (Toán, KHTN) và phần **Objectives** của Unit trong SGV Tiếng Anh 6 — số trang ghi là trang SGV, chưa đối chiếu số trang SGK học sinh. Đợt 28/11/2026 đã thêm KHTN Chương I, III, VI, X và Tiếng Anh Unit 5–12 (đối chiếu Objectives từng Unit trong SGV) → lớp 6 đủ 29 chủ đề.
 
@@ -92,3 +92,11 @@ Không bật thì gia sư vẫn chạy miễn phí ở chế độ **Trợ giúp
 - Đáp án đã được giải lại và kiểm thử tự động (572/572 phép kiểm tra đạt). 60 câu (KHTN 7, Toán 8) đã đối chiếu SGK; 60 câu Toán 7, Tiếng Anh 7 chưa. **Giáo viên chưa duyệt** câu nào.
 - Các chủ đề ghi "Đang biên soạn" chỉ là tên dự kiến theo mạch nội dung, chưa đối chiếu số bài, Unit hay trang.
 - Tài liệu cần để hoàn tất đối chiếu: xem mục **Má Điệp yêu con → Tài liệu cần bổ sung** trên trang.
+
+
+## Tài khoản và kết quả tự cập nhật (từ 28/11/2026)
+- Mỗi con đăng nhập bằng **tên + mật khẩu** do Má tạo (Firebase → Authentication → Utilisateurs). E-mail đăng nhập nội bộ: `huyhero@lophoc-huyhero-anpretty.web.app`, `anpretty@lophoc-huyhero-anpretty.web.app`.
+- Quên/đổi mật khẩu của con: vào https://console.firebase.google.com/project/lophoc-huyhero-anpretty/authentication/users → bấm ⋮ ở dòng của con → "Réinitialiser le mot de passe" hoặc xóa rồi tạo lại (kết quả học không mất).
+- Má vào mục **"Má Điệp yêu con"** → **Đăng nhập bằng Google** (tài khoản lethidiep1204@gmail.com) để xem kết quả của hai con, tự cập nhật.
+- Mất mạng: con vẫn học được, kết quả lưu trên máy và tự gửi khi có mạng.
+- Dịch vụ: Firebase gói Spark (miễn phí), dự án `lophoc-huyhero-anpretty`. Quy tắc bảo mật: chỉ Má đọc được kết quả của cả hai con; mỗi con chỉ đọc/ghi sổ của mình.

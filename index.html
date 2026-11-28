@@ -237,6 +237,12 @@ code{font-family:ui-monospace,Consolas,monospace;font-size:.9em;overflow-wrap:an
 .guide h3{margin-top:22px}
 .guide ol li,.guide ul li{margin:.3em 0}
 .who{background:var(--blue-soft);color:var(--blue)!important;gap:6px}
+.sync{font-size:13px;font-weight:600;margin-left:2px}.sync.ok{color:var(--ok,#1a7f4b)}.sync.wait{color:var(--warn,#b26a00)}
+.login{max-width:420px;margin:18px auto 0;padding:16px 18px;text-align:left}
+.login input[type=password]{width:100%;min-height:46px;font-size:17px;padding:8px 12px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink);margin:8px 0}
+.login .err{color:var(--bad);font-weight:600}
+.acct{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;padding:12px 16px;border-radius:12px;margin:0 0 16px;border:1px solid var(--line);background:var(--paper)}
+.acct.ok{background:var(--blue-soft)}
 .pick-hero{max-width:880px;margin:0 auto;text-align:center;padding-top:clamp(10px,4vw,40px)}
 .members{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin:28px 0 14px}
 .member{display:flex;flex-direction:column;align-items:center;gap:8px;padding:26px 18px;border-radius:22px;border:2px solid var(--line);background:var(--paper);box-shadow:var(--sh);min-height:200px;justify-content:center}
@@ -294,7 +300,7 @@ details.soan{margin-top:30px;padding:0 16px}details.soan>summary{font-size:18px}
     <span>LophocHuyhero-Anpretty</span>
   </a>
   <nav class="nav" aria-label="Điều hướng chính">
-    <a href="#chon-nguoi-hoc" data-nav="who" class="who">👤 <span id="whoName">Chọn người học</span></a>
+    <a href="#chon-nguoi-hoc" data-nav="who" class="who">👤 <span id="whoName">Chọn người học</span><span id="syncDot" class="sync" aria-live="polite"></span></a>
     <a href="#trang-chu" data-nav="home">Trang chủ</a>
     <a href="#on-loi" data-nav="review">Ôn lỗi của em</a>
     <a href="#giao-vien" data-nav="teacher">Má Điệp yêu con</a>
@@ -338,9 +344,10 @@ ROOT.nhap ??= {};
 const fixS = x => { x.att ??= {}; x.draft ??= {}; x.pos ??= {}; x.tab ??= {}; x.loc ??= {}; x.lop ??= 7; x.mon ??= 'toan'; return x; };
 let S = ROOT.current && MEMBERS.includes(ROOT.current) ? fixS(ROOT.members[ROOT.current] ??= blank()) : blank();
 let canSave = true;
-const save = () => { if (ROOT.current && MEMBERS.includes(ROOT.current)) ROOT.members[ROOT.current] = S; try { localStorage.setItem(KEY, JSON.stringify(ROOT)); } catch (e) { canSave = false; } };
+const saveLocal = () => { try { localStorage.setItem(KEY, JSON.stringify(ROOT)); } catch (e) { canSave = false; } };
+const save = () => { if (ROOT.current && MEMBERS.includes(ROOT.current)) { S.capNhat = Date.now(); ROOT.members[ROOT.current] = S; } saveLocal(); henGui(); };
 function useMember(n) { ROOT.current = n; S = fixS(ROOT.members[n] ??= blank()); V = {}; save(); }
-const hasMember = () => !!(ROOT.current && MEMBERS.includes(ROOT.current));
+const hasMember = () => !!(ROOT.current && MEMBERS.includes(ROOT.current)) && (CLOUD.tt !== 'san-sang' || (CLOUD.vaiTro === 'con' && CLOUD.ten === ROOT.current));
 function memberAtt(n) {
   const loc = (ROOT.members[n] && ROOT.members[n].att) || {}, imp = (ROOT.nhap[n] && ROOT.nhap[n].att) || {};
   const out = Object.assign({}, imp);
@@ -351,6 +358,128 @@ const fmtTime = t => t ? new Date(t).toLocaleString('vi-VN', { day: '2-digit', m
 const b64e = s => { const b = new TextEncoder().encode(s); let x = ''; b.forEach(c => x += String.fromCharCode(c)); return btoa(x); };
 const b64d = s => new TextDecoder().decode(Uint8Array.from(atob(s), c => c.charCodeAt(0)));
 let saveT; const saveSoon = () => { clearTimeout(saveT); saveT = setTimeout(save, 300); };
+
+/* ---------- TÀI KHOẢN VÀ ĐỒNG BỘ KẾT QUẢ (Firebase, gói miễn phí Spark) ----------
+   - Mỗi con đăng nhập bằng tên + mật khẩu (Má tạo trong Firebase → Authentication).
+   - Má đăng nhập bằng tài khoản Google MA_EMAIL để xem kết quả của cả hai con.
+   - Kết quả vẫn lưu trên máy; khi có mạng, tự gộp với bản trên mạng (câu nào làm gần nhất thì giữ).
+   - Cấu hình dưới đây là thông tin công khai của dự án Firebase (không phải mật khẩu);
+     quyền đọc/ghi do "Quy tắc bảo mật" trên Firebase quyết định. */
+const FB_CFG = { apiKey: 'AIzaSyBK5mEPXWDoWRx9v6B_M2xbK-BgKiTKrtQ', authDomain: 'lophoc-huyhero-anpretty.firebaseapp.com', projectId: 'lophoc-huyhero-anpretty', storageBucket: 'lophoc-huyhero-anpretty.firebasestorage.app', messagingSenderId: '81457789131', appId: '1:81457789131:web:0daad80ea0444755bac34e' };
+const MA_EMAIL = 'lethidiep1204@gmail.com';
+const emailCon = n => n.toLowerCase() + '@lophoc-huyhero-anpretty.web.app';
+const FB_URL = p => 'https://www.gstatic.com/firebasejs/10.12.2/firebase-' + p + '.js';
+const CLOUD = { tt: 'dang-tai', user: null, vaiTro: null, ten: null, fb: null, loi: '', daGui: 0, choGui: false, guiLoi: '', capNhat: {}, huy: [], diVao: false };
+const lastT = r => r && r.tries && r.tries.length ? (r.tries[r.tries.length - 1].t || 0) : 0;
+function gopAtt(a, b) {
+  const out = Object.assign({}, a || {});
+  for (const [id, r] of Object.entries(b || {})) { const o = out[id]; if (!o || lastT(r) > lastT(o) || (lastT(r) === lastT(o) && (r.tries?.length || 0) > (o.tries?.length || 0)) || (!o.done && r.done && lastT(r) >= lastT(o))) out[id] = r; }
+  return out;
+}
+function gopSo(loc, may) { // gộp sổ tiến độ trên máy với bản trên mạng
+  const s = fixS(Object.assign({}, loc || blank()));
+  if (!may) return s;
+  s.att = gopAtt(s.att, may.att);
+  if ((may.capNhat || 0) > (loc && loc.capNhat || 0)) { if (may.last) s.last = may.last; s.pos = Object.assign({}, s.pos, may.pos || {}); if (may.lop) s.lop = may.lop; if (may.mon) s.mon = may.mon; }
+  s.capNhat = Math.max(s.capNhat || 0, may.capNhat || 0);
+  return s;
+}
+const goiTuSo = s => ({ att: s.att, last: s.last || null, pos: s.pos || {}, lop: s.lop, mon: s.mon, capNhat: s.capNhat || Date.now() });
+const docSo = sn => { try { return JSON.parse(sn.data().duLieu || '{}'); } catch (e) { return null; } };
+function veLai() { // vẽ lại màn hình khi trạng thái đăng nhập thay đổi, không làm gián đoạn bài đang làm
+  updateSync();
+  const h = location.hash;
+  if (h === '#giao-vien' || h === '#chon-nguoi-hoc' || !hasMember()) route();
+  else { const wn = $('#whoName'); if (wn) wn.textContent = ROOT.current; }
+}
+function updateSync() {
+  const d = $('#syncDot'); if (!d) return;
+  if (CLOUD.vaiTro === 'con' && CLOUD.ten === ROOT.current) {
+    if (CLOUD.choGui || CLOUD.guiLoi) { d.className = 'sync wait'; d.textContent = ' ☁…'; d.title = 'Kết quả đang chờ có mạng để gửi cho Má'; }
+    else { d.className = 'sync ok'; d.textContent = ' ☁✓'; d.title = CLOUD.daGui ? 'Đã lưu lên mạng lúc ' + fmtTime(CLOUD.daGui) : 'Đã đăng nhập'; }
+  } else if (CLOUD.vaiTro === 'me') { d.className = 'sync ok'; d.textContent = ' (Má)'; d.title = 'Má đang đăng nhập'; }
+  else { d.className = 'sync'; d.textContent = ''; d.title = ''; }
+}
+async function cloudInit() {
+  const cham = setTimeout(() => { if (CLOUD.tt === 'dang-tai') { CLOUD.tt = 'khong-ket-noi'; CLOUD.loi = 'Mạng chậm, chưa kết nối được phần đăng nhập.'; veLai(); } }, 12000);
+  try {
+    const [A, Au, F] = window.__LH_FB_MOCK || await Promise.all([import(FB_URL('app')), import(FB_URL('auth')), import(FB_URL('firestore'))]);
+    const app = A.initializeApp(FB_CFG), auth = Au.getAuth(app);
+    let db; try { db = F.initializeFirestore(app, { localCache: F.persistentLocalCache() }); } catch (e) { db = F.getFirestore(app); }
+    CLOUD.fb = { Au, F, auth, db };
+    Au.onAuthStateChanged(auth, u => { clearTimeout(cham); khiDoiNguoi(u); });
+  } catch (e) { clearTimeout(cham); CLOUD.tt = 'khong-ket-noi'; CLOUD.loi = 'Máy chưa kết nối mạng nên chưa đăng nhập được.'; veLai(); }
+}
+function khiDoiNguoi(u) {
+  CLOUD.huy.forEach(f => { try { f(); } catch (e) {} }); CLOUD.huy = [];
+  Object.assign(CLOUD, { tt: 'san-sang', user: u || null, vaiTro: null, ten: null, guiLoi: '', choGui: false });
+  if (u) {
+    const em = String(u.email || '').toLowerCase(), n = MEMBERS.find(m => emailCon(m) === em);
+    if (em === MA_EMAIL) { CLOUD.vaiTro = 'me'; ngheKetQua(); }
+    else if (n) { CLOUD.vaiTro = 'con'; CLOUD.ten = n; if (ROOT.current !== n) useMember(n); guiLen(); }
+    else CLOUD.vaiTro = 'khac';
+  }
+  if (CLOUD.diVao && CLOUD.vaiTro === 'con') { CLOUD.diVao = false; V = {}; location.hash = '#trang-chu'; if (location.hash === '#trang-chu') route(); updateSync(); return; }
+  veLai();
+}
+let guiT; function henGui() { if (CLOUD.vaiTro === 'con' && CLOUD.ten === ROOT.current) { CLOUD.choGui = true; updateSync(); clearTimeout(guiT); guiT = setTimeout(guiLen, 1500); } }
+async function guiLen() { // đọc bản trên mạng, gộp với bản trên máy, ghi lại (giao dịch an toàn khi học trên nhiều máy)
+  if (!CLOUD.fb || CLOUD.vaiTro !== 'con') return;
+  const n = CLOUD.ten, { F, db } = CLOUD.fb, ref = F.doc(db, 'tienDo', n.toLowerCase());
+  try {
+    let gop = null;
+    await F.runTransaction(db, async tx => {
+      const sn = await tx.get(ref), may = sn.exists() ? docSo(sn) : null;
+      gop = gopSo(ROOT.members[n], may);
+      tx.set(ref, { ten: n, duLieu: JSON.stringify(goiTuSo(gop)), capNhat: Date.now(), banGhi: 1 });
+    });
+    if (CLOUD.ten !== n) return;
+    const loc = ROOT.members[n] || blank();
+    loc.att = gop.att; if (gop.capNhat > (loc.capNhat || 0)) { loc.last = gop.last; loc.pos = gop.pos; loc.lop = gop.lop; loc.mon = gop.mon; }
+    loc.capNhat = gop.capNhat; ROOT.members[n] = loc; if (ROOT.current === n) S = loc; saveLocal();
+    CLOUD.daGui = Date.now(); CLOUD.choGui = false; CLOUD.guiLoi = '';
+  } catch (e) { CLOUD.guiLoi = e && (e.code || e.message) || 'loi'; clearTimeout(guiT); guiT = setTimeout(guiLen, 60000); }
+  updateSync();
+}
+addEventListener('online', () => { if (CLOUD.vaiTro === 'con') guiLen(); });
+function ngheKetQua() { // Má: nhận kết quả của từng con ngay khi con làm bài
+  const { F, db } = CLOUD.fb;
+  MEMBERS.forEach(n => {
+    const un = F.onSnapshot(F.doc(db, 'tienDo', n.toLowerCase()), sn => {
+      if (!sn.exists()) { CLOUD.capNhat[n] = 0; } else { const c = docSo(sn); if (c) { ROOT.nhap[n] = { att: c.att || {}, xuat: sn.data().capNhat || c.capNhat || Date.now(), mang: true }; saveLocal(); } CLOUD.capNhat[n] = sn.data().capNhat || 0; }
+      if (location.hash === '#giao-vien') { if (maXem === n && $('#maStats')) $('#maStats').innerHTML = statsHTML(n); const p = $('#acct'); if (p) p.outerHTML = acctHTML(); }
+    }, err => { CLOUD.loi = 'Không đọc được kết quả trên mạng (' + (err.code || err.message) + ').'; const p = $('#acct'); if (p) p.outerHTML = acctHTML(); });
+    CLOUD.huy.push(un);
+  });
+}
+async function conDangNhap(n, mk) {
+  const fbk = $('#dnFb'); const { Au, auth } = CLOUD.fb;
+  if (fbk) { fbk.className = 'small'; fbk.textContent = 'Đang kiểm tra…'; }
+  try { CLOUD.diVao = true; await Au.signInWithEmailAndPassword(auth, emailCon(n), mk); }
+  catch (e) {
+    CLOUD.diVao = false; const c = e.code || '';
+    const msg = /invalid-credential|wrong-password|user-not-found|invalid-email|invalid-login/.test(c) ? 'Mật khẩu chưa đúng. Em thử lại hoặc hỏi Má nhé.' : /too-many-requests/.test(c) ? 'Em nhập sai nhiều lần. Đợi vài phút rồi thử lại.' : /network/.test(c) ? 'Máy đang mất mạng. Em kiểm tra wifi rồi thử lại.' : 'Chưa đăng nhập được (' + c + ').';
+    if (fbk) { fbk.className = 'small err'; fbk.textContent = msg; }
+  }
+}
+async function dangXuat() {
+  if (CLOUD.vaiTro === 'con') { clearTimeout(guiT); await guiLen(); }
+  try { await CLOUD.fb.Au.signOut(CLOUD.fb.auth); } catch (e) {}
+  if (CLOUD.vaiTro !== 'me') { ROOT.current = null; S = blank(); V = {}; saveLocal(); }
+}
+async function maDangNhap() {
+  const { Au, auth } = CLOUD.fb, pv = new Au.GoogleAuthProvider(); pv.setCustomParameters({ login_hint: MA_EMAIL, prompt: 'select_account' });
+  try { await Au.signInWithPopup(auth, pv); }
+  catch (e) { if (/popup-blocked|operation-not-supported/.test(e.code || '')) { try { await Au.signInWithRedirect(auth, pv); } catch (x) { toast('Chưa đăng nhập được: ' + (x.code || x.message)); } } else if (!/popup-closed|cancelled-popup/.test(e.code || '')) toast('Chưa đăng nhập được: ' + (e.code || e.message)); }
+}
+function acctHTML() {
+  if (CLOUD.tt === 'dang-tai') return '<div id="acct" class="acct"><span>Đang kết nối tài khoản…</span></div>';
+  if (CLOUD.tt === 'khong-ket-noi') return `<div id="acct" class="acct"><span>⚠ ${esc(CLOUD.loi)} Kết quả bên dưới chỉ gồm dữ liệu trên máy này.</span></div>`;
+  if (CLOUD.vaiTro === 'me') return `<div id="acct" class="acct ok"><span>✓ Má đã đăng nhập (${esc(CLOUD.user.email)}). Kết quả của các con <b>tự cập nhật</b> mỗi khi con làm bài, dù con học trên máy nào.${CLOUD.loi ? `<br><span class="err">${esc(CLOUD.loi)}</span>` : ''}</span><button class="btn sm ghost" data-cl="xuat">Đăng xuất</button></div>`;
+  if (CLOUD.vaiTro === 'khac') return `<div id="acct" class="acct"><span>Tài khoản ${esc(CLOUD.user.email || '')} không phải tài khoản của Má.</span><button class="btn sm ghost" data-cl="xuat">Đăng xuất</button></div>`;
+  return `<div id="acct" class="acct"><span><b>Má đăng nhập</b> để xem kết quả các con học trên mọi máy.${CLOUD.vaiTro === 'con' ? `<br><span class="small muted">Máy này đang đăng nhập tài khoản của ${esc(CLOUD.ten)}; Má đăng nhập thì con sẽ được đăng xuất.</span>` : ''}</span><button class="btn sm pri" data-cl="ma">Đăng nhập bằng Google</button></div>`;
+}
+
 
 /* ---------- hình minh họa ---------- */
 const ICONS = {
@@ -498,12 +627,17 @@ addEventListener('hashchange', () => { route(); scrollTo(0, 0); });
 
 /* ---------- CHỌN NGƯỜI HỌC ---------- */
 function viewPicker() {
+  const sanSang = CLOUD.tt === 'san-sang', dn = sanSang && V.dn && MEMBERS.includes(V.dn) ? V.dn : null;
+  const dangLa = CLOUD.vaiTro === 'con' ? CLOUD.ten : null;
   app.innerHTML = `<div class="wrap"><section class="pick-hero">
     <h1>Ai đang học hôm nay?</h1>
-    <p class="lead" style="margin:0 auto">Chọn đúng tên của em để vào lớp học. Mỗi bạn có sổ tiến độ riêng trên máy này.</p>
-    <div class="members">${MEMBERS.map((n, i) => { const st = memberStats(memberAtt(n)); return `<button class="member m${i % 2}" data-member="${esc(n)}"><span class="ava" aria-hidden="true">${esc(n[0])}</span><b>${esc(n)}</b><span class="small muted">${st.lam ? `Đã làm ${st.lam} câu · học lần cuối ${fmtTime(st.last)}` : 'Chưa làm bài nào trên máy này'}</span></button>`; }).join('')}</div>
+    <p class="lead" style="margin:0 auto">${sanSang ? 'Chọn tên của em rồi nhập mật khẩu. Em học ở máy nào thì kết quả cũng được lưu lại và gửi cho Má.' : CLOUD.tt === 'dang-tai' ? 'Đang kết nối tài khoản…' : 'Máy chưa kết nối mạng. Em vẫn học được: kết quả lưu trên máy này và tự gửi cho Má khi em đăng nhập lúc có mạng.'}</p>
+    <div class="members">${MEMBERS.map((n, i) => { const st = memberStats(memberAtt(n)); return `<button class="member m${i % 2}" data-member="${esc(n)}" aria-pressed="${dn === n}"><span class="ava" aria-hidden="true">${esc(n[0])}</span><b>${esc(n)}</b><span class="small muted">${dangLa === n ? '✓ Đang đăng nhập trên máy này' : st.lam ? `Đã làm ${st.lam} câu · học lần cuối ${fmtTime(st.last)}` : 'Chưa làm bài nào trên máy này'}</span></button>`; }).join('')}</div>
+    ${dn ? `<form class="card login" id="dnForm" autocomplete="on"><input type="text" name="username" value="${esc(emailCon(dn))}" autocomplete="username" hidden><label for="dnPass"><b>Mật khẩu của ${esc(dn)}</b></label><input type="password" id="dnPass" autocomplete="current-password" required minlength="6" placeholder="Nhập mật khẩu Má đã đưa cho em"><div class="row"><button class="btn pri" type="submit">Vào học</button><button class="btn ghost" type="button" data-cl="huyDn">Chọn lại</button></div><p id="dnFb" class="small" role="status"></p></form>` : ''}
+    ${dangLa ? `<p style="margin-top:14px"><button class="btn sm ghost" data-cl="xuat">Đăng xuất ${esc(dangLa)}</button></p>` : ''}
     <p class="note">Má Điệp xem kết quả học của các con ở mục “Má Điệp yêu con”.</p>
   </section></div>`;
+  if (dn) setTimeout(() => $('#dnPass')?.focus(), 30);
 }
 function memberStats(att) {
   const st = { lam: 0, dungDau: 0, daSua: 0, conSai: [], goiY: 0, tt: 0, last: 0, loi: {}, recent: [], muc: {}, chuDe: {} };
@@ -525,7 +659,7 @@ function memberStats(att) {
 const pct = (a, b) => b ? Math.round(a / b * 100) : 0;
 function recsFor(n, st) {
   const out = [];
-  if (!st.lam) return [{ t: `${n} chưa làm bài nào (trên máy này hoặc trong dữ liệu đã nhập). Nếu con học trên máy khác, hãy nhờ con bấm “Gửi kết quả cho Má” rồi dán mã vào ô bên dưới.` }];
+  if (!st.lam) return [{ t: `${n} chưa làm bài nào (trên máy này hoặc trong dữ liệu đã nhập). Khi con đăng nhập và làm bài, kết quả sẽ hiện ở đây.` }];
   if (st.conSai.length) out.push({ t: `Còn <b>${st.conSai.length}</b> câu làm sai mà chưa sửa xong: ${st.conSai.slice(0, 6).map(c => esc(c.x.t.ten) + ' – ' + (c.x.tt ? 'câu luyện lại ' : 'câu ') + (c.x.i + 1)).join('; ')}${st.conSai.length > 6 ? '…' : ''}. Nên nhắc con mở mục “Ôn lỗi của em” để sửa.` });
   Object.entries(st.chuDe).forEach(([tid, c]) => { const t = T[tid]; if (c.lam >= 2 && pct(c.dungDau, c.lam) < 60) out.push({ t: `Chủ đề <b>${esc(t.ten)}</b> (lớp ${t.lop}): chỉ đúng ngay ${c.dungDau}/${c.lam} câu ở lần đầu. Nên cho con đọc lại phần “Học kiến thức”, xem ví dụ có lời giải rồi làm lại các câu sai.` }); });
   const loi = Object.entries(st.loi).sort((a, b) => b[1].n - a[1].n);
@@ -551,7 +685,7 @@ function statsHTML(n) {
     <div class="kpi"><b>${st.goiY}</b><span>lần xin gợi ý</span></div>
     <div class="kpi"><b style="font-size:17px">${fmtTime(st.last)}</b><span>lần học gần nhất</span></div>
   </div>
-  <p class="small muted">Dữ liệu: tiến độ của ${esc(n)} trên máy này${imp ? ` + kết quả nhập từ máy khác (xuất lúc ${fmtTime(imp.xuat)})` : ''}.</p>
+  <p class="small muted">Dữ liệu: ${imp && imp.mang ? `kết quả trên mạng của ${esc(n)}, cập nhật lúc ${fmtTime(imp.xuat)}` : `tiến độ của ${esc(n)} trên máy này${imp ? ` + kết quả nhập từ máy khác (xuất lúc ${fmtTime(imp.xuat)})` : ''}`}.</p>
   <h3>Những vấn đề nên ôn luyện thêm cho con</h3>
   <ul class="recs">${recsFor(n, st).map(r => `<li class="${r.good ? 'good' : ''}">${r.t}</li>`).join('')}</ul>
   ${loi.length ? `<h3>Lỗi con hay mắc</h3>${loi.map(([k, v]) => `<div class="bar"><span>${esc(k)}</span><span class="tr"><i style="width:${Math.round(v.n / maxL * 100)}%"></i></span><span class="n">${v.n}</span></div>`).join('')}` : ''}
@@ -593,7 +727,8 @@ function viewHome() {
     }).join('')}</div>`).join('') || '<p class="muted">Chưa có chủ đề.</p>'}
     <p class="note">Chủ đề có ghi số bài, số trang đã được đối chiếu với mục lục SGK (lớp 7, 8) hoặc sách giáo viên — SGV (lớp 6). Các chủ đề còn lại là tên dự kiến theo mạch nội dung, chưa đối chiếu.</p>
   </section>
-  <details style="margin-top:24px"><summary>📤 Gửi kết quả cho Má (khi em học trên máy khác máy của Má)</summary><div>
+  <details style="margin-top:24px"><summary>📤 Gửi mã kết quả cho Má (chỉ cần khi không đăng nhập được)</summary><div>
+    <p class="small">${CLOUD.vaiTro === 'con' ? '☁ Em đang đăng nhập: kết quả tự gửi cho Má, em không cần làm gì thêm.' : 'Em chưa đăng nhập nên kết quả chỉ lưu trên máy này.'}</p>
     <p class="small">Bấm “Sao chép mã”, rồi gửi mã này cho Má qua Zalo/Messenger. Má dán mã vào mục “Má Điệp yêu con” để xem kết quả của em.</p>
     <textarea id="maGui" readonly rows="3" style="width:100%;font-size:13px;border-radius:10px;border:1px solid var(--line);background:var(--bg);padding:8px">${esc(exportCode())}</textarea>
     <div class="row" style="margin-top:6px"><button class="btn sm" data-copy="maGui">Sao chép mã</button><button class="btn sm ghost" data-act3="taiMa">Tải tệp kết quả</button></div></div></details>
@@ -1016,10 +1151,11 @@ function viewTeacher() {
   const cols = [['cb', 'Cơ bản'], ['vd', 'Vận dụng'], ['nc', 'Nâng cao'], ['tt', 'Câu luyện lại'], ['tong', 'Tổng số câu'], ['trich', 'Trích / phỏng theo'], ['tuSoan', 'Tự biên soạn'], ['daKT', 'Đáp án đã kiểm tra'], ['daDC', 'Đã đối chiếu nguồn'], ['cho', 'Chờ xác minh']];
   app.innerHTML = `<div class="wrap guide"><h1>Má Điệp yêu con</h1>
   <p class="lead">Theo dõi bài tập từng con đã làm và những vấn đề nên ôn luyện thêm.</p>
+  ${acctHTML()}
   <div class="mtabs" role="group" aria-label="Chọn con">${MEMBERS.map(n => `<button data-maxem="${esc(n)}" aria-pressed="${n === maXem}">👤 ${esc(n)}</button>`).join('')}</div>
   <section id="maStats">${statsHTML(maXem)}</section>
-  <details style="margin-top:18px"><summary>📥 Nhận kết quả của con từ máy khác</summary><div>
-    <p class="small">Khi con học trên điện thoại hoặc máy tính khác, con bấm “Gửi kết quả cho Má” ở trang chủ và gửi mã cho Má. Má dán mã (hoặc chọn tệp kết quả) vào đây.</p>
+  <details style="margin-top:18px"><summary>📥 Nhận mã kết quả thủ công (chỉ cần khi con không đăng nhập được)</summary><div>
+    <p class="small">Bình thường kết quả tự gửi lên khi con đăng nhập. Chỉ khi con học lúc không có mạng và chưa đăng nhập được, con bấm “Gửi mã kết quả” ở trang chủ và gửi mã cho Má; Má dán mã (hoặc chọn tệp) vào đây.</p>
     <textarea id="maNhan" rows="3" style="width:100%;font-size:13px;border-radius:10px;border:1px solid var(--line);background:var(--bg);padding:8px" placeholder="Dán mã bắt đầu bằng LHA1: …"></textarea>
     <div class="row" style="margin-top:6px"><button class="btn sm pri" data-act3="nhanMa">Nhận kết quả</button><label class="btn sm ghost">Chọn tệp kết quả<input type="file" id="maTep" accept=".json,.txt" hidden></label><span id="maNhanFb" class="small"></span></div></div></details>
   <details class="soan"><summary>🛠 Góc soạn học liệu: kiểm kê, nguồn, hướng dẫn</summary><div>
@@ -1076,12 +1212,22 @@ app.addEventListener('click', async e => {
 });
 
 app.addEventListener('click', e => {
-  const m = e.target.closest('[data-member]'); if (m) { useMember(m.dataset.member); if (location.hash === '#trang-chu') route(); else location.hash = '#trang-chu'; return; }
+  const m = e.target.closest('[data-member]'); if (m) { const n = m.dataset.member;
+    if (CLOUD.tt === 'dang-tai') { toast('Đang kết nối tài khoản, em đợi vài giây nhé.'); return; }
+    if (CLOUD.tt === 'san-sang' && !(CLOUD.vaiTro === 'con' && CLOUD.ten === n)) { V.dn = n; viewPicker(); return; }
+    if (CLOUD.tt !== 'san-sang') toast('Chưa có mạng: kết quả lưu trên máy này, sẽ gửi cho Má khi em đăng nhập.');
+    useMember(n); if (location.hash === '#trang-chu') route(); else location.hash = '#trang-chu'; return; }
+  const cl = e.target.closest('[data-cl]'); if (cl) { const k = cl.dataset.cl;
+    if (k === 'huyDn') { V.dn = null; viewPicker(); }
+    if (k === 'xuat') dangXuat();
+    if (k === 'ma') maDangNhap();
+    return; }
   const mx = e.target.closest('[data-maxem]'); if (mx) { maXem = mx.dataset.maxem; $$('[data-maxem]').forEach(b => b.setAttribute('aria-pressed', String(b === mx))); $('#maStats').innerHTML = statsHTML(maXem); return; }
   const a3 = e.target.closest('[data-act3]'); if (!a3) return;
   if (a3.dataset.act3 === 'taiMa') { const blob = new Blob([exportCode()], { type: 'text/plain' }); const u = URL.createObjectURL(blob); const l = document.createElement('a'); l.href = u; l.download = 'ket-qua-' + ROOT.current + '-' + new Date().toISOString().slice(0, 10) + '.txt'; document.body.appendChild(l); l.click(); l.remove(); setTimeout(() => URL.revokeObjectURL(u), 2000); toast('Nếu trình duyệt không tải được tệp, em dùng nút “Sao chép mã”.'); }
   if (a3.dataset.act3 === 'nhanMa') nhanMa($('#maNhan').value);
 });
+app.addEventListener('submit', e => { if (e.target.id === 'dnForm') { e.preventDefault(); const mk = $('#dnPass').value; if (V.dn && mk) conDangNhap(V.dn, mk); } });
 app.addEventListener('change', async e => { if (e.target.id === 'maTep' && e.target.files[0]) nhanMa(await e.target.files[0].text()); });
 function nhanMa(raw) {
   const fb = $('#maNhanFb');
@@ -1095,8 +1241,9 @@ function nhanMa(raw) {
   } catch (err) { if (fb) fb.textContent = '✗ ' + err.message; }
 }
 
-window.__lophoc = { grade, parseNum, checkOpen, validate, inventory, ALLQ, state: () => S, root: () => ROOT, memberStats, memberAtt };
+window.__lophoc = { grade, parseNum, checkOpen, validate, inventory, ALLQ, state: () => S, root: () => ROOT, memberStats, memberAtt, gopAtt, gopSo, cloud: () => CLOUD };
 route();
+cloudInit();
 }
 }
 </script>

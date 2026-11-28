@@ -435,7 +435,7 @@ async function guiLen() { // đọc bản trên mạng, gộp với bản trên 
     });
     if (CLOUD.ten !== n) return;
     const loc = ROOT.members[n] || blank();
-    loc.att = gop.att; if (gop.capNhat > (loc.capNhat || 0)) { loc.last = gop.last; loc.pos = gop.pos; loc.lop = gop.lop; loc.mon = gop.mon; }
+    const moi = (loc.capNhat || 0) > (gop.capNhat || 0); loc.att = gopAtt(loc.att, gop.att); if (moi) henGui(); else if (gop.capNhat > (loc.capNhat || 0)) { loc.last = gop.last; loc.pos = gop.pos; loc.lop = gop.lop; loc.mon = gop.mon; }
     loc.capNhat = gop.capNhat; ROOT.members[n] = loc; if (ROOT.current === n) S = loc; saveLocal();
     CLOUD.daGui = Date.now(); CLOUD.choGui = false; CLOUD.guiLoi = '';
   } catch (e) { CLOUD.guiLoi = e && (e.code || e.message) || 'loi'; clearTimeout(guiT); guiT = setTimeout(guiLen, 60000); }
